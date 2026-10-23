@@ -3,17 +3,44 @@ import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+  const allPosts = await getCollection('blog');
+  const sortedPosts = allPosts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return sortedPosts.map((post) => {
+    // Related: same category, excluding current post
+    const relatedPosts = sortedPosts
+      .filter((p) => p.id !== post.id && p.data.category === post.data.category)
+      .slice(0, 4);
+
+    // Recent: latest posts excluding current post
+    const recentPosts = sortedPosts
+      .filter((p) => p.id !== post.id)
+      .slice(0, 4);
+
+    return {
+      params: { slug: post.id },
+      props: { 
+        post, 
+        relatedPosts, 
+        recentPosts, 
+        allPosts: sortedPosts 
+      },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, relatedPosts, recentPosts, allPosts } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PostLayout {...post.data}>
+<PostLayout 
+  {...post.data} 
+  currentSlug={post.id}
+  relatedPosts={relatedPosts}
+  recentPosts={recentPosts}
+  allPosts={allPosts}
+>
   <Content />
 </PostLayout>
