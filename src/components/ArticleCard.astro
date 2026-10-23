@@ -1,0 +1,74 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  slug: string;
+  category: string;
+  specialScore: number;
+  specialVerdict: string;
+  readingTime: string;
+}
+
+const { 
+  title, 
+  description, 
+  pubDate, 
+  slug, 
+  category, 
+  specialScore, 
+  specialVerdict,
+  readingTime 
+} = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+}).format(pubDate);
+
+const verdictColor = 
+  specialVerdict === 'Overhyped' ? 'text-rose-600' :
+  specialVerdict === 'True Gem' ? 'text-emerald-600' :
+  specialVerdict === 'Modern Masterpiece' ? 'text-indigo-600' : 'text-amber-600';
+---
+
+<article class="group relative flex flex-col justify-between border-b border-stone-200 py-8 transition-colors">
+  <div class="space-y-3">
+    <div class="flex items-center space-x-3 text-xs">
+      <span class="font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+        {category}
+      </span>
+      <span class="text-stone-600">&bull;</span>
+      <time datetime={pubDate.toISOString()} class="text-stone-600">
+        {formattedDate}
+      </time>
+      <span class="text-stone-600">&bull;</span>
+      <span class="text-stone-600">{readingTime}</span>
+    </div>
+
+    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 group-hover:text-amber-800 transition-colors leading-snug">
+      <a href={`/blog/${slug}`}>
+        <span class="absolute inset-0 z-10"></span>
+        {title}
+      </a>
+    </h2>
+
+    <p class="text-stone-600 text-sm sm:text-base leading-relaxed line-clamp-3">
+      {description}
+    </p>
+  </div>
+
+  <div class="mt-5 flex items-center justify-between pt-4 border-t border-stone-100 text-xs">
+    <div class="flex items-center space-x-2">
+      <span class="font-mono text-stone-600 uppercase tracking-wider">Verdict:</span>
+      <span class={`font-bold uppercase tracking-wider ${verdictColor}`}>{specialVerdict}</span>
+    </div>
+
+    <div class="flex items-baseline space-x-1">
+      <span class="text-stone-600">Special Index:</span>
+      <span class="font-serif text-base font-bold text-stone-900">{specialScore.toFixed(1)}</span>
+      <span class="text-stone-600">/10</span>
+    </div>
+  </div>
+</article>

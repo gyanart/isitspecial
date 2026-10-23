@@ -1,0 +1,32 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'Our Mission' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header class="border-b border-stone-200 bg-stone-50/80 backdrop-blur-md sticky top-0 z-40 transition-colors">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <a href="/" class="group flex items-baseline space-x-1.5 text-stone-900 transition-colors">
+        <span class="text-2xl font-black tracking-tight uppercase font-serif text-amber-700 group-hover:text-amber-800 transition-colors">IS IT SPECIAL?</span>
+      </a>
+      <span class="hidden md:inline-block text-xs uppercase tracking-widest text-stone-600 border-l border-stone-300 pl-3">The Anti-Hype Publication</span>
+    </div>
+
+    <nav class="flex items-center space-x-6 text-sm font-medium text-stone-600">
+      {navLinks.map((link) => (
+        <a href={link.href} class="hover:text-stone-900 transition-colors">
+          {link.label}
+        </a>
+      ))}
+      <a 
+        href="/#articles" 
+        class="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-stone-900 text-stone-50 hover:bg-stone-800 transition-all shadow-sm"
+      >
+        Read Reviews
+      </a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Contact the Editorial Desk | Is It Special?"
+  description="Contact the editors of Is It Special. Submit product review recommendations, corrections, editorial inquiries, or press communications."
+>
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <header class="space-y-3 pb-8 border-b border-stone-200">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-800">Editorial Desk</span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
+        Contact & Item Submissions
+      </h1>
+      <p class="text-stone-600 text-base leading-relaxed">
+        Got a product that claims to be extraordinary? Or an everyday marvel we should investigate? Let our editorial team know.
+      </p>
+    </header>
+
+    <div class="py-8 space-y-8">
+      
+      <!-- Direct Contact Details -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="p-5 rounded-xl border border-stone-200 bg-white shadow-xs">
+          <div class="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">General Inquiries</div>
+          <div class="text-stone-900 font-semibold text-base font-mono">editorial@isitspecial.com</div>
+          <div class="text-xs text-stone-600 mt-1">Reader feedback & general questions</div>
+        </div>
+
+        <div class="p-5 rounded-xl border border-stone-200 bg-white shadow-xs">
+          <div class="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">Testing Submissions</div>
+          <div class="text-stone-900 font-semibold text-base font-mono">reviews@isitspecial.com</div>
+          <div class="text-xs text-stone-600 mt-1">Pitch an item or trend for our Special Index</div>
+        </div>
+      </div>
+
+      <!-- Contact / Tip Form -->
+      <form class="space-y-5 p-6 sm:p-8 rounded-2xl bg-white border border-stone-200 shadow-xs" onsubmit="event.preventDefault(); alert('Thank you for your submission. Our editorial team reviews reader submissions weekly.');">
+        <h3 class="font-serif text-xl font-bold text-stone-900">Send a Note or Review Tip</h3>
+        
+        <div>
+          <label for="name" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Your Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            placeholder="Jane Doe" 
+            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Your Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required 
+            placeholder="you@domain.com" 
+            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
+          />
+        </div>
+
+        <div>
+          <label for="subject" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Subject / Item Under Question</label>
+          <input 
+            type="text" 
+            id="subject" 
+            name="subject" 
+            required 
+            placeholder="e.g. Is the Moccamaster coffee maker really worth $350?" 
+            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Your Message or Observation</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            rows="4" 
+            required 
+            placeholder="Tell us what you've observed, why it's trending, or what specific questions you want us to answer..." 
+            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full sm:w-auto px-6 py-3 rounded-xl bg-stone-900 text-stone-50 font-semibold text-sm hover:bg-stone-800 transition-colors cursor-pointer shadow-sm"
+        >
+          Submit to Editorial Desk
+        </button>
+      </form>
+
+    </div>
+  </div>
+</BaseLayout>
