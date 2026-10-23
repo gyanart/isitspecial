@@ -71,6 +71,37 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
 ---
 
 <BaseLayout title={`${title} | Is It Special?`} description={description} type="article">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "headline": title,
+      "description": description,
+      "image": heroImage ? (heroImage.startsWith('http') ? heroImage : `https://www.isitspecial.com${heroImage}`) : undefined,
+      "datePublished": pubDate.toISOString(),
+      "author": {
+        "@type": "Organization",
+        "name": author,
+        "url": "https://www.isitspecial.com/about"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Is It Special?",
+        "url": "https://www.isitspecial.com"
+      },
+      "itemReviewed": {
+        "@type": "Product",
+        "name": title
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": specialScore,
+        "bestRating": "10",
+        "worstRating": "1"
+      }
+    })} />
+  </Fragment>
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
     
     <!-- Header Meta & Title (Centered) -->

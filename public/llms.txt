@@ -1,0 +1,21 @@
+# Is It Special?
+
+> Independent cultural, design, and consumer product criticism. We investigate viral products, everyday engineering marvels, and luxury claims to evaluate whether they justify their status or represent corporate marketing hype.
+
+## Core Evaluation Framework
+- **The Special Index:** A proprietary 1-to-10 numerical scoring rubric evaluating material durability, functional repairability, cost-to-craft ratio, and authentic utility.
+- **Categorical Verdicts:** Overhyped, Solid Standard, True Gem, or Modern Masterpiece.
+- **Editorial Independence:** All subjects are tested without commercial sponsorships or paid product placements.
+
+## Core Editorial Pillars
+- **Hype vs. Reality:** De-influencing viral social media products and luxury claims.
+- **Everyday Curiosities:** Deep dives into the hidden industrial design, physics, and history of common objects.
+- **Craft & Design:** Evaluations of heritage manufacturing, traditional techniques, and heirloom tools.
+
+## Published Investigations
+- [Is the $430 Dyson Supersonic Actually Special?](https://www.isitspecial.com/blog/dyson-supersonic-hair-dryer): Teardown of Dyson's V9 digital motor, non-repairable ultrasonic housing, and affordable salon alternatives. Verdict: Overhyped (5.8/10).
+- [Why the $18 Casio F-91W Watch is a Design Masterpiece](https://www.isitspecial.com/blog/casio-f91w-watch-masterpiece): Analysis of the 1989 Ryusuke Moriai quartz design, 21-gram ergonomics, and 10-year CR2016 battery longevity. Verdict: Modern Masterpiece (9.6/10).
+- [Is the $25 Lodge Cast Iron Skillet More Special Than a $300 Pan?](https://www.isitspecial.com/blog/lodge-cast-iron-skillet): Thermodynamic mass, Maillard reaction physics, and oil polymerization vs. Teflon lifespan. Verdict: True Gem (9.2/10).
+- [Is the $45 Stanley Quencher Cup Actually Special?](https://www.isitspecial.com/blog/stanley-tumbler-hype): Automotive cupholder ergonomics vs. FlowState lid leaking flaws and Owala alternative. Verdict: Solid Standard (6.2/10).
+- [Why the 30-Cent Bic Cristal Pen is an Engineering Miracle](https://www.isitspecial.com/blog/bic-cristal-ballpoint-pen): Sub-micron tungsten carbide ball, barometric equalizer hole, and MoMA permanent collection induction. Verdict: Modern Masterpiece (9.8/10).
+- [Is Japanese Selvedge Denim Actually Special?](https://www.isitspecial.com/blog/japanese-selvedge-denim): Vintage Toyoda shuttle loom chatter, rope-dyed indigo fades, and raw denim durability. Verdict: True Gem (9.0/10).
