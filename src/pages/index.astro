@@ -63,6 +63,12 @@ const regularPosts = posts.filter(p => p.id !== featuredPost?.id);
           </a>
         </h2>
 
+        {featuredPost.data.heroImage && (
+          <div class="my-5 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 max-h-72">
+            <img src={featuredPost.data.heroImage} alt={featuredPost.data.title} class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" />
+          </div>
+        )}
+
         <p class="mt-4 text-stone-600 text-base sm:text-lg leading-relaxed">
           {featuredPost.data.description}
         </p>
@@ -96,6 +102,7 @@ const regularPosts = posts.filter(p => p.id !== featuredPost?.id);
           specialScore={post.data.specialScore}
           specialVerdict={post.data.specialVerdict}
           readingTime={post.data.readingTime}
+          heroImage={post.data.heroImage}
         />
       ))}
     </div>

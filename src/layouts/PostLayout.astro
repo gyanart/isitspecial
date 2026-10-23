@@ -20,6 +20,8 @@ interface Props {
   description: string;
   pubDate: Date;
   updatedDate?: Date;
+  heroImage?: string;
+  heroImageAlt?: string;
   category: string;
   author: string;
   authorRole: string;
@@ -36,6 +38,8 @@ const {
   title,
   description,
   pubDate,
+  heroImage,
+  heroImageAlt,
   category,
   author,
   authorRole,
@@ -104,6 +108,17 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
         </span>
       </div>
     </header>
+
+    {heroImage && (
+      <div class="max-w-4xl mx-auto my-8 overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-xs">
+        <img 
+          src={heroImage} 
+          alt={heroImageAlt || title} 
+          class="w-full h-[260px] sm:h-[420px] object-cover" 
+          loading="eager"
+        />
+      </div>
+    )}
 
     <!-- Top In-Content Ad Placeholder (Zero-CLS) -->
     <div class="max-w-4xl mx-auto mt-6">

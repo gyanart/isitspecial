@@ -8,6 +8,7 @@ interface Props {
   specialScore: number;
   specialVerdict: string;
   readingTime: string;
+  heroImage?: string;
 }
 
 const { 
@@ -18,7 +19,8 @@ const {
   category, 
   specialScore, 
   specialVerdict,
-  readingTime 
+  readingTime,
+  heroImage 
 } = Astro.props;
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -33,8 +35,8 @@ const verdictColor =
   specialVerdict === 'Modern Masterpiece' ? 'text-indigo-600' : 'text-amber-600';
 ---
 
-<article class="group relative flex flex-col justify-between border-b border-stone-200 py-8 transition-colors">
-  <div class="space-y-3">
+<article class="group relative flex flex-col sm:flex-row sm:items-center gap-6 justify-between border-b border-stone-200 py-8 transition-colors">
+  <div class="space-y-3 flex-1 min-w-0">
     <div class="flex items-center space-x-3 text-xs">
       <span class="font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
         {category}
@@ -54,21 +56,32 @@ const verdictColor =
       </a>
     </h2>
 
-    <p class="text-stone-600 text-sm sm:text-base leading-relaxed line-clamp-3">
+    <p class="text-stone-600 text-sm sm:text-base leading-relaxed line-clamp-2">
       {description}
     </p>
+
+    <div class="mt-4 flex items-center justify-between pt-3 border-t border-stone-100 text-xs">
+      <div class="flex items-center space-x-2">
+        <span class="font-mono text-stone-600 uppercase tracking-wider">Verdict:</span>
+        <span class={`font-bold uppercase tracking-wider ${verdictColor}`}>{specialVerdict}</span>
+      </div>
+
+      <div class="flex items-baseline space-x-1">
+        <span class="text-stone-600">Special Index:</span>
+        <span class="font-serif text-base font-bold text-stone-900">{specialScore.toFixed(1)}</span>
+        <span class="text-stone-600">/10</span>
+      </div>
+    </div>
   </div>
 
-  <div class="mt-5 flex items-center justify-between pt-4 border-t border-stone-100 text-xs">
-    <div class="flex items-center space-x-2">
-      <span class="font-mono text-stone-600 uppercase tracking-wider">Verdict:</span>
-      <span class={`font-bold uppercase tracking-wider ${verdictColor}`}>{specialVerdict}</span>
+  {heroImage && (
+    <div class="w-full sm:w-44 sm:h-32 shrink-0 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-xs">
+      <img 
+        src={heroImage} 
+        alt={title} 
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+        loading="lazy" 
+      />
     </div>
-
-    <div class="flex items-baseline space-x-1">
-      <span class="text-stone-600">Special Index:</span>
-      <span class="font-serif text-base font-bold text-stone-900">{specialScore.toFixed(1)}</span>
-      <span class="text-stone-600">/10</span>
-    </div>
-  </div>
+  )}
 </article>
