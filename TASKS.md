@@ -1,7 +1,16 @@
 # 🎯 Editorial Tasks & Pipeline Overview — isitspecial.com
 
 > **Single Source of Truth for Article Production, Hero Images & Affiliate Links.**  
-> *Amazon Associate Tag: `isitspecial-21`* | *Default Image Specs: `16:9` (1920×1080 px or 1200×675 px)*
+> *Amazon Associate Tag: `isitspecial-21`* | *Default Image Specs: `16:9` (1920×1080 px or 1200×675 px)*  
+> 📘 **Editorial SOP & Publishing Engine:** See [PLAYBOOK.md](file:///d:/_Anti-Gravity/_isitspecial/PLAYBOOK.md) for full SEO, GEO, UX, and bilingual standards.
+
+---
+
+## 📅 Monthly Publishing Schedule Engine (10 Articles / Month)
+Articles are released at equal 3-day intervals:
+* **Cadence Dates:** `1st, 4th, 7th, 10th, 13th, 16th, 19th, 22nd, 25th, 31st` (10 articles / month).
+* **30-Day Months (Apr, Jun, Sep, Nov):** Final slot moves from 31st to **30th** (`1, 4, 7, 10, 13, 16, 19, 22, 25, 30`).
+* **Short Months (< 30 days, February):** Skip the 10th slot entirely (`1, 4, 7, 10, 13, 16, 19, 22, 25, 28` -> 9 articles).
 
 ---
 
