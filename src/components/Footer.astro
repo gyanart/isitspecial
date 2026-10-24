@@ -30,6 +30,30 @@ const currentYear = new Date().getFullYear();
       }
     </p>
 
+    <!-- Compact Footer Substack Newsletter Subscription -->
+    <div class="w-full max-w-md mx-auto">
+      <form 
+        action="https://isitspecial.substack.com/api/v1/free?nojs=true" 
+        method="post" 
+        target="_blank"
+        class="flex items-center gap-2"
+      >
+        <input 
+          type="email" 
+          name="email" 
+          required 
+          placeholder={lang === 'hi' ? 'ईमेल द्वारा साप्ताहिक अपडेट्स पाएं...' : 'Get weekly teardowns in your inbox...'} 
+          class="w-full px-4 py-2.5 rounded-full border border-[#dce5dd] text-xs bg-white text-[#14241c] placeholder-[#14241c]/45 focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all shadow-2xs"
+        />
+        <button 
+          type="submit" 
+          class="shrink-0 px-5 py-2.5 rounded-full bg-[#15803d] hover:bg-[#166534] text-white text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-95"
+        >
+          {lang === 'hi' ? 'ज्वाइन' : 'Join'}
+        </button>
+      </form>
+    </div>
+
     <!-- Navigation & AdSense Mandatory Compliance Links (Pill Style) -->
     <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2.5 text-xs font-medium text-[#14241c]/75">
       <a href={lang === 'hi' ? '/hi' : '/'} class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'होम' : 'Home'}</a>

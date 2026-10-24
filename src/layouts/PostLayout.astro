@@ -5,6 +5,7 @@ import ShareBar from '../components/ShareBar.astro';
 import WhatsAppChannelCard from '../components/WhatsAppChannelCard.astro';
 import FloatingShareBar from '../components/FloatingShareBar.astro';
 import ArticleLikeButton from '../components/ArticleLikeButton.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
 
 interface PostItem {
   id: string;
@@ -260,6 +261,9 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
           <div class="mt-8">
             <WhatsAppChannelCard lang={lang} />
           </div>
+
+          <!-- Weekly Substack Newsletter Signup -->
+          <NewsletterSignup lang={lang} />
 
           <!-- E-E-A-T Author Box (Required for Google Quality Raters & AdSense) -->
           <div class="not-prose mt-14 p-6 sm:p-8 rounded-2xl bg-zinc-50 border border-zinc-200/80">
