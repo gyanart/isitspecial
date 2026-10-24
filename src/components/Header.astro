@@ -63,22 +63,134 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
       ))}
     </nav>
 
-    <!-- Right Controls: WhatsApp, Saved List, Language & CTA -->
-    <div class="flex items-center space-x-2.5 sm:space-x-3">
+    <!-- Right Controls: Share Icon Dropdown, Saved List, Language -->
+    <div class="flex items-center space-x-2 sm:space-x-2.5">
       
-      <!-- Official WhatsApp Channel Direct Pill -->
-      <a 
-        href={whatsappChannelUrl} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all shadow-2xs"
-        title="Join IsItSpecial WhatsApp Channel"
-      >
-        <svg class="w-3.5 h-3.5 fill-current text-[#25D366]" viewBox="0 0 24 24">
-          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.835.811 2.791.811 3.18 0 5.766-2.587 5.767-5.766.001-3.181-2.585-5.767-5.767-5.797zm0 10.366c-.859 0-1.637-.238-2.316-.677l-.166-.108-1.574.412.42-1.535-.114-.183c-.47-.749-.718-1.583-.717-2.511.001-2.52 2.052-4.57 4.572-4.57 2.518 0 4.568 2.051 4.568 4.571-.001 2.521-2.051 4.571-4.573 4.571zM12 .001C5.372.001 0 5.373 0 12c0 2.115.548 4.103 1.509 5.836L0 24l6.336-1.464C8.016 23.473 9.96 24 12 24c6.628 0 12-5.373 12-12S18.628.001 12 .001z"/>
-        </svg>
-        <span class="hidden sm:inline">WhatsApp</span>
-      </a>
+      <!-- Sleek Share Icon with Popular Channels Dropdown -->
+      <div class="relative" id="share-menu-wrapper">
+        <button 
+          id="header-share-toggle" 
+          class="w-9 h-9 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] text-[#14241c] hover:text-[#15803d] flex items-center justify-center shadow-2xs transition-all cursor-pointer"
+          title="Share Is It Special"
+          aria-label="Share options"
+        >
+          <!-- Crisp Modern Vector Share Icon -->
+          <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2.2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </button>
+
+        <!-- Popular Channels Share Dropdown Popover -->
+        <div 
+          id="header-share-dropdown" 
+          class="hidden absolute right-0 top-11 w-72 rounded-2xl bg-white border border-[#dce5dd] shadow-2xl p-3.5 z-50 text-[#14241c]"
+        >
+          <div class="flex items-center justify-between pb-2 mb-2.5 border-b border-[#dce5dd]/60">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#15803d] font-mono">
+              {isHi ? 'शेयर विकल्प' : 'SHARE THIS PAGE'}
+            </span>
+            <button id="close-share-dropdown-btn" class="w-5 h-5 rounded-full hover:bg-zinc-100 flex items-center justify-center text-xs text-[#14241c]/50 hover:text-[#14241c] cursor-pointer">
+              ✕
+            </button>
+          </div>
+
+          <!-- Popular Share Channels Grid -->
+          <div class="grid grid-cols-2 gap-1.5 text-xs font-semibold">
+            
+            <!-- WhatsApp -->
+            <button data-channel="whatsapp" class="header-share-action flex items-center space-x-2 p-2 rounded-xl hover:bg-[#eaf5eb] text-[#14241c] transition-colors w-full text-left cursor-pointer">
+              <span class="w-6 h-6 rounded-lg bg-[#25D366]/15 text-[#25D366] flex items-center justify-center shrink-0">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.835.811 2.791.811 3.18 0 5.766-2.587 5.767-5.766.001-3.181-2.585-5.767-5.767-5.797zm0 10.366c-.859 0-1.637-.238-2.316-.677l-.166-.108-1.574.412.42-1.535-.114-.183c-.47-.749-.718-1.583-.717-2.511.001-2.52 2.052-4.57 4.572-4.57 2.518 0 4.568 2.051 4.568 4.571-.001 2.521-2.051 4.571-4.573 4.571zM12 .001C5.372.001 0 5.373 0 12c0 2.115.548 4.103 1.509 5.836L0 24l6.336-1.464C8.016 23.473 9.96 24 12 24c6.628 0 12-5.373 12-12S18.628.001 12 .001z"/>
+                </svg>
+              </span>
+              <span>WhatsApp</span>
+            </button>
+
+            <!-- X (Twitter) -->
+            <button data-channel="x" class="header-share-action flex items-center space-x-2 p-2 rounded-xl hover:bg-zinc-100 text-[#14241c] transition-colors w-full text-left cursor-pointer">
+              <span class="w-6 h-6 rounded-lg bg-black/10 text-black flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </span>
+              <span>X (Twitter)</span>
+            </button>
+
+            <!-- Facebook -->
+            <button data-channel="facebook" class="header-share-action flex items-center space-x-2 p-2 rounded-xl hover:bg-blue-50 text-[#14241c] transition-colors w-full text-left cursor-pointer">
+              <span class="w-6 h-6 rounded-lg bg-[#1877F2]/15 text-[#1877F2] flex items-center justify-center shrink-0">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </span>
+              <span>Facebook</span>
+            </button>
+
+            <!-- Instagram -->
+            <button data-channel="instagram" class="header-share-action flex items-center space-x-2 p-2 rounded-xl hover:bg-rose-50 text-[#14241c] transition-colors w-full text-left cursor-pointer">
+              <span class="w-6 h-6 rounded-lg bg-[#E4405F]/15 text-[#E4405F] flex items-center justify-center shrink-0">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </span>
+              <span>Instagram</span>
+            </button>
+
+            <!-- LinkedIn -->
+            <button data-channel="linkedin" class="header-share-action flex items-center space-x-2 p-2 rounded-xl hover:bg-sky-50 text-[#14241c] transition-colors w-full text-left cursor-pointer">
+              <span class="w-6 h-6 rounded-lg bg-[#0A66C2]/15 text-[#0A66C2] flex items-center justify-center shrink-0">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </span>
+              <span>LinkedIn</span>
+            </button>
+
+            <!-- Telegram -->
+            <button data-channel="telegram" class="header-share-action flex items-center space-x-2 p-2 rounded-xl hover:bg-sky-50 text-[#14241c] transition-colors w-full text-left cursor-pointer">
+              <span class="w-6 h-6 rounded-lg bg-[#229ED9]/15 text-[#229ED9] flex items-center justify-center shrink-0">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
+                </svg>
+              </span>
+              <span>Telegram</span>
+            </button>
+
+          </div>
+
+          <!-- Universal 1-Click Copy Link -->
+          <div class="mt-2.5 pt-2.5 border-t border-[#dce5dd]/60">
+            <button 
+              id="header-copy-link-btn" 
+              class="w-full py-2 px-3 rounded-xl bg-[#f7faf7] hover:bg-[#eaf5eb] border border-[#dce5dd] text-[#14241c] text-xs font-bold transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span id="header-copy-btn-text">{isHi ? 'लिंक कॉपी करें' : 'Copy Page Link'}</span>
+            </button>
+          </div>
+
+          <!-- WhatsApp Channel Direct Invite -->
+          <a 
+            href={whatsappChannelUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="mt-2 block p-2 rounded-xl bg-[#25D366]/10 border border-[#25D366]/25 hover:bg-[#25D366]/20 transition-all text-center"
+          >
+            <span class="text-[11px] font-bold text-[#128C7E] flex items-center justify-center space-x-1.5">
+              <span>🟢 {isHi ? 'व्हाट्सएप चैनल से जुड़ें' : 'Join IsItSpecial Channel'} &rarr;</span>
+            </span>
+          </a>
+
+        </div>
+      </div>
 
       <!-- Saved Reading List Trigger Pill -->
       <button 
@@ -125,6 +237,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
 <SavedDrawer lang={lang} />
 
 <script is:inline>
+  // Saved reading list counter
   function updateHeaderSavedCount() {
     try {
       const saved = JSON.parse(localStorage.getItem('isitspecial_saved') || '[]');
@@ -142,4 +255,83 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
 
   window.addEventListener('bookmarks-updated', updateHeaderSavedCount);
   updateHeaderSavedCount();
+
+  // Share Dropdown Logic
+  const shareToggleBtn = document.getElementById('header-share-toggle');
+  const shareDropdown = document.getElementById('header-share-dropdown');
+  const closeShareBtn = document.getElementById('close-share-dropdown-btn');
+  const copyLinkBtn = document.getElementById('header-copy-link-btn');
+
+  function toggleShareDropdown(e) {
+    e?.stopPropagation();
+    shareDropdown?.classList.toggle('hidden');
+  }
+
+  function closeShareDropdown() {
+    shareDropdown?.classList.add('hidden');
+  }
+
+  shareToggleBtn?.addEventListener('click', toggleShareDropdown);
+  closeShareBtn?.addEventListener('click', closeShareDropdown);
+
+  // Close when clicking anywhere outside
+  document.addEventListener('click', (e) => {
+    if (!shareDropdown?.contains(e.target) && !shareToggleBtn?.contains(e.target)) {
+      closeShareDropdown();
+    }
+  });
+
+  // Handle Share Actions
+  document.querySelectorAll('.header-share-action').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const channel = btn.getAttribute('data-channel');
+      const url = window.location.href;
+      const title = document.title || 'Is It Special?';
+      const text = `🔍 "${title}" — Is it genuinely special? Read the verdict:\n${url}`;
+
+      switch (channel) {
+        case 'whatsapp':
+          window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+          break;
+        case 'x':
+          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, '_blank');
+          break;
+        case 'facebook':
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+          break;
+        case 'instagram':
+          // Instagram does not have a web share URL: copy link and notify
+          navigator.clipboard.writeText(url).then(() => {
+            alert('Link copied! Open Instagram to share in your Story, DM, or Bio.');
+            window.open('https://www.instagram.com', '_blank');
+          });
+          break;
+        case 'linkedin':
+          window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+          break;
+        case 'telegram':
+          window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
+          break;
+      }
+      closeShareDropdown();
+    });
+  });
+
+  // Universal 1-Click Copy Link inside dropdown
+  copyLinkBtn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      const textSpan = document.getElementById('header-copy-btn-text');
+      if (textSpan) {
+        const originalText = textSpan.innerText;
+        textSpan.innerText = '✓ Link Copied!';
+        setTimeout(() => { 
+          textSpan.innerText = originalText;
+          closeShareDropdown();
+        }, 1500);
+      }
+    } catch (e) {
+      console.error('Copy failed', e);
+    }
+  });
 </script>
