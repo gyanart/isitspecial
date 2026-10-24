@@ -7,6 +7,9 @@ interface Props {
   cons?: string[];
   whoShouldBuy?: string;
   whoShouldSkip?: string;
+  affiliateUrl?: string;
+  affiliateLabel?: string;
+  affiliateStore?: string;
   lang?: 'en' | 'hi';
 }
 
@@ -18,6 +21,9 @@ const {
   cons = [], 
   whoShouldBuy, 
   whoShouldSkip,
+  affiliateUrl,
+  affiliateLabel,
+  affiliateStore = 'Amazon',
   lang = 'en'
 } = Astro.props;
 
@@ -109,6 +115,32 @@ const isHi = lang === 'hi';
           <span class="text-stone-600">{whoShouldSkip}</span>
         </div>
       )}
+    </div>
+  )}
+
+  <!-- Tasteful Affiliate Link & Pricing Section -->
+  {affiliateUrl && (
+    <div class="mt-6 pt-5 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-stone-50/80 p-4 sm:p-5 rounded-2xl border border-stone-200/70">
+      <div class="text-xs space-y-0.5 text-center sm:text-left">
+        <span class="font-bold text-stone-900 block text-sm">
+          {isHi ? `उत्पाद उपलब्धता (${affiliateStore})` : `Check Pricing & Availability (${affiliateStore})`}
+        </span>
+        <span class="text-[11px] text-stone-600 block">
+          {isHi 
+            ? '*पारदर्शिता प्रकटीकरण: यदि आप हमारे लिंक से खरीदारी करते हैं, तो हमें बिना किसी अतिरिक्त लागत के एक छोटा कमीशन मिल सकता है।' 
+            : '*Transparency Disclosure: As an independent reviewer, we may earn an affiliate commission from qualifying purchases at zero extra cost to you.'}
+        </span>
+      </div>
+
+      <a 
+        href={affiliateUrl} 
+        target="_blank" 
+        rel="nofollow sponsored noopener" 
+        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-amber-800 text-stone-50 font-bold text-xs hover:bg-amber-900 transition-all shadow-xs flex items-center justify-center space-x-2 shrink-0 group hover:shadow-md"
+      >
+        <span>🛒</span>
+        <span>{affiliateLabel || (isHi ? `${affiliateStore} पर देखें →` : `View on ${affiliateStore} →`)}</span>
+      </a>
     </div>
   )}
 </div>
