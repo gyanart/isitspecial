@@ -12,6 +12,7 @@ interface PostItem {
     specialScore: number;
     specialVerdict: string;
     readingTime: string;
+    heroImage?: string;
     lang?: 'en' | 'hi';
   };
 }
@@ -64,18 +65,18 @@ const formattedDate = new Intl.DateTimeFormat(isHi ? 'hi-IN' : 'en-US', {
   day: 'numeric'
 }).format(pubDate);
 
-// Dynamic verdict color
+// Dynamic verdict colors
 const isOverhyped = specialVerdict.toLowerCase().includes('overhyped') || specialVerdict.includes('ओवरहाइप्ड');
 const isMasterpiece = specialVerdict.toLowerCase().includes('masterpiece') || specialVerdict.includes('मास्टरपीस');
 const isGem = specialVerdict.toLowerCase().includes('gem') || specialVerdict.includes('नगीना');
 
-const verdictColor = isOverhyped
-  ? 'bg-rose-100 text-rose-800 border-rose-200'
+const verdictTheme = isOverhyped
+  ? { badge: 'bg-rose-50 text-rose-700 border-rose-200', score: 'text-rose-600' }
   : isMasterpiece
-  ? 'bg-indigo-100 text-indigo-800 border-indigo-200'
+  ? { badge: 'bg-indigo-50 text-indigo-700 border-indigo-200', score: 'text-indigo-600' }
   : isGem
-  ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
-  : 'bg-amber-100 text-amber-800 border-amber-200';
+  ? { badge: 'bg-emerald-50 text-emerald-700 border-emerald-200', score: 'text-emerald-600' }
+  : { badge: 'bg-amber-50 text-amber-800 border-amber-200', score: 'text-amber-600' };
 
 // Calculate Category Counts filtered by current language
 const currentLangPosts = allPosts.filter(p => (p.data.lang || 'en') === lang);
@@ -89,6 +90,7 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
   title={`${title} | ${isHi ? 'इज इट स्पेशल?' : 'Is It Special?'}`} 
   description={description} 
   type="article"
+  image={heroImage}
   lang={lang}
   translationUrl={translationUrl}
 >
@@ -124,135 +126,152 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
     })} />
   </Fragment>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
-    
-    <!-- Header Meta & Title (Centered) -->
-    <header class="max-w-3xl mx-auto text-center space-y-4 pb-8 border-b border-stone-200">
-      <div class="flex items-center justify-center space-x-2 text-xs">
-        <a href={isHi ? '/hi' : '/'} class="text-stone-600 hover:text-stone-900 transition-colors uppercase tracking-wider font-semibold">
-          {isHi ? 'समीक्षाएं' : 'Articles'}
+  <!-- Article Hero Header (Full-width clean white section matching Homepage) -->
+  <header class="border-b border-zinc-200/80 bg-white py-12 sm:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+      
+      <!-- Category Badge & Breadcrumbs -->
+      <div class="flex items-center justify-center space-x-2 text-xs font-bold uppercase tracking-wider">
+        <a href={isHi ? '/hi' : '/'} class="text-zinc-500 hover:text-zinc-950 transition-colors">
+          {isHi ? 'होम' : 'Investigations'}
         </a>
-        <span class="text-stone-600">/</span>
-        <span class="text-amber-800 uppercase tracking-wider font-semibold">{category}</span>
+        <span class="text-zinc-300">/</span>
+        <span class="px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-900 border border-zinc-200">
+          {category}
+        </span>
       </div>
 
-      <h1 class="font-serif text-3xl sm:text-5xl font-extrabold text-stone-900 tracking-tight leading-[1.18]">
+      <!-- Main Headline -->
+      <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-extrabold text-zinc-950 tracking-tight leading-[1.12]">
         {title}
       </h1>
 
-      <p class="text-stone-600 text-lg sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
+      <!-- Subtitle / Hook -->
+      <p class="text-zinc-600 text-lg sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
         {description}
       </p>
 
-      <!-- Author and Date Meta -->
-      <div class="pt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-stone-600">
-        <div class="flex items-center space-x-2">
-          <div class="w-7 h-7 rounded-full bg-amber-700 text-stone-50 flex items-center justify-center font-bold text-xs uppercase">
+      <!-- Author, Date, Reading Time, and Special Index Pill -->
+      <div class="pt-2 flex flex-wrap items-center justify-center gap-3 text-xs text-zinc-600">
+        <div class="flex items-center space-x-2 bg-zinc-50 px-3 py-1.5 rounded-full border border-zinc-200">
+          <div class="w-5 h-5 rounded-full bg-zinc-950 text-white flex items-center justify-center font-bold text-[10px] uppercase">
             {author.charAt(0)}
           </div>
-          <span class="font-semibold text-stone-900">{author}</span>
-          <span class="text-stone-600">({authorRole})</span>
+          <span class="font-bold text-zinc-900">{author}</span>
+          <span class="text-zinc-400">&bull;</span>
+          <span class="text-zinc-500">{authorRole}</span>
         </div>
-        <span class="text-stone-600">&bull;</span>
-        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
-        <span class="text-stone-600">&bull;</span>
-        <span>{readingTime}</span>
-        <span class="text-stone-600">&bull;</span>
-        <span class={`px-2.5 py-0.5 rounded-full border text-[11px] font-bold uppercase tracking-wider ${verdictColor}`}>
+
+        <span class="text-zinc-300 hidden sm:inline">&bull;</span>
+        <time datetime={pubDate.toISOString()} class="font-mono text-xs">{formattedDate}</time>
+        <span class="text-zinc-300">&bull;</span>
+        <span class="font-mono text-xs">{readingTime}</span>
+        
+        <span class="text-zinc-300">&bull;</span>
+        <span class={`px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-wider ${verdictTheme.badge}`}>
           {isHi ? 'निष्कर्ष: ' : 'Verdict: '} {specialVerdict} ({specialScore.toFixed(1)}/10)
         </span>
       </div>
 
-      <!-- In-Article Direct Language Switcher Callout -->
+      <!-- In-Article Bilingual Translation Switcher Banner -->
       {translationUrl && (
-        <div class="mt-6 pt-4 border-t border-stone-100 flex justify-center">
-          <div class={`inline-flex items-center gap-3 px-4 py-2.5 rounded-2xl border text-xs shadow-xs ${
-            isHi ? 'bg-amber-50/80 border-amber-200 text-amber-950' : 'bg-stone-100/90 border-stone-300/80 text-stone-900'
-          }`}>
+        <div class="pt-4 flex justify-center">
+          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-zinc-100/90 border border-zinc-200/90 text-xs shadow-xs">
             <span class="text-base">🌐</span>
-            <span class="font-medium">
+            <span class="font-medium text-zinc-700">
               {isHi 
-                ? 'Would you prefer to read this article in English?' 
+                ? 'Would you prefer to read this critique in English?' 
                 : 'क्या आप इस लेख को हिंदी में पढ़ना चाहते हैं?'}
             </span>
             <a 
               href={translationUrl} 
-              class={`ml-1 px-3 py-1 rounded-full text-xs font-bold transition-all shadow-xs ${
-                isHi 
-                  ? 'bg-amber-800 text-stone-50 hover:bg-amber-900' 
-                  : 'bg-stone-900 text-stone-50 hover:bg-stone-800'
-              }`}
+              class="px-3.5 py-1 rounded-full text-xs font-bold bg-zinc-950 text-white hover:bg-zinc-800 transition-all shadow-xs"
             >
               {isHi ? 'Read in English →' : 'हिंदी में पढ़ें →'}
             </a>
           </div>
         </div>
       )}
-    </header>
 
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+    
     <!-- Hero Image Banner -->
     {heroImage && (
-      <div class="max-w-4xl mx-auto my-8 overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-xs">
+      <div class="mb-10 overflow-hidden rounded-3xl border border-zinc-200/90 bg-white shadow-sm max-h-[500px]">
         <img 
           src={heroImage} 
           alt={heroImageAlt || title} 
-          class="w-full h-[260px] sm:h-[440px] object-cover" 
+          class="w-full h-full object-cover" 
           loading="eager"
         />
       </div>
     )}
 
     <!-- Top In-Content Ad Placeholder (Zero-CLS) -->
-    <div class="max-w-4xl mx-auto mt-4">
-      <AdSlot format="horizontal" label="Advertisement (Top Leaderboard)" slotId="ISITSPECIAL_TOP_BANNER" />
-    </div>
+    <AdSlot format="horizontal" label="Advertisement (Top Leaderboard)" slotId="ISITSPECIAL_TOP_BANNER" />
 
-    <!-- Main Content & Sidebar Grid (Desktop 8 / 4 Grid) -->
+    <!-- 2-Column Desktop Grid (Article Body + Sidebar) -->
     <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
       
-      <!-- Left Column: The Editorial Article (Span 8) -->
-      <div class="lg:col-span-8 min-w-0">
-        <div class="prose prose-zinc prose-lg max-w-none 
-          prose-headings:font-serif prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-zinc-950
-          prose-p:leading-relaxed prose-p:text-zinc-800
-          prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/40 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:font-serif
-          prose-strong:text-zinc-950 prose-strong:font-bold
-          prose-a:text-amber-700 prose-a:font-semibold hover:prose-a:text-amber-800">
-          <slot />
-        </div>
+      <!-- Left Column: The Editorial Magazine Paper (Span 8) -->
+      <div class="lg:col-span-8 min-w-0 space-y-8">
+        
+        <!-- White Editorial Card Wrapper -->
+        <div class="bg-white border border-zinc-200/90 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-sm">
+          <div class="prose prose-zinc prose-lg max-w-none 
+            prose-headings:font-serif prose-headings:font-extrabold prose-headings:text-zinc-950 prose-headings:tracking-tight
+            prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:pt-6 prose-h2:border-t prose-h2:border-zinc-100
+            prose-p:leading-relaxed prose-p:text-zinc-800
+            prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/50 prose-blockquote:py-3.5 prose-blockquote:px-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:font-serif prose-blockquote:text-zinc-900
+            prose-strong:text-zinc-950 prose-strong:font-bold
+            prose-a:text-amber-700 prose-a:font-semibold hover:prose-a:text-amber-800">
+            <slot />
+          </div>
 
-        <!-- Mid-Article In-Content Ad Placeholder (Zero-CLS) -->
-        <AdSlot format="horizontal" label="Advertisement (Mid-Article Flow)" slotId="ISITSPECIAL_MID_BANNER" />
+          <!-- Mid-Article In-Content Ad Placeholder (Zero-CLS) -->
+          <div class="mt-12 not-prose">
+            <AdSlot format="horizontal" label="Advertisement (In-Article Flow)" slotId="ISITSPECIAL_MID_BANNER" />
+          </div>
 
-        <!-- E-E-A-T Author Box (Required for Google Quality Raters & AdSense) -->
-        <div class="mt-14 p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 shadow-sm">
-          <div class="flex items-start space-x-4">
-            <div class="w-12 h-12 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-bold text-lg font-serif shrink-0 shadow-xs">
-              {author.charAt(0)}
-            </div>
-            <div class="space-y-1.5 flex-1">
-              <div class="flex items-baseline space-x-2">
-                <h3 class="font-bold text-zinc-950 text-base">{author}</h3>
-                <span class="text-xs text-amber-700 font-semibold uppercase tracking-wider">{authorRole}</span>
+          <!-- E-E-A-T Author Box (Required for Google Quality Raters & AdSense) -->
+          <div class="not-prose mt-14 p-6 sm:p-8 rounded-2xl bg-zinc-50 border border-zinc-200/80">
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-2xl bg-zinc-950 text-white flex items-center justify-center font-bold text-lg font-serif shrink-0 shadow-xs">
+                {author.charAt(0)}
               </div>
-              <p class="text-sm text-zinc-600 leading-relaxed">
-                {isHi
-                  ? 'हमारे स्वतंत्र उत्पाद एवं संस्कृति परीक्षण डेस्क द्वारा लिखित। हम अपने परीक्षण उत्पाद स्वयं खरीदते हैं, कॉर्पोरेट स्पॉन्सरशिप अस्वीकार करते हैं, और वास्तविक परिस्थितियों में परीक्षण करके तय करते हैं कि क्या सचमुच बेहतरीन है और क्या केवल मार्केटिंग का दिखावा।'
-                  : 'Written by our independent product & cultural testing desk. We purchase our own subjects, reject corporate sponsorship, and test items under everyday conditions to filter true quality from marketing hype.'}
-              </p>
+              <div class="space-y-1.5 flex-1">
+                <div class="flex items-baseline space-x-2">
+                  <h3 class="font-bold text-zinc-950 text-base">{author}</h3>
+                  <span class="text-xs text-amber-700 font-bold uppercase tracking-wider">{authorRole}</span>
+                </div>
+                <p class="text-sm text-zinc-600 leading-relaxed">
+                  {isHi
+                    ? 'हमारे स्वतंत्र उत्पाद एवं संस्कृति परीक्षण डेस्क द्वारा लिखित। हम अपने परीक्षण उत्पाद स्वयं खरीदते हैं, कॉर्पोरेट स्पॉन्सरशिप अस्वीकार करते हैं, और वास्तविक परिस्थितियों में परीक्षण करके तय करते हैं कि क्या सचमुच बेहतरीन है और क्या केवल मार्केटिंग का दिखावा।'
+                    : 'Written by our independent product & cultural testing desk. We purchase our own subjects, reject corporate sponsorship, and test items under everyday conditions to filter true quality from marketing hype.'}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Related Articles Section (Bottom of Post) -->
         {relatedPosts.length > 0 && (
-          <div class="mt-16 pt-10 border-t border-zinc-200">
+          <div class="pt-6">
             <div class="flex items-center justify-between mb-6">
-              <h3 class="font-serif text-2xl font-bold text-zinc-950">
-                {isHi ? 'संबंधित समीक्षाएं' : 'Related Investigations'}
-              </h3>
-              <span class="text-xs font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
-                {isHi ? 'श्रेणी:' : 'In'} {category}
+              <div>
+                <h3 class="font-serif text-2xl font-bold text-zinc-950">
+                  {isHi ? 'संबंधित समीक्षाएं' : 'Related Investigations'}
+                </h3>
+                <p class="text-xs text-zinc-500 mt-0.5">
+                  {isHi ? 'इस श्रेणी के अन्य उत्पाद' : `More critical teardowns in ${category}`}
+                </p>
+              </div>
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+                {category}
               </span>
             </div>
             
@@ -264,19 +283,32 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
                 return (
                   <a 
                     href={relatedLink} 
-                    class="group block p-5 rounded-2xl border border-zinc-200/90 bg-white hover:border-amber-500 hover:shadow-md transition-all"
+                    class="group block bg-white border border-zinc-200/90 rounded-2xl p-5 card-hover shadow-xs"
                   >
+                    {related.data.heroImage && (
+                      <div class="w-full h-36 rounded-xl overflow-hidden mb-4 bg-zinc-100 border border-zinc-200/60">
+                        <img 
+                          src={related.data.heroImage} 
+                          alt={related.data.title} 
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
                     <div class="flex items-center justify-between text-xs text-zinc-500 mb-2">
-                      <span class="font-semibold text-amber-700 uppercase tracking-wide">{related.data.category}</span>
-                      <span class="font-mono bg-zinc-100 px-2 py-0.5 rounded text-zinc-700">{related.data.specialScore.toFixed(1)}/10</span>
+                      <span class="font-bold text-zinc-800 uppercase tracking-wide text-[11px] bg-zinc-100 px-2 py-0.5 rounded">
+                        {related.data.category}
+                      </span>
+                      <span class="font-mono font-bold bg-amber-50 text-amber-800 px-2 py-0.5 rounded border border-amber-200/60">
+                        {related.data.specialScore.toFixed(1)}/10
+                      </span>
                     </div>
-                    <h4 class="font-serif text-base sm:text-lg font-bold text-zinc-950 group-hover:text-amber-600 transition-colors line-clamp-2 leading-snug">
+                    <h4 class="font-serif text-base font-bold text-zinc-950 group-hover:text-amber-600 transition-colors line-clamp-2 leading-snug">
                       {related.data.title}
                     </h4>
                     <p class="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed">
                       {related.data.description}
                     </p>
-                    <div class="mt-3 text-xs font-bold text-amber-700 group-hover:translate-x-1 transition-transform flex items-center space-x-1">
+                    <div class="mt-4 pt-3 border-t border-zinc-100 text-xs font-bold text-amber-700 group-hover:translate-x-1 transition-transform flex items-center space-x-1">
                       <span>{isHi ? 'पूरा निष्कर्ष पढ़ें' : 'Read Verdict'}</span>
                       <span>&rarr;</span>
                     </div>
@@ -289,22 +321,24 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
 
       </div>
 
-      <!-- Right Column: Sticky Sidebar (Span 4) -->
+      <!-- Right Column: Sticky Sidebar Matching Homepage (Span 4) -->
       <aside class="lg:col-span-4 space-y-6 sticky top-20">
         
         <!-- Sidebar Widget 1: The Verdict Scorecard -->
-        <div class="p-6 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-4">
+        <div class="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b border-zinc-100 pb-3">
             <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
-              {isHi ? 'त्वरित स्कोरकार्ड' : 'Quick Scorecard'}
+              {isHi ? 'त्वरित स्कोरकार्ड' : 'The Scorecard'}
             </span>
-            <span class={`px-2.5 py-0.5 rounded-full border text-[11px] font-bold uppercase tracking-wider ${verdictColor}`}>
+            <span class={`px-2.5 py-0.5 rounded-full border text-[11px] font-bold uppercase tracking-wider ${verdictTheme.badge}`}>
               {specialVerdict}
             </span>
           </div>
 
           <div class="flex items-baseline space-x-2">
-            <span class="font-serif text-5xl font-black text-zinc-950">{specialScore.toFixed(1)}</span>
+            <span class={`font-serif text-5xl font-black tracking-tight ${verdictTheme.score}`}>
+              {specialScore.toFixed(1)}
+            </span>
             <span class="text-zinc-600 font-bold uppercase text-xs font-mono">
               {isHi ? '/ 10 स्पेशल इंडेक्स' : '/ 10 Special Index'}
             </span>
@@ -313,19 +347,19 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
           <p class="text-xs text-zinc-600 leading-relaxed border-t border-zinc-100 pt-3">
             {isHi 
               ? 'हमारी रेटिंग सामग्री की गुणवत्ता, मरम्मत की सुविधा और टिकाऊ उपयोगिता पर आधारित है।' 
-              : 'Ratings strictly reflect material quality, repairability, value durability, and authenticity versus manufacturer hype.'}
+              : 'Evaluated on material craftsmanship, repairability, longevity, and price-to-utility ratio.'}
           </p>
         </div>
 
         <!-- Sidebar Widget 2: Recent Articles -->
         {recentPosts.length > 0 && (
-          <div class="p-6 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-4">
+          <div class="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-4">
             <div class="flex items-center justify-between border-b border-zinc-100 pb-3">
               <h4 class="font-serif text-base font-bold text-zinc-950">
-                {isHi ? 'हालिया समीक्षाएं' : 'Recent Investigations'}
+                {isHi ? 'हालिया समीक्षाएं' : 'Recent Drops'}
               </h4>
               <span class="text-[10px] font-mono text-zinc-600 uppercase bg-zinc-100 px-2 py-0.5 rounded">
-                {isHi ? 'नया' : 'Latest'}
+                {isHi ? 'ताज़ा' : 'Latest'}
               </span>
             </div>
 
@@ -353,9 +387,9 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
 
         <!-- Sidebar Widget 3: Categories & Editorial Pillars -->
         {categoriesWithCount.length > 0 && (
-          <div class="p-6 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-4">
+          <div class="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-4">
             <h4 class="font-serif text-base font-bold text-zinc-950 border-b border-zinc-100 pb-3">
-              {isHi ? 'विषय के अनुसार खोजें' : 'Browse by Pillar'}
+              {isHi ? 'विषय के अनुसार खोजें' : 'Editorial Pillars'}
             </h4>
             <ul class="space-y-1.5 text-xs">
               {categoriesWithCount.map((cat) => (
