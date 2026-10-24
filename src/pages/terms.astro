@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 ---
 
 <BaseLayout 
@@ -52,7 +53,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <h2>5. Contact Information</h2>
       <p>
-        For inquiries regarding our terms or rights permissions, please email <a href="mailto:editorial@isitspecial.com">editorial@isitspecial.com</a>.
+        For inquiries regarding our terms or rights permissions, please email <ObfuscatedEmail user="editorial" domain="isitspecial.com" />.
       </p>
     </div>
   </div>

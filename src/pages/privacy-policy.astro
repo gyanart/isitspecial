@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 ---
 
 <BaseLayout 
@@ -51,7 +52,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <h2>CCPA & GDPR Privacy Rights</h2>
       <p>
-        We respect your privacy rights under the European General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA). You have the right to request access to personal data, request rectification of errors, request erasure of data, or object to processing. If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us at <a href="mailto:editorial@isitspecial.com">editorial@isitspecial.com</a>.
+        We respect your privacy rights under the European General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA). You have the right to request access to personal data, request rectification of errors, request erasure of data, or object to processing. If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us at <ObfuscatedEmail user="editorial" domain="isitspecial.com" />.
       </p>
 
       <h2>Children's Information</h2>

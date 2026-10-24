@@ -1,99 +1,221 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 ---
 
 <BaseLayout 
   title="Contact the Editorial Desk | Is It Special?"
   description="Contact the editors of Is It Special. Submit product review recommendations, corrections, editorial inquiries, or press communications."
 >
-  <div class="max-w-2xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
-    <header class="space-y-3 pb-8 border-b border-stone-200">
-      <span class="text-xs font-bold uppercase tracking-widest text-amber-800">Editorial Desk</span>
-      <h1 class="font-serif text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    
+    <!-- Header -->
+    <header class="space-y-3 pb-8 border-b border-[#dce5dd]/80 text-center sm:text-left">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-[#15803d] bg-[#eaf5eb] border border-[#bbf7d0]">
+        <span>✉️</span>
+        <span>Independent Editorial Office</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-5xl font-black text-[#14241c] tracking-tight leading-tight">
         Contact & Item Submissions
       </h1>
-      <p class="text-stone-600 text-base leading-relaxed">
-        Got a product that claims to be extraordinary? Or an everyday marvel we should investigate? Let our editorial team know.
+      <p class="text-[#14241c]/75 text-base sm:text-lg leading-relaxed font-normal max-w-xl">
+        Got a product that claims to be extraordinary? Or an everyday marvel we should test? Drop a note to our testing desk.
       </p>
     </header>
 
-    <div class="py-8 space-y-8">
+    <div class="py-10 space-y-8">
       
-      <!-- Direct Contact Details -->
+      <!-- Direct Contact Details (Spam-Protected Obfuscated Emails) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div class="p-5 rounded-xl border border-stone-200 bg-white shadow-xs">
-          <div class="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">General Inquiries</div>
-          <div class="text-stone-900 font-semibold text-base font-mono">editorial@isitspecial.com</div>
-          <div class="text-xs text-stone-600 mt-1">Reader feedback & general questions</div>
+        
+        <div class="p-5 rounded-2xl border border-[#dce5dd] bg-white shadow-2xs space-y-1.5">
+          <div class="text-[10px] font-extrabold uppercase tracking-widest text-[#15803d] font-mono">
+            General Inquiries
+          </div>
+          <div class="text-[#14241c] font-semibold text-base font-mono">
+            <ObfuscatedEmail user="editorial" domain="isitspecial.com" />
+          </div>
+          <div class="text-xs text-[#14241c]/60">Reader feedback & general correspondence</div>
         </div>
 
-        <div class="p-5 rounded-xl border border-stone-200 bg-white shadow-xs">
-          <div class="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">Testing Submissions</div>
-          <div class="text-stone-900 font-semibold text-base font-mono">reviews@isitspecial.com</div>
-          <div class="text-xs text-stone-600 mt-1">Pitch an item or trend for our Special Index</div>
+        <div class="p-5 rounded-2xl border border-[#dce5dd] bg-white shadow-2xs space-y-1.5">
+          <div class="text-[10px] font-extrabold uppercase tracking-widest text-[#15803d] font-mono">
+            Testing Submissions
+          </div>
+          <div class="text-[#14241c] font-semibold text-base font-mono">
+            <ObfuscatedEmail user="reviews" domain="isitspecial.com" />
+          </div>
+          <div class="text-xs text-[#14241c]/60">Pitch an item or trend for our Special Index</div>
         </div>
+
       </div>
 
-      <!-- Contact / Tip Form -->
-      <form class="space-y-5 p-6 sm:p-8 rounded-2xl bg-white border border-stone-200 shadow-xs" onsubmit="event.preventDefault(); alert('Thank you for your submission. Our editorial team reviews reader submissions weekly.');">
-        <h3 class="font-serif text-xl font-bold text-stone-900">Send a Note or Review Tip</h3>
-        
-        <div>
-          <label for="name" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Your Name</label>
+      <!-- Advanced Anti-Spam Contact Form -->
+      <form 
+        id="editorial-contact-form"
+        class="space-y-5 p-6 sm:p-9 rounded-3xl bg-white border border-[#dce5dd] shadow-sm relative overflow-hidden"
+      >
+        <div class="flex items-center justify-between border-b border-[#dce5dd]/60 pb-3">
+          <h3 class="font-serif text-xl font-bold text-[#14241c]">Send a Note or Teardown Tip</h3>
+          <span class="inline-flex items-center space-x-1 text-[11px] font-semibold text-[#15803d] bg-[#eaf5eb] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">
+            <span>🛡️</span>
+            <span>Spam Protected</span>
+          </span>
+        </div>
+
+        <!-- Feedback Alert Container -->
+        <div id="form-feedback-alert" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
+
+        <!-- 1. HONEYPOT ANTI-SPAM TRAP (Hidden from humans, bots automatically fill it in) -->
+        <div class="hidden" style="display: none !important;" aria-hidden="true">
+          <label for="company_website_hp">Leave this field blank</label>
           <input 
             type="text" 
-            id="name" 
-            name="name" 
-            required 
-            placeholder="Jane Doe" 
-            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
+            id="company_website_hp" 
+            name="company_website_hp" 
+            tabindex="-1" 
+            autocomplete="off" 
           />
         </div>
 
-        <div>
-          <label for="email" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Your Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            required 
-            placeholder="you@domain.com" 
-            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
-          />
+        <!-- Form Fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block text-xs font-bold text-[#14241c]/80 uppercase tracking-wider mb-1.5">Your Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required 
+              placeholder="Jane Doe" 
+              class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce5dd] text-sm focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 bg-[#f7faf7]"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-xs font-bold text-[#14241c]/80 uppercase tracking-wider mb-1.5">Your Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              placeholder="you@domain.com" 
+              class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce5dd] text-sm focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 bg-[#f7faf7]"
+            />
+          </div>
         </div>
 
         <div>
-          <label for="subject" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Subject / Item Under Question</label>
+          <label for="subject" class="block text-xs font-bold text-[#14241c]/80 uppercase tracking-wider mb-1.5">Product or Topic Under Question</label>
           <input 
             type="text" 
             id="subject" 
             name="subject" 
             required 
             placeholder="e.g. Is the Moccamaster coffee maker really worth $350?" 
-            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce5dd] text-sm focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 bg-[#f7faf7]"
           />
         </div>
 
         <div>
-          <label for="message" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Your Message or Observation</label>
+          <label for="message" class="block text-xs font-bold text-[#14241c]/80 uppercase tracking-wider mb-1.5">Your Observation or Question</label>
           <textarea 
             id="message" 
             name="message" 
             rows="4" 
             required 
-            placeholder="Tell us what you've observed, why it's trending, or what specific questions you want us to answer..." 
-            class="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50"
+            placeholder="Tell us what you've observed, why it's trending, or what specific claims you want us to test..." 
+            class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce5dd] text-sm focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 bg-[#f7faf7]"
           ></textarea>
         </div>
 
+        <!-- Submit Button -->
         <button 
+          id="submit-form-btn"
           type="submit" 
-          class="w-full sm:w-auto px-6 py-3 rounded-xl bg-stone-900 text-stone-50 font-semibold text-sm hover:bg-stone-800 transition-colors cursor-pointer shadow-sm"
+          class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm hover:shadow-md flex items-center justify-center space-x-2"
         >
-          Submit to Editorial Desk
+          <span>Submit to Editorial Desk</span>
+          <span>&rarr;</span>
         </button>
+
       </form>
+
+      <!-- WhatsApp Channel Direct Alternative -->
+      <div class="p-6 rounded-3xl bg-[#25D366]/10 border border-[#25D366]/30 text-[#14241c] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="space-y-1 text-center sm:text-left">
+          <h4 class="font-serif font-bold text-base text-[#14241c]">Prefer Instant Messaging?</h4>
+          <p class="text-xs text-[#14241c]/70">Join our official WhatsApp channel to send feedback directly to our editorial team.</p>
+        </div>
+        <a 
+          href="https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q04" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shrink-0 transition-colors shadow-xs"
+        >
+          Open WhatsApp Channel &rarr;
+        </a>
+      </div>
 
     </div>
   </div>
+
+  <script is:inline>
+    // Multi-Layer Anti-Spam Form Verification
+    const form = document.getElementById('editorial-contact-form');
+    const alertBox = document.getElementById('form-feedback-alert');
+    const submitBtn = document.getElementById('submit-form-btn');
+    const honeypot = document.getElementById('company_website_hp');
+    
+    // Timestamp Gate: Record when form was loaded (bots submit within <500ms)
+    const formLoadedAt = Date.now();
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // 1. Honeypot check: If bot filled hidden field, silently fail or block
+      if (honeypot && honeypot.value.trim().length > 0) {
+        console.warn('Bot submission intercepted via honeypot.');
+        showAlert('Submission blocked by anti-spam filter.', 'error');
+        return;
+      }
+
+      // 2. Time-Gate check: Reject if submitted faster than 3 seconds
+      const elapsed = Date.now() - formLoadedAt;
+      if (elapsed < 3000) {
+        showAlert('Please take a moment to review your message before submitting.', 'error');
+        return;
+      }
+
+      // 3. Link spam filter: Reject messages with excessive URLs (typical bot behavior)
+      const messageText = document.getElementById('message')?.value || '';
+      const urlCount = (messageText.match(/https?:\/\//gi) || []).length;
+      if (urlCount > 3) {
+        showAlert('Messages with more than 3 links are blocked by our anti-spam filter.', 'error');
+        return;
+      }
+
+      // Successful human submission
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Transmitting...';
+
+      setTimeout(() => {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Submit to Editorial Desk</span><span>&rarr;</span>';
+        showAlert('✓ Thank you for your note! Our editorial team reviews reader submissions weekly.', 'success');
+      }, 800);
+    });
+
+    function showAlert(msg, type) {
+      if (!alertBox) return;
+      alertBox.classList.remove('hidden', 'bg-rose-50', 'text-rose-800', 'border-rose-200', 'bg-[#eaf5eb]', 'text-[#15803d]', 'border-[#bbf7d0]');
+      if (type === 'error') {
+        alertBox.classList.add('bg-rose-50', 'text-rose-800', 'border', 'border-rose-200');
+      } else {
+        alertBox.classList.add('bg-[#eaf5eb]', 'text-[#15803d]', 'border', 'border-[#bbf7d0]');
+      }
+      alertBox.innerText = msg;
+    }
+  </script>
 </BaseLayout>

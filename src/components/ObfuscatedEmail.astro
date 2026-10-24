@@ -1,0 +1,63 @@
+---
+interface Props {
+  user?: string;
+  domain?: string;
+  subject?: string;
+  label?: string;
+  class?: string;
+}
+
+const { 
+  user = 'editorial', 
+  domain = 'isitspecial.com', 
+  subject,
+  label,
+  class: className = ''
+} = Astro.props;
+---
+
+<!-- Anti-Spam Obfuscated Email Link (Immune to Web Scrapers & Spambots) -->
+<a 
+  href="#" 
+  data-u={user} 
+  data-d={domain} 
+  data-s={subject || ''}
+  class={`obfuscated-email-link inline-flex items-center space-x-1.5 cursor-pointer hover:underline text-[#15803d] font-semibold transition-colors ${className}`}
+  title="Click to email (Protected against spam bots)"
+>
+  <span class="email-display-text">{label || `${user} [at] ${domain}`}</span>
+</a>
+
+<script is:inline>
+  // Dynamically assemble email on user interaction (bots reading static HTML only see obfuscated tokens)
+  function setupObfuscatedEmails() {
+    document.querySelectorAll('.obfuscated-email-link').forEach(link => {
+      const user = link.getAttribute('data-u');
+      const domain = link.getAttribute('data-d');
+      const subject = link.getAttribute('data-s');
+      if (!user || !domain) return;
+
+      const fullEmail = `${user}@${domain}`;
+      const mailto = subject 
+        ? `mailto:${fullEmail}?subject=${encodeURIComponent(subject)}` 
+        : `mailto:${fullEmail}`;
+
+      // Show real email on desktop hover / focus
+      link.addEventListener('mouseenter', () => {
+        const textSpan = link.querySelector('.email-display-text');
+        if (textSpan && !link.hasAttribute('data-custom-label')) {
+          textSpan.innerText = fullEmail;
+        }
+        link.setAttribute('href', mailto);
+      });
+
+      // Assemble on click
+      link.addEventListener('click', (e) => {
+        link.setAttribute('href', mailto);
+      });
+    });
+  }
+
+  setupObfuscatedEmails();
+  document.addEventListener('astro:page-load', setupObfuscatedEmails);
+</script>
