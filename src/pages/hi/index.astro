@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import WhatsAppChannelCard from '../../components/WhatsAppChannelCard.astro';
+import FloatingShareBar from '../../components/FloatingShareBar.astro';
 
 // Fetch Hindi blog posts sorted by pubDate descending
 const posts = (await getCollection('blog'))
@@ -45,6 +46,9 @@ const categories = [
   translationUrl="/"
 >
   
+  <!-- Fixed Floating Share Dock (Right Side, Vertically Centered) -->
+  <FloatingShareBar lang="hi" />
+
   <!-- Grasshopper Style Hero Section in Hindi -->
   <section class="relative overflow-hidden pt-8 pb-16 sm:py-20 border-b border-[#dce5dd]/60">
     <div class="absolute top-0 left-0 w-full h-full hero-glow pointer-events-none"></div>

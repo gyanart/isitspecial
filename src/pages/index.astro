@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import AdSlot from '../components/AdSlot.astro';
 import WhatsAppChannelCard from '../components/WhatsAppChannelCard.astro';
+import FloatingShareBar from '../components/FloatingShareBar.astro';
 
 // Fetch English blog posts sorted by pubDate descending
 const posts = (await getCollection('blog'))
@@ -43,6 +44,9 @@ const categories = [
 
 <BaseLayout lang="en" translationUrl="/hi">
   
+  <!-- Fixed Floating Share Dock (Right Side, Vertically Centered) -->
+  <FloatingShareBar lang="en" />
+
   <!-- Grasshopper Style Hero Section with Search & Collage -->
   <section class="relative overflow-hidden pt-8 pb-16 sm:py-20 border-b border-[#dce5dd]/60">
     <!-- Subtle Organic Green Radial Glow -->
