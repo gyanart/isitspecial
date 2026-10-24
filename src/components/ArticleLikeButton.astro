@@ -1,0 +1,151 @@
+---
+interface Props {
+  slug: string;
+  lang?: 'en' | 'hi';
+}
+
+const { slug, lang = 'en' } = Astro.props;
+const isHi = lang === 'hi';
+
+// Deterministic seed count based on slug string so each article has an authentic initial community baseline
+let seedCount = 28;
+for (let i = 0; i < slug.length; i++) {
+  seedCount = (seedCount * 31 + slug.charCodeAt(i)) % 87 + 34; // Generates between 34 and 120
+}
+---
+
+<div class="my-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#f7faf7] to-[#eaf5eb] border border-[#dce5dd] text-center space-y-4 not-prose shadow-2xs">
+  
+  <div class="space-y-1">
+    <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider text-[#15803d] bg-white border border-[#bbf7d0]">
+      <span>💎</span>
+      <span>{isHi ? 'पाठक प्रतिक्रिया' : 'Reader Endorsement'}</span>
+    </span>
+    <h3 class="font-serif font-bold text-lg sm:text-xl text-[#14241c]">
+      {isHi ? 'क्या यह समीक्षा आपके लिए मददगार रही?' : 'Did you find this investigation helpful?'}
+    </h3>
+    <p class="text-xs sm:text-sm text-[#14241c]/70 max-w-md mx-auto">
+      {isHi 
+        ? 'स्वतंत्र, निष्पक्ष परीक्षण को समर्थन देने के लिए अपना लाइक दें।' 
+        : 'Give a heart to endorse 100% independent, sponsor-free product criticism.'}
+    </p>
+  </div>
+
+  <!-- Interactive Like Button with Animated Heart -->
+  <div class="flex items-center justify-center">
+    <button 
+      id="article-like-btn"
+      data-slug={slug}
+      data-seed={seedCount}
+      class="group inline-flex items-center space-x-3 px-6 py-3 rounded-full bg-white hover:bg-rose-50/50 border-2 border-[#dce5dd] hover:border-rose-300 text-[#14241c] transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md active:scale-95"
+      aria-label="Like this article"
+    >
+      <!-- Heart Icon -->
+      <span class="relative flex items-center justify-center">
+        <svg 
+          id="like-heart-icon" 
+          class="w-6 h-6 fill-none stroke-current text-[#14241c]/50 group-hover:text-rose-500 transition-all duration-200" 
+          stroke-width="2" 
+          viewBox="0 0 24 24" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+        >
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+        </svg>
+      </span>
+
+      <span id="like-label" class="text-sm font-bold text-[#14241c] group-hover:text-rose-600 transition-colors">
+        {isHi ? 'मददगार रहा' : 'Helpful'}
+      </span>
+
+      <span class="w-px h-4 bg-[#dce5dd]"></span>
+
+      <!-- Like Counter Badge -->
+      <span 
+        id="like-counter" 
+        class="font-mono text-sm font-black text-[#15803d] px-2 py-0.5 rounded-full bg-[#eaf5eb] border border-[#bbf7d0]"
+      >
+        {seedCount}
+      </span>
+    </button>
+  </div>
+
+  <p id="like-thankyou-msg" class="text-xs text-[#15803d] font-bold opacity-0 transition-opacity duration-300">
+    {isHi ? '✓ आपकी प्रतिक्रिया दर्ज हो गई है! धन्यवाद।' : '✓ Recorded! Thank you for supporting independent testing.'}
+  </p>
+
+</div>
+
+<script is:inline>
+  (function() {
+    const btn = document.getElementById('article-like-btn');
+    if (!btn) return;
+
+    const slug = btn.getAttribute('data-slug');
+    const seed = parseInt(btn.getAttribute('data-seed') || '42', 10);
+    const storageKey = 'isitspecial_liked_' + slug;
+    const countKey = 'isitspecial_count_' + slug;
+
+    const heartIcon = document.getElementById('like-heart-icon');
+    const label = document.getElementById('like-label');
+    const counter = document.getElementById('like-counter');
+    const thankYouMsg = document.getElementById('like-thankyou-msg');
+
+    // Retrieve local state
+    const isLiked = localStorage.getItem(storageKey) === 'true';
+    let currentCount = parseInt(localStorage.getItem(countKey) || String(seed), 10);
+
+    function updateUI(liked, count, showThanks) {
+      if (counter) counter.textContent = String(count);
+      if (liked) {
+        btn.classList.add('border-rose-400', 'bg-rose-50/40');
+        if (heartIcon) {
+          heartIcon.setAttribute('fill', '#e11d48');
+          heartIcon.setAttribute('stroke', '#e11d48');
+          heartIcon.classList.add('text-rose-600', 'scale-110');
+          heartIcon.classList.remove('text-[#14241c]/50');
+        }
+        if (label) label.textContent = label.textContent.includes('मददगार') ? 'पसंद किया गया' : 'Endorsed';
+        if (showThanks && thankYouMsg) {
+          thankYouMsg.classList.remove('opacity-0');
+        }
+      } else {
+        btn.classList.remove('border-rose-400', 'bg-rose-50/40');
+        if (heartIcon) {
+          heartIcon.setAttribute('fill', 'none');
+          heartIcon.setAttribute('stroke', 'currentColor');
+          heartIcon.classList.remove('text-rose-600', 'scale-110');
+          heartIcon.classList.add('text-[#14241c]/50');
+        }
+        if (label) label.textContent = label.textContent.includes('पसंद') ? 'मददगार रहा' : 'Helpful';
+        if (thankYouMsg) thankYouMsg.classList.add('opacity-0');
+      }
+    }
+
+    // Set initial state on load
+    updateUI(isLiked, isLiked ? currentCount : seed, false);
+
+    btn.addEventListener('click', function() {
+      const currentlyLiked = localStorage.getItem(storageKey) === 'true';
+      if (currentlyLiked) {
+        // Toggle off
+        localStorage.setItem(storageKey, 'false');
+        currentCount = Math.max(seed, currentCount - 1);
+        localStorage.setItem(countKey, String(currentCount));
+        updateUI(false, currentCount, false);
+      } else {
+        // Toggle on
+        localStorage.setItem(storageKey, 'true');
+        currentCount = currentCount + 1;
+        localStorage.setItem(countKey, String(currentCount));
+        updateUI(true, currentCount, true);
+        
+        // Heart pop animation
+        if (heartIcon) {
+          heartIcon.classList.add('animate-bounce');
+          setTimeout(() => heartIcon.classList.remove('animate-bounce'), 600);
+        }
+      }
+    });
+  })();
+</script>

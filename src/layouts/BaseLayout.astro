@@ -24,6 +24,13 @@ const {
 } = Astro.props;
 
 const siteName = lang === 'hi' ? 'इज इट स्पेशल? (Is It Special?)' : 'Is It Special?';
+const siteUrl = 'https://www.isitspecial.com';
+
+// Ensure fully qualified absolute URLs for canonical, translation, and OpenGraph (Required by GSC & GEO crawlers)
+const fullCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : `${siteUrl}${canonicalUrl.startsWith('/') ? '' : '/'}${canonicalUrl}`;
+const fullTranslationUrl = translationUrl 
+  ? (translationUrl.startsWith('http') ? translationUrl : `${siteUrl}${translationUrl.startsWith('/') ? '' : '/'}${translationUrl}`)
+  : undefined;
 
 // Environment variable support for GA4 & Google Search Console
 const gaMeasurementId = import.meta.env.PUBLIC_GA_ID || undefined;
@@ -38,7 +45,7 @@ const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={canonicalUrl} />
+    <link rel="canonical" href={fullCanonicalUrl} />
 
     <!-- RSS Auto-Discovery Feed -->
     <link rel="alternate" type="application/rss+xml" title="Is It Special? RSS Feed" href="https://www.isitspecial.com/rss.xml" />
@@ -59,10 +66,12 @@ const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial
       </script>
     )}
 
-    {translationUrl && (
-      <link rel="alternate" hreflang={lang === 'en' ? 'hi' : 'en'} href={translationUrl} />
+    <!-- International Hreflang Tags (Fully Qualified Absolute URLs + x-default) -->
+    {fullTranslationUrl && (
+      <link rel="alternate" hreflang={lang === 'en' ? 'hi' : 'en'} href={fullTranslationUrl} />
     )}
-    <link rel="alternate" hreflang={lang} href={canonicalUrl} />
+    <link rel="alternate" hreflang={lang} href={fullCanonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={lang === 'en' ? fullCanonicalUrl : (fullTranslationUrl || fullCanonicalUrl)} />
 
     <!-- Google Fonts: Bitter (Display Serif) + Inter (Clean Sans) + Devanagari (Hindi) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

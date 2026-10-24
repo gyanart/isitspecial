@@ -4,6 +4,7 @@ import AdSlot from '../components/AdSlot.astro';
 import ShareBar from '../components/ShareBar.astro';
 import WhatsAppChannelCard from '../components/WhatsAppChannelCard.astro';
 import FloatingShareBar from '../components/FloatingShareBar.astro';
+import ArticleLikeButton from '../components/ArticleLikeButton.astro';
 
 interface PostItem {
   id: string;
@@ -53,6 +54,7 @@ const {
   specialScore,
   specialVerdict,
   readingTime,
+  currentSlug = '',
   lang = 'en',
   translationUrl,
   relatedPosts = [],
@@ -242,6 +244,9 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
             prose-a:text-[#15803d] prose-a:font-semibold hover:prose-a:underline">
             <slot />
           </div>
+
+          <!-- Reader Like & Endorsement Widget -->
+          <ArticleLikeButton slug={currentSlug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-')} lang={lang} />
 
           <!-- In-Article Social Share & Bookmark Actions -->
           <ShareBar title={title} lang={lang} />
