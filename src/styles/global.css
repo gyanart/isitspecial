@@ -12,14 +12,15 @@
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
-    color: #111827;
-    background-color: #fafaf9;
+    color: #09090b;
+    background-color: #f8fafc;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-editorial {
     font-family: var(--font-serif);
+    letter-spacing: -0.02em;
   }
 
   html[lang="hi"] {
@@ -35,14 +36,23 @@
   }
 }
 
-/* Custom editorial utility classes */
-.article-container {
-  max-width: 44rem; /* ~704px - ideal reading length for 65-75 chars per line */
-}
-
 /* Zero-CLS Ad Unit Wrapper */
 .ad-slot-box {
   min-height: 250px;
-  background-color: #f3f4f6;
-  border: 1px dashed #e5e7eb;
+  background-color: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+}
+
+/* Custom card shadow */
+.card-shadow {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+}
+
+.card-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
 }

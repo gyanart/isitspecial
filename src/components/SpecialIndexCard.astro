@@ -27,120 +27,154 @@ const {
   lang = 'en'
 } = Astro.props;
 
+const isHi = lang === 'hi';
+
 // Color styling based on verdict keywords
 const isOverhyped = verdict.toLowerCase().includes('overhyped') || verdict.includes('ओवरहाइप्ड');
 const isMasterpiece = verdict.toLowerCase().includes('masterpiece') || verdict.includes('मास्टरपीस');
 const isGem = verdict.toLowerCase().includes('gem') || verdict.includes('नगीना');
 
-const currentTheme = isOverhyped
-  ? { badgeBg: 'bg-rose-100 text-rose-800 border-rose-200', scoreColor: 'text-rose-600', border: 'border-rose-200' }
+const verdictTheme = isOverhyped
+  ? { badge: 'bg-rose-50 text-rose-700 border-rose-200/80', score: 'text-rose-600', ring: 'ring-rose-500/10' }
   : isMasterpiece
-  ? { badgeBg: 'bg-indigo-100 text-indigo-800 border-indigo-200', scoreColor: 'text-indigo-700', border: 'border-indigo-200' }
+  ? { badge: 'bg-indigo-50 text-indigo-700 border-indigo-200/80', score: 'text-indigo-600', ring: 'ring-indigo-500/10' }
   : isGem
-  ? { badgeBg: 'bg-emerald-100 text-emerald-800 border-emerald-200', scoreColor: 'text-emerald-700', border: 'border-emerald-200' }
-  : { badgeBg: 'bg-amber-100 text-amber-800 border-amber-200', scoreColor: 'text-amber-600', border: 'border-amber-200' };
-
-const isHi = lang === 'hi';
+  ? { badge: 'bg-emerald-50 text-emerald-700 border-emerald-200/80', score: 'text-emerald-600', ring: 'ring-emerald-500/10' }
+  : { badge: 'bg-amber-50 text-amber-800 border-amber-200/80', score: 'text-amber-600', ring: 'ring-amber-500/10' };
 ---
 
-<div class={`my-10 rounded-2xl border-2 ${currentTheme.border} bg-white p-6 sm:p-8 shadow-sm transition-all`}>
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-stone-200 gap-4">
+<!-- 'not-prose' is mandatory to prevent markdown styling from overriding button colors and text -->
+<div class="not-prose my-12 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-9 shadow-sm">
+  
+  <!-- Header: Title and Big Score Counter -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-zinc-100 gap-4">
     <div>
-      <span class="text-xs font-bold uppercase tracking-widest text-stone-600">
-        {isHi ? 'द स्पेशल इंडेक्स निष्कर्ष' : 'The Special Index Verdict'}
-      </span>
-      <h3 class="font-serif text-2xl font-bold text-stone-900 mt-1">
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
+          {isHi ? 'द स्पेशल इंडेक्स निष्कर्ष' : 'The Special Index Verdict'}
+        </span>
+      </div>
+      <h3 class="font-serif text-2xl sm:text-3xl font-extrabold text-zinc-900 mt-1">
         {isHi ? 'क्या यह वाकई खास है?' : 'Is It Special?'}
       </h3>
     </div>
 
-    <div class="flex items-center space-x-4">
-      <span class={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border ${currentTheme.badgeBg}`}>
-        {verdict}
-      </span>
-      <div class="flex items-baseline space-x-1">
-        <span class={`text-4xl font-black font-serif tracking-tight ${currentTheme.scoreColor}`}>{score.toFixed(1)}</span>
-        <span class="text-xs font-bold text-stone-600 uppercase">/ 10</span>
+    <!-- Rating Score Box -->
+    <div class="flex items-center space-x-4 self-start sm:self-auto bg-zinc-50 px-4 py-2.5 rounded-2xl border border-zinc-200/80">
+      <div class="text-right">
+        <span class={`inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider border ${verdictTheme.badge}`}>
+          {verdict}
+        </span>
+      </div>
+      <div class="border-l border-zinc-200 pl-4 flex items-baseline space-x-1">
+        <span class={`text-4xl sm:text-5xl font-black font-serif tracking-tight ${verdictTheme.score}`}>
+          {score.toFixed(1)}
+        </span>
+        <span class="text-xs font-bold text-zinc-600 uppercase font-mono">/10</span>
       </div>
     </div>
   </div>
 
-  <p class="mt-5 text-stone-700 text-base leading-relaxed italic">
+  <!-- Summary Quote -->
+  <div class="my-6 p-4 sm:p-5 rounded-2xl bg-zinc-50 border-l-4 border-zinc-900 text-zinc-700 text-base sm:text-lg leading-relaxed italic">
     "{summary}"
-  </p>
+  </div>
 
+  <!-- Pros & Cons Grid -->
   {(pros.length > 0 || cons.length > 0) && (
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-6 border-t border-stone-100 text-sm">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6 pt-2 text-sm">
       {pros.length > 0 && (
-        <div class="space-y-2">
-          <h4 class="font-bold text-emerald-800 flex items-center space-x-1">
-            <span>✓</span>
+        <div class="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-100/80 space-y-2.5">
+          <h4 class="font-bold text-emerald-900 flex items-center space-x-1.5 text-xs uppercase tracking-wider">
+            <span class="w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">✓</span>
             <span>{isHi ? 'क्या इसे खास बनाता है' : 'What Makes It Special'}</span>
           </h4>
-          <ul class="space-y-1 text-stone-600 pl-4 list-disc">
-            {pros.map(item => <li>{item}</li>)}
+          <ul class="space-y-1.5 text-zinc-700 pl-2">
+            {pros.map(item => (
+              <li class="flex items-start space-x-2">
+                <span class="text-emerald-600 font-bold leading-none">&bull;</span>
+                <span class="leading-snug">{item}</span>
+              </li>
+            ))}
           </ul>
         </div>
       )}
 
       {cons.length > 0 && (
-        <div class="space-y-2">
-          <h4 class="font-bold text-rose-800 flex items-center space-x-1">
-            <span>✕</span>
+        <div class="p-4 rounded-2xl bg-rose-50/50 border border-rose-100/80 space-y-2.5">
+          <h4 class="font-bold text-rose-900 flex items-center space-x-1.5 text-xs uppercase tracking-wider">
+            <span class="w-4 h-4 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px]">✕</span>
             <span>{isHi ? 'कहाँ हाइप फेल होती है' : 'Where The Hype Fails'}</span>
           </h4>
-          <ul class="space-y-1 text-stone-600 pl-4 list-disc">
-            {cons.map(item => <li>{item}</li>)}
+          <ul class="space-y-1.5 text-zinc-700 pl-2">
+            {cons.map(item => (
+              <li class="flex items-start space-x-2">
+                <span class="text-rose-600 font-bold leading-none">&bull;</span>
+                <span class="leading-snug">{item}</span>
+              </li>
+            ))}
           </ul>
         </div>
       )}
     </div>
   )}
 
+  <!-- Persona Recommendation -->
   {(whoShouldBuy || whoShouldSkip) && (
-    <div class="mt-6 pt-5 border-t border-stone-100 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+    <div class="mt-6 pt-5 border-t border-zinc-100 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
       {whoShouldBuy && (
-        <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-          <span class="font-bold text-stone-900 uppercase tracking-wide block mb-1">
+        <div class="bg-zinc-50 p-3.5 rounded-xl border border-zinc-200/60">
+          <span class="font-bold text-zinc-900 uppercase tracking-wide block mb-1">
             {isHi ? 'किसे खरीदना चाहिए:' : 'Who Should Get It:'}
           </span>
-          <span class="text-stone-600">{whoShouldBuy}</span>
+          <span class="text-zinc-600 leading-relaxed block">{whoShouldBuy}</span>
         </div>
       )}
       {whoShouldSkip && (
-        <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-          <span class="font-bold text-stone-900 uppercase tracking-wide block mb-1">
+        <div class="bg-zinc-50 p-3.5 rounded-xl border border-zinc-200/60">
+          <span class="font-bold text-zinc-900 uppercase tracking-wide block mb-1">
             {isHi ? 'किसे छोड़ देना चाहिए:' : 'Who Should Skip:'}
           </span>
-          <span class="text-stone-600">{whoShouldSkip}</span>
+          <span class="text-zinc-600 leading-relaxed block">{whoShouldSkip}</span>
         </div>
       )}
     </div>
   )}
 
-  <!-- Tasteful Affiliate Link & Pricing Section -->
+  <!-- Modern High-Contrast Affiliate Callout Button -->
   {affiliateUrl && (
-    <div class="mt-6 pt-5 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-stone-50/80 p-4 sm:p-5 rounded-2xl border border-stone-200/70">
-      <div class="text-xs space-y-0.5 text-center sm:text-left">
-        <span class="font-bold text-stone-900 block text-sm">
-          {isHi ? `उत्पाद उपलब्धता (${affiliateStore})` : `Check Pricing & Availability (${affiliateStore})`}
-        </span>
-        <span class="text-[11px] text-stone-600 block">
+    <div class="mt-7 pt-6 border-t border-zinc-200/90 flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-900 text-white p-5 rounded-2xl shadow-md">
+      <div class="text-xs space-y-1 text-center sm:text-left">
+        <div class="flex items-center justify-center sm:justify-start space-x-2">
+          <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-zinc-950">
+            {affiliateStore}
+          </span>
+          <span class="font-bold text-sm text-zinc-100">
+            {isHi ? 'उत्पाद उपलब्धता एवं वर्तमान मूल्य' : 'Check Real-Time Pricing & Stock'}
+          </span>
+        </div>
+        <p class="text-[11px] text-zinc-400 max-w-md">
           {isHi 
-            ? '*पारदर्शिता प्रकटीकरण: यदि आप हमारे लिंक से खरीदारी करते हैं, तो हमें बिना किसी अतिरिक्त लागत के एक छोटा कमीशन मिल सकता है।' 
-            : '*Transparency Disclosure: As an independent reviewer, we may earn an affiliate commission from qualifying purchases at zero extra cost to you.'}
-        </span>
+            ? '*पारदर्शिता प्रकटीकरण: यदि आप हमारे लिंक से खरीदते हैं, तो हमें बिना किसी अतिरिक्त शुल्क के एक छोटा कमीशन मिल सकता है।' 
+            : '*Transparency: As an independent reviewer, we may earn a small referral commission at no extra cost to you.'}
+        </p>
       </div>
 
+      <!-- High-Contrast Pure White-Text Button -->
       <a 
         href={affiliateUrl} 
         target="_blank" 
         rel="nofollow sponsored noopener" 
-        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-amber-800 text-stone-50 font-bold text-xs hover:bg-amber-900 transition-all shadow-xs flex items-center justify-center space-x-2 shrink-0 group hover:shadow-md"
+        class="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-extrabold text-sm transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center space-x-2 shrink-0 cursor-pointer no-underline group"
+        style="text-decoration: none !important; color: #09090b !important;"
       >
-        <span>🛒</span>
-        <span>{affiliateLabel || (isHi ? `${affiliateStore} पर देखें →` : `View on ${affiliateStore} →`)}</span>
+        <span class="text-base group-hover:scale-110 transition-transform">🛒</span>
+        <span class="tracking-tight" style="color: #09090b !important;">
+          {affiliateLabel || (isHi ? `${affiliateStore} पर देखें →` : `View on ${affiliateStore} →`)}
+        </span>
       </a>
     </div>
   )}
+
 </div>

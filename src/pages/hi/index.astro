@@ -20,83 +20,102 @@ const regularPosts = posts.filter(p => p.id !== featuredPost?.id);
   translationUrl="/"
 >
   <!-- Hero Editorial Header in Hindi -->
-  <section class="border-b border-stone-200 bg-stone-100/60 py-16 sm:py-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
-      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-amber-800 bg-amber-100/70 border border-amber-200/80">
-        स्वतंत्र उत्पाद एवं सांस्कृतिक समीक्षा
-      </span>
+  <section class="border-b border-zinc-200/80 bg-white py-16 sm:py-24 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6 relative z-10">
+      
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-zinc-900 bg-zinc-100 border border-zinc-200">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+        <span>स्वतंत्र उत्पाद एवं सांस्कृतिक समीक्षा</span>
+      </div>
 
-      <h1 class="font-serif text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-[1.18]">
+      <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold text-zinc-950 tracking-tight leading-[1.12]">
         क्या यह वाकई खास है? <br />
-        <span class="italic font-normal text-stone-600 font-serif">या सिर्फ मार्केटिंग का खेल?</span>
+        <span class="italic font-normal text-zinc-500 font-serif">या सिर्फ मार्केटिंग का खेल?</span>
       </h1>
 
-      <p class="max-w-2xl mx-auto text-stone-600 text-lg sm:text-xl leading-relaxed font-normal">
-        हम वायरल दावों का परीक्षण करते हैं, रोज़मर्रा की वस्तुओं की इंजीनियरिंग की पड़ताल करते हैं और विज्ञापनों के पीछे का सच बताते हैं। कोई प्रायोजक नहीं, सिर्फ एक ईमानदार 1 से 10 का निष्कर्ष।
+      <p class="max-w-2xl mx-auto text-zinc-600 text-base sm:text-xl leading-relaxed font-normal">
+        हम वायरल दावों की निष्पक्ष जांच करते हैं, रोज़मर्रा की वस्तुओं की इंजीनियरिंग को परखते हैं और विज्ञापनों के पीछे का सच बताते हैं। कोई प्रायोजक नहीं, सिर्फ एक पारदर्शी 1 से 10 का निष्कर्ष।
       </p>
 
       <div class="pt-2 flex flex-wrap justify-center gap-3 text-xs font-semibold">
-        <a href="#articles" class="px-5 py-2.5 rounded-full bg-stone-900 text-stone-50 hover:bg-stone-800 transition-colors shadow-sm">
-          समीक्षाएं पढ़ें
+        <a href="#articles" class="px-5 py-3 rounded-xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all shadow-sm">
+          समीक्षाएं देखें ↓
         </a>
-        <a href="/about" class="px-5 py-2.5 rounded-full bg-white text-stone-800 border border-stone-300 hover:bg-stone-50 transition-colors">
-          हमारे परीक्षण मानक
+        <a href="/about" class="px-5 py-3 rounded-xl bg-white text-zinc-800 border border-zinc-300 hover:bg-zinc-50 transition-all">
+          हमारे 4-चरणीय परीक्षण मानक
         </a>
       </div>
     </div>
   </section>
 
   <!-- Main Content Area -->
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
     
     <!-- Top Ad Placeholder (Zero-CLS) -->
     <AdSlot format="horizontal" label="Advertisement (Leaderboard Slot)" slotId="ISITSPECIAL_HI_HOME_LEADERBOARD" />
 
-    <!-- Featured Post Spotlight (if exists) -->
+    <!-- Featured Post Spotlight -->
     {featuredPost && (
-      <section class="my-10 p-6 sm:p-8 rounded-3xl bg-white border border-stone-200 shadow-xs relative group">
-        <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-800 mb-2">
-          <span>★ प्रमुख समीक्षा (Featured)</span>
-          <span>&bull;</span>
-          <span class="text-stone-600 font-mono">स्पेशल इंडेक्स: {featuredPost.data.specialScore.toFixed(1)}/10</span>
-        </div>
+      <section class="my-10 p-6 sm:p-9 rounded-3xl bg-white border border-zinc-200/90 shadow-sm relative group overflow-hidden">
+        <div class="flex flex-col lg:flex-row gap-8 items-center justify-between">
+          
+          <div class="space-y-4 flex-1">
+            <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-700">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200">★ प्रमुख समीक्षा</span>
+              <span class="text-zinc-600">&bull;</span>
+              <span class="text-zinc-600 font-mono">इंडेक्स: {featuredPost.data.specialScore.toFixed(1)}/10</span>
+            </div>
 
-        <h2 class="font-serif text-2xl sm:text-4xl font-extrabold text-stone-900 group-hover:text-amber-800 transition-colors leading-tight">
-          <a href={`/hi/blog/${featuredPost.id.replace(/^hi\//, '')}`}>
-            <span class="absolute inset-0 z-10"></span>
-            {featuredPost.data.title}
-          </a>
-        </h2>
+            <h2 class="font-serif text-2xl sm:text-4xl font-extrabold text-zinc-950 group-hover:text-amber-600 transition-colors leading-tight">
+              <a href={`/hi/blog/${featuredPost.id.replace(/^hi\//, '')}`}>
+                <span class="absolute inset-0 z-10"></span>
+                {featuredPost.data.title}
+              </a>
+            </h2>
 
-        {featuredPost.data.heroImage && (
-          <div class="my-5 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 max-h-72">
-            <img src={featuredPost.data.heroImage} alt={featuredPost.data.title} class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" />
+            <p class="text-zinc-600 text-sm sm:text-base leading-relaxed line-clamp-3">
+              {featuredPost.data.description}
+            </p>
+
+            <div class="pt-2 flex items-center justify-between text-xs text-zinc-600">
+              <div class="flex items-center space-x-2">
+                <span class="font-bold text-zinc-900">{featuredPost.data.author}</span>
+                <span>&bull;</span>
+                <span>{featuredPost.data.readingTime}</span>
+              </div>
+              <span class="font-bold text-amber-600 group-hover:translate-x-1 transition-transform inline-flex items-center">
+                पूरा निष्कर्ष पढ़ें &rarr;
+              </span>
+            </div>
           </div>
-        )}
 
-        <p class="mt-4 text-stone-600 text-base sm:text-lg leading-relaxed">
-          {featuredPost.data.description}
-        </p>
+          {featuredPost.data.heroImage && (
+            <div class="w-full lg:w-96 h-64 shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 shadow-xs relative">
+              <img 
+                src={featuredPost.data.heroImage} 
+                alt={featuredPost.data.title} 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+              />
+            </div>
+          )}
 
-        <div class="mt-6 flex items-center justify-between pt-4 border-t border-stone-100 text-xs text-stone-600">
-          <div class="flex items-center space-x-2">
-            <span class="font-semibold text-stone-900">{featuredPost.data.author}</span>
-            <span>&bull;</span>
-            <span>{featuredPost.data.readingTime}</span>
-          </div>
-          <span class="font-bold text-amber-800 group-hover:underline">पूरा निष्कर्ष पढ़ें &rarr;</span>
         </div>
       </section>
     )}
 
     <!-- Article Feed Header -->
-    <div id="articles" class="pt-8 pb-4 flex items-center justify-between border-b border-stone-200">
-      <h3 class="font-serif text-2xl font-bold text-stone-900">हिंदी में ताज़ा समीक्षाएं</h3>
-      <span class="text-xs text-stone-600 font-mono">{posts.length} लेख प्रकाशित</span>
+    <div id="articles" class="pt-10 pb-4 flex items-center justify-between border-b border-zinc-200">
+      <div>
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-zinc-950">हिंदी में ताज़ा समीक्षाएं</h3>
+        <p class="text-xs text-zinc-600 mt-1">लोकप्रिय उपकरणों और सांस्कृतिक वस्तुओं की निष्पक्ष पड़ताल</p>
+      </div>
+      <span class="text-xs text-zinc-600 font-mono bg-zinc-100 px-3 py-1 rounded-full border border-zinc-200">
+        {posts.length} प्रकाशित
+      </span>
     </div>
 
     <!-- Regular Articles List -->
-    <div class="divide-y divide-stone-200">
+    <div class="space-y-4 my-6">
       {regularPosts.map((post) => (
         <ArticleCard
           title={post.data.title}
@@ -119,10 +138,13 @@ const regularPosts = posts.filter(p => p.id !== featuredPost?.id);
     </div>
 
     <!-- The Special Pledge / Mission Callout in Hindi -->
-    <section class="mt-16 p-8 rounded-3xl bg-stone-900 text-stone-100 space-y-4">
-      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">हमारा संपादकीय नियम</span>
-      <h3 class="font-serif text-2xl sm:text-3xl font-bold">ना कोई पेड प्रमोशन। ना कोई समझौता।</h3>
-      <p class="text-stone-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+    <section class="mt-16 p-8 sm:p-10 rounded-3xl bg-zinc-950 text-white space-y-4 shadow-xl">
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 font-mono">हमारा संपादकीय नियम</span>
+      </div>
+      <h3 class="font-serif text-2xl sm:text-3xl font-extrabold tracking-tight">ना कोई पेड प्रमोशन। ना कोई समझौता।</h3>
+      <p class="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-2xl font-normal">
         isitspecial.com पर समीक्षा की जाने वाली प्रत्येक वस्तु का परीक्षण वास्तविक परिस्थितियों में किया जाता है। हम किसी ब्रांड से अपने स्कोर बदलने के पैसे नहीं लेते। जब कोई चीज़ सिर्फ दिखावा होती है, तो हम उसे साफ शब्दों में कहते हैं।
       </p>
       <div class="pt-2">

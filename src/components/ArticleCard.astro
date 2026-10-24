@@ -33,65 +33,73 @@ const formattedDate = new Intl.DateTimeFormat(isHi ? 'hi-IN' : 'en-US', {
   day: 'numeric'
 }).format(pubDate);
 
-// Dynamic verdict color
+// Dynamic verdict styling
 const isOverhyped = specialVerdict.toLowerCase().includes('overhyped') || specialVerdict.includes('ओवरहाइप्ड');
 const isMasterpiece = specialVerdict.toLowerCase().includes('masterpiece') || specialVerdict.includes('मास्टरपीस');
 const isGem = specialVerdict.toLowerCase().includes('gem') || specialVerdict.includes('नगीना');
 
-const verdictColor = isOverhyped
-  ? 'text-rose-600'
+const verdictBadge = isOverhyped
+  ? 'bg-rose-50 text-rose-700 border-rose-200'
   : isMasterpiece
-  ? 'text-indigo-600'
+  ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
   : isGem
-  ? 'text-emerald-600'
-  : 'text-amber-600';
+  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+  : 'bg-amber-50 text-amber-800 border-amber-200';
 
 const articleUrl = isHi ? `/hi/blog/${slug}` : `/blog/${slug}`;
 ---
 
-<article class="group relative flex flex-col sm:flex-row sm:items-center gap-6 justify-between border-b border-stone-200 py-8 transition-colors">
+<article class="group relative bg-white border border-zinc-200/80 rounded-2xl p-5 sm:p-6 card-hover flex flex-col sm:flex-row gap-6 justify-between items-start my-4">
   <div class="space-y-3 flex-1 min-w-0">
-    <div class="flex items-center space-x-3 text-xs">
-      <span class="font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+    
+    <!-- Category & Date Meta -->
+    <div class="flex flex-wrap items-center gap-2 text-xs">
+      <span class="font-bold uppercase tracking-wider text-zinc-900 bg-zinc-100 px-2.5 py-0.5 rounded-md border border-zinc-200">
         {category}
       </span>
-      <span class="text-stone-600">&bull;</span>
-      <time datetime={pubDate.toISOString()} class="text-stone-600">
+      <span class="text-zinc-600">&bull;</span>
+      <time datetime={pubDate.toISOString()} class="text-zinc-600 font-mono text-[11px]">
         {formattedDate}
       </time>
-      <span class="text-stone-600">&bull;</span>
-      <span class="text-stone-600">{readingTime}</span>
+      <span class="text-zinc-600">&bull;</span>
+      <span class="text-zinc-600 text-[11px]">{readingTime}</span>
     </div>
 
-    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 group-hover:text-amber-800 transition-colors leading-snug">
+    <!-- Title -->
+    <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-900 group-hover:text-amber-600 transition-colors leading-snug">
       <a href={articleUrl}>
         <span class="absolute inset-0 z-10"></span>
         {title}
       </a>
     </h2>
 
-    <p class="text-stone-600 text-sm sm:text-base leading-relaxed line-clamp-2">
+    <!-- Description -->
+    <p class="text-zinc-600 text-sm sm:text-base leading-relaxed line-clamp-2">
       {description}
     </p>
 
-    <div class="mt-4 flex items-center justify-between pt-3 border-t border-stone-100 text-xs">
+    <!-- Score & Verdict Footer -->
+    <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs">
       <div class="flex items-center space-x-2">
-        <span class="font-mono text-stone-600 uppercase tracking-wider">
+        <span class="text-[11px] font-mono text-zinc-600 uppercase tracking-wider">
           {isHi ? 'निष्कर्ष:' : 'Verdict:'}
         </span>
-        <span class={`font-bold uppercase tracking-wider ${verdictColor}`}>{specialVerdict}</span>
+        <span class={`font-bold px-2 py-0.5 rounded-full border text-[11px] uppercase tracking-wider ${verdictBadge}`}>
+          {specialVerdict}
+        </span>
       </div>
 
-      <div class="flex items-baseline space-x-1">
-        <span class="text-stone-600">{isHi ? 'स्पेशल इंडेक्स:' : 'Special Index:'}</span>
-        <span class="font-serif text-base font-bold text-stone-900">{specialScore.toFixed(1)}</span>
-        <span class="text-stone-600">/10</span>
+      <div class="flex items-baseline space-x-1 bg-zinc-50 px-2.5 py-1 rounded-lg border border-zinc-200/60">
+        <span class="text-[10px] font-mono uppercase text-zinc-600">Score:</span>
+        <span class="font-serif text-base font-black text-zinc-900">{specialScore.toFixed(1)}</span>
+        <span class="text-[10px] text-zinc-600 font-mono">/10</span>
       </div>
     </div>
   </div>
 
+  <!-- Thumbnail Photo with Zoom Effect -->
   {heroImage && (
-    <div class="w-full sm:w-44 sm:h-32 shrink-0 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-xs">
+    <div class="w-full sm:w-52 h-44 sm:h-36 shrink-0 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-xs relative">
       <img 
         src={heroImage} 
         alt={title} 
