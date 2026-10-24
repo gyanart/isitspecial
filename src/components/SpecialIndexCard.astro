@@ -32,6 +32,7 @@ const {
 } = Astro.props;
 
 const isHi = lang === 'hi';
+const isAmazon = affiliateStore.toLowerCase() === 'amazon';
 
 // Automatic Smart Affiliate URL builder with store ID "isitspecial-21"
 const defaultStoreTag = 'isitspecial-21';
@@ -58,7 +59,11 @@ const verdictTheme = isOverhyped
 ---
 
 <!-- 'not-prose' prevents markdown styling from overriding button colors and text -->
-<div class="not-prose my-12 rounded-3xl border border-[#dce5dd]/90 bg-white p-6 sm:p-9 shadow-sm">
+<div 
+  class="not-prose my-12 rounded-3xl border border-[#dce5dd]/90 bg-white p-6 sm:p-9 shadow-sm special-card"
+  data-special-card="true"
+  data-lang={lang}
+>
   
   <!-- Header: Title and Big Score Counter -->
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-[#dce5dd]/60 gap-4">
@@ -171,7 +176,7 @@ const verdictTheme = isOverhyped
                 <path fill="#FF9900" d="M433 415.2c-6.5 15.8-16 26.8-21.2 31c-5.5 4.5-9.5 2.7-6.5-3.8s19.3-46.5 12.7-55c-6.5-8.3-37-4.3-48-3.2c-10.8 1-13 2-14-.3c-2.3-5.7 21.7-15.5 37.5-17.5c15.7-1.8 41-.8 46 5.7c3.7 5.1 0 27.1-6.5 43.1z"/>
               </svg>
               <span class="font-extrabold tracking-wide text-xs text-white">
-                amazon<span class="text-amber-400 font-bold">{isHi ? '.in' : ''}</span>
+                amazon<span class="text-amber-400 font-bold" data-amazon-tld>{isHi ? '.in' : ''}</span>
               </span>
             </div>
           ) : (
@@ -207,6 +212,10 @@ const verdictTheme = isOverhyped
         href={effectiveAffiliateUrl} 
         target="_blank" 
         rel="nofollow sponsored noopener" 
+        data-amazon-geo={isAmazon && productKeyword ? "true" : undefined}
+        data-keyword={productKeyword}
+        data-tag={defaultStoreTag}
+        data-has-custom-label={affiliateLabel ? "true" : undefined}
         class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-sm transition-all duration-200 shadow-md hover:shadow-xl flex items-center justify-center space-x-2.5 shrink-0 cursor-pointer no-underline group"
         style="text-decoration: none !important; color: #09090b !important;"
       >
@@ -217,7 +226,7 @@ const verdictTheme = isOverhyped
           <path d="M1 2h3.5l2.6 12.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L22.5 7H5.5" stroke="#09090b"></path>
         </svg>
 
-        <span class="tracking-tight font-black" style="color: #09090b !important;">
+        <span data-affiliate-label class="tracking-tight font-black" style="color: #09090b !important;">
           {affiliateLabel || (isHi ? `${affiliateStore} पर देखें →` : `Check Price on ${affiliateStore} →`)}
         </span>
       </a>
@@ -226,3 +235,93 @@ const verdictTheme = isOverhyped
   )}
 
 </div>
+
+<script is:inline>
+  // Automatic Universal Amazon Geo-Redirection Engine
+  (function initAmazonGeoEngine() {
+    try {
+      var tz = '';
+      try {
+        tz = (Intl && Intl.DateTimeFormat) ? Intl.DateTimeFormat().resolvedOptions().timeZone || '' : '';
+      } catch(e) {}
+      
+      var navLang = (navigator.language || '').toLowerCase();
+      var languages = (navigator.languages || []).map(function(l) { return (l || '').toLowerCase(); });
+
+      // Country TLD resolution table
+      var tld = 'com';
+      var storeSuffix = '';
+
+      var isIndia = tz.indexOf('Kolkata') !== -1 || tz.indexOf('Calcutta') !== -1 || navLang.indexOf('-in') !== -1 || languages.some(function(l) { return l.indexOf('-in') !== -1 || l === 'hi'; });
+      var isUK = tz.indexOf('London') !== -1 || tz.indexOf('Belfast') !== -1 || navLang === 'en-gb' || languages.some(function(l) { return l === 'en-gb'; });
+      var isCanada = tz.indexOf('Toronto') !== -1 || tz.indexOf('Vancouver') !== -1 || tz.indexOf('Montreal') !== -1 || tz.indexOf('Edmonton') !== -1 || navLang === 'en-ca' || navLang === 'fr-ca';
+      var isAustralia = tz.indexOf('Sydney') !== -1 || tz.indexOf('Melbourne') !== -1 || tz.indexOf('Brisbane') !== -1 || tz.indexOf('Perth') !== -1 || navLang === 'en-au';
+      var isGermany = tz.indexOf('Berlin') !== -1 || tz.indexOf('Vienna') !== -1 || navLang.indexOf('de') === 0;
+      var isFrance = tz.indexOf('Paris') !== -1 || navLang.indexOf('fr') === 0;
+      var isJapan = tz.indexOf('Tokyo') !== -1 || navLang.indexOf('ja') === 0;
+
+      if (isIndia) {
+        tld = 'in';
+        storeSuffix = '.in';
+      } else if (isUK) {
+        tld = 'co.uk';
+        storeSuffix = '.co.uk';
+      } else if (isCanada) {
+        tld = 'ca';
+        storeSuffix = '.ca';
+      } else if (isAustralia) {
+        tld = 'com.au';
+        storeSuffix = '.com.au';
+      } else if (isGermany) {
+        tld = 'de';
+        storeSuffix = '.de';
+      } else if (isFrance) {
+        tld = 'fr';
+        storeSuffix = '.fr';
+      } else if (isJapan) {
+        tld = 'co.jp';
+        storeSuffix = '.co.jp';
+      }
+
+      function applyGeoLinks() {
+        var cards = document.querySelectorAll('[data-special-card="true"]');
+        cards.forEach(function(card) {
+          var btn = card.querySelector('[data-amazon-geo="true"]');
+          if (!btn) return;
+
+          var keyword = btn.getAttribute('data-keyword');
+          var tag = btn.getAttribute('data-tag') || 'isitspecial-21';
+          if (!keyword) return;
+
+          // Rewrite URL to reader's localized Amazon storefront
+          btn.href = 'https://www.amazon.' + tld + '/s?k=' + encodeURIComponent(keyword) + '&tag=' + tag;
+
+          // Update visible Amazon storefront badge (e.g. amazon.in, amazon.co.uk)
+          var badge = card.querySelector('[data-amazon-tld]');
+          if (badge) {
+            badge.textContent = storeSuffix;
+          }
+
+          // Update button text if no custom hardcoded label was assigned
+          var hasCustomLabel = btn.getAttribute('data-has-custom-label') === 'true';
+          var btnText = card.querySelector('[data-affiliate-label]');
+          var isHindi = card.getAttribute('data-lang') === 'hi';
+
+          if (btnText && !hasCustomLabel) {
+            btnText.textContent = isHindi 
+              ? 'अमेज़न (Amazon' + storeSuffix + ') पर देखें →' 
+              : 'Check Price on Amazon' + storeSuffix + ' →';
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyGeoLinks);
+      } else {
+        applyGeoLinks();
+      }
+    } catch(err) {
+      console.warn('Geo link resolution fallback to defaults.', err);
+    }
+  })();
+</script>

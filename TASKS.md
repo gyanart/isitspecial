@@ -24,7 +24,7 @@ $$\mathbf{1, 4, 7, 10, 13, 16, 19, 22, 25, 28}$$
 | **004** | **Dyson Supersonic Hair Dryer**<br>*(Search: `Dyson Supersonic Hair Dryer`)* | [EN Page](/blog/dyson-supersonic-hair-dryer)<br>[HI Page](/hi/blog/dyson-supersonic-hair-dryer) | `16:9`<br>(1920×1080) | `A striking, hyper-realistic minimalist studio product photograph of a metallic fuchsia and nickel Dyson Supersonic hair dryer resting on a smooth grey volcanic stone pedestal, soft atmospheric rim lighting highlighting the iconic hollow cylindrical aperture and magnetic nozzle, clean luxury editorial aesthetic, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **005** | **Japanese Selvedge Raw Denim Jeans**<br>*(Search: `Japanese Selvedge Raw Denim Jeans`)* | [EN Page](/blog/japanese-selvedge-denim)<br>[HI Page](/hi/blog/japanese-selvedge-denim) | `16:9`<br>(1920×1080) | `An authentic, high-definition close-up macro photograph of raw, stiff Japanese selvedge denim, showing the neat red-and-white ticker selvedge edge turned up on the cuff over a rustic aged wooden worktable, visible slubby weave texture and rich deep indigo rope-dyed yarn, natural warm workshop window lighting, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **006** | **AeroPress Original Coffee Press**<br>*(Search: `AeroPress Original Coffee Press`)* | [EN Page](/blog/aeropress-coffee-maker)<br>[HI Page](/hi/blog/aeropress-coffee-maker) | `16:9`<br>(1920×1080) | `A wide-angle, hyper-realistic commercial studio photograph of an original clear smoky-tinted AeroPress coffee maker resting on a warm butcher-block wooden kitchen counter next to a ceramic cup of fresh black coffee, morning natural side window light, fine coffee grounds scattered subtly, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
-| **007** | **Technivorm Moccamaster KBGV Select**<br>*(Search: `Technivorm Moccamaster KBGV Select`)* | [EN Page](/blog/moccamaster-coffee-maker)<br>[HI Page](/hi/blog/moccamaster-coffee-maker) | `16:9`<br>(1920×1080) | `A clean, luxury architectural product photograph of a brushed silver and matte black Technivorm Moccamaster KBGV Select coffee maker with glass carafe on a minimalist white quartz kitchen island, soft ambient Nordic morning light, 16:9 banner aspect ratio.` | 🟡 `AWAITING IMAGE` |
+| **007** | **Technivorm Moccamaster KBGV Select**<br>*(Search: `Technivorm Moccamaster KBGV Select`)* | [EN Page](/blog/moccamaster-coffee-maker)<br>[HI Page](/hi/blog/moccamaster-coffee-maker) | `16:9`<br>(1920×1080) | `A clean, luxury architectural product photograph of a brushed silver and matte black Technivorm Moccamaster KBGV Select coffee maker with glass carafe on a minimalist white quartz kitchen island, soft ambient Nordic morning light, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **000** | **Casio F-91W Digital Watch**<br>*(Search: `Casio F-91W`)* | [EN Page](/blog/casio-f91w-watch-masterpiece)<br>[HI Page](/hi/blog/casio-f91w-watch-masterpiece) | `16:9`<br>(1920×1080) | `A close-up, dramatic commercial studio photograph of a classic black resin Casio F-91W digital watch resting on dark textured slate stone, crisp green LCD display showing 10:58, water droplets on the bezel, soft moody rim lighting, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 
 ---
@@ -150,9 +150,9 @@ $$\mathbf{1, 4, 7, 10, 13, 16, 19, 22, 25, 28}$$
 
 ---
 
-## 🟡 Task #007: Technivorm Moccamaster KBGV Select
+## 🟢 Task #007: Technivorm Moccamaster KBGV Select
 
-* **Status:** 🟡 `AWAITING IMAGE & AFFILIATE LINK REVIEW`
+* **Status:** 🟢 `LIVE` (Hero image integrated & live geo-affiliate links active)
 * **Product Search Query:** `Technivorm Moccamaster KBGV Select`
 * **Article Links:**
   * English: [http://localhost:4321/blog/moccamaster-coffee-maker](http://localhost:4321/blog/moccamaster-coffee-maker)
