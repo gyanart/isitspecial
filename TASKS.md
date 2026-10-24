@@ -6,11 +6,11 @@
 
 ---
 
-## 📅 Monthly Publishing Schedule Engine (10 Articles / Month)
-Articles are released at equal 3-day intervals:
-* **Cadence Dates:** `1st, 4th, 7th, 10th, 13th, 16th, 19th, 22nd, 25th, 31st` (10 articles / month).
-* **30-Day Months (Apr, Jun, Sep, Nov):** Final slot moves from 31st to **30th** (`1, 4, 7, 10, 13, 16, 19, 22, 25, 30`).
-* **Short Months (< 30 days, February):** Skip the 10th slot entirely (`1, 4, 7, 10, 13, 16, 19, 22, 25, 28` -> 9 articles).
+## 📅 Monthly Publishing Schedule Engine
+Articles are scheduled every **3 days** throughout each month:
+* **31-Day Months:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` (11 articles / month).
+* **30-Day Months:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` (11 articles / month, final slot on 30th).
+* **Short Months (< 30 days, February):** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` (10 articles / month, skip last slot).
 
 ---
 

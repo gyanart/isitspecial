@@ -20,12 +20,11 @@
 
 ---
 
-## 1. The 10-Article Monthly Scheduling Engine
+## 1. The Monthly Scheduling Engine
 
-To guarantee consistent indexing by search engines and regular crawl cycles by AI search crawlers (Perplexity, GPTBot, ClaudeBot, Google-Extended), `isitspecial.com` runs on an exact mathematical publishing cadence of **10 articles per month**, evenly spaced.
+To guarantee consistent indexing by search engines and regular crawl cycles by AI search crawlers (Perplexity, GPTBot, ClaudeBot, Google-Extended), `isitspecial.com` runs on an exact mathematical publishing cadence scheduled every **3 days** throughout the month:
 
-### 📅 The 3-Day Equal Spacing Formula
-Articles are scheduled every **3 days** starting on the 1st of each month:
+### 📅 The 3-Day Cadence Sequence
 * **Slot 1:** 1st
 * **Slot 2:** 4th
 * **Slot 3:** 7th
@@ -35,38 +34,36 @@ Articles are scheduled every **3 days** starting on the 1st of each month:
 * **Slot 7:** 19th
 * **Slot 8:** 22nd
 * **Slot 9:** 25th
-* **Slot 10:** 28th / End-of-Month Rule
+* **Slot 10:** 28th
+* **Slot 11 (Month-End Bonus/Closing Slot):** 30th or 31st (see below)
 
 ### ⚙️ Calendar Resolution Rules (End-of-Month Handling)
 1. **31-Day Months** *(January, March, May, July, August, October, December)*:
-   * Slot 10 publishes on the **31st** (or Day 28 + Day 31 for an evenly closed cycle).
-   * Total articles: **10 articles**.
+   * **Full Cadence:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` (11 scheduled articles).
 2. **30-Day Months** *(April, June, September, November)*:
-   * If the last day of the month is 30, the final slot is scheduled for the **30th** instead of the 31st.
-   * Total articles: **10 articles**.
+   * **Adjusted Cadence:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` (11 scheduled articles, with the last slot moved from 31st to 30th).
 3. **Short Months (< 30 days — February)**:
    * February has 28 days (29 in leap years).
    * **Rule:** If the month has fewer than 30 days, **skip the last article schedule**.
-   * Publication dates for February: `1, 4, 7, 10, 13, 16, 19, 22, 25, 28`.
-   * Total articles for February: **9 articles**.
+   * **February Cadence:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` (10 scheduled articles).
 
 ### 🗓️ Annual Master Publishing Cadence Matrix
 
 | Month | Days in Month | Scheduled Publication Dates | Monthly Total |
 | :--- | :---: | :--- | :---: |
-| **January** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 31` | **10** |
-| **February** | 28 / 29 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` *(Skip last)* | **9** |
-| **March** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 31` | **10** |
-| **April** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 30` *(30th rule)* | **10** |
-| **May** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 31` | **10** |
-| **June** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 30` *(30th rule)* | **10** |
-| **July** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 31` | **10** |
-| **August** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 31` | **10** |
-| **September** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 30` *(30th rule)* | **10** |
-| **October** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 31` | **10** |
-| **November** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 30` *(30th rule)* | **10** |
-| **December** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 31` | **10** |
-| **Full Year** | — | **119 Articles / Year (Bilingual = 238 Pages)** | **119** |
+| **January** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
+| **February** | 28 / 29 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` *(Skip last)* | **10** |
+| **March** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
+| **April** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
+| **May** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
+| **June** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
+| **July** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
+| **August** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
+| **September** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
+| **October** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
+| **November** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
+| **December** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
+| **Full Year** | — | **131 Articles / Year (Bilingual = 262 Pages)** | **131** |
 
 ---
 
