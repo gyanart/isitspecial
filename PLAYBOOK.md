@@ -85,6 +85,17 @@ Our scoring is uncompromising and non-negotiable:
 
 ---
 
+## 2.1 The Post-20 "Versus" (Head-to-Head Comparison) Directive
+
+Once the publication reaches its initial benchmark of **20 standalone flagship investigations**, the editorial schedule permanently integrates **Head-to-Head "Versus" Showdowns** into the publishing mix (e.g. 1 out of every 3 articles).
+
+### 🥊 The Architecture of a "Versus" Teardown:
+* **High-Intent Search Targeting:** Queries like *"Le Creuset vs. Lodge"* or *"AeroPress vs. Moka Pot"* capture readers at the final moment of purchase intent.
+* **Direct Empirical Comparison Matrix:** Side-by-side materials table (Weight, Heat Retention, Failure Modes, Repairability, Cost-per-Year).
+* **The Nuanced Verdict:** Avoid lazy "it depends" answers; declare an unambiguous winner for specific consumer profiles (e.g., *"If you braise acidic wine stews twice a week, buy Le Creuset; for everything else, the $25 Lodge wins"*).
+
+---
+
 ## 3. End-to-End Article Production Flow (The 4-Step Standard)
 
 Every article strictly follows this 4-step production and publishing protocol:
