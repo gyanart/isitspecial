@@ -33,7 +33,7 @@ const fullTranslationUrl = translationUrl
   : undefined;
 
 // Environment variable support for GA4 & Google Search Console
-const gaMeasurementId = import.meta.env.PUBLIC_GA_ID || undefined;
+const gaMeasurementId = import.meta.env.PUBLIC_GA_ID || 'G-DRJNNKLC7X';
 const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION || undefined;
 
 const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial.com${image.startsWith('/') ? '' : '/'}${image}`;
