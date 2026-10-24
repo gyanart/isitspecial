@@ -1,0 +1,264 @@
+---
+interface Props {
+  productName: string;
+  productPrice: number;
+  heirloomLifespanYears?: number;
+  competitorName: string;
+  competitorPrice: number;
+  competitorLifespanYears?: number;
+  unitLabel?: string;
+  unitLabelPlural?: string;
+  defaultFrequencyPerWeek?: number;
+  defaultYears?: number;
+  currencySymbol?: string;
+  lang?: 'en' | 'hi';
+}
+
+const {
+  productName = 'Le Creuset 5.5-Qt Dutch Oven',
+  productPrice = 420,
+  heirloomLifespanYears = 30,
+  competitorName = 'Budget $70 Enameled Pot',
+  competitorPrice = 70,
+  competitorLifespanYears = 3,
+  unitLabel = 'meal',
+  unitLabelPlural = 'meals',
+  defaultFrequencyPerWeek = 3,
+  defaultYears = 20,
+  currencySymbol = '$',
+  lang = 'en',
+} = Astro.props;
+
+const isHi = lang === 'hi';
+---
+
+<div class="my-10 rounded-3xl border-2 border-[#bbf7d0] bg-gradient-to-br from-[#f7faf7] via-white to-[#eaf5eb] p-6 sm:p-9 shadow-sm not-prose space-y-6 cpu-calculator">
+  
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-[#dce5dd]/80 gap-3">
+    <div>
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider text-[#15803d] bg-[#eaf5eb] border border-[#bbf7d0]">
+        <span>🧮</span>
+        <span>{isHi ? 'लागत-प्रति-उपयोग कैलकुलेटर' : 'True Cost-Per-Use Calculator'}</span>
+      </div>
+      <h3 class="font-serif text-xl sm:text-2xl font-black text-[#14241c] mt-2">
+        {isHi ? 'असली दीर्घकालिक मूल्य की गणित' : 'The Real Long-Term Economics'}
+      </h3>
+      <p class="text-xs sm:text-sm text-[#14241c]/70 mt-0.5">
+        {isHi 
+          ? 'स्लाइडर को एडजस्ट करके देखें कि क्या महंगा टिकाऊ सामान वास्तव में सस्ता पड़ता है।' 
+          : 'Drag the sliders to see how an heirloom investment compares to disposable alternatives.'}
+      </p>
+    </div>
+
+    <div class="shrink-0 text-right">
+      <span class="inline-block px-3 py-1.5 rounded-xl bg-white border border-[#dce5dd] text-xs font-mono font-bold text-[#14241c] shadow-2xs">
+        {isHi ? 'शून्य दिखावा • शुद्ध गणित' : 'Zero Fluff • Pure Math'}
+      </span>
+    </div>
+  </div>
+
+  <!-- Sliders Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white/70 backdrop-blur-xs p-5 rounded-2xl border border-[#dce5dd]/70">
+    
+    <!-- Slider 1: Frequency Per Week -->
+    <div class="space-y-2">
+      <div class="flex justify-between items-center text-xs font-bold text-[#14241c]">
+        <span>{isHi ? 'प्रति सप्ताह कितनी बार उपयोग करेंगे?' : `How often do you use it per week?`}</span>
+        <span class="font-mono text-sm text-[#15803d] font-black bg-[#eaf5eb] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">
+          <span id="cpu-freq-val">{defaultFrequencyPerWeek}</span>x / {isHi ? 'सप्ताह' : 'wk'}
+        </span>
+      </div>
+      <input 
+        type="range" 
+        id="cpu-freq-slider" 
+        min="1" 
+        max="10" 
+        step="1" 
+        value={defaultFrequencyPerWeek}
+        class="w-full h-2 bg-[#dce5dd] rounded-lg appearance-none cursor-pointer accent-[#15803d]"
+      />
+      <div class="flex justify-between text-[10px] text-[#14241c]/50 font-mono">
+        <span>1x ({isHi ? 'सप्ताहांत' : 'weekend'})</span>
+        <span>5x ({isHi ? 'नियमित' : 'regular'})</span>
+        <span>10x ({isHi ? 'दैनिक' : 'daily'})</span>
+      </div>
+    </div>
+
+    <!-- Slider 2: Years of Ownership -->
+    <div class="space-y-2">
+      <div class="flex justify-between items-center text-xs font-bold text-[#14241c]">
+        <span>{isHi ? 'आप इसे कितने साल इस्तेमाल करना चाहते हैं?' : 'Expected years of ownership:'}</span>
+        <span class="font-mono text-sm text-[#15803d] font-black bg-[#eaf5eb] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">
+          <span id="cpu-years-val">{defaultYears}</span> {isHi ? 'वर्ष' : 'years'}
+        </span>
+      </div>
+      <input 
+        type="range" 
+        id="cpu-years-slider" 
+        min="3" 
+        max="40" 
+        step="1" 
+        value={defaultYears}
+        class="w-full h-2 bg-[#dce5dd] rounded-lg appearance-none cursor-pointer accent-[#15803d]"
+      />
+      <div class="flex justify-between text-[10px] text-[#14241c]/50 font-mono">
+        <span>3 {isHi ? 'वर्ष' : 'yrs'}</span>
+        <span>20 {isHi ? 'वर्ष' : 'yrs'}</span>
+        <span>40 {isHi ? 'वर्ष (पीढ़ी)' : 'yrs (heirloom)'}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Live Comparison Results Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    
+    <!-- Left: The Heirloom Gem (e.g. Le Creuset) -->
+    <div class="p-5 rounded-2xl border-2 border-[#15803d] bg-white shadow-xs relative overflow-hidden flex flex-col justify-between">
+      <div class="absolute top-0 right-0 bg-[#15803d] text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+        {isHi ? 'आजीवन निवेश' : 'Lifetime Buy'}
+      </div>
+      
+      <div class="space-y-1">
+        <h4 class="font-bold text-sm text-[#14241c] flex items-center space-x-1.5">
+          <span>💎</span>
+          <span>{productName}</span>
+        </h4>
+        <p class="text-xs text-[#14241c]/60">
+          {isHi ? `मूल कीमत: ${currencySymbol}${productPrice} (1 बार खरीदारी)` : `Initial price: ${currencySymbol}${productPrice} (1-time purchase)`}
+        </p>
+      </div>
+
+      <div class="pt-5 space-y-1">
+        <div class="text-[10px] uppercase font-mono font-bold tracking-wider text-[#14241c]/60">
+          {isHi ? 'प्रति उपयोग वास्तविक लागत' : `True Cost Per ${unitLabel}`}
+        </div>
+        <div class="flex items-baseline space-x-1">
+          <span class="font-mono text-3xl sm:text-4xl font-black text-[#15803d]" id="cpu-product-cost">
+            {currencySymbol}0.13
+          </span>
+          <span class="text-xs text-[#14241c]/60">/ {unitLabel}</span>
+        </div>
+        <p class="text-[11px] text-[#15803d] font-semibold">
+          {isHi ? '✓ 0 बार रिप्लेसमेंट • आजीवन वारंटी' : '✓ 0 replacements needed • Lifetime warranty'}
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: The Budget Disposable Competitor -->
+    <div class="p-5 rounded-2xl border border-zinc-200 bg-zinc-50/70 shadow-2xs flex flex-col justify-between">
+      <div class="space-y-1">
+        <h4 class="font-bold text-sm text-zinc-700 flex items-center space-x-1.5">
+          <span>⚠️</span>
+          <span>{competitorName}</span>
+        </h4>
+        <p class="text-xs text-zinc-500">
+          {isHi 
+            ? `मूल कीमत: ${currencySymbol}${competitorPrice} (हर ${competitorLifespanYears} साल में चटकता है)` 
+            : `Initial price: ${currencySymbol}${competitorPrice} (chips every ${competitorLifespanYears} years)`}
+        </p>
+      </div>
+
+      <div class="pt-5 space-y-1">
+        <div class="text-[10px] uppercase font-mono font-bold tracking-wider text-zinc-500">
+          {isHi ? 'प्रति उपयोग वास्तविक लागत' : `True Cost Per ${unitLabel}`}
+        </div>
+        <div class="flex items-baseline space-x-1">
+          <span class="font-mono text-3xl sm:text-4xl font-black text-zinc-700" id="cpu-competitor-cost">
+            {currencySymbol}0.22
+          </span>
+          <span class="text-xs text-zinc-500">/ {unitLabel}</span>
+        </div>
+        <p class="text-[11px] text-rose-600 font-semibold">
+          <span id="cpu-replacements-needed">7</span> {isHi ? 'बार दोबारा खरीदना पड़ेगा' : 'pots sent to landfill'}
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Line Insight Banner -->
+  <div class="p-4 rounded-2xl bg-[#eaf5eb] border border-[#bbf7d0] text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div class="flex items-center space-x-2.5">
+      <span class="text-2xl">💡</span>
+      <p class="text-xs sm:text-sm text-[#14241c] font-medium leading-relaxed">
+        <span class="font-black text-[#15803d]" id="cpu-insight-bold">
+          {isHi ? 'गणितीय निष्कर्ष:' : 'Mathematical Insight:'}
+        </span>{' '}
+        <span id="cpu-insight-text">
+          {isHi 
+            ? `20 वर्षों में प्रीमियम बर्तन आपके ${currencySymbol}70 बचाएगा और 6 बर्तन कचरे में जाने से रोकेगा।` 
+            : `Over 20 years, the premium cookware saves you ${currencySymbol}70 in replacements and prevents 6 pots from going to a landfill.`}
+        </span>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script is:inline define:vars={{
+  productPrice,
+  competitorPrice,
+  competitorLifespanYears,
+  currencySymbol,
+  unitLabel,
+  isHi
+}}>
+  (function() {
+    const freqSlider = document.getElementById('cpu-freq-slider');
+    const yearsSlider = document.getElementById('cpu-years-slider');
+    const freqVal = document.getElementById('cpu-freq-val');
+    const yearsVal = document.getElementById('cpu-years-val');
+    const productCostEl = document.getElementById('cpu-product-cost');
+    const competitorCostEl = document.getElementById('cpu-competitor-cost');
+    const replacementsEl = document.getElementById('cpu-replacements-needed');
+    const insightTextEl = document.getElementById('cpu-insight-text');
+
+    if (!freqSlider || !yearsSlider) return;
+
+    function recalculate() {
+      const freq = parseInt(freqSlider.value, 10);
+      const years = parseInt(yearsSlider.value, 10);
+
+      if (freqVal) freqVal.textContent = freq;
+      if (yearsVal) yearsVal.textContent = years;
+
+      const totalUses = freq * 52 * years;
+      
+      // Heirloom product costs only 1 initial purchase
+      const productCostPerUse = (productPrice / totalUses).toFixed(2);
+      
+      // Competitor requires replacements every competitorLifespanYears
+      const replacementsNeeded = Math.ceil(years / competitorLifespanYears);
+      const totalCompetitorCost = replacementsNeeded * competitorPrice;
+      const competitorCostPerUse = (totalCompetitorCost / totalUses).toFixed(2);
+
+      const netSavings = totalCompetitorCost - productPrice;
+
+      if (productCostEl) productCostEl.textContent = `${currencySymbol}${productCostPerUse}`;
+      if (competitorCostEl) competitorCostEl.textContent = `${currencySymbol}${competitorCostPerUse}`;
+      if (replacementsEl) {
+        replacementsEl.textContent = isHi 
+          ? `${replacementsNeeded} बार रिप्लेसमेंट` 
+          : `${replacementsNeeded} pots bought`;
+      }
+
+      if (insightTextEl) {
+        if (netSavings > 0) {
+          insightTextEl.textContent = isHi
+            ? `${years} वर्षों में प्रीमियम बर्तन आपके ${currencySymbol}${netSavings} बचाएगा और ${replacementsNeeded - 1} बार बर्तन कचरे में जाने से रोकेगा।`
+            : `Over ${years} years, the heirloom tool saves you ${currencySymbol}${netSavings} in replacements and prevents ${replacementsNeeded - 1} broken items from entering a landfill.`;
+        } else {
+          insightTextEl.textContent = isHi
+            ? `प्रति ${unitLabel} केवल ${currencySymbol}${productCostPerUse} की लागत में आपको आजीवन चलने वाला हेरिटेज बर्तन मिलता है।`
+            : `At just ${currencySymbol}${productCostPerUse} per ${unitLabel}, the heirloom gives you authentic commercial durability for pennies per session.`;
+        }
+      }
+    }
+
+    freqSlider.addEventListener('input', recalculate);
+    yearsSlider.addEventListener('input', recalculate);
+    recalculate();
+  })();
+</script>

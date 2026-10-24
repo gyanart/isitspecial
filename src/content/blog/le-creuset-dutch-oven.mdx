@@ -14,6 +14,7 @@ featured: false
 translationSlug: "le-creuset-dutch-oven"
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
 
 In the world of high-end culinary gear, few objects carry the status symbol weight of a flame-orange **Le Creuset Dutch Oven** (or *cocotte*). Sitting conspicuously on the back burner of celebrity chef kitchens, Michelin-starred tasting rooms, and Architectural Digest home tours, this French enameled vessel commands an astonishing retail price of **\$420 for a 5.5-quart round pot**.
 
@@ -78,7 +79,28 @@ Even a \$420 French heirloom has real-world friction:
 
 ---
 
-## 4. The Special Index Breakdown
+## 4. The True Cost-Per-Use (CPU) Equation
+
+Can a $420 pot ever make rational economic sense over a $70 supermarket alternative? Let us run the actual mathematical equation of long-term ownership:
+
+<CostPerUseCalculator 
+  productName="Le Creuset 5.5-Qt Dutch Oven"
+  productPrice={420}
+  heirloomLifespanYears={30}
+  competitorName="Budget $70 Enameled Pot"
+  competitorPrice={70}
+  competitorLifespanYears={3}
+  unitLabel="meal"
+  unitLabelPlural="meals"
+  defaultFrequencyPerWeek={3}
+  defaultYears={20}
+  currencySymbol="$"
+  lang="en"
+/>
+
+---
+
+## 5. The Special Index Breakdown
 
 <SpecialIndexCard 
   score={9.3}
@@ -103,7 +125,7 @@ Even a \$420 French heirloom has real-world friction:
 
 ---
 
-## 5. The Unvarnished Verdict
+## 6. The Unvarnished Verdict
 
 If you buy a Le Creuset simply to display on an open kitchen shelf as an aesthetic flex, you are buying a \$420 piece of jewelry.
 

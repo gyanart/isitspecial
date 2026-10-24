@@ -14,6 +14,7 @@ featured: false
 translationSlug: "le-creuset-dutch-oven"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
 
 लक्जरी कुकिंग और प्रीमियम किचन बर्तनों की दुनिया में, फ्रेंच **Le Creuset Dutch Oven** (जिसे फ्रेंच में *cocotte* कहा जाता है) से बड़ा कोई स्टेटस सिंबल नहीं है। मिशेलिन-स्टार शेफ के किचनों, टीवी कुकिंग शो और सेलेब्रिटी घरों में दिखने वाले इस 5.5-क्वार्ट के बर्तन की कीमत लगभग **$420 (भारत में ₹35,000 से ₹40,000)** तक होती है।
 
@@ -78,7 +79,28 @@ Le Creuset का पेटेंटेड मल्टी-कोट विट�
 
 ---
 
-## 4. द स्पेशल इंडेक्स स्कोर
+## 4. वास्तविक लागत-प्रति-उपयोग (CPU) की गणित
+
+क्या ₹35,000 का महंगा बर्तन ₹5,000 के आम बर्तन की तुलना में आर्थिक रूप से सही फैसला हो सकता है? आइए वास्तविक दीर्घकालिक उपयोग का गणित देखते हैं:
+
+<CostPerUseCalculator 
+  productName="Le Creuset 5.5-Qt डच ओवन"
+  productPrice={35000}
+  heirloomLifespanYears={30}
+  competitorName="सस्ता ₹5,000 एनामेल्ड बर्तन"
+  competitorPrice={5000}
+  competitorLifespanYears={3}
+  unitLabel="भोजन"
+  unitLabelPlural="भोजन"
+  defaultFrequencyPerWeek={3}
+  defaultYears={20}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
+---
+
+## 5. द स्पेशल इंडेक्स स्कोर
 
 <SpecialIndexCard 
   score={9.3}
@@ -103,7 +125,7 @@ Le Creuset का पेटेंटेड मल्टी-कोट विट�
 
 ---
 
-## 5. अंतिम निष्पक्ष निष्कर्ष
+## 6. अंतिम निष्पक्ष निष्कर्ष
 
 यदि आप Le Creuset सिर्फ रसोई की खुली शेल्फ पर सजाने या इंस्टाग्राम फोटो के लिए खरीद रहे हैं, तो यह केवल एक महंगा गहना है।
 

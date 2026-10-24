@@ -207,29 +207,46 @@ const verdictTheme = isOverhyped
         </p>
       </div>
 
-      <!-- High-Contrast Pure Black Text on Amber Button with Sharp Vector SVG Cart Icon -->
-      <a 
-        href={effectiveAffiliateUrl} 
-        target="_blank" 
-        rel="nofollow sponsored noopener" 
-        data-amazon-geo={isAmazon && productKeyword ? "true" : undefined}
-        data-keyword={productKeyword}
-        data-tag={defaultStoreTag}
-        data-has-custom-label={affiliateLabel ? "true" : undefined}
-        class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-sm transition-all duration-200 shadow-md hover:shadow-xl flex items-center justify-center space-x-2.5 shrink-0 cursor-pointer no-underline group"
-        style="text-decoration: none !important; color: #09090b !important;"
-      >
-        <!-- Sharp Solid Black High-Visibility Shopping Cart Icon -->
-        <svg class="w-5 h-5 text-zinc-950 shrink-0 group-hover:scale-110 transition-transform stroke-zinc-950 fill-none" stroke-width="2.3" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="9" cy="21" r="1.5" fill="#09090b"></circle>
-          <circle cx="19" cy="21" r="1.5" fill="#09090b"></circle>
-          <path d="M1 2h3.5l2.6 12.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L22.5 7H5.5" stroke="#09090b"></path>
-        </svg>
+      <div class="flex flex-col sm:flex-row items-center gap-2.5 w-full sm:w-auto">
+        <!-- 1-Click Copy Quick Verdict Button for WhatsApp & Socials -->
+        <button 
+          type="button"
+          class="copy-quick-verdict-btn w-full sm:w-auto px-4 py-3.5 rounded-xl bg-white border border-[#dce5dd] hover:border-[#15803d] text-[#14241c] hover:text-[#15803d] text-xs font-bold transition-all shadow-2xs hover:shadow-xs flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
+          data-score={score}
+          data-verdict={verdict}
+          data-product={productKeyword || "This Product"}
+          data-summary={summary}
+          data-lang={lang}
+          title={isHi ? 'व्हाट्सएप के लिए संक्षिप्त निष्कर्ष कॉपी करें' : 'Copy quick verdict summary for WhatsApp / Reddit'}
+        >
+          <span class="copy-verdict-icon">📋</span>
+          <span class="copy-verdict-text">{isHi ? 'निष्कर्ष कॉपी' : 'Copy Verdict'}</span>
+        </button>
 
-        <span data-affiliate-label class="tracking-tight font-black" style="color: #09090b !important;">
-          {affiliateLabel || (isHi ? `${affiliateStore} पर देखें →` : `Check Price on ${affiliateStore} →`)}
-        </span>
-      </a>
+        <!-- High-Contrast Pure Black Text on Amber Button with Sharp Vector SVG Cart Icon -->
+        <a 
+          href={effectiveAffiliateUrl} 
+          target="_blank" 
+          rel="nofollow sponsored noopener" 
+          data-amazon-geo={isAmazon && productKeyword ? "true" : undefined}
+          data-keyword={productKeyword}
+          data-tag={defaultStoreTag}
+          data-has-custom-label={affiliateLabel ? "true" : undefined}
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-sm transition-all duration-200 shadow-md hover:shadow-xl flex items-center justify-center space-x-2.5 shrink-0 cursor-pointer no-underline group"
+          style="text-decoration: none !important; color: #09090b !important;"
+        >
+          <!-- Sharp Solid Black High-Visibility Shopping Cart Icon -->
+          <svg class="w-5 h-5 text-zinc-950 shrink-0 group-hover:scale-110 transition-transform stroke-zinc-950 fill-none" stroke-width="2.3" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1.5" fill="#09090b"></circle>
+            <circle cx="19" cy="21" r="1.5" fill="#09090b"></circle>
+            <path d="M1 2h3.5l2.6 12.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L22.5 7H5.5" stroke="#09090b"></path>
+          </svg>
+
+          <span data-affiliate-label class="tracking-tight font-black" style="color: #09090b !important;">
+            {affiliateLabel || (isHi ? `${affiliateStore} पर देखें →` : `Check Price on ${affiliateStore} →`)}
+          </span>
+        </a>
+      </div>
 
     </div>
   )}
@@ -320,6 +337,38 @@ const verdictTheme = isOverhyped
       } else {
         applyGeoLinks();
       }
+
+      // 1-Click Copy Verdict Handler
+      document.querySelectorAll('.copy-quick-verdict-btn').forEach(function(copyBtn) {
+        copyBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var score = copyBtn.getAttribute('data-score') || '9.0';
+          var verdict = copyBtn.getAttribute('data-verdict') || 'True Gem';
+          var product = copyBtn.getAttribute('data-product') || document.title;
+          var summary = copyBtn.getAttribute('data-summary') || '';
+          var isHindi = copyBtn.getAttribute('data-lang') === 'hi';
+          var currentUrl = window.location.href;
+
+          var textToCopy = isHindi
+            ? '🔍 Is It Special? निष्कर्ष: ' + product + '\n⭐ स्पेशल स्कोर: ' + score + '/10 (' + verdict + ')\n' + (summary ? '• ' + summary + '\n' : '') + '👉 पूरी निष्पक्ष समीक्षा पढ़ें: ' + currentUrl
+            : '🔍 Is It Special? Teardown: ' + product + '\n⭐ Special Score: ' + score + '/10 (' + verdict + ')\n' + (summary ? '• ' + summary + '\n' : '') + '👉 Read unvarnished teardown: ' + currentUrl;
+
+          navigator.clipboard.writeText(textToCopy).then(function() {
+            var icon = copyBtn.querySelector('.copy-verdict-icon');
+            var text = copyBtn.querySelector('.copy-verdict-text');
+            if (icon) icon.textContent = '✓';
+            if (text) text.textContent = isHindi ? 'कॉपी हो गया!' : 'Copied!';
+            copyBtn.classList.add('bg-emerald-50', 'border-[#15803d]', 'text-[#15803d]');
+            setTimeout(function() {
+              if (icon) icon.textContent = '📋';
+              if (text) text.textContent = isHindi ? 'निष्कर्ष कॉपी' : 'Copy Verdict';
+              copyBtn.classList.remove('bg-emerald-50', 'border-[#15803d]', 'text-[#15803d]');
+            }, 3000);
+          }).catch(function() {
+            prompt(isHindi ? 'निष्कर्ष कॉपी करें:' : 'Copy verdict:', textToCopy);
+          });
+        });
+      });
     } catch(err) {
       console.warn('Geo link resolution fallback to defaults.', err);
     }
