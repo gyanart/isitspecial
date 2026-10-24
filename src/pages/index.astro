@@ -10,109 +10,243 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const featuredPost = posts.find(p => p.data.featured) || posts[0];
-const regularPosts = posts.filter(p => p.id !== featuredPost?.id);
+
+// Category metadata with cover imagery for the 4-card catalog grid
+const categories = [
+  {
+    name: 'Everyday Curiosities',
+    count: '2 teardowns',
+    image: '/images/casio-f91w.jpg',
+    href: '/#articles',
+  },
+  {
+    name: 'Hype vs. Reality',
+    count: '2 teardowns',
+    image: '/images/stanley-tumbler.jpg',
+    href: '/#articles',
+  },
+  {
+    name: 'Craft & Heritage',
+    count: '2 teardowns',
+    image: '/images/lodge-cast-iron.jpg',
+    href: '/#articles',
+  },
+  {
+    name: 'Industrial Design',
+    count: '2 teardowns',
+    image: '/images/bic-pen.jpg',
+    href: '/#articles',
+  },
+];
 ---
 
 <BaseLayout lang="en" translationUrl="/hi">
   
-  <!-- Hero Editorial Header -->
-  <section class="border-b border-zinc-200/80 bg-white py-16 sm:py-24 relative overflow-hidden">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6 relative z-10">
-      
-      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-zinc-900 bg-zinc-100 border border-zinc-200">
-        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-        <span>Independent Consumer & Culture Criticism</span>
-      </div>
+  <!-- Grasshopper Style Hero Section with Search & Collage -->
+  <section class="relative overflow-hidden pt-8 pb-16 sm:py-20 border-b border-[#dce5dd]/60">
+    <!-- Subtle Organic Green Radial Glow -->
+    <div class="absolute top-0 left-0 w-full h-full hero-glow pointer-events-none"></div>
 
-      <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold text-zinc-950 tracking-tight leading-[1.08]">
-        Is It Actually Special? <br />
-        <span class="italic font-normal text-zinc-500 font-serif">Or Just Marketing Illusion?</span>
-      </h1>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6 text-left">
+          
+          <!-- Top Mint Pill Badge -->
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#15803d] bg-[#dcfce7]/70 border border-[#bbf7d0] shadow-2xs">
+            <span class="w-2 h-2 rounded-full bg-[#15803d] animate-pulse"></span>
+            <span>Unvarnished Reviews &middot; The Special Index</span>
+          </div>
 
-      <p class="max-w-2xl mx-auto text-zinc-600 text-base sm:text-xl leading-relaxed font-normal">
-        We test viral claims, tear down commercial hype, and dissect the hidden engineering of everyday objects. No sponsored reviews. Just an honest 1-to-10 verdict.
-      </p>
+          <!-- Massive Bitter Display Headline -->
+          <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#14241c] tracking-tight leading-[1.06]">
+            Real objects, <br />
+            tested with <br />
+            <span class="italic text-[#15803d]">confidence</span>
+          </h1>
 
-      <div class="pt-2 flex flex-wrap justify-center gap-3 text-xs font-semibold">
-        <a href="#articles" class="px-5 py-3 rounded-xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all shadow-sm">
-          Explore Investigations ↓
-        </a>
-        <a href="/about" class="px-5 py-3 rounded-xl bg-white text-zinc-800 border border-zinc-300 hover:bg-zinc-50 transition-all">
-          Our 4-Stage Testing Criteria
-        </a>
+          <!-- Clean Inter Subtitle -->
+          <p class="max-w-xl text-[#14241c]/75 text-base sm:text-lg leading-relaxed font-normal">
+            Search our catalog, or see what viral product you're considering. We test the claims, dissect the engineering, and give you an unfiltered verdict.
+          </p>
+
+          <!-- Grasshopper Rounded-Full Search Bar -->
+          <div class="max-w-md">
+            <form action="#articles" method="get" class="relative flex items-center bg-white rounded-full border border-[#dce5dd] shadow-sm p-1.5 focus-within:border-[#15803d] focus-within:ring-2 focus-within:ring-[#15803d]/20 transition-all">
+              <div class="pl-4 text-[#14241c]/40">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                placeholder="Try 'casio', 'stanley', 'cast iron'..." 
+                class="w-full bg-transparent px-3 py-2 text-sm text-[#14241c] placeholder-[#14241c]/40 focus:outline-none"
+              />
+              <button 
+                type="submit" 
+                class="px-5 py-2.5 rounded-full bg-[#15803d] hover:bg-[#166534] text-white text-xs font-bold shadow-xs transition-colors shrink-0"
+              >
+                Search
+              </button>
+            </form>
+
+            <!-- Popular Quick Keywords -->
+            <div class="mt-3 flex items-center flex-wrap gap-2 text-xs text-[#14241c]/60">
+              <span class="font-extrabold uppercase tracking-wider text-[10px] text-[#14241c]/40 font-mono">POPULAR:</span>
+              <a href="/blog/casio-f91w-watch-masterpiece" class="px-2.5 py-0.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] hover:text-[#15803d] transition-colors">casio</a>
+              <a href="/blog/stanley-tumbler-hype" class="px-2.5 py-0.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] hover:text-[#15803d] transition-colors">stanley</a>
+              <a href="/blog/lodge-cast-iron-skillet" class="px-2.5 py-0.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] hover:text-[#15803d] transition-colors">cast-iron</a>
+              <a href="/blog/bic-cristal-ballpoint-pen" class="px-2.5 py-0.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] hover:text-[#15803d] transition-colors">bic-pen</a>
+            </div>
+          </div>
+
+          <!-- 3 Grasshopper Live Stat Counters -->
+          <div class="pt-4 flex items-center space-x-6 sm:space-x-8 text-xs font-medium border-t border-[#dce5dd]/60">
+            <div class="flex items-center space-x-2">
+              <span class="text-base text-[#15803d]">⚡</span>
+              <div>
+                <span class="block font-bold text-sm text-[#14241c] font-serif">9.8</span>
+                <span class="text-[#14241c]/60 text-[11px]">Top Score</span>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-base text-[#15803d]">🔍</span>
+              <div>
+                <span class="block font-bold text-sm text-[#14241c] font-serif">{posts.length}</span>
+                <span class="text-[#14241c]/60 text-[11px]">In-Depth Tests</span>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-base text-[#15803d]">🛡️</span>
+              <div>
+                <span class="block font-bold text-sm text-[#14241c] font-serif">100%</span>
+                <span class="text-[#14241c]/60 text-[11px]">Unsponsored</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Hero Floating Cards Collage (Grasshopper Aesthetic) -->
+        <div class="lg:col-span-5 relative flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-sm sm:max-w-md">
+            
+            <!-- Main Hero Card (Casio F-91W Watch) -->
+            <div class="relative rounded-3xl overflow-hidden bg-white border border-[#dce5dd] shadow-xl p-3 group">
+              <div class="rounded-2xl overflow-hidden aspect-[16/11] bg-[#eaf5eb] relative">
+                <img 
+                  src="/images/casio-f91w.jpg" 
+                  alt="Casio F-91W Watch Teardown" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-[#15803d] text-white shadow-md">
+                  ★ Lead Teardown
+                </span>
+                <span class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-black/60 text-white backdrop-blur-md">
+                  Japan 🇯🇵
+                </span>
+              </div>
+              <div class="p-3 pt-4 space-y-1">
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#15803d]">Modern Masterpiece</span>
+                <h3 class="font-serif font-bold text-lg text-[#14241c] leading-snug">
+                  <a href="/blog/casio-f91w-watch-masterpiece" class="hover:text-[#15803d] transition-colors">
+                    Casio F-91W: The $18 Indestructible Design Masterpiece
+                  </a>
+                </h3>
+              </div>
+            </div>
+
+            <!-- Floating Secondary Card (Stanley Tumbler / Lodge Skillet) -->
+            <div class="hidden sm:block absolute -bottom-6 -left-8 w-60 rounded-2xl overflow-hidden bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-2xl p-2.5 transition-transform hover:scale-105">
+              <div class="flex items-center space-x-3">
+                <img 
+                  src="/images/stanley-tumbler.jpg" 
+                  alt="Stanley Tumbler" 
+                  class="w-14 h-14 rounded-xl object-cover shrink-0"
+                />
+                <div class="min-w-0 flex-1">
+                  <span class="text-[9px] font-extrabold uppercase tracking-wider text-rose-600">Hype vs Reality</span>
+                  <h4 class="font-serif font-bold text-xs text-[#14241c] truncate">Stanley 40 oz Tumbler</h4>
+                  <span class="inline-block mt-0.5 px-2 py-0.2 rounded-full text-[9px] font-bold bg-[#eaf5eb] text-[#15803d]">
+                    ⏱️ 5-min read
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Main Content Area -->
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
-    
-    <!-- Top Ad Placeholder (Zero-CLS) -->
-    <AdSlot format="horizontal" label="Advertisement (Leaderboard Slot)" slotId="ISITSPECIAL_HOME_LEADERBOARD" />
-
-    <!-- Featured Post Spotlight -->
-    {featuredPost && (
-      <section class="my-10 p-6 sm:p-9 rounded-3xl bg-white border border-zinc-200/90 shadow-sm relative group overflow-hidden">
-        <div class="flex flex-col lg:flex-row gap-8 items-center justify-between">
-          
-          <div class="space-y-4 flex-1">
-            <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-700">
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200">★ Lead Investigation</span>
-              <span class="text-zinc-600">&bull;</span>
-              <span class="text-zinc-600 font-mono">Index: {featuredPost.data.specialScore.toFixed(1)}/10</span>
-            </div>
-
-            <h2 class="font-serif text-2xl sm:text-4xl font-extrabold text-zinc-950 group-hover:text-amber-600 transition-colors leading-tight">
-              <a href={`/blog/${featuredPost.id}`}>
-                <span class="absolute inset-0 z-10"></span>
-                {featuredPost.data.title}
-              </a>
-            </h2>
-
-            <p class="text-zinc-600 text-sm sm:text-base leading-relaxed line-clamp-3">
-              {featuredPost.data.description}
-            </p>
-
-            <div class="pt-2 flex items-center justify-between text-xs text-zinc-600">
-              <div class="flex items-center space-x-2">
-                <span class="font-bold text-zinc-900">{featuredPost.data.author}</span>
-                <span>&bull;</span>
-                <span>{featuredPost.data.readingTime}</span>
-              </div>
-              <span class="font-bold text-amber-600 group-hover:translate-x-1 transition-transform inline-flex items-center">
-                Read Verdict &rarr;
-              </span>
-            </div>
-          </div>
-
-          {featuredPost.data.heroImage && (
-            <div class="w-full lg:w-96 h-64 shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 shadow-xs relative">
-              <img 
-                src={featuredPost.data.heroImage} 
-                alt={featuredPost.data.title} 
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-              />
-            </div>
-          )}
-
-        </div>
-      </section>
-    )}
-
-    <!-- Article Feed Header -->
-    <div id="articles" class="pt-10 pb-4 flex items-center justify-between border-b border-zinc-200">
+  <!-- Section 2: Catalog Categories Grid ("What are you craving?" style) -->
+  <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-14 border-b border-[#dce5dd]/60">
+    <div class="flex items-baseline justify-between mb-8">
       <div>
-        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-zinc-950">Recent Dissections</h3>
-        <p class="text-xs text-zinc-600 mt-1">Unvarnished assessments of popular tools, gear, and cultural phenomena</p>
+        <span class="text-[11px] font-extrabold uppercase tracking-widest text-[#15803d] font-mono">THE CATALOG</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-[#14241c] mt-1">What are you curious about?</h2>
       </div>
-      <span class="text-xs text-zinc-600 font-mono bg-zinc-100 px-3 py-1 rounded-full border border-zinc-200">
-        {posts.length} published
+      <a href="#articles" class="text-xs font-bold text-[#15803d] hover:underline flex items-center space-x-1">
+        <span>All teardowns</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+
+    <!-- 4 Rounded-2xl Category Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      {categories.map((cat) => (
+        <a 
+          href={cat.href} 
+          class="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-zinc-900 border border-[#dce5dd]/80 shadow-xs card-hover flex flex-col justify-end p-4 text-white"
+        >
+          <!-- Background Photo with Zoom -->
+          <img 
+            src={cat.image} 
+            alt={cat.name} 
+            class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-70 group-hover:opacity-85" 
+          />
+          <!-- Gradient Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+          
+          <div class="relative z-10 space-y-0.5">
+            <h3 class="font-serif text-base sm:text-lg font-bold leading-tight group-hover:text-[#bbf7d0] transition-colors">
+              {cat.name}
+            </h3>
+            <span class="text-[11px] text-white/70 font-medium block">
+              {cat.count}
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 3: Today's Top Verdicts ("Tonight's greenest hits" style) -->
+  <section id="articles" class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+    
+    <div class="flex items-baseline justify-between mb-8">
+      <div>
+        <span class="text-[11px] font-extrabold uppercase tracking-widest text-[#15803d] font-mono">THE SPECIAL INDEX</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-[#14241c] mt-1">Today's Top Verdicts</h2>
+      </div>
+      <span class="text-xs text-[#14241c]/60 font-medium">
+        Showing all {posts.length} investigations
       </span>
     </div>
 
-    <!-- Regular Articles List -->
-    <div class="space-y-4 my-6">
-      {regularPosts.map((post) => (
+    <!-- Zero-CLS Leaderboard Ad Slot -->
+    <div class="mb-10">
+      <AdSlot format="horizontal" label="Advertisement (Leaderboard Slot)" slotId="ISITSPECIAL_HOME_LEADERBOARD" />
+    </div>
+
+    <!-- 3-Column Responsive Grid of Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+      {posts.map((post) => (
         <ArticleCard
           title={post.data.title}
           description={post.data.description}
@@ -123,31 +257,71 @@ const regularPosts = posts.filter(p => p.id !== featuredPost?.id);
           specialVerdict={post.data.specialVerdict}
           readingTime={post.data.readingTime}
           heroImage={post.data.heroImage}
+          lang="en"
         />
       ))}
     </div>
 
-    <!-- Mid-Feed Ad Unit (Zero-CLS) -->
-    <div class="mt-12">
-      <AdSlot format="horizontal" label="Advertisement (Feed Slot)" slotId="ISITSPECIAL_HOME_FEED" />
+  </section>
+
+  <!-- Section 4: Lush Forest Green Callout Banner ("What's in your kitchen?" style) -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0e2a1b] via-[#123623] to-[#16432b] text-white p-8 sm:p-12 lg:p-16 shadow-xl">
+      <!-- Background Abstract Rings Pattern -->
+      <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full border border-white/10 pointer-events-none"></div>
+      <div class="absolute -right-10 -bottom-10 w-60 h-60 rounded-full border border-white/10 pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-2xl space-y-4">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-[#bbf7d0] bg-white/10 border border-white/20">
+          <span>🧪</span>
+          <span>Community Testing Queue</span>
+        </div>
+
+        <h2 class="font-serif text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+          Have an item you want us to test?
+        </h2>
+
+        <p class="text-sm sm:text-base text-white/80 leading-relaxed font-normal">
+          Tell Is It Special which viral product, everyday object, or expensive purchase you're questioning. We'll buy it, tear down the engineering, and publish the verdict.
+        </p>
+
+        <div class="pt-2">
+          <a 
+            href="/contact" 
+            class="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full bg-[#15803d] hover:bg-[#166534] text-white font-bold text-sm transition-all shadow-md hover:shadow-xl group"
+          >
+            <span>Submit a Product for Testing</span>
+            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- The Special Pledge / Mission Callout -->
-    <section class="mt-16 p-8 sm:p-10 rounded-3xl bg-zinc-950 text-white space-y-4 shadow-xl">
-      <div class="flex items-center space-x-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 font-mono">The Editorial Standard</span>
-      </div>
-      <h3 class="font-serif text-2xl sm:text-3xl font-extrabold tracking-tight">Zero Sponsorships. Zero Bullshit.</h3>
-      <p class="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-2xl font-normal">
-        Every product, gadget, or curiosity evaluated on isitspecial.com is tested under messy real-world conditions. We reject corporate sponsorships and free press samples that come with strings attached. When a viral item fails our test, we tell you clearly.
-      </p>
-      <div class="pt-2">
-        <a href="/about" class="text-xs font-bold text-amber-400 hover:text-amber-300 underline underline-offset-4">
-          Read our testing manifesto & methodology &rarr;
-        </a>
-      </div>
-    </section>
+  <!-- Section 5: Bottom Quick Thumbnails Carousel / Bar -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <div class="flex items-center justify-center flex-wrap gap-4 sm:gap-6 text-xs text-[#14241c]/70 font-medium">
+      <a href="/blog/casio-f91w-watch-masterpiece" class="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] transition-colors">
+        <img src="/images/casio-f91w.jpg" alt="Casio" class="w-6 h-6 rounded-full object-cover" />
+        <span>Casio F-91W</span>
+      </a>
+      <a href="/blog/stanley-tumbler-hype" class="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] transition-colors">
+        <img src="/images/stanley-tumbler.jpg" alt="Stanley" class="w-6 h-6 rounded-full object-cover" />
+        <span>Stanley Tumbler</span>
+      </a>
+      <a href="/blog/lodge-cast-iron-skillet" class="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] transition-colors">
+        <img src="/images/lodge-cast-iron.jpg" alt="Lodge" class="w-6 h-6 rounded-full object-cover" />
+        <span>Lodge Cast Iron</span>
+      </a>
+      <a href="/blog/bic-cristal-ballpoint-pen" class="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] transition-colors">
+        <img src="/images/bic-pen.jpg" alt="Bic" class="w-6 h-6 rounded-full object-cover" />
+        <span>Bic Cristal</span>
+      </a>
+      <a href="/blog/japanese-selvedge-denim" class="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] transition-colors">
+        <img src="/images/selvedge-denim.jpg" alt="Denim" class="w-6 h-6 rounded-full object-cover" />
+        <span>Selvedge Denim</span>
+      </a>
+    </div>
+  </section>
 
-  </div>
 </BaseLayout>

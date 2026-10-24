@@ -49,47 +49,47 @@ const isGem = verdict.toLowerCase().includes('gem') || verdict.includes('नग�
 const verdictTheme = isOverhyped
   ? { badge: 'bg-rose-50 text-rose-700 border-rose-200/80', score: 'text-rose-600', ring: 'ring-rose-500/10' }
   : isMasterpiece
-  ? { badge: 'bg-indigo-50 text-indigo-700 border-indigo-200/80', score: 'text-indigo-600', ring: 'ring-indigo-500/10' }
+  ? { badge: 'bg-[#eaf5eb] text-[#15803d] border-[#bbf7d0]', score: 'text-[#15803d]', ring: 'ring-[#15803d]/10' }
   : isGem
-  ? { badge: 'bg-emerald-50 text-emerald-700 border-emerald-200/80', score: 'text-emerald-600', ring: 'ring-emerald-500/10' }
-  : { badge: 'bg-amber-50 text-amber-800 border-amber-200/80', score: 'text-amber-600', ring: 'ring-amber-500/10' };
+  ? { badge: 'bg-emerald-50 text-emerald-800 border-emerald-200/80', score: 'text-emerald-700', ring: 'ring-emerald-500/10' }
+  : { badge: 'bg-amber-50 text-amber-800 border-amber-200/80', score: 'text-amber-700', ring: 'ring-amber-500/10' };
 ---
 
 <!-- 'not-prose' prevents markdown styling from overriding button colors and text -->
-<div class="not-prose my-12 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-9 shadow-sm">
+<div class="not-prose my-12 rounded-3xl border border-[#dce5dd]/90 bg-white p-6 sm:p-9 shadow-sm">
   
   <!-- Header: Title and Big Score Counter -->
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-zinc-100 gap-4">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-[#dce5dd]/60 gap-4">
     <div>
       <div class="flex items-center space-x-2">
-        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-        <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
+        <span class="inline-block w-2 h-2 rounded-full bg-[#15803d] animate-pulse"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-[#14241c]/60 font-mono">
           {isHi ? 'द स्पेशल इंडेक्स निष्कर्ष' : 'The Special Index Verdict'}
         </span>
       </div>
-      <h3 class="font-serif text-2xl sm:text-3xl font-extrabold text-zinc-900 mt-1">
+      <h3 class="font-serif text-2xl sm:text-3xl font-extrabold text-[#14241c] mt-1">
         {isHi ? 'क्या यह वाकई खास है?' : 'Is It Special?'}
       </h3>
     </div>
 
     <!-- Rating Score Box -->
-    <div class="flex items-center space-x-4 self-start sm:self-auto bg-zinc-50 px-4 py-2.5 rounded-2xl border border-zinc-200/80">
+    <div class="flex items-center space-x-4 self-start sm:self-auto bg-[#f7faf7] px-4 py-2.5 rounded-2xl border border-[#dce5dd]/80">
       <div class="text-right">
         <span class={`inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider border ${verdictTheme.badge}`}>
           {verdict}
         </span>
       </div>
-      <div class="border-l border-zinc-200 pl-4 flex items-baseline space-x-1">
+      <div class="border-l border-[#dce5dd] pl-4 flex items-baseline space-x-1">
         <span class={`text-4xl sm:text-5xl font-black font-serif tracking-tight ${verdictTheme.score}`}>
           {score.toFixed(1)}
         </span>
-        <span class="text-xs font-bold text-zinc-600 uppercase font-mono">/10</span>
+        <span class="text-xs font-bold text-[#14241c]/60 uppercase font-mono">/10</span>
       </div>
     </div>
   </div>
 
   <!-- Summary Quote -->
-  <div class="my-6 p-4 sm:p-5 rounded-2xl bg-zinc-50 border-l-4 border-zinc-900 text-zinc-700 text-base sm:text-lg leading-relaxed italic">
+  <div class="my-6 p-4 sm:p-5 rounded-2xl bg-[#f7faf7] border-l-4 border-[#15803d] text-[#14241c]/85 text-base sm:text-lg leading-relaxed italic">
     "{summary}"
   </div>
 
