@@ -37,9 +37,9 @@ const currentYear = new Date().getFullYear();
       <a href="/about" class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'परीक्षण मानक' : 'Our Criteria'}</a>
       <a href="/contact" class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'सुझाव भेजें' : 'Submit an Item'}</a>
       <span class="text-[#dce5dd] hidden sm:inline">&bull;</span>
-      <a href="/privacy-policy" class="hover:text-[#15803d] transition-colors">Privacy Policy</a>
-      <a href="/terms" class="hover:text-[#15803d] transition-colors">Terms of Service</a>
-      <a href="/terms#disclaimer" class="hover:text-[#15803d] transition-colors">Affiliate Disclaimer</a>
+      <a href="/privacy-policy" class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'गोपनीयता नीति' : 'Privacy Policy'}</a>
+      <a href="/terms" class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'नियम व शर्तें' : 'Terms of Service'}</a>
+      <a href={lang === 'hi' ? '/hi/affiliate-disclosure' : '/affiliate-disclosure'} class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'एफिलिएट प्रकटीकरण' : 'Affiliate Disclosure'}</a>
     </nav>
 
     <!-- Bottom Copyright & Amazon Disclosure -->
