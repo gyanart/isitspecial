@@ -5,6 +5,8 @@
   :root {
     --font-serif: "Newsreader", "Playfair Display", Georgia, serif;
     --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    --font-devanagari-serif: "Noto Serif Devanagari", serif;
+    --font-devanagari-sans: "Noto Sans Devanagari", sans-serif;
   }
 
   html {
@@ -18,6 +20,18 @@
 
   h1, h2, h3, .font-editorial {
     font-family: var(--font-serif);
+  }
+
+  html[lang="hi"] {
+    font-family: var(--font-devanagari-sans), var(--font-sans);
+  }
+
+  html[lang="hi"] h1, 
+  html[lang="hi"] h2, 
+  html[lang="hi"] h3, 
+  html[lang="hi"] .font-editorial,
+  html[lang="hi"] .font-serif {
+    font-family: var(--font-devanagari-serif), var(--font-serif);
   }
 }
 

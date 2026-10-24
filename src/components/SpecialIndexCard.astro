@@ -1,12 +1,13 @@
 ---
 interface Props {
   score: number;
-  verdict: 'Overhyped' | 'Solid Standard' | 'True Gem' | 'Modern Masterpiece';
+  verdict: string;
   summary: string;
   pros?: string[];
   cons?: string[];
   whoShouldBuy?: string;
   whoShouldSkip?: string;
+  lang?: 'en' | 'hi';
 }
 
 const { 
@@ -16,41 +17,35 @@ const {
   pros = [], 
   cons = [], 
   whoShouldBuy, 
-  whoShouldSkip 
+  whoShouldSkip,
+  lang = 'en'
 } = Astro.props;
 
-// Color styling based on verdict
-const verdictConfig = {
-  'Overhyped': {
-    badgeBg: 'bg-rose-100 text-rose-800 border-rose-200',
-    scoreColor: 'text-rose-600',
-    border: 'border-rose-200'
-  },
-  'Solid Standard': {
-    badgeBg: 'bg-amber-100 text-amber-800 border-amber-200',
-    scoreColor: 'text-amber-600',
-    border: 'border-amber-200'
-  },
-  'True Gem': {
-    badgeBg: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-    scoreColor: 'text-emerald-700',
-    border: 'border-emerald-200'
-  },
-  'Modern Masterpiece': {
-    badgeBg: 'bg-indigo-100 text-indigo-800 border-indigo-200',
-    scoreColor: 'text-indigo-700',
-    border: 'border-indigo-200'
-  }
-};
+// Color styling based on verdict keywords
+const isOverhyped = verdict.toLowerCase().includes('overhyped') || verdict.includes('ओवरहाइप्ड');
+const isMasterpiece = verdict.toLowerCase().includes('masterpiece') || verdict.includes('मास्टरपीस');
+const isGem = verdict.toLowerCase().includes('gem') || verdict.includes('नगीना');
 
-const currentTheme = verdictConfig[verdict] || verdictConfig['Solid Standard'];
+const currentTheme = isOverhyped
+  ? { badgeBg: 'bg-rose-100 text-rose-800 border-rose-200', scoreColor: 'text-rose-600', border: 'border-rose-200' }
+  : isMasterpiece
+  ? { badgeBg: 'bg-indigo-100 text-indigo-800 border-indigo-200', scoreColor: 'text-indigo-700', border: 'border-indigo-200' }
+  : isGem
+  ? { badgeBg: 'bg-emerald-100 text-emerald-800 border-emerald-200', scoreColor: 'text-emerald-700', border: 'border-emerald-200' }
+  : { badgeBg: 'bg-amber-100 text-amber-800 border-amber-200', scoreColor: 'text-amber-600', border: 'border-amber-200' };
+
+const isHi = lang === 'hi';
 ---
 
 <div class={`my-10 rounded-2xl border-2 ${currentTheme.border} bg-white p-6 sm:p-8 shadow-sm transition-all`}>
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-stone-200 gap-4">
     <div>
-      <span class="text-xs font-bold uppercase tracking-widest text-stone-600">The Special Index Verdict</span>
-      <h3 class="font-serif text-2xl font-bold text-stone-900 mt-1">Is It Special?</h3>
+      <span class="text-xs font-bold uppercase tracking-widest text-stone-600">
+        {isHi ? 'द स्पेशल इंडेक्स निष्कर्ष' : 'The Special Index Verdict'}
+      </span>
+      <h3 class="font-serif text-2xl font-bold text-stone-900 mt-1">
+        {isHi ? 'क्या यह वाकई खास है?' : 'Is It Special?'}
+      </h3>
     </div>
 
     <div class="flex items-center space-x-4">
@@ -74,7 +69,7 @@ const currentTheme = verdictConfig[verdict] || verdictConfig['Solid Standard'];
         <div class="space-y-2">
           <h4 class="font-bold text-emerald-800 flex items-center space-x-1">
             <span>✓</span>
-            <span>What Makes It Special</span>
+            <span>{isHi ? 'क्या इसे खास बनाता है' : 'What Makes It Special'}</span>
           </h4>
           <ul class="space-y-1 text-stone-600 pl-4 list-disc">
             {pros.map(item => <li>{item}</li>)}
@@ -86,7 +81,7 @@ const currentTheme = verdictConfig[verdict] || verdictConfig['Solid Standard'];
         <div class="space-y-2">
           <h4 class="font-bold text-rose-800 flex items-center space-x-1">
             <span>✕</span>
-            <span>Where The Hype Fails</span>
+            <span>{isHi ? 'कहाँ हाइप फेल होती है' : 'Where The Hype Fails'}</span>
           </h4>
           <ul class="space-y-1 text-stone-600 pl-4 list-disc">
             {cons.map(item => <li>{item}</li>)}
@@ -100,13 +95,17 @@ const currentTheme = verdictConfig[verdict] || verdictConfig['Solid Standard'];
     <div class="mt-6 pt-5 border-t border-stone-100 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
       {whoShouldBuy && (
         <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-          <span class="font-bold text-stone-900 uppercase tracking-wide block mb-1">Who Should Get It:</span>
+          <span class="font-bold text-stone-900 uppercase tracking-wide block mb-1">
+            {isHi ? 'किसे खरीदना चाहिए:' : 'Who Should Get It:'}
+          </span>
           <span class="text-stone-600">{whoShouldBuy}</span>
         </div>
       )}
       {whoShouldSkip && (
         <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-          <span class="font-bold text-stone-900 uppercase tracking-wide block mb-1">Who Should Skip:</span>
+          <span class="font-bold text-stone-900 uppercase tracking-wide block mb-1">
+            {isHi ? 'किसे छोड़ देना चाहिए:' : 'Who Should Skip:'}
+          </span>
           <span class="text-stone-600">{whoShouldSkip}</span>
         </div>
       )}

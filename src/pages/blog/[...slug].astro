@@ -4,18 +4,24 @@ import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
-  const sortedPosts = allPosts.sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-  );
+  
+  // English posts (not in hi/ directory)
+  const enPosts = allPosts
+    .filter((p) => (p.data.lang || 'en') === 'en' && !p.id.startsWith('hi/'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-  return sortedPosts.map((post) => {
-    // Related: same category, excluding current post
-    const relatedPosts = sortedPosts
+  return enPosts.map((post) => {
+    // Check if Hindi translation exists
+    const hasHiTranslation = allPosts.some(
+      (p) => p.id === `hi/${post.id}` || p.data.translationSlug === post.id
+    );
+    const translationUrl = hasHiTranslation ? `/hi/blog/${post.id}` : undefined;
+
+    const relatedPosts = enPosts
       .filter((p) => p.id !== post.id && p.data.category === post.data.category)
       .slice(0, 4);
 
-    // Recent: latest posts excluding current post
-    const recentPosts = sortedPosts
+    const recentPosts = enPosts
       .filter((p) => p.id !== post.id)
       .slice(0, 4);
 
@@ -23,21 +29,24 @@ export async function getStaticPaths() {
       params: { slug: post.id },
       props: { 
         post, 
+        translationUrl, 
         relatedPosts, 
         recentPosts, 
-        allPosts: sortedPosts 
+        allPosts: enPosts 
       },
     };
   });
 }
 
-const { post, relatedPosts, recentPosts, allPosts } = Astro.props;
+const { post, translationUrl, relatedPosts, recentPosts, allPosts } = Astro.props;
 const { Content } = await render(post);
 ---
 
 <PostLayout 
   {...post.data} 
   currentSlug={post.id}
+  lang="en"
+  translationUrl={translationUrl}
   relatedPosts={relatedPosts}
   recentPosts={recentPosts}
   allPosts={allPosts}

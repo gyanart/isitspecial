@@ -4,16 +4,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import AdSlot from '../components/AdSlot.astro';
 
-// Fetch all blog posts sorted by pubDate descending
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+// Fetch English blog posts sorted by pubDate descending
+const posts = (await getCollection('blog'))
+  .filter(p => (p.data.lang || 'en') === 'en' && !p.id.startsWith('hi/'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const featuredPost = posts.find(p => p.data.featured) || posts[0];
 const regularPosts = posts.filter(p => p.id !== featuredPost?.id);
 ---
 
-<BaseLayout>
+<BaseLayout lang="en" translationUrl="/hi">
   <!-- Hero Editorial Header -->
   <section class="border-b border-stone-200 bg-stone-100/60 py-16 sm:py-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">

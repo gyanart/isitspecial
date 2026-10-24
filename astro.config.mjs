@@ -9,6 +9,13 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.isitspecial.com',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'hi'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   vite: {
     plugins: [tailwindcss()]
   },

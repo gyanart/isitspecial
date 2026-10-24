@@ -1,32 +1,89 @@
 ---
-const navLinks = [
+interface Props {
+  lang?: 'en' | 'hi';
+  translationUrl?: string;
+}
+
+const { lang = 'en', translationUrl } = Astro.props;
+
+const enNavLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'Our Mission' },
   { href: '/contact', label: 'Contact' },
 ];
+
+const hiNavLinks = [
+  { href: '/hi', label: 'होम' },
+  { href: '/about', label: 'हमारा मिशन' },
+  { href: '/contact', label: 'संपर्क' },
+];
+
+const currentLinks = lang === 'hi' ? hiNavLinks : enNavLinks;
+
+// Target URL when switching language
+const targetEnUrl = lang === 'hi' ? (translationUrl || '/') : '#';
+const targetHiUrl = lang === 'en' ? (translationUrl || '/hi') : '#';
 ---
 
 <header class="border-b border-stone-200 bg-stone-50/80 backdrop-blur-md sticky top-0 z-40 transition-colors">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+    
+    <!-- Logo & Tagline -->
     <div class="flex items-center space-x-3">
-      <a href="/" class="group flex items-baseline space-x-1.5 text-stone-900 transition-colors">
-        <span class="text-2xl font-black tracking-tight uppercase font-serif text-amber-700 group-hover:text-amber-800 transition-colors">IS IT SPECIAL?</span>
+      <a href={lang === 'hi' ? '/hi' : '/'} class="group flex items-baseline space-x-1.5 text-stone-900 transition-colors">
+        <span class="text-xl sm:text-2xl font-black tracking-tight uppercase font-serif text-amber-700 group-hover:text-amber-800 transition-colors">
+          IS IT SPECIAL?
+        </span>
       </a>
-      <span class="hidden md:inline-block text-xs uppercase tracking-widest text-stone-600 border-l border-stone-300 pl-3">The Anti-Hype Publication</span>
+      <span class="hidden md:inline-block text-xs uppercase tracking-widest text-stone-600 border-l border-stone-300 pl-3">
+        {lang === 'hi' ? 'निष्पक्ष समीक्षा एवं शोध' : 'The Anti-Hype Publication'}
+      </span>
     </div>
 
-    <nav class="flex items-center space-x-6 text-sm font-medium text-stone-600">
-      {navLinks.map((link) => (
-        <a href={link.href} class="hover:text-stone-900 transition-colors">
-          {link.label}
+    <!-- Navigation & Language Switcher Pill -->
+    <div class="flex items-center space-x-4 sm:space-x-6">
+      <nav class="hidden sm:flex items-center space-x-5 text-sm font-medium text-stone-600">
+        {currentLinks.map((link) => (
+          <a href={link.href} class="hover:text-stone-900 transition-colors">
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Language Switcher Pill (EN | हिन्दी) -->
+      <div class="inline-flex items-center rounded-full p-0.5 bg-stone-200/80 border border-stone-300 text-xs font-semibold">
+        <a 
+          href={targetEnUrl} 
+          class={`px-2.5 py-1 rounded-full transition-all ${
+            lang === 'en' 
+              ? 'bg-white text-stone-900 shadow-xs' 
+              : 'text-stone-600 hover:text-stone-900'
+          }`}
+          title="Switch to English"
+        >
+          EN
         </a>
-      ))}
+        <a 
+          href={targetHiUrl} 
+          class={`px-2.5 py-1 rounded-full transition-all ${
+            lang === 'hi' 
+              ? 'bg-amber-700 text-stone-50 shadow-xs' 
+              : 'text-stone-600 hover:text-stone-900 font-devanagari'
+          }`}
+          title="हिंदी में बदलें"
+        >
+          हिन्दी
+        </a>
+      </div>
+
+      <!-- Action Button -->
       <a 
-        href="/#articles" 
-        class="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-stone-900 text-stone-50 hover:bg-stone-800 transition-all shadow-sm"
+        href={lang === 'hi' ? '/hi#articles' : '/#articles'} 
+        class="hidden lg:inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-stone-900 text-stone-50 hover:bg-stone-800 transition-all shadow-sm"
       >
-        Read Reviews
+        {lang === 'hi' ? 'समीक्षाएं देखें' : 'Read Reviews'}
       </a>
-    </nav>
+    </div>
+
   </div>
 </header>

@@ -9,6 +9,8 @@ interface Props {
   image?: string;
   canonicalUrl?: string;
   type?: 'website' | 'article';
+  lang?: 'en' | 'hi';
+  translationUrl?: string;
 }
 
 const {
@@ -17,24 +19,31 @@ const {
   image = '/og-default.jpg',
   canonicalUrl = Astro.url.href,
   type = 'website',
+  lang = 'en',
+  translationUrl,
 } = Astro.props;
 
-const siteName = 'Is It Special?';
+const siteName = lang === 'hi' ? 'इज इट स्पेशल? (Is It Special?)' : 'Is It Special?';
 ---
 
 <!doctype html>
-<html lang="en" class="h-full bg-stone-50 text-stone-900">
+<html lang={lang} class="h-full bg-stone-50 text-stone-900">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Google Fonts for Editorial Typography: Newsreader & Plus Jakarta Sans -->
+    {translationUrl && (
+      <link rel="alternate" hreflang={lang === 'en' ? 'hi' : 'en'} href={translationUrl} />
+    )}
+    <link rel="alternate" hreflang={lang} href={canonicalUrl} />
+
+    <!-- Google Fonts for Editorial Typography (English & Devanagari Hindi) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link 
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" 
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" 
       rel="stylesheet" 
     />
 
@@ -60,10 +69,10 @@ const siteName = 'Is It Special?';
     <slot name="head" />
   </head>
   <body class="flex min-h-full flex-col font-sans selection:bg-amber-100 selection:text-amber-900 antialiased">
-    <Header />
+    <Header lang={lang} translationUrl={translationUrl} />
     <main class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

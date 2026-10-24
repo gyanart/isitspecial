@@ -9,6 +9,7 @@ interface Props {
   specialVerdict: string;
   readingTime: string;
   heroImage?: string;
+  lang?: 'en' | 'hi';
 }
 
 const { 
@@ -20,19 +21,32 @@ const {
   specialScore, 
   specialVerdict,
   readingTime,
-  heroImage 
+  heroImage,
+  lang = 'en'
 } = Astro.props;
 
-const formattedDate = new Intl.DateTimeFormat('en-US', {
+const isHi = lang === 'hi';
+
+const formattedDate = new Intl.DateTimeFormat(isHi ? 'hi-IN' : 'en-US', {
   year: 'numeric',
   month: 'short',
   day: 'numeric'
 }).format(pubDate);
 
-const verdictColor = 
-  specialVerdict === 'Overhyped' ? 'text-rose-600' :
-  specialVerdict === 'True Gem' ? 'text-emerald-600' :
-  specialVerdict === 'Modern Masterpiece' ? 'text-indigo-600' : 'text-amber-600';
+// Dynamic verdict color
+const isOverhyped = specialVerdict.toLowerCase().includes('overhyped') || specialVerdict.includes('ओवरहाइप्ड');
+const isMasterpiece = specialVerdict.toLowerCase().includes('masterpiece') || specialVerdict.includes('मास्टरपीस');
+const isGem = specialVerdict.toLowerCase().includes('gem') || specialVerdict.includes('नगीना');
+
+const verdictColor = isOverhyped
+  ? 'text-rose-600'
+  : isMasterpiece
+  ? 'text-indigo-600'
+  : isGem
+  ? 'text-emerald-600'
+  : 'text-amber-600';
+
+const articleUrl = isHi ? `/hi/blog/${slug}` : `/blog/${slug}`;
 ---
 
 <article class="group relative flex flex-col sm:flex-row sm:items-center gap-6 justify-between border-b border-stone-200 py-8 transition-colors">
@@ -50,7 +64,7 @@ const verdictColor =
     </div>
 
     <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 group-hover:text-amber-800 transition-colors leading-snug">
-      <a href={`/blog/${slug}`}>
+      <a href={articleUrl}>
         <span class="absolute inset-0 z-10"></span>
         {title}
       </a>
@@ -62,12 +76,14 @@ const verdictColor =
 
     <div class="mt-4 flex items-center justify-between pt-3 border-t border-stone-100 text-xs">
       <div class="flex items-center space-x-2">
-        <span class="font-mono text-stone-600 uppercase tracking-wider">Verdict:</span>
+        <span class="font-mono text-stone-600 uppercase tracking-wider">
+          {isHi ? 'निष्कर्ष:' : 'Verdict:'}
+        </span>
         <span class={`font-bold uppercase tracking-wider ${verdictColor}`}>{specialVerdict}</span>
       </div>
 
       <div class="flex items-baseline space-x-1">
-        <span class="text-stone-600">Special Index:</span>
+        <span class="text-stone-600">{isHi ? 'स्पेशल इंडेक्स:' : 'Special Index:'}</span>
         <span class="font-serif text-base font-bold text-stone-900">{specialScore.toFixed(1)}</span>
         <span class="text-stone-600">/10</span>
       </div>

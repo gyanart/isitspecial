@@ -12,6 +12,7 @@ interface PostItem {
     specialScore: number;
     specialVerdict: string;
     readingTime: string;
+    lang?: 'en' | 'hi';
   };
 }
 
@@ -29,6 +30,8 @@ interface Props {
   specialVerdict: string;
   readingTime: string;
   currentSlug?: string;
+  lang?: 'en' | 'hi';
+  translationUrl?: string;
   relatedPosts?: PostItem[];
   recentPosts?: PostItem[];
   allPosts?: PostItem[];
@@ -46,37 +49,56 @@ const {
   specialScore,
   specialVerdict,
   readingTime,
+  lang = 'en',
+  translationUrl,
   relatedPosts = [],
   recentPosts = [],
   allPosts = [],
 } = Astro.props;
 
-const formattedDate = new Intl.DateTimeFormat('en-US', {
+const isHi = lang === 'hi';
+
+const formattedDate = new Intl.DateTimeFormat(isHi ? 'hi-IN' : 'en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 }).format(pubDate);
 
-const verdictColor = 
-  specialVerdict === 'Overhyped' ? 'bg-rose-100 text-rose-800 border-rose-200' :
-  specialVerdict === 'True Gem' ? 'bg-emerald-100 text-emerald-800 border-emerald-200' :
-  specialVerdict === 'Modern Masterpiece' ? 'bg-indigo-100 text-indigo-800 border-indigo-200' : 
-  'bg-amber-100 text-amber-800 border-amber-200';
+// Dynamic verdict color
+const isOverhyped = specialVerdict.toLowerCase().includes('overhyped') || specialVerdict.includes('ओवरहाइप्ड');
+const isMasterpiece = specialVerdict.toLowerCase().includes('masterpiece') || specialVerdict.includes('मास्टरपीस');
+const isGem = specialVerdict.toLowerCase().includes('gem') || specialVerdict.includes('नगीना');
 
-// Calculate Category Counts
-const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft & Design'].map((cat) => {
-  const count = allPosts.filter((p) => p.data.category === cat).length;
-  return { name: cat, count };
-});
+const verdictColor = isOverhyped
+  ? 'bg-rose-100 text-rose-800 border-rose-200'
+  : isMasterpiece
+  ? 'bg-indigo-100 text-indigo-800 border-indigo-200'
+  : isGem
+  ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+  : 'bg-amber-100 text-amber-800 border-amber-200';
+
+// Calculate Category Counts filtered by current language
+const currentLangPosts = allPosts.filter(p => (p.data.lang || 'en') === lang);
+const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.category))).map(cat => ({
+  name: cat,
+  count: currentLangPosts.filter(p => p.data.category === cat).length
+}));
 ---
 
-<BaseLayout title={`${title} | Is It Special?`} description={description} type="article">
+<BaseLayout 
+  title={`${title} | ${isHi ? 'इज इट स्पेशल?' : 'Is It Special?'}`} 
+  description={description} 
+  type="article"
+  lang={lang}
+  translationUrl={translationUrl}
+>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Review",
       "headline": title,
       "description": description,
+      "inLanguage": isHi ? "hi" : "en",
       "image": heroImage ? (heroImage.startsWith('http') ? heroImage : `https://www.isitspecial.com${heroImage}`) : undefined,
       "datePublished": pubDate.toISOString(),
       "author": {
@@ -86,7 +108,7 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Is It Special?",
+        "name": isHi ? "इज इट स्पेशल?" : "Is It Special?",
         "url": "https://www.isitspecial.com"
       },
       "itemReviewed": {
@@ -105,9 +127,11 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
     
     <!-- Header Meta & Title (Centered) -->
-    <header class="max-w-3xl mx-auto text-center space-y-4 pb-10 border-b border-stone-200">
+    <header class="max-w-3xl mx-auto text-center space-y-4 pb-8 border-b border-stone-200">
       <div class="flex items-center justify-center space-x-2 text-xs">
-        <a href="/" class="text-stone-600 hover:text-stone-900 transition-colors uppercase tracking-wider font-semibold">Articles</a>
+        <a href={isHi ? '/hi' : '/'} class="text-stone-600 hover:text-stone-900 transition-colors uppercase tracking-wider font-semibold">
+          {isHi ? 'समीक्षाएं' : 'Articles'}
+        </a>
         <span class="text-stone-600">/</span>
         <span class="text-amber-800 uppercase tracking-wider font-semibold">{category}</span>
       </div>
@@ -135,24 +159,51 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
         <span>{readingTime}</span>
         <span class="text-stone-600">&bull;</span>
         <span class={`px-2.5 py-0.5 rounded-full border text-[11px] font-bold uppercase tracking-wider ${verdictColor}`}>
-          Verdict: {specialVerdict} ({specialScore.toFixed(1)}/10)
+          {isHi ? 'निष्कर्ष: ' : 'Verdict: '} {specialVerdict} ({specialScore.toFixed(1)}/10)
         </span>
       </div>
+
+      <!-- In-Article Direct Language Switcher Callout -->
+      {translationUrl && (
+        <div class="mt-6 pt-4 border-t border-stone-100 flex justify-center">
+          <div class={`inline-flex items-center gap-3 px-4 py-2.5 rounded-2xl border text-xs shadow-xs ${
+            isHi ? 'bg-amber-50/80 border-amber-200 text-amber-950' : 'bg-stone-100/90 border-stone-300/80 text-stone-900'
+          }`}>
+            <span class="text-base">🌐</span>
+            <span class="font-medium">
+              {isHi 
+                ? 'Would you prefer to read this article in English?' 
+                : 'क्या आप इस लेख को हिंदी में पढ़ना चाहते हैं?'}
+            </span>
+            <a 
+              href={translationUrl} 
+              class={`ml-1 px-3 py-1 rounded-full text-xs font-bold transition-all shadow-xs ${
+                isHi 
+                  ? 'bg-amber-800 text-stone-50 hover:bg-amber-900' 
+                  : 'bg-stone-900 text-stone-50 hover:bg-stone-800'
+              }`}
+            >
+              {isHi ? 'Read in English →' : 'हिंदी में पढ़ें →'}
+            </a>
+          </div>
+        </div>
+      )}
     </header>
 
+    <!-- Hero Image Banner -->
     {heroImage && (
       <div class="max-w-4xl mx-auto my-8 overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-xs">
         <img 
           src={heroImage} 
           alt={heroImageAlt || title} 
-          class="w-full h-[260px] sm:h-[420px] object-cover" 
+          class="w-full h-[260px] sm:h-[440px] object-cover" 
           loading="eager"
         />
       </div>
     )}
 
     <!-- Top In-Content Ad Placeholder (Zero-CLS) -->
-    <div class="max-w-4xl mx-auto mt-6">
+    <div class="max-w-4xl mx-auto mt-4">
       <AdSlot format="horizontal" label="Advertisement (Top Leaderboard)" slotId="ISITSPECIAL_TOP_BANNER" />
     </div>
 
@@ -185,7 +236,9 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
                 <span class="text-xs text-amber-800 font-medium uppercase tracking-wider">{authorRole}</span>
               </div>
               <p class="text-sm text-stone-600 leading-relaxed">
-                Written by our independent product & cultural testing desk. We purchase our own subjects, reject corporate sponsorship, and test items under everyday conditions to filter true quality from marketing hype.
+                {isHi
+                  ? 'हमारे स्वतंत्र उत्पाद एवं संस्कृति परीक्षण डेस्क द्वारा लिखित। हम अपने परीक्षण उत्पाद स्वयं खरीदते हैं, कॉर्पोरेट स्पॉन्सरशिप अस्वीकार करते हैं, और वास्तविक परिस्थितियों में परीक्षण करके तय करते हैं कि क्या सचमुच बेहतरीन है और क्या केवल मार्केटिंग का दिखावा।'
+                  : 'Written by our independent product & cultural testing desk. We purchase our own subjects, reject corporate sponsorship, and test items under everyday conditions to filter true quality from marketing hype.'}
               </p>
             </div>
           </div>
@@ -195,32 +248,41 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
         {relatedPosts.length > 0 && (
           <div class="mt-16 pt-10 border-t border-stone-200">
             <div class="flex items-center justify-between mb-6">
-              <h3 class="font-serif text-2xl font-bold text-stone-900">Related Investigations</h3>
-              <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">In {category}</span>
+              <h3 class="font-serif text-2xl font-bold text-stone-900">
+                {isHi ? 'संबंधित समीक्षाएं' : 'Related Investigations'}
+              </h3>
+              <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">
+                {isHi ? 'श्रेणी:' : 'In'} {category}
+              </span>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {relatedPosts.map((related) => (
-                <a 
-                  href={`/blog/${related.id}`} 
-                  class="group block p-5 rounded-2xl border border-stone-200 bg-white hover:border-amber-400 hover:shadow-sm transition-all"
-                >
-                  <div class="flex items-center justify-between text-xs text-stone-600 mb-2">
-                    <span class="font-semibold text-amber-800 uppercase tracking-wide">{related.data.category}</span>
-                    <span class="font-mono">{related.data.specialScore.toFixed(1)}/10</span>
-                  </div>
-                  <h4 class="font-serif text-base sm:text-lg font-bold text-stone-900 group-hover:text-amber-800 transition-colors line-clamp-2 leading-snug">
-                    {related.data.title}
-                  </h4>
-                  <p class="text-xs text-stone-600 mt-2 line-clamp-2 leading-relaxed">
-                    {related.data.description}
-                  </p>
-                  <div class="mt-3 text-xs font-semibold text-amber-800 group-hover:underline flex items-center space-x-1">
-                    <span>Read Verdict</span>
-                    <span>&rarr;</span>
-                  </div>
-                </a>
-              ))}
+              {relatedPosts.map((related) => {
+                const relatedLink = related.data.lang === 'hi' 
+                  ? `/hi/blog/${related.id.replace(/^hi\//, '')}` 
+                  : `/blog/${related.id}`;
+                return (
+                  <a 
+                    href={relatedLink} 
+                    class="group block p-5 rounded-2xl border border-stone-200 bg-white hover:border-amber-400 hover:shadow-sm transition-all"
+                  >
+                    <div class="flex items-center justify-between text-xs text-stone-600 mb-2">
+                      <span class="font-semibold text-amber-800 uppercase tracking-wide">{related.data.category}</span>
+                      <span class="font-mono">{related.data.specialScore.toFixed(1)}/10</span>
+                    </div>
+                    <h4 class="font-serif text-base sm:text-lg font-bold text-stone-900 group-hover:text-amber-800 transition-colors line-clamp-2 leading-snug">
+                      {related.data.title}
+                    </h4>
+                    <p class="text-xs text-stone-600 mt-2 line-clamp-2 leading-relaxed">
+                      {related.data.description}
+                    </p>
+                    <div class="mt-3 text-xs font-semibold text-amber-800 group-hover:underline flex items-center space-x-1">
+                      <span>{isHi ? 'पूरा निष्कर्ष पढ़ें' : 'Read Verdict'}</span>
+                      <span>&rarr;</span>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </div>
         )}
@@ -233,7 +295,9 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
         <!-- Sidebar Widget 1: The Verdict Scorecard -->
         <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-4">
           <div class="flex items-center justify-between border-b border-stone-100 pb-3">
-            <span class="text-xs font-bold uppercase tracking-wider text-stone-600">Quick Scorecard</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-stone-600">
+              {isHi ? 'त्वरित स्कोरकार्ड' : 'Quick Scorecard'}
+            </span>
             <span class={`px-2 py-0.5 rounded-full border text-[11px] font-bold uppercase tracking-wider ${verdictColor}`}>
               {specialVerdict}
             </span>
@@ -241,11 +305,15 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
 
           <div class="flex items-baseline space-x-2">
             <span class="font-serif text-5xl font-black text-stone-900">{specialScore.toFixed(1)}</span>
-            <span class="text-stone-600 font-bold uppercase text-xs">/ 10 Special Index</span>
+            <span class="text-stone-600 font-bold uppercase text-xs">
+              {isHi ? '/ 10 स्पेशल इंडेक्स' : '/ 10 Special Index'}
+            </span>
           </div>
 
           <p class="text-xs text-stone-600 leading-relaxed border-t border-stone-100 pt-3">
-            Ratings strictly reflect material quality, repairability, value durability, and authenticity versus manufacturer hype.
+            {isHi 
+              ? 'हमारी रेटिंग सामग्री की गुणवत्ता, मरम्मत की सुविधा और टिकाऊ उपयोगिता पर आधारित है।' 
+              : 'Ratings strictly reflect material quality, repairability, value durability, and authenticity versus manufacturer hype.'}
           </p>
         </div>
 
@@ -253,48 +321,59 @@ const categoriesWithCount = ['Hype vs. Reality', 'Everyday Curiosities', 'Craft 
         {recentPosts.length > 0 && (
           <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-4">
             <div class="flex items-center justify-between border-b border-stone-100 pb-3">
-              <h4 class="font-serif text-base font-bold text-stone-900">Recent Investigations</h4>
-              <span class="text-[10px] font-mono text-stone-600 uppercase">New Drops</span>
+              <h4 class="font-serif text-base font-bold text-stone-900">
+                {isHi ? 'हालिया समीक्षाएं' : 'Recent Investigations'}
+              </h4>
+              <span class="text-[10px] font-mono text-stone-600 uppercase">
+                {isHi ? 'नया' : 'New Drops'}
+              </span>
             </div>
 
             <ul class="space-y-4 divide-y divide-stone-100 text-xs">
-              {recentPosts.map((recent, idx) => (
-                <li class={idx > 0 ? 'pt-3' : ''}>
-                  <a href={`/blog/${recent.id}`} class="group block space-y-1">
-                    <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wide block">
-                      {recent.data.category} &bull; {recent.data.specialScore.toFixed(1)}/10
+              {recentPosts.map((recent, idx) => {
+                const recentLink = recent.data.lang === 'hi' 
+                  ? `/hi/blog/${recent.id.replace(/^hi\//, '')}` 
+                  : `/blog/${recent.id}`;
+                return (
+                  <li class={idx > 0 ? 'pt-3' : ''}>
+                    <a href={recentLink} class="group block space-y-1">
+                      <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wide block">
+                        {recent.data.category} &bull; {recent.data.specialScore.toFixed(1)}/10
+                      </span>
+                      <h5 class="font-serif text-sm font-semibold text-stone-900 group-hover:text-amber-800 transition-colors leading-snug">
+                        {recent.data.title}
+                      </h5>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
+        <!-- Sidebar Widget 3: Categories & Editorial Pillars -->
+        {categoriesWithCount.length > 0 && (
+          <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-4">
+            <h4 class="font-serif text-base font-bold text-stone-900 border-b border-stone-100 pb-3">
+              {isHi ? 'विषय के अनुसार खोजें' : 'Browse by Pillar'}
+            </h4>
+            <ul class="space-y-2 text-xs">
+              {categoriesWithCount.map((cat) => (
+                <li>
+                  <a 
+                    href={isHi ? '/hi#articles' : '/#articles'} 
+                    class="flex items-center justify-between p-2 rounded-lg hover:bg-stone-50 transition-colors text-stone-700 font-medium"
+                  >
+                    <span>{cat.name}</span>
+                    <span class="px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 font-mono text-[11px] font-bold">
+                      {cat.count}
                     </span>
-                    <h5 class="font-serif text-sm font-semibold text-stone-900 group-hover:text-amber-800 transition-colors leading-snug">
-                      {recent.data.title}
-                    </h5>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
         )}
-
-        <!-- Sidebar Widget 3: Categories & Editorial Pillars -->
-        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-4">
-          <h4 class="font-serif text-base font-bold text-stone-900 border-b border-stone-100 pb-3">
-            Browse by Pillar
-          </h4>
-          <ul class="space-y-2 text-xs">
-            {categoriesWithCount.map((cat) => (
-              <li>
-                <a 
-                  href="/#articles" 
-                  class="flex items-center justify-between p-2 rounded-lg hover:bg-stone-50 transition-colors text-stone-700 font-medium"
-                >
-                  <span>{cat.name}</span>
-                  <span class="px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 font-mono text-[11px] font-bold">
-                    {cat.count}
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
 
         <!-- Sidebar Widget 4: Sticky Skyscraper AdSense Placeholder (Zero-CLS) -->
         <AdSlot format="sidebar" label="Advertisement (Sticky Sidebar)" slotId="ISITSPECIAL_SIDEBAR_STICKY" />

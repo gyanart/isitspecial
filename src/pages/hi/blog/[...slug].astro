@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  
+  // Hindi posts (in hi/ directory or lang === 'hi')
+  const hiPosts = allPosts
+    .filter((p) => p.data.lang === 'hi' || p.id.startsWith('hi/'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return hiPosts.map((post) => {
+    const cleanSlug = post.id.replace(/^hi\//, '');
+    
+    // Check if English translation exists
+    const hasEnTranslation = allPosts.some(
+      (p) => p.id === cleanSlug || p.data.translationSlug === cleanSlug
+    );
+    const translationUrl = hasEnTranslation ? `/blog/${cleanSlug}` : undefined;
+
+    const relatedPosts = hiPosts
+      .filter((p) => p.id !== post.id && p.data.category === post.data.category)
+      .slice(0, 4);
+
+    const recentPosts = hiPosts
+      .filter((p) => p.id !== post.id)
+      .slice(0, 4);
+
+    return {
+      params: { slug: cleanSlug },
+      props: { 
+        post, 
+        translationUrl, 
+        relatedPosts, 
+        recentPosts, 
+        allPosts: hiPosts 
+      },
+    };
+  });
+}
+
+const { post, translationUrl, relatedPosts, recentPosts, allPosts } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PostLayout 
+  {...post.data} 
+  currentSlug={post.id.replace(/^hi\//, '')}
+  lang="hi"
+  translationUrl={translationUrl}
+  relatedPosts={relatedPosts}
+  recentPosts={recentPosts}
+  allPosts={allPosts}
+>
+  <Content />
+</PostLayout>
