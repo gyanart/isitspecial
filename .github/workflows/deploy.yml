@@ -33,13 +33,13 @@ jobs:
           PUBLIC_AMAZON_STORE_ID: isitspecial-21
         run: npm run build
 
-      - name: 🚀 Sync Files to Shared Linux Hosting via FTP/FTPS
+      - name: 🚀 Sync Static HTML Files to Server via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR || 'isitspecial/' }}
           local-dir: dist/
           protocol: ftp
           port: 21
