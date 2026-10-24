@@ -13,7 +13,7 @@
 | **002** | **Bic Cristal Medium Ballpoint Pens**<br>*(Search: `Bic Cristal Medium Ballpoint Pens`)* | [EN Page](/blog/bic-cristal-ballpoint-pen)<br>[HI Page](/hi/blog/bic-cristal-ballpoint-pen) | `16:9`<br>(1920×1080) | `A macro, architectural studio photograph of a classic clear hexagonal Bic Cristal ballpoint pen with a blue cap, lying diagonally across a textured cream architectural sketchpad with blue ink technical drawings, soft studio rim lighting, 16:9 aspect ratio.` | 🟢 `LIVE` |
 | **003** | **Lodge 10.25 Inch Cast Iron Skillet**<br>*(Search: `Lodge 10.25 Inch Cast Iron Skillet`)* | [EN Page](/blog/lodge-cast-iron-skillet)<br>[HI Page](/hi/blog/lodge-cast-iron-skillet) | `16:9`<br>(1920×1080) | `A dramatic, high-end culinary photograph of a seasoned black 10.25-inch Lodge cast iron skillet with a sizzling ribeye steak, fresh rosemary, and melting garlic butter over a rustic slate countertop, warm directional rim lighting, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **004** | **Dyson Supersonic Hair Dryer**<br>*(Search: `Dyson Supersonic Hair Dryer`)* | [EN Page](/blog/dyson-supersonic-hair-dryer)<br>[HI Page](/hi/blog/dyson-supersonic-hair-dryer) | `16:9`<br>(1920×1080) | `A striking, hyper-realistic minimalist studio product photograph of a metallic fuchsia and nickel Dyson Supersonic hair dryer resting on a smooth grey volcanic stone pedestal, soft atmospheric rim lighting highlighting the iconic hollow cylindrical aperture and magnetic nozzle, clean luxury editorial aesthetic, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
-| **005** | **Japanese Selvedge Raw Denim Jeans**<br>*(Search: `Japanese Selvedge Raw Denim Jeans`)* | [EN Page](/blog/japanese-selvedge-denim)<br>[HI Page](/hi/blog/japanese-selvedge-denim) | `16:9`<br>(1920×1080) | `An authentic, high-definition close-up macro photograph of raw, stiff Japanese selvedge denim, showing the neat red-and-white ticker selvedge edge turned up on the cuff over a rustic aged wooden worktable, visible slubby weave texture and rich deep indigo rope-dyed yarn, natural warm workshop window lighting, 16:9 banner aspect ratio.` | 🟡 `READY` |
+| **005** | **Japanese Selvedge Raw Denim Jeans**<br>*(Search: `Japanese Selvedge Raw Denim Jeans`)* | [EN Page](/blog/japanese-selvedge-denim)<br>[HI Page](/hi/blog/japanese-selvedge-denim) | `16:9`<br>(1920×1080) | `An authentic, high-definition close-up macro photograph of raw, stiff Japanese selvedge denim, showing the neat red-and-white ticker selvedge edge turned up on the cuff over a rustic aged wooden worktable, visible slubby weave texture and rich deep indigo rope-dyed yarn, natural warm workshop window lighting, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **000** | **Casio F-91W Digital Watch**<br>*(Search: `Casio F-91W`)* | [EN Page](/blog/casio-f91w-watch-masterpiece)<br>[HI Page](/hi/blog/casio-f91w-watch-masterpiece) | `16:9`<br>(1920×1080) | `A close-up, dramatic commercial studio photograph of a classic black resin Casio F-91W digital watch resting on dark textured slate stone, crisp green LCD display showing 10:58, water droplets on the bezel, soft moody rim lighting, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 
 ---
@@ -91,25 +91,20 @@
 
 ---
 
-## 🟡 Task #005: Japanese Selvedge Denim
+## 🟢 Task #005: Japanese Selvedge Denim
 
-* **Status:** 🟡 `READY` (Awaiting user ChatGPT image & affiliate link)
+* **Status:** 🟢 `LIVE` (Hero image integrated & live retailer link configured)
 * **Product Search Query:** `Japanese Selvedge Raw Denim Jeans`
 * **Article Links:**
   * English: [http://localhost:4321/blog/japanese-selvedge-denim](http://localhost:4321/blog/japanese-selvedge-denim)
   * Hindi: [http://localhost:4321/hi/blog/japanese-selvedge-denim](http://localhost:4321/hi/blog/japanese-selvedge-denim)
-* **Image Dimensions:** `16:9` (`1920×1080` or `1200×675` px)
-* **Target Image Path:** `public/images/selvedge-denim.jpg`
+* **Image Dimensions:** `16:9` (`1920×1080` px)
+* **Active Image Path:** `public/images/selvedge-denim.jpg`
 
-### 🎨 ChatGPT Image Prompt (Copy & Paste):
-```text
-An authentic, high-definition close-up macro photograph of raw, stiff Japanese selvedge denim, showing the neat red-and-white ticker selvedge edge turned up on the cuff over a rustic aged wooden worktable, visible slubby weave texture and rich deep indigo rope-dyed yarn, natural warm workshop window lighting, 16:9 banner aspect ratio.
-```
-
-### 🔗 Affiliate Configuration:
-* **Recommended Search Keyword:** `Japanese Selvedge Raw Denim Jeans`
-* **Amazon Associate Tag:** `isitspecial-21`
-* **Target Button Label:** `Explore Selvedge Denim on Amazon →`
+### 🔗 Retailer Configuration:
+* **Direct Retailer URL:** `https://tinyurl.com/bd84dehn` (Marks & Spencer Japanese Selvedge on Myntra)
+* **Store:** `Myntra` (Non-affiliate reader convenience link)
+* **Target Button Label:** `Check Stock on Myntra →` / `मिंत्रा (Myntra) पर स्टॉक देखें →`
 
 ---
 
