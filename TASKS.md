@@ -25,6 +25,9 @@ $$\mathbf{1, 4, 7, 10, 13, 16, 19, 22, 25, 28}$$
 | **005** | **Japanese Selvedge Raw Denim Jeans**<br>*(Search: `Japanese Selvedge Raw Denim Jeans`)* | [EN Page](/blog/japanese-selvedge-denim)<br>[HI Page](/hi/blog/japanese-selvedge-denim) | `16:9`<br>(1920×1080) | `An authentic, high-definition close-up macro photograph of raw, stiff Japanese selvedge denim, showing the neat red-and-white ticker selvedge edge turned up on the cuff over a rustic aged wooden worktable, visible slubby weave texture and rich deep indigo rope-dyed yarn, natural warm workshop window lighting, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **006** | **AeroPress Original Coffee Press**<br>*(Search: `AeroPress Original Coffee Press`)* | [EN Page](/blog/aeropress-coffee-maker)<br>[HI Page](/hi/blog/aeropress-coffee-maker) | `16:9`<br>(1920×1080) | `A wide-angle, hyper-realistic commercial studio photograph of an original clear smoky-tinted AeroPress coffee maker resting on a warm butcher-block wooden kitchen counter next to a ceramic cup of fresh black coffee, morning natural side window light, fine coffee grounds scattered subtly, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **007** | **Technivorm Moccamaster KBGV Select**<br>*(Search: `Technivorm Moccamaster KBGV Select`)* | [EN Page](/blog/moccamaster-coffee-maker)<br>[HI Page](/hi/blog/moccamaster-coffee-maker) | `16:9`<br>(1920×1080) | `A clean, luxury architectural product photograph of a brushed silver and matte black Technivorm Moccamaster KBGV Select coffee maker with glass carafe on a minimalist white quartz kitchen island, soft ambient Nordic morning light, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
+| **008** | **Le Creuset Enameled Cast Iron Dutch Oven**<br>*(Search: `Le Creuset Enameled Cast Iron Round Dutch Oven`)* | [EN Page](/blog/le-creuset-dutch-oven)<br>[HI Page](/hi/blog/le-creuset-dutch-oven) | `16:9`<br>(1920×1080) | `A wide-angle, hyper-realistic commercial studio photograph of a classic iconic volcanic flame orange Le Creuset 5.5-quart round Dutch oven with stainless steel lid knob on a rustic French butcher-block wooden kitchen prep island, diffused warm morning side light, fresh herbs and sea salt, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
+| **009** | **KitchenAid Artisan 5-Quart Stand Mixer**<br>*(Search: `KitchenAid Artisan Series 5 Quart Tilt Head Stand Mixer`)* | [EN Page](/blog/kitchenaid-stand-mixer)<br>[HI Page](/hi/blog/kitchenaid-stand-mixer) | `16:9`<br>(1920×1080) | `A wide-angle, hyper-realistic commercial studio photograph of a classic glossy Empire Red KitchenAid Artisan 5-quart stand mixer with polished stainless steel bowl on a clean white Italian Carrara marble kitchen countertop, soft natural morning side light, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
+| **010** | **Bialetti Moka Express Stovetop Maker**<br>*(Search: `Bialetti Moka Express Stovetop Coffee Maker 6 Cup`)* | [EN Page](/blog/bialetti-moka-express)<br>[HI Page](/hi/blog/bialetti-moka-express) | `16:9`<br>(1920×1080) | `A wide-angle, hyper-realistic commercial studio photograph of a classic polished silver octagonal eight-sided Bialetti Moka Express stovetop espresso pot resting on an authentic dark cast-iron gas stove grate with a subtle, low blue gas flame underneath, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 | **000** | **Casio F-91W Digital Watch**<br>*(Search: `Casio F-91W`)* | [EN Page](/blog/casio-f91w-watch-masterpiece)<br>[HI Page](/hi/blog/casio-f91w-watch-masterpiece) | `16:9`<br>(1920×1080) | `A close-up, dramatic commercial studio photograph of a classic black resin Casio F-91W digital watch resting on dark textured slate stone, crisp green LCD display showing 10:58, water droplets on the bezel, soft moody rim lighting, 16:9 banner aspect ratio.` | 🟢 `LIVE` |
 
 ---
@@ -164,6 +167,57 @@ $$\mathbf{1, 4, 7, 10, 13, 16, 19, 22, 25, 28}$$
 
 ### 🔗 Affiliate Configuration:
 * **Search Keyword:** `Technivorm Moccamaster KBGV Select`
+* **Amazon Associate Tag:** `isitspecial-21`
+* **Target Button Label:** `Check Price on Amazon →` / `अमेज़न पर लाइव कीमत देखें →`
+
+---
+
+## 🟢 Task #008: Le Creuset Enameled Cast Iron Dutch Oven
+
+* **Status:** 🟢 `LIVE` (English & Hindi published, 16:9 hero image integrated, geo-affiliate engine active)
+* **Product Search Query:** `Le Creuset Enameled Cast Iron Round Dutch Oven`
+* **Article Links:**
+  * English: [http://localhost:4321/blog/le-creuset-dutch-oven](http://localhost:4321/blog/le-creuset-dutch-oven)
+  * Hindi: [http://localhost:4321/hi/blog/le-creuset-dutch-oven](http://localhost:4321/hi/blog/le-creuset-dutch-oven)
+* **Image Dimensions:** `16:9` (`1920×1080` px)
+* **Active Image Path:** `public/images/le-creuset.jpg`
+
+### 🔗 Affiliate Configuration:
+* **Search Keyword:** `Le Creuset Enameled Cast Iron Round Dutch Oven`
+* **Amazon Associate Tag:** `isitspecial-21`
+* **Target Button Label:** `Check Price on Amazon →` / `अमेज़न पर लाइव कीमत देखें →`
+
+---
+
+## 🟢 Task #009: KitchenAid Artisan 5-Quart Stand Mixer
+
+* **Status:** 🟢 `LIVE` (English & Hindi published, 16:9 hero image integrated, geo-affiliate engine active)
+* **Product Search Query:** `KitchenAid Artisan Series 5 Quart Tilt Head Stand Mixer`
+* **Article Links:**
+  * English: [http://localhost:4321/blog/kitchenaid-stand-mixer](http://localhost:4321/blog/kitchenaid-stand-mixer)
+  * Hindi: [http://localhost:4321/hi/blog/kitchenaid-stand-mixer](http://localhost:4321/hi/blog/kitchenaid-stand-mixer)
+* **Image Dimensions:** `16:9` (`1920×1080` px)
+* **Active Image Path:** `public/images/kitchenaid-mixer.jpg`
+
+### 🔗 Affiliate Configuration:
+* **Search Keyword:** `KitchenAid Artisan Series 5 Quart Tilt Head Stand Mixer`
+* **Amazon Associate Tag:** `isitspecial-21`
+* **Target Button Label:** `Check Price on Amazon →` / `अमेज़न पर लाइव कीमत देखें →`
+
+---
+
+## 🟢 Task #010: Bialetti Moka Express Stovetop Maker
+
+* **Status:** 🟢 `LIVE` (English & Hindi published, 16:9 hero image integrated, geo-affiliate engine active)
+* **Product Search Query:** `Bialetti Moka Express Stovetop Coffee Maker 6 Cup`
+* **Article Links:**
+  * English: [http://localhost:4321/blog/bialetti-moka-express](http://localhost:4321/blog/bialetti-moka-express)
+  * Hindi: [http://localhost:4321/hi/blog/bialetti-moka-express](http://localhost:4321/hi/blog/bialetti-moka-express)
+* **Image Dimensions:** `16:9` (`1920×1080` px)
+* **Active Image Path:** `public/images/bialetti-moka.jpg`
+
+### 🔗 Affiliate Configuration:
+* **Search Keyword:** `Bialetti Moka Express Stovetop Coffee Maker 6 Cup`
 * **Amazon Associate Tag:** `isitspecial-21`
 * **Target Button Label:** `Check Price on Amazon →` / `अमेज़न पर लाइव कीमत देखें →`
 
