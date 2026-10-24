@@ -85,19 +85,48 @@ Our scoring is uncompromising and non-negotiable:
 
 ---
 
-## 3. End-to-End Article Production Flow
+## 3. End-to-End Article Production Flow (The 4-Step Standard)
 
-Follow this exact 7-stage workflow for every new product addition:
+Every article strictly follows this 4-step production and publishing protocol:
 
 ```mermaid
-flowchart TD
-    A["1. Candidate Selection<br>(Assign ID & Pillar)"] --> B["2. Research & Teardown<br>(Physics, Tolerances, Flaws)"]
-    B --> C["3. Bilingual MDX Drafting<br>(EN in /blog, HI in /hi/blog)"]
-    C --> D["4. AI Studio Photography<br>(16:9 Prompt into ChatGPT/Midjourney)"]
-    D --> E["5. Image Ingestion<br>(Save to public/images/[slug].jpg)"]
-    E --> F["6. Card & Affiliate Wiring<br>(SpecialIndexCard + Store Tags)"]
-    F --> G["7. Static Build & Verification<br>(npm run build -> Git Commit)"]
+flowchart LR
+    A["Step 1: Image Studio Render<br>(16:9 AI Commercial Studio Photo)"] --> B["Step 2: Dynamic Geo-Affiliate<br>(Keyword + isitspecial-21 Engine)"]
+    B --> C["Step 3: Local Review & Sign-Off<br>(localhost:4321 User Approval Gate)"]
+    C --> D["Step 4: 1-Click Cloud Deploy<br>(GitHub Actions Node 24 -> FTP Sync)"]
 ```
+
+### 🛑 Non-Negotiable Gate: No Publishing Without User Sign-Off
+**Zero unapproved deployments.** No article may be committed or pushed to production until the user has personally reviewed the hero image, tested the affiliate links locally, and provided an explicit **"Approved to Publish"** confirmation.
+
+### The 4 Production Steps in Detail:
+
+1. **Step 1: Visual Asset Generation (AI Studio Prompt / 16:9 Hero Render)**
+   - Draft a photorealistic, commercial studio prompt matching the product's authentic materials.
+   - Strictly `16:9` aspect ratio (minimum `1920 × 1080 px` or `1280 × 720 px`).
+   - Saved locally to `public/images/[slug].jpg`.
+   - Prompt structure: `[Shot Type] + [Product Model, Color, Materials] + [Tactile Studio Surface] + [Natural Rim Lighting] + [16:9 banner aspect ratio]`.
+
+2. **Step 2: Dynamic Geo-Search Affiliate Engine**
+   - We utilize our built-in smart geo-routing engine inside `<SpecialIndexCard />`.
+   - Instead of fragile hardcoded single-store URLs, we pass the exact `productKeyword` along with our official store tag `isitspecial-21`.
+   - **Smart Routing Behavior:**
+     - 🇮🇳 **Indian Visitors:** Routed automatically to `https://www.amazon.in/s?k=[productKeyword]&tag=isitspecial-21`.
+     - 🌍 **Global / US Visitors:** Routed automatically to `https://www.amazon.com/s?k=[productKeyword]&tag=isitspecial-21`.
+   - **Direct ASIN / Shortlink Override:** If the user supplies an exact Amazon SiteStripe direct shortlink (e.g. `https://amzn.to/XXXXXX`), it overrides the search query and binds directly to the buy button.
+
+3. **Step 3: Local Staging Preview & Sign-Off**
+   - Test locally on `http://localhost:4321/blog/[slug]` and `http://localhost:4321/hi/blog/[slug]`.
+   - Verify layout, hero image cropping, typography, pros/cons list, and test both English and Hindi Amazon buttons.
+   - Present the preview to the user in a review artifact for explicit approval.
+
+4. **Step 4: 1-Click Cloud Deployment via GitHub Actions**
+   - Once approved, git commit and push to `origin main`.
+   - GitHub Actions (`.github/workflows/deploy.yml` on Node 24) automatically runs static generation (`npm run build`).
+   - Differential sync transfers only compiled static HTML/CSS/assets to `/home/username/isitspecial/` on the server.
+   - Sitemaps (`/sitemap-index.xml`) and RSS feeds (`/rss.xml`) update automatically in real-time.
+
+---
 
 ### Mandatory In-Article Sections
 Every article must follow this narrative arc:
