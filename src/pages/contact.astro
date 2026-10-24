@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+
+// Cloudflare Turnstile site key (Defaults to official Cloudflare test key which always passes if not set)
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
 ---
 
 <BaseLayout 
@@ -129,6 +132,16 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
           ></textarea>
         </div>
 
+        <!-- Cloudflare Turnstile Anti-Bot Challenge -->
+        <div class="pt-2">
+          <div 
+            class="cf-turnstile" 
+            data-sitekey={turnstileSiteKey} 
+            data-theme="light"
+            data-size="flexible"
+          ></div>
+        </div>
+
         <!-- Submit Button -->
         <button 
           id="submit-form-btn"
@@ -195,12 +208,22 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
         return;
       }
 
+      // 4. Cloudflare Turnstile verification
+      const turnstileToken = form.querySelector('[name="cf-turnstile-response"]')?.value;
+      if (window.turnstile && !turnstileToken) {
+        showAlert('Please complete the Cloudflare security verification before submitting.', 'error');
+        return;
+      }
+
       // Successful human submission
       submitBtn.disabled = true;
       submitBtn.innerText = 'Transmitting...';
 
       setTimeout(() => {
         form.reset();
+        if (window.turnstile) {
+          try { window.turnstile.reset(); } catch(err) {}
+        }
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<span>Submit to Editorial Desk</span><span>&rarr;</span>';
         showAlert('✓ Thank you for your note! Our editorial team reviews reader submissions weekly.', 'success');
@@ -218,4 +241,7 @@ import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
       alertBox.innerText = msg;
     }
   </script>
+
+  <!-- Cloudflare Turnstile API Script -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </BaseLayout>

@@ -24,6 +24,10 @@ const {
 } = Astro.props;
 
 const siteName = lang === 'hi' ? 'इज इट स्पेशल? (Is It Special?)' : 'Is It Special?';
+
+// Environment variable support for GA4 & Google Search Console
+const gaMeasurementId = import.meta.env.PUBLIC_GA_ID || undefined;
+const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION || undefined;
 ---
 
 <!doctype html>
@@ -33,6 +37,25 @@ const siteName = lang === 'hi' ? 'इज इट स्पेशल? (Is It Speci
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
+
+    <!-- RSS Auto-Discovery Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Is It Special? RSS Feed" href="https://www.isitspecial.com/rss.xml" />
+
+    <!-- Google Search Console Verification Meta Tag -->
+    {gscVerification && (
+      <meta name="google-site-verification" content={gscVerification} />
+    )}
+
+    <!-- Google Analytics 4 (GA4) -->
+    {gaMeasurementId && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+      <script is:inline define:vars={{ gaMeasurementId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaMeasurementId);
+      </script>
+    )}
 
     {translationUrl && (
       <link rel="alternate" hreflang={lang === 'en' ? 'hi' : 'en'} href={translationUrl} />
