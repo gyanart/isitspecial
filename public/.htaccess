@@ -1,0 +1,55 @@
+# ==============================================================================
+# Is It Special? — Apache & cPanel Configuration
+# High-Performance, Anti-Loop HTTPS & Clean Routing
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. PREVENT LOOP: Handle HTTPS redirect safely
+  # Only redirect if NOT already on HTTPS and proxy didn't terminate SSL
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. CANONICAL HOST REDIRECTS (Prevents infinite loops)
+  # Redirect cPanel subdomain alias (isitspecial.gyanart.com) -> canonical domain
+  RewriteCond %{HTTP_HOST} ^isitspecial\.gyanart\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.isitspecial.com/$1 [L,R=301]
+
+  # Redirect bare apex domain (isitspecial.com) -> www.isitspecial.com
+  # (Crucial: Matches ONLY apex domain, never matches www.isitspecial.com to avoid loop)
+  RewriteCond %{HTTP_HOST} ^isitspecial\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.isitspecial.com/$1 [L,R=301]
+
+  # 3. Clean routing for static directory indexes
+  DirectoryIndex index.html
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+</IfModule>
+
+# Enable Gzip Compression for Fast Page Speed
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript application/json image/svg+xml
+</IfModule>
+
+# Browser Caching for Performance & LCP Optimization
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

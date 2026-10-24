@@ -28,6 +28,8 @@ const siteName = lang === 'hi' ? 'इज इट स्पेशल? (Is It Speci
 // Environment variable support for GA4 & Google Search Console
 const gaMeasurementId = import.meta.env.PUBLIC_GA_ID || undefined;
 const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION || undefined;
+
+const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial.com${image.startsWith('/') ? '' : '/'}${image}`;
 ---
 
 <!doctype html>
@@ -82,12 +84,45 @@ const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION || undefined;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={siteName} />
+    <meta property="og:image" content={fullImageUrl} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={fullImageUrl} />
+
+    <!-- Global Schema.org JSON-LD (GEO / AI Citability / Knowledge Graph) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.isitspecial.com/#website",
+          "url": "https://www.isitspecial.com/",
+          "name": "Is It Special?",
+          "description": "Unfiltered product teardowns, materials science analysis, and consumer criticism.",
+          "inLanguage": ["en-US", "hi-IN"],
+          "publisher": {
+            "@id": "https://www.isitspecial.com/#organization"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://www.isitspecial.com/#organization",
+          "name": "Is It Special?",
+          "url": "https://www.isitspecial.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.isitspecial.com/favicon.svg"
+          },
+          "sameAs": [
+            "https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q04"
+          ]
+        }
+      ]
+    })} />
 
     <slot name="head" />
   </head>
