@@ -201,11 +201,11 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
     
     <!-- Hero Image Banner -->
     {heroImage && (
-      <div class="mb-10 overflow-hidden rounded-3xl border border-zinc-200/90 bg-white shadow-sm max-h-[500px]">
+      <div class="mb-10 overflow-hidden rounded-3xl border border-zinc-200/90 bg-zinc-100 shadow-sm">
         <img 
           src={heroImage} 
           alt={heroImageAlt || title} 
-          class="w-full h-full object-cover" 
+          class="w-full h-[280px] sm:h-[440px] md:h-[500px] object-cover" 
           loading="eager"
         />
       </div>
