@@ -1,37 +1,41 @@
 ---
+import SavedDrawer from './SavedDrawer.astro';
+
 interface Props {
   lang?: 'en' | 'hi';
   translationUrl?: string;
 }
 
 const { lang = 'en', translationUrl } = Astro.props;
+const isHi = lang === 'hi';
 
 const enNavLinks = [
-  { href: '/', label: 'Home', icon: 'house' },
-  { href: '/#categories', label: 'The Index', icon: 'grid' },
-  { href: '/about', label: 'Manifesto', icon: 'shield' },
-  { href: '/contact', label: 'Submit Item', icon: 'sparkle' },
+  { href: '/', label: 'Home' },
+  { href: '/#categories', label: 'The Index' },
+  { href: '/about', label: 'Manifesto' },
+  { href: '/contact', label: 'Submit Item' },
 ];
 
 const hiNavLinks = [
-  { href: '/hi', label: 'होम', icon: 'house' },
-  { href: '/hi#categories', label: 'श्रेणियां', icon: 'grid' },
-  { href: '/about', label: 'हमारा मिशन', icon: 'shield' },
-  { href: '/contact', label: 'सुझाव भेजें', icon: 'sparkle' },
+  { href: '/hi', label: 'होम' },
+  { href: '/hi#categories', label: 'श्रेणियां' },
+  { href: '/about', label: 'हमारा मिशन' },
+  { href: '/contact', label: 'सुझाव भेजें' },
 ];
 
-const currentLinks = lang === 'hi' ? hiNavLinks : enNavLinks;
+const currentLinks = isHi ? hiNavLinks : enNavLinks;
 
 // Target URL when switching language
-const targetEnUrl = lang === 'hi' ? (translationUrl || '/') : '#';
-const targetHiUrl = lang === 'en' ? (translationUrl || '/hi') : '#';
+const targetEnUrl = isHi ? (translationUrl || '/') : '#';
+const targetHiUrl = !isHi ? (translationUrl || '/hi') : '#';
+const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q04';
 ---
 
 <header class="border-b border-[#dce5dd]/80 bg-[#f7faf7]/90 backdrop-blur-md sticky top-0 z-50 transition-all">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
     
     <!-- Grasshopper Style Brand Logo -->
-    <a href={lang === 'hi' ? '/hi' : '/'} class="group flex items-center space-x-2.5 text-[#14241c]">
+    <a href={isHi ? '/hi' : '/'} class="group flex items-center space-x-2.5 text-[#14241c]">
       <!-- Circular Botanical Emerald Logo Mark -->
       <span class="w-9 h-9 rounded-full bg-[#15803d] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
         <svg class="h-4.5 w-4.5 text-white" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -59,15 +63,40 @@ const targetHiUrl = lang === 'en' ? (translationUrl || '/hi') : '#';
       ))}
     </nav>
 
-    <!-- Right Controls: Segmented Switcher & CTA Pill -->
-    <div class="flex items-center space-x-3 sm:space-x-4">
+    <!-- Right Controls: WhatsApp, Saved List, Language & CTA -->
+    <div class="flex items-center space-x-2.5 sm:space-x-3">
       
+      <!-- Official WhatsApp Channel Direct Pill -->
+      <a 
+        href={whatsappChannelUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all shadow-2xs"
+        title="Join IsItSpecial WhatsApp Channel"
+      >
+        <svg class="w-3.5 h-3.5 fill-current text-[#25D366]" viewBox="0 0 24 24">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.835.811 2.791.811 3.18 0 5.766-2.587 5.767-5.766.001-3.181-2.585-5.767-5.767-5.797zm0 10.366c-.859 0-1.637-.238-2.316-.677l-.166-.108-1.574.412.42-1.535-.114-.183c-.47-.749-.718-1.583-.717-2.511.001-2.52 2.052-4.57 4.572-4.57 2.518 0 4.568 2.051 4.568 4.571-.001 2.521-2.051 4.571-4.573 4.571zM12 .001C5.372.001 0 5.373 0 12c0 2.115.548 4.103 1.509 5.836L0 24l6.336-1.464C8.016 23.473 9.96 24 12 24c6.628 0 12-5.373 12-12S18.628.001 12 .001z"/>
+        </svg>
+        <span class="hidden sm:inline">WhatsApp</span>
+      </a>
+
+      <!-- Saved Reading List Trigger Pill -->
+      <button 
+        id="open-saved-btn" 
+        class="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#dce5dd] hover:border-[#15803d] text-[#14241c] transition-colors shadow-2xs cursor-pointer"
+        title="View Saved Articles"
+      >
+        <span>🔖</span>
+        <span class="hidden lg:inline">{isHi ? 'सेव्ड' : 'Saved'}</span>
+        <span id="saved-badge-count" class="w-4 h-4 rounded-full bg-[#15803d] text-white text-[10px] flex items-center justify-center font-bold">0</span>
+      </button>
+
       <!-- Grasshopper Pill Language Switcher (EN | हिन्दी) -->
       <div class="inline-flex items-center rounded-full p-1 bg-[#eaf5eb] border border-[#dce5dd] text-xs font-semibold shadow-2xs">
         <a 
           href={targetEnUrl} 
-          class={`px-3 py-1 rounded-full transition-all ${
-            lang === 'en' 
+          class={`px-2.5 sm:px-3 py-1 rounded-full transition-all ${
+            !isHi 
               ? 'bg-[#15803d] text-white shadow-xs font-bold' 
               : 'text-[#14241c]/70 hover:text-[#14241c]'
           }`}
@@ -77,8 +106,8 @@ const targetHiUrl = lang === 'en' ? (translationUrl || '/hi') : '#';
         </a>
         <a 
           href={targetHiUrl} 
-          class={`px-3 py-1 rounded-full transition-all ${
-            lang === 'hi' 
+          class={`px-2.5 sm:px-3 py-1 rounded-full transition-all ${
+            isHi 
               ? 'bg-[#15803d] text-white shadow-xs font-bold' 
               : 'text-[#14241c]/70 hover:text-[#14241c]'
           }`}
@@ -88,14 +117,29 @@ const targetHiUrl = lang === 'en' ? (translationUrl || '/hi') : '#';
         </a>
       </div>
 
-      <!-- Action Pill Button -->
-      <a 
-        href={lang === 'hi' ? '/hi#articles' : '/#articles'} 
-        class="hidden sm:inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-[#15803d] text-white hover:bg-[#166534] transition-all shadow-sm hover:shadow-md"
-      >
-        {lang === 'hi' ? 'समीक्षाएं देखें ↓' : 'Browse Teardowns ↓'}
-      </a>
     </div>
 
   </div>
 </header>
+
+<SavedDrawer lang={lang} />
+
+<script is:inline>
+  function updateHeaderSavedCount() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('isitspecial_saved') || '[]');
+      const badge = document.getElementById('saved-badge-count');
+      if (badge) {
+        badge.innerText = saved.length;
+        badge.style.display = saved.length > 0 ? 'flex' : 'none';
+      }
+    } catch {}
+  }
+
+  document.getElementById('open-saved-btn')?.addEventListener('click', () => {
+    window.dispatchEvent(new Event('open-saved-drawer'));
+  });
+
+  window.addEventListener('bookmarks-updated', updateHeaderSavedCount);
+  updateHeaderSavedCount();
+</script>

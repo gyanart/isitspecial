@@ -42,10 +42,17 @@ const currentYear = new Date().getFullYear();
       <a href="/terms#disclaimer" class="hover:text-[#15803d] transition-colors">Affiliate Disclaimer</a>
     </nav>
 
-    <!-- Bottom Copyright -->
-    <div class="pt-6 border-t border-[#dce5dd]/60 w-full flex flex-col sm:flex-row justify-between items-center text-[11px] text-[#14241c]/50 gap-2">
-      <p>&copy; {currentYear} isitspecial.com. All rights reserved.</p>
-      <p>{lang === 'hi' ? 'शुद्ध निष्पक्षता एवं तेज़ गति के लिए निर्मित।' : 'Built for extreme speed, honest criticism, and zero bloat.'}</p>
+    <!-- Bottom Copyright & Amazon Disclosure -->
+    <div class="pt-6 border-t border-[#dce5dd]/60 w-full flex flex-col items-center text-[11px] text-[#14241c]/50 gap-2">
+      <p class="text-[11.5px] text-[#14241c]/60 max-w-xl mx-auto">
+        {lang === 'hi' 
+          ? 'एक अमेज़न एसोसिएट के रूप में, isitspecial.com योग्य खरीदारियों से कमीशन अर्जित करता है।' 
+          : 'As an Amazon Associate, isitspecial.com earns from qualifying purchases.'}
+      </p>
+      <div class="w-full flex flex-col sm:flex-row justify-between items-center pt-2 text-[11px] text-[#14241c]/45 gap-2">
+        <p>&copy; {currentYear} isitspecial.com. All rights reserved.</p>
+        <p>{lang === 'hi' ? 'शुद्ध निष्पक्षता एवं तेज़ गति के लिए निर्मित।' : 'Built for extreme speed, honest criticism, and zero bloat.'}</p>
+      </div>
     </div>
 
   </div>

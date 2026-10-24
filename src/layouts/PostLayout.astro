@@ -1,6 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
+import ShareBar from '../components/ShareBar.astro';
+import WhatsAppChannelCard from '../components/WhatsAppChannelCard.astro';
 
 interface PostItem {
   id: string;
@@ -126,6 +128,9 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
     })} />
   </Fragment>
 
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="fixed top-0 left-0 h-1 bg-[#15803d] z-50 transition-all duration-75 w-0 pointer-events-none"></div>
+
   <!-- Article Hero Header (Full-width clean section matching Grasshopper style) -->
   <header class="border-b border-[#dce5dd]/80 bg-[#f7faf7] py-12 sm:py-16 relative overflow-hidden">
     <div class="absolute top-0 left-0 w-full h-full hero-glow pointer-events-none"></div>
@@ -234,9 +239,17 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
             <slot />
           </div>
 
+          <!-- In-Article Social Share & Bookmark Actions -->
+          <ShareBar title={title} lang={lang} />
+
           <!-- Mid-Article In-Content Ad Placeholder (Zero-CLS) -->
-          <div class="mt-12 not-prose">
+          <div class="mt-8 not-prose">
             <AdSlot format="horizontal" label="Advertisement (In-Article Flow)" slotId="ISITSPECIAL_MID_BANNER" />
+          </div>
+
+          <!-- WhatsApp Channel In-Article Join Box -->
+          <div class="mt-8">
+            <WhatsAppChannelCard lang={lang} />
           </div>
 
           <!-- E-E-A-T Author Box (Required for Google Quality Raters & AdSense) -->
@@ -326,6 +339,9 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
       <!-- Right Column: Sticky Sidebar Matching Homepage (Span 4) -->
       <aside class="lg:col-span-4 space-y-6 sticky top-20">
         
+        <!-- Sidebar Widget 0: WhatsApp Channel Direct Join -->
+        <WhatsAppChannelCard lang={lang} compact={true} />
+
         <!-- Sidebar Widget 1: The Verdict Scorecard -->
         <div class="p-6 sm:p-7 rounded-3xl bg-white border border-[#dce5dd]/90 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b border-[#dce5dd]/60 pb-3">
@@ -419,4 +435,17 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
     </div>
 
   </div>
+
+  <script is:inline>
+    // Smooth reading scroll progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      const progressBar = document.getElementById('reading-progress');
+      if (progressBar) {
+        progressBar.style.width = scrolled + '%';
+      }
+    });
+  </script>
 </BaseLayout>

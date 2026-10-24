@@ -1,0 +1,64 @@
+---
+interface Props {
+  lang?: 'en' | 'hi';
+  compact?: boolean;
+}
+
+const { lang = 'en', compact = false } = Astro.props;
+const isHi = lang === 'hi';
+const channelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q04';
+---
+
+<div class={`rounded-3xl border border-[#25D366]/40 bg-gradient-to-br from-[#f0fdf4] via-[#f7faf7] to-[#eaf5eb] p-6 sm:p-7 shadow-xs relative overflow-hidden not-prose ${compact ? 'space-y-3' : 'space-y-4'}`}>
+  
+  <!-- Subtle WhatsApp Watermark in Background -->
+  <div class="absolute -right-4 -bottom-4 text-[#25D366]/10 pointer-events-none">
+    <svg class="w-32 h-32 fill-current" viewBox="0 0 24 24">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.835.811 2.791.811 3.18 0 5.766-2.587 5.767-5.766.001-3.181-2.585-5.767-5.767-5.797zm0 10.366c-.859 0-1.637-.238-2.316-.677l-.166-.108-1.574.412.42-1.535-.114-.183c-.47-.749-.718-1.583-.717-2.511.001-2.52 2.052-4.57 4.572-4.57 2.518 0 4.568 2.051 4.568 4.571-.001 2.521-2.051 4.571-4.573 4.571zM12 .001C5.372.001 0 5.373 0 12c0 2.115.548 4.103 1.509 5.836L0 24l6.336-1.464C8.016 23.473 9.96 24 12 24c6.628 0 12-5.373 12-12S18.628.001 12 .001z"/>
+    </svg>
+  </div>
+
+  <!-- Header: WhatsApp Logo Badge & Active Pulse -->
+  <div class="flex items-center justify-between">
+    <div class="flex items-center space-x-2.5">
+      <div class="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xs shrink-0">
+        <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.835.811 2.791.811 3.18 0 5.766-2.587 5.767-5.766.001-3.181-2.585-5.767-5.767-5.797zm0 10.366c-.859 0-1.637-.238-2.316-.677l-.166-.108-1.574.412.42-1.535-.114-.183c-.47-.749-.718-1.583-.717-2.511.001-2.52 2.052-4.57 4.572-4.57 2.518 0 4.568 2.051 4.568 4.571-.001 2.521-2.051 4.571-4.573 4.571zM12 .001C5.372.001 0 5.373 0 12c0 2.115.548 4.103 1.509 5.836L0 24l6.336-1.464C8.016 23.473 9.96 24 12 24c6.628 0 12-5.373 12-12S18.628.001 12 .001z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#15803d] font-mono block">
+          {isHi ? 'आधिकारिक चैनल' : 'OFFICIAL CHANNEL'}
+        </span>
+        <h4 class="font-serif font-black text-sm text-[#14241c] leading-none">
+          IsItSpecial WhatsApp
+        </h4>
+      </div>
+    </div>
+
+    <!-- Live Beacon -->
+    <span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#25D366]/20 text-[#128C7E] border border-[#25D366]/30">
+      <span class="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></span>
+      <span>{isHi ? 'सक्रिय' : 'Live'}</span>
+    </span>
+  </div>
+
+  <!-- Pitch Body -->
+  <p class="text-xs text-[#14241c]/80 leading-relaxed font-normal">
+    {isHi 
+      ? 'नया लेख प्रकाशित होते ही सीधे व्हाट्सएप पर अलर्ट पाएं। हर समीक्षा का निष्पक्ष निष्कर्ष और सत्यापित अमेज़न लिंक तुरंत आपके फोन पर।' 
+      : 'Never miss an unvarnished teardown. Get instant drop notifications, verified buying links, and price alerts directly inside WhatsApp.'}
+  </p>
+
+  <!-- CTA Join Button -->
+  <a 
+    href={channelUrl} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="w-full py-3 px-4 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 group cursor-pointer"
+  >
+    <span>{isHi ? 'व्हाट्सएप चैनल से जुड़ें' : 'Join IsItSpecial Channel'}</span>
+    <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+  </a>
+
+</div>

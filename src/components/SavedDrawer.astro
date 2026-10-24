@@ -1,0 +1,131 @@
+---
+interface Props {
+  lang?: 'en' | 'hi';
+}
+
+const { lang = 'en' } = Astro.props;
+const isHi = lang === 'hi';
+---
+
+<!-- Saved Articles Drawer Modal -->
+<div id="saved-drawer-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+<aside id="saved-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-[#f7faf7] border-l border-[#dce5dd] z-50 translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
+  
+  <!-- Header -->
+  <div class="p-6 border-b border-[#dce5dd] flex items-center justify-between bg-white">
+    <div class="flex items-center space-x-2">
+      <span class="text-xl">🔖</span>
+      <h3 class="font-serif text-lg font-bold text-[#14241c]">
+        {isHi ? 'आपकी सेव की गई समीक्षाएं' : 'Your Saved Reading List'}
+      </h3>
+    </div>
+
+    <button id="close-saved-drawer" class="w-8 h-8 rounded-full bg-[#f7faf7] border border-[#dce5dd] hover:bg-zinc-200 flex items-center justify-center text-xs font-bold transition-colors cursor-pointer">
+      ✕
+    </button>
+  </div>
+
+  <!-- Content List Area -->
+  <div id="saved-list-container" class="p-6 flex-1 overflow-y-auto space-y-3">
+    <!-- Populated by JavaScript -->
+    <div id="empty-saved-state" class="text-center py-16 space-y-3">
+      <span class="text-4xl block">📖</span>
+      <h4 class="font-serif font-bold text-sm text-[#14241c]">
+        {isHi ? 'कोई लेख सेव नहीं किया गया है' : 'No articles saved yet'}
+      </h4>
+      <p class="text-xs text-[#14241c]/60 max-w-xs mx-auto leading-relaxed">
+        {isHi 
+          ? 'किसी भी लेख पर सेव बटन दबाएं और बाद में यहाँ आराम से पढ़ें।' 
+          : 'Click the Save or Heart button on any article card to build your personal reading list.'}
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="p-6 border-t border-[#dce5dd] bg-white text-center space-y-2">
+    <a 
+      href="https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q04" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs flex items-center justify-center space-x-2 shadow-xs transition-colors"
+    >
+      <span>💬 {isHi ? 'व्हाट्सएप चैनल से जुड़ें' : 'Join WhatsApp Channel'}</span>
+    </a>
+    <p class="text-[10px] text-[#14241c]/50">
+      {isHi ? 'आपकी सूची इस ब्राउज़र में सुरक्षित रहती है।' : 'Saved locally in your browser for fast offline return.'}
+    </p>
+  </div>
+
+</aside>
+
+<script is:inline>
+  const overlay = document.getElementById('saved-drawer-overlay');
+  const drawer = document.getElementById('saved-drawer');
+  const closeBtn = document.getElementById('close-saved-drawer');
+  const container = document.getElementById('saved-list-container');
+  const emptyState = document.getElementById('empty-saved-state');
+
+  function openDrawer() {
+    renderSavedList();
+    overlay?.classList.remove('opacity-0', 'pointer-events-none');
+    drawer?.classList.remove('translate-x-full');
+  }
+
+  function closeDrawer() {
+    overlay?.classList.add('opacity-0', 'pointer-events-none');
+    drawer?.classList.add('translate-x-full');
+  }
+
+  closeBtn?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
+
+  window.addEventListener('open-saved-drawer', openDrawer);
+
+  function renderSavedList() {
+    let saved = [];
+    try {
+      saved = JSON.parse(localStorage.getItem('isitspecial_saved') || '[]');
+    } catch {
+      saved = [];
+    }
+
+    if (!container) return;
+
+    if (saved.length === 0) {
+      if (emptyState) emptyState.style.display = 'block';
+      container.innerHTML = '';
+      if (emptyState) container.appendChild(emptyState);
+      return;
+    }
+
+    container.innerHTML = '';
+    saved.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'p-4 rounded-2xl bg-white border border-[#dce5dd] shadow-2xs flex items-center justify-between gap-3 group';
+      card.innerHTML = `
+        <div class="min-w-0 flex-1">
+          <a href="${item.url}" class="font-serif font-bold text-sm text-[#14241c] hover:text-[#15803d] transition-colors line-clamp-2 leading-snug">
+            ${item.title}
+          </a>
+          <span class="text-[10px] text-[#14241c]/50 font-mono mt-1 block">Saved &bull; Ready to read</span>
+        </div>
+        <button data-remove-idx="${idx}" class="remove-saved-item w-7 h-7 rounded-full bg-[#f7faf7] border border-[#dce5dd] hover:bg-rose-50 hover:border-rose-200 hover:text-rose-600 text-xs flex items-center justify-center shrink-0 transition-colors" title="Remove">
+          ✕
+        </button>
+      `;
+      container.appendChild(card);
+    });
+
+    // Add remove listeners
+    container.querySelectorAll('.remove-saved-item').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = parseInt(btn.getAttribute('data-remove-idx') || '0', 10);
+        saved.splice(idx, 1);
+        localStorage.setItem('isitspecial_saved', JSON.stringify(saved));
+        window.dispatchEvent(new Event('bookmarks-updated'));
+        renderSavedList();
+      });
+    });
+  }
+</script>

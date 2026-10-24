@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import AdSlot from '../components/AdSlot.astro';
+import WhatsAppChannelCard from '../components/WhatsAppChannelCard.astro';
 
 // Fetch English blog posts sorted by pubDate descending
 const posts = (await getCollection('blog'))
@@ -260,6 +261,11 @@ const categories = [
           lang="en"
         />
       ))}
+    </div>
+
+    <!-- WhatsApp Channel Direct Banner on Homepage -->
+    <div class="mt-12">
+      <WhatsAppChannelCard lang="en" />
     </div>
 
   </section>

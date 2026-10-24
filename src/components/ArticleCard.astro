@@ -78,11 +78,17 @@ const articleUrl = isHi ? `/hi/blog/${slug}` : `/blog/${slug}`;
     </span>
 
     <!-- Bookmark / Favorite Icon (Top-Right) -->
-    <div class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/85 backdrop-blur-md flex items-center justify-center text-[#14241c]/60 shadow-2xs group-hover:text-rose-500 transition-colors">
-      <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+    <button 
+      type="button"
+      data-article-url={articleUrl}
+      data-article-title={title}
+      class="card-bookmark-btn z-20 absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#14241c]/60 shadow-2xs hover:text-rose-500 hover:scale-110 transition-all cursor-pointer"
+      title="Save to Reading List"
+    >
+      <svg class="w-4 h-4 fill-none stroke-current transition-colors" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
       </svg>
-    </div>
+    </button>
   </div>
 
   <!-- Card Body -->
@@ -131,3 +137,52 @@ const articleUrl = isHi ? `/hi/blog/${slug}` : `/blog/${slug}`;
   </div>
 
 </article>
+
+<script is:inline>
+  function syncCardBookmarks() {
+    let saved = [];
+    try {
+      saved = JSON.parse(localStorage.getItem('isitspecial_saved') || '[]');
+    } catch {}
+
+    document.querySelectorAll('.card-bookmark-btn').forEach(btn => {
+      const url = btn.getAttribute('data-article-url');
+      const isSaved = saved.some(item => item.url === url);
+      const icon = btn.querySelector('svg');
+      if (isSaved) {
+        icon?.classList.add('fill-rose-500', 'text-rose-500');
+        icon?.classList.remove('fill-none');
+      } else {
+        icon?.classList.remove('fill-rose-500', 'text-rose-500');
+        icon?.classList.add('fill-none');
+      }
+    });
+  }
+
+  // Toggle bookmark on card click
+  document.querySelectorAll('.card-bookmark-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = btn.getAttribute('data-article-url');
+      const title = btn.getAttribute('data-article-title');
+      let saved = [];
+      try {
+        saved = JSON.parse(localStorage.getItem('isitspecial_saved') || '[]');
+      } catch {}
+
+      const idx = saved.findIndex(item => item.url === url);
+      if (idx > -1) {
+        saved.splice(idx, 1);
+      } else {
+        saved.push({ title, url, date: new Date().toISOString() });
+      }
+      localStorage.setItem('isitspecial_saved', JSON.stringify(saved));
+      window.dispatchEvent(new Event('bookmarks-updated'));
+      syncCardBookmarks();
+    });
+  });
+
+  window.addEventListener('bookmarks-updated', syncCardBookmarks);
+  syncCardBookmarks();
+</script>
