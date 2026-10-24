@@ -20,50 +20,48 @@
 
 ---
 
-## 1. The Monthly Scheduling Engine
+## 1. The Universal 10-Article Monthly Scheduling Engine
 
-To guarantee consistent indexing by search engines and regular crawl cycles by AI search crawlers (Perplexity, GPTBot, ClaudeBot, Google-Extended), `isitspecial.com` runs on an exact mathematical publishing cadence scheduled every **3 days** throughout the month:
+To guarantee consistent indexing by search engines, uninterrupted predictability, and regular crawl cycles by AI search crawlers (Perplexity, GPTBot, ClaudeBot, Google-Extended), `isitspecial.com` runs on an exact mathematical publishing cadence of **exactly 10 articles per month**, scheduled every **3 days** from the 1st through the 28th.
 
-### 📅 The 3-Day Cadence Sequence
-* **Slot 1:** 1st
-* **Slot 2:** 4th
-* **Slot 3:** 7th
-* **Slot 4:** 10th
-* **Slot 5:** 13th
-* **Slot 6:** 16th
-* **Slot 7:** 19th
-* **Slot 8:** 22nd
-* **Slot 9:** 25th
-* **Slot 10:** 28th
-* **Slot 11 (Month-End Bonus/Closing Slot):** 30th or 31st (see below)
+### 📅 The Universal 10-Date Release Series (All Months)
+Every single month—whether it has 28, 29, 30, or 31 days—uses the exact same 10 publication dates:
 
-### ⚙️ Calendar Resolution Rules (End-of-Month Handling)
-1. **31-Day Months** *(January, March, May, July, August, October, December)*:
-   * **Full Cadence:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` (11 scheduled articles).
-2. **30-Day Months** *(April, June, September, November)*:
-   * **Adjusted Cadence:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` (11 scheduled articles, with the last slot moved from 31st to 30th).
-3. **Short Months (< 30 days — February)**:
-   * February has 28 days (29 in leap years).
-   * **Rule:** If the month has fewer than 30 days, **skip the last article schedule**.
-   * **February Cadence:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` (10 scheduled articles).
+$$\mathbf{1, 4, 7, 10, 13, 16, 19, 22, 25, 28}$$
+
+* **Slot 1:** 1st of the month
+* **Slot 2:** 4th of the month
+* **Slot 3:** 7th of the month
+* **Slot 4:** 10th of the month
+* **Slot 5:** 13th of the month
+* **Slot 6:** 16th of the month
+* **Slot 7:** 19th of the month
+* **Slot 8:** 22nd of the month
+* **Slot 9:** 25th of the month
+* **Slot 10:** 28th of the month
+
+### 💡 Why We Cap at the 28th (The Month-Turnover Reset):
+* **Zero Date Clashing:** By concluding every month on the 28th, we prevent back-to-back releases (e.g. publishing on the 31st and then immediately publishing on the 1st of the following month).
+* **Universal Consistency:** There are no month-end edge cases or awkward calendar rules. February, April, and December follow the exact identical release rhythm.
+* **Natural Buffer:** The 3-to-4 day window between the 28th and the 1st of the next month allows for buffer review, analytics audits, and staging the upcoming month's asset queue.
 
 ### 🗓️ Annual Master Publishing Cadence Matrix
 
-| Month | Days in Month | Scheduled Publication Dates | Monthly Total |
+| Month | Days in Month | Universal Scheduled Publication Dates | Monthly Total |
 | :--- | :---: | :--- | :---: |
-| **January** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
-| **February** | 28 / 29 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` *(Skip last)* | **10** |
-| **March** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
-| **April** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
-| **May** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
-| **June** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
-| **July** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
-| **August** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
-| **September** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
-| **October** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
-| **November** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` *(30th rule)* | **11** |
-| **December** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` | **11** |
-| **Full Year** | — | **131 Articles / Year (Bilingual = 262 Pages)** | **131** |
+| **January** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **February** | 28 / 29 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **March** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **April** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **May** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **June** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **July** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **August** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **September** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **October** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **November** | 30 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **December** | 31 | `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` | **10** |
+| **Full Year** | — | **Exactly 120 Articles / Year (Bilingual = 240 Pages)** | **120** |
 
 ---
 

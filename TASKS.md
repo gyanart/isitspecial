@@ -6,11 +6,11 @@
 
 ---
 
-## 📅 Monthly Publishing Schedule Engine
-Articles are scheduled every **3 days** throughout each month:
-* **31-Day Months:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31` (11 articles / month).
-* **30-Day Months:** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30` (11 articles / month, final slot on 30th).
-* **Short Months (< 30 days, February):** `1, 4, 7, 10, 13, 16, 19, 22, 25, 28` (10 articles / month, skip last slot).
+## 📅 Universal Monthly Publishing Schedule (10 Articles / Month)
+Every month—regardless of 28, 29, 30, or 31 days—publishes on the exact same 10 universal dates:
+$$\mathbf{1, 4, 7, 10, 13, 16, 19, 22, 25, 28}$$
+* **Monthly Total:** Exactly 10 flagship investigations (bilingual = 20 live pages).
+* **Reset Buffer:** The 28th-to-1st gap prevents back-to-back publishing and resets the cadence cleanly.
 
 ---
 
