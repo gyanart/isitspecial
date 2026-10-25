@@ -9,11 +9,13 @@
 ## 📑 Table of Contents
 1. [The 10-Article Monthly Scheduling Engine](#1-the-10-article-monthly-scheduling-engine)
 2. [Editorial Pillars & The Special Index™ Framework](#2-editorial-pillars--the-special-index-framework)
+   - [2.1 The Post-20 "Versus" Directive](#21-the-post-20-versus-head-to-head-comparison-directive)
+   - [2.2 The Signature Feature Duo: Audio Verdict & CPU Calculator](#22-the-signature-feature-duo-audio-verdict--cost-per-use-calculator)
 3. [End-to-End Article Production Flow](#3-end-to-end-article-production-flow)
 4. [Bilingual Publishing Guidelines (English & Native Hindi)](#4-bilingual-publishing-guidelines-english--native-hindi)
 5. [Visual Asset Generation & Image Prompt Engineering](#5-visual-asset-generation--image-prompt-engineering)
 6. [Affiliate, Retailer & Legal Compliance](#6-affiliate-retailer--legal-compliance)
-7. [UX & Usability Standards](#7-ux--usability-standards)
+7. [UX & Usability Standards (Typography, Dividers & Brand System)](#7-ux--usability-standards)
 8. [Technical SEO & Structured Data Requirements](#8-technical-seo--structured-data-requirements)
 9. [GEO (Generative Engine Optimization) & AI Citability](#9-geo-generative-engine-optimization--ai-citability)
 10. [Pre-Flight Build & Verification Checklist](#10-pre-flight-build--verification-checklist)
@@ -96,21 +98,91 @@ Once the publication reaches its initial benchmark of **20 standalone flagship i
 
 ---
 
-## 3. End-to-End Article Production Flow (The 4-Step Standard)
+## 2.2 The Signature Feature Duo: Audio Verdict & Cost-Per-Use Calculator
 
-Every article strictly follows this 4-step production and publishing protocol:
+Every single teardown on `isitspecial.com` must feature our two proprietary reader-utility engines:
+
+### 🎙️ 1. The 45-Second Neural Voice Verdict (`<AudioVerdictPlayer />`)
+Positioned prominently immediately below the opening hook/paradox question and directly above Section 1. It provides busy readers with an authentic, broadcast-grade audio briefing of the teardown.
+
+* **Mandatory Component:**
+  ```astro
+  <AudioVerdictPlayer 
+    audioSrc="/audio/[slug]-verdict-en.mp3" 
+    duration="0:45" 
+    lang="en" 
+  />
+  ```
+* **Voice Models (Natural Studio Quality):**
+  * **English:** `en-US-AriaNeural` tuned to `-2%` tempo (`rate="-2%"`). Warm, articulate, deep-toned, documentary-style delivery with zero robotic sibilance or metallic crackle.
+  * **Hindi:** `hi-IN-SwaraNeural`. Microsoft's premier natural female voice for Hindi, spoken in a clear, engaging, conversational cadence.
+* **Audio Script Guidelines:**
+  * **Duration:** 35 to 45 seconds (~70 to 90 words).
+  * **Spoken-Word Quality Rule:** Absolutely NO raw markdown (`#`, `**`, `[]`), NO hyphens or slashes, and NO unexpanded numbers or abbreviations. Write out words in full (e.g. *"four hundred and twenty dollars"*, *"ten out of ten"*, *"sixty seconds"*).
+  * **Structure:** State the consumer dilemma, reveal the core metallurgical or physics finding, and declare the score and verdict.
+  * **Generation Pipeline:** Managed via `scripts/generate-all-audio.py` using `edge-tts`. Files are saved to `public/audio/[slug]-verdict-en.mp3` and `public/audio/[slug]-verdict-hi.mp3`.
+
+---
+
+### 🧮 2. The True Cost-Per-Use (CPU) & Longevity Calculator (`<CostPerUseCalculator />`)
+Positioned directly above the final Verdict / Special Index section. It replaces marketing intuition with cold, empirical arithmetic, proving whether an heirloom upfront investment actually saves money over disposable alternatives.
+
+* **Mandatory Component (English Example):**
+  ```astro
+  <CostPerUseCalculator 
+    productName="Le Creuset 5.5-Qt Dutch Oven"
+    productPrice={420}
+    heirloomLifespanYears={30}
+    competitorName="Budget $70 Enameled Pot"
+    competitorPrice={70}
+    competitorLifespanYears={3}
+    unitLabel="meal"
+    unitLabelPlural="meals"
+    defaultFrequencyPerWeek={3}
+    defaultYears={20}
+    currencySymbol="$"
+    lang="en"
+  />
+  ```
+* **Mandatory Component (Hindi Localized Example):**
+  ```astro
+  <CostPerUseCalculator 
+    productName="Le Creuset 5.5-Qt डच ओवन"
+    productPrice={35000}
+    heirloomLifespanYears={30}
+    competitorName="सस्ता ₹5,000 एनामेल्ड बर्तन"
+    competitorPrice={5000}
+    competitorLifespanYears={3}
+    unitLabel="भोजन"
+    unitLabelPlural="भोजन"
+    defaultFrequencyPerWeek={3}
+    defaultYears={20}
+    currencySymbol="₹"
+    lang="hi"
+  />
+  ```
+* **Section Heading Rules:**
+  * **English:** `## The True Cost-Per-Use (CPU) Equation`
+  * **Hindi:** `## लागत-प्रति-उपयोग (CPU) का वास्तविक गणित`
+
+---
+
+## 3. End-to-End Article Production Flow (The 5-Step Standard)
+
+Every article strictly follows this 5-step production and publishing protocol:
 
 ```mermaid
 flowchart LR
-    A["Step 1: Image Studio Render<br>(16:9 AI Commercial Studio Photo)"] --> B["Step 2: Dynamic Geo-Affiliate<br>(Keyword + isitspecial-21 Engine)"]
-    B --> C["Step 3: Local Review & Sign-Off<br>(localhost:4321 User Approval Gate)"]
-    C --> D["Step 4: 1-Click Cloud Deploy<br>(GitHub Actions Node 24 -> FTP Sync)"]
+    A["Step 1: 16:9 Studio Photo<br>(Midjourney / Gemini 16:9)"] --> B["Step 2: Studio Audio Drop<br>(Aria + Swara Female Voices)"]
+    B --> C["Step 3: CPU & Geo-Affiliate<br>(Calculators + isitspecial-21)"]
+    C --> D["Step 4: Local Staging Review<br>(Strict User Sign-Off Gate)"]
+    D --> E["Step 5: 1-Click Cloud Deploy<br>(GitHub Actions Node 24 FTP)"]
 ```
 
 ### 🛑 Non-Negotiable Gate: No Publishing Without User Sign-Off
-**Zero unapproved deployments.** No article may be committed or pushed to production until the user has personally reviewed the hero image, tested the affiliate links locally, and provided an explicit **"Approved to Publish"** confirmation.
+**Zero unapproved deployments.** No article may be committed or pushed to production until the user has personally reviewed the hero image, tested the audio verdict clips locally, verified the CPU calculator, and provided an explicit **"Approved to Publish"** confirmation.
 
-### The 4 Production Steps in Detail:
+### The 5 Production Steps in Detail:
 
 1. **Step 1: Visual Asset Generation (AI Studio Prompt / 16:9 Hero Render)**
    - Draft a photorealistic, commercial studio prompt matching the product's authentic materials.
@@ -118,23 +190,24 @@ flowchart LR
    - Saved locally to `public/images/[slug].jpg`.
    - Prompt structure: `[Shot Type] + [Product Model, Color, Materials] + [Tactile Studio Surface] + [Natural Rim Lighting] + [16:9 banner aspect ratio]`.
 
-2. **Step 2: Dynamic Geo-Search Affiliate Engine**
-   - We utilize our built-in smart geo-routing engine inside `<SpecialIndexCard />`.
-   - Instead of fragile hardcoded single-store URLs, we pass the exact `productKeyword` along with our official store tag `isitspecial-21`.
-   - **Smart Routing Behavior:**
-     - 🇮🇳 **Indian Visitors:** Routed automatically to `https://www.amazon.in/s?k=[productKeyword]&tag=isitspecial-21`.
-     - 🌍 **Global / US Visitors:** Routed automatically to `https://www.amazon.com/s?k=[productKeyword]&tag=isitspecial-21`.
-   - **Direct ASIN / Shortlink Override:** If the user supplies an exact Amazon SiteStripe direct shortlink (e.g. `https://amzn.to/XXXXXX`), it overrides the search query and binds directly to the buy button.
+2. **Step 2: Studio Voice Verdict Generation (Edge-TTS)**
+   - Author conversational 45-second scripts in English and Hindi.
+   - Run `python scripts/generate-all-audio.py` to compile neural MP3 files with `en-US-AriaNeural` (English) and `hi-IN-SwaraNeural` (Hindi).
+   - Saved to `public/audio/[slug]-verdict-en.mp3` and `public/audio/[slug]-verdict-hi.mp3`.
 
-3. **Step 3: Local Staging Preview & Sign-Off**
+3. **Step 3: Cost-Per-Use & Dynamic Geo-Affiliate Configuration**
+   - Calculate realistic heirloom vs. disposable pricing and lifespans.
+   - Configure `<CostPerUseCalculator />` with `$` for EN and `₹` for HI.
+   - Configure `<SpecialIndexCard />` passing `productKeyword` and tag `isitspecial-21`.
+
+4. **Step 4: Local Staging Preview & Sign-Off**
    - Test locally on `http://localhost:4321/blog/[slug]` and `http://localhost:4321/hi/blog/[slug]`.
-   - Verify layout, hero image cropping, typography, pros/cons list, and test both English and Hindi Amazon buttons.
+   - Verify layout, test audio playback, check slider responsiveness, and verify single horizontal divider lines.
    - Present the preview to the user in a review artifact for explicit approval.
 
-4. **Step 4: 1-Click Cloud Deployment via GitHub Actions**
+5. **Step 5: 1-Click Cloud Deployment via GitHub Actions**
    - Once approved, git commit and push to `origin main`.
    - GitHub Actions (`.github/workflows/deploy.yml` on Node 24) automatically runs static generation (`npm run build`).
-   - Differential sync transfers only compiled static HTML/CSS/assets to `/home/username/isitspecial/` on the server.
    - Sitemaps (`/sitemap-index.xml`) and RSS feeds (`/rss.xml`) update automatically in real-time.
 
 ---
@@ -142,11 +215,12 @@ flowchart LR
 ### Mandatory In-Article Sections
 Every article must follow this narrative arc:
 1. **The Hook & Paradox (Paragraphs 1–3):** Contrast luxury claims or viral hysteria against historical reality.
-2. **The Physics / Micro-Engineering:** Provide granular, non-obvious engineering facts (e.g., 0.1-micron tungsten balls, thermal mass retention, low-tension shuttle loom vibrations).
-3. **The Unvarnished Flaws:** The friction and flaws influencers never show (leaks, repairability bans, power brick weight).
-4. **The Superior Alternative ("The De-influencer"):** Direct recommendation of a more practical, cheaper, or more durable alternative.
-5. **Buyer Alert / Value & Price Watch:** Realistic pricing ranges in both USD (\$) and Indian Rupees (₹) to protect readers from scalpers.
-6. **The Final Verdict:** [`SpecialIndexCard`](file:///d:/_Anti-Gravity/_isitspecial/src/components/SpecialIndexCard.astro) containing the score, summary, pros, cons, target personas, and store callout.
+2. **Feature #1: The 45-Second Voice Briefing:** `<AudioVerdictPlayer audioSrc="..." duration="0:45" lang="..." />` right before Section 1.
+3. **Section 1: The Physics / Metallurgy / Micro-Engineering:** Provide granular, non-obvious engineering facts (e.g., vitreous glass fusion, 0.1-micron tungsten balls, thermal mass retention).
+4. **Section 2: The Unvarnished Flaws:** The friction and flaws influencers never show (leaks, repairability bans, power brick weight).
+5. **Section 3: The Superior Alternative ("The De-influencer"):** Direct recommendation of a more practical, cheaper, or more durable alternative.
+6. **Feature #2: The True Cost-Per-Use (CPU) Equation:** `<CostPerUseCalculator ... />` proving long-term mathematical economics.
+7. **The Final Verdict:** [`SpecialIndexCard`](file:///d:/_Anti-Gravity/_isitspecial/src/components/SpecialIndexCard.astro) containing the score, summary, pros, cons, target personas, and store callout.
 
 ---
 
@@ -233,7 +307,14 @@ Always format prompts with these 5 core elements:
 
 Monetization is secondary to editorial integrity. Every link must comply with FTC, Amazon Associates, and search engine link quality guidelines.
 
-### 🛒 Multi-Store [`SpecialIndexCard`](file:///d:/_Anti-Gravity/_isitspecial/src/components/SpecialIndexCard.astro) Configuration
+### 🛒 Multi-Store [`SpecialIndexCard`](file:///d:/_Anti-Gravity/_isitspecial/src/components/SpecialIndexCard.astro) Architecture
+
+Our official Amazon affiliate card is built as a balanced 3-row stacked container:
+* **Row 1:** Official brand pill (`[a amazon]`) + single-line headline `Check Real-Time Pricing & Stock`.
+* **Row 2:** Side-by-side action buttons:
+  * `[ 📋 Copy Verdict ]`: 1-click clipboard copy of the article verdict and score for easy sharing.
+  * `[ 🛒 Check Price on Amazon → ]`: Clean international label without `.in` or `.co.uk` domain noise, while smart client geo-routing dynamically resolves the reader's locale and applies tag `isitspecial-21`.
+* **Row 3:** Full-width bottom transparency disclaimer spanning the card footer.
 
 ```astro
 <SpecialIndexCard 
@@ -246,7 +327,7 @@ Monetization is secondary to editorial integrity. Every link must comply with FT
   whoShouldSkip="..."
   affiliateUrl="https://link.amazon/..." 
   productKeyword="Lodge 10.25 Inch Cast Iron Skillet"
-  affiliateLabel="Check Price & Availability on Amazon →"
+  affiliateLabel="Check Price on Amazon →"
   affiliateStore="Amazon"
   isAffiliate={true}
   lang="en"
@@ -269,17 +350,34 @@ Monetization is secondary to editorial integrity. Every link must comply with FT
 
 ---
 
-## 7. UX & Usability Standards
+## 7. UX, Usability & Brand System Standards
 
 `isitspecial.com` is designed for ruthless reading speed, aesthetic elegance, and zero visual clutter.
 
-* **Typography Hierarchy:**
-  * Headings: Serif editorial font (*Bitter* / *Noto Serif Devanagari*).
-  * Body: Crisp, high-legibility geometric sans-serif (*Inter* / *Noto Sans Devanagari*).
-  * Monospace / Scores: Heavy numerical tabular figures.
-* **Accessibility (WCAG AA/AAA):**
-  * CTA buttons: Pure black text (`#09090b`) on rich amber backgrounds (`#fbbf24`), delivering ultra-high contrast (> 12:1 ratio).
-  * Scorecard badges: Dynamically color-coded based on verdict (Rose for overhyped, Emerald for gems, Amber for standards).
+### ✒️ Typography & Divider Rules
+* **Headings:** Serif editorial font (*Bitter* / *Noto Serif Devanagari*).
+* **Body:** Crisp, high-legibility geometric sans-serif (*Inter* / *Noto Sans Devanagari*).
+* **Monospace / Scores:** Heavy numerical tabular figures.
+* **⚠️ Single Horizontal Divider Rule (No Duplicate Lines):**
+  * Section dividers must be authored exclusively with markdown `---` (`<hr>`).
+  * Never apply `border-t` to `<h2>` headings inside typography CSS or templates. This prevents double parallel horizontal lines from appearing above section titles.
+
+### 🟢 Official Brand Identity & Device Assets
+* **Official Brand Emblem:** A high-gloss deep emerald circular pin featuring a stylized intertwined "iS" lettermark in white and mint green.
+* **Multi-Device Icon Suite:**
+  * `favicon.ico`: Multi-resolution ICO (16×16, 32×32, 48×48) for desktop tabs and Windows taskbars.
+  * `favicon-32x32.png` & `favicon-16x16.png`: High-DPI browser tab icons.
+  * `apple-touch-icon.png` (180×180 px): For iOS and iPadOS home screen bookmarks.
+  * `icon-192.png` & `icon-512.png`: For Android home screen and PWA splash screens.
+  * `site.webmanifest`: PWA manifest with theme color `#15803d` and background `#f7faf7`.
+* **Social Preview Card (Open Graph & Twitter):**
+  * Primary fallback image: `public/og-image.jpg` (1200×630 px MozJPEG @ 92% quality) featuring the clean editorial desk preview.
+* **Footer Attribution:**
+  * Must display: `Website Design by GyanArt` linking to `https://www.gyanart.com` (Hindi edition: `वेबसाइट डिज़ाइन: GyanArt`).
+
+### ♿ Accessibility (WCAG AA/AAA)
+* **CTA buttons:** Pure black text (`#09090b`) on rich amber backgrounds (`#fbbf24`), delivering ultra-high contrast (> 12:1 ratio).
+* **Scorecard badges:** Dynamically color-coded based on verdict (Rose for overhyped, Emerald for gems, Amber for standards).
 * **Zero Cumulative Layout Shift (CLS):**
   * Hero images specify explicit `16:9` aspect ratio containers to prevent page jump during rendering.
 * **Instant Static Navigation:**
@@ -296,7 +394,7 @@ Every published article must pass automated search validation:
      * `@type: "Article"` & `@type: "Review"`
      * `itemReviewed`: Product name, category, and review score.
      * `reviewRating`: Value out of 10, bestRating 10, worstRating 1.
-     * `author`: Verified editorial desk organization.
+     * `publisher`: Verified organization with logo `https://www.isitspecial.com/logo.png`.
 2. **Canonical & Alternate Hreflang Tags:**
    * `link rel="canonical"` points to the exact article URL.
    * `link rel="alternate" hreflang="hi"` / `hreflang="en"` links localized editions.
@@ -322,7 +420,10 @@ Before any batch is committed or pushed to production:
 
 - [ ] **Bilingual Parity:** Both `src/content/blog/[slug].mdx` and `src/content/blog/hi/[slug].mdx` exist and have synchronized `translationSlug`.
 - [ ] **Image Health:** Hero photo is placed at `public/images/[slug].jpg` in 16:9 ratio and renders cleanly.
-- [ ] **CTA Tested:** Store link works and points to the correct Amazon tag or retailer.
+- [ ] **🎙️ Audio Verdicts:** Both `public/audio/[slug]-verdict-en.mp3` (`en-US-AriaNeural`) and `public/audio/[slug]-verdict-hi.mp3` (`hi-IN-SwaraNeural`) are generated, tested, and referenced in `<AudioVerdictPlayer />`.
+- [ ] **🧮 CPU Calculator:** `<CostPerUseCalculator />` is embedded with tailored product economics, localized currencies (`$` for EN, `₹` for HI), and realistic lifespans.
+- [ ] **🛒 Amazon Box Tested:** Store button functions cleanly with geo-routing and the `isitspecial-21` tag; Copy Verdict button works.
+- [ ] **📏 Divider Integrity:** Verify no double horizontal lines appear above section headings.
 - [ ] **Local Build:** Run `npm run build` and ensure **zero errors** with all routes generated.
 - [ ] **Pipeline Updated:** Update [TASKS.md](file:///d:/_Anti-Gravity/_isitspecial/TASKS.md) status to 🟢 `LIVE`.
 - [ ] **AI Directory:** Append entry to [`public/llms.txt`](file:///d:/_Anti-Gravity/_isitspecial/public/llms.txt).
