@@ -15,6 +15,8 @@ lang: "hi"
 translationSlug: "moccamaster-coffee-maker"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../../components/AudioVerdictPlayer.astro';
 
 आज की आधुनिक दुनिया में ज्यादातर घरेलू ड्रिप कॉफी मशीनें ₹2,000 से ₹4,000 के प्लास्टिक के डिब्बे होती हैं। दो या तीन साल बाद उनका एल्युमिनियम पाइप चोक हो जाता है, अंदर का फ्यूज उड़ जाता है और पूरी बॉडी पर गोंद लगे होने के कारण उन्हें ठीक करना असंभव होता है—नतीजा, वे कचरे के ढेर में फेंक दी जाती हैं।
 
@@ -25,6 +27,9 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 इंटीरियर डिजाइनर इसके रेट्रो लुक के दीवाने हैं, और कॉफी विशेषज्ञ इसकी 'गोल्डन कप' गुणवत्ता की कसम खाते हैं।
 
 तो हमारा तीखा उपभोक्ता सवाल है: **क्या ₹30,000 की ड्रिप कॉफी मशीन सच में कुछ अनोखा करती है? या उपभोक्ता केवल विंटेज यूरोपीय डिजाइन के लिए अंधाधुंध पैसा लुटा रहे हैं?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/moccamaster-coffee-maker-verdict-hi.mp3" duration="0:45" lang="hi" />
 
 ---
 
@@ -66,6 +71,27 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 1. **शॉवरहेड का सीमित फैलाव:** पानी गिराने वाली स्टील की नली में केवल 9 छेद हैं। यदि आप ब्रूइंग के शुरुआती 30 सेकंड में चम्मच से कॉफी पाउडर को नहीं हिलाते, तो किनारों का पाउडर सूखा रह सकता है।
 2. **कांच का हॉटप्लेट:** कॉफी बनने के बाद कांच की केतली गर्म प्लेट पर रखी रहती है। यदि 20 मिनट से ज्यादा देर तक कॉफी हॉटप्लेट पर रखी रहे, तो वह जलने लगती है और कड़वी हो जाती है।
 3. **कोई डिजिटल टाइमर या ऑटो-शेड्यूल नहीं:** इसमें कोई स्क्रीन या मोबाइल ऐप नहीं है। यदि आप चाहते हैं कि सुबह 6:00 बजे अलार्म बजने से पहले कॉफी अपने आप बन जाए, तो यह मशीन निराश करेगी। इसमें सिर्फ दो साधारण टॉगल स्विच हैं।
+---
+
+## लागत-प्रति-उपयोग (CPU) का वास्तविक गणित
+
+क्या महंगे टिकाऊ उत्पाद सस्ते विकल्पों की तुलना में दीर्घकाल में किफायती साबित होते हैं? आइए गणितीय दृष्टि से इसका वास्तविक मूल्यांकन करें:
+
+<CostPerUseCalculator 
+  productName="Technivorm Moccamaster KBGV"
+  productPrice={34000}
+  heirloomLifespanYears={25}
+  competitorName="सस्ता प्लास्टिक ड्रिप कॉफी मेकर"
+  competitorPrice={4000}
+  competitorLifespanYears={3}
+  unitLabel="पॉट"
+  unitLabelPlural="पॉट"
+  defaultFrequencyPerWeek={7}
+  defaultYears={15}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
 
 ---
 

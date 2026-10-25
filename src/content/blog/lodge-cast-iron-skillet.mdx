@@ -12,12 +12,17 @@ readingTime: "5 min read"
 featured: false
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../components/AudioVerdictPlayer.astro';
 
 Walk into any high-end kitchen retailer and you will be greeted by walls of Teflon, ceramic, titanium-infused, diamond-coated non-stick frying pans priced between \$150 and \$350. They arrive in pristine pastel hues with promises of frictionless omelets and effortless cleanup.
 
 Yet, ask any master line cook or thermodynamic physicist what they use at home, and they will point to a heavy, crude black disk made in South Pittsburg, Tennessee: the **Lodge 10.25-inch Cast Iron Skillet**, currently selling for under \$25.
 
 So we ask: **Is this \$25 slab of cast iron genuinely special? Or is it an antiquated burden in the age of modern non-stick coatings?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/lodge-cast-iron-skillet-verdict-en.mp3" duration="0:45" lang="en" />
 
 ---
 
@@ -47,6 +52,27 @@ To be clear, cast iron is not without friction:
 1. **Heft:** At 5.4 lbs, single-handed flipping requires significant forearm strength.
 2. **Thermal Handle Conductance:** The iron handle gets searingly hot; you must use a silicone grip or folded towel.
 3. **Acid Sensitivity:** Simmering heavy tomato sauces or wine reductions for hours can strip the seasoning and impart a metallic taste.
+---
+
+## The True Cost-Per-Use (CPU) Equation
+
+Can an upfront purchase make rational economic sense over cheaper disposable alternatives? Here is the actual mathematical equation of long-term ownership:
+
+<CostPerUseCalculator 
+  productName="Lodge 10.25-Inch Cast Iron Skillet"
+  productPrice={22}
+  heirloomLifespanYears={40}
+  competitorName="Coated Non-Stick Frying Pan"
+  competitorPrice={35}
+  competitorLifespanYears={2}
+  unitLabel="meal"
+  unitLabelPlural="meals"
+  defaultFrequencyPerWeek={5}
+  defaultYears={10}
+  currencySymbol="$"
+  lang="en"
+/>
+
 
 ---
 

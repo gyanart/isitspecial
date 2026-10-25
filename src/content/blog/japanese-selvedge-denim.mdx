@@ -12,12 +12,17 @@ readingTime: "6 min read"
 featured: false
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../components/AudioVerdictPlayer.astro';
 
 Walk into any shopping mall and you can purchase a pair of stretchy, pre-washed blue jeans for \$45. They come pre-faded, soft out of the package, and blended with 2% elastane so you can bend your knees without resistance.
 
 Yet in the enthusiast underground, denim aficionados pay \$250 to \$400 for stiff, cardboard-like trousers woven in Kojima, Okayama Prefecture. They refuse to wash them for six months, meticulously fold up the cuffs, and boast about "slub", "chatter", and "rope-dyeing".
 
 So we ask: **Is Japanese selvedge denim genuinely special fabric? Or is it an exercise in overpriced hipster nostalgia?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/japanese-selvedge-denim-verdict-en.mp3" duration="0:45" lang="en" />
 
 ---
 
@@ -46,6 +51,27 @@ As you walk, sit, and live in the jeans over years, the indigo slowly abrades aw
 - **The Break-In Agony:** For the first 3 to 4 weeks, 15oz raw selvedge denim feels like wearing sandpaper and sheet metal. It scratches the back of your knees and restricts movement until the cotton fibers soften.
 - **Indigo Bleed:** In the initial months, natural indigo will crock onto light-colored sneakers, white furniture, and car leather seats.
 - **Price Barrier:** Quality Japanese selvedge jeans start around \$200 (such as Japan Blue or Sugar Cane) and climb past \$400 for heavyweight iron-dyed brands like Samurai or Iron Heart.
+---
+
+## The True Cost-Per-Use (CPU) Equation
+
+Can an upfront purchase make rational economic sense over cheaper disposable alternatives? Here is the actual mathematical equation of long-term ownership:
+
+<CostPerUseCalculator 
+  productName="Japanese Raw Selvedge Denim"
+  productPrice={240}
+  heirloomLifespanYears={10}
+  competitorName="Fast-Fashion Stretch Jeans"
+  competitorPrice={45}
+  competitorLifespanYears={1.5}
+  unitLabel="wear"
+  unitLabelPlural="wears"
+  defaultFrequencyPerWeek={3}
+  defaultYears={6}
+  currencySymbol="$"
+  lang="en"
+/>
+
 
 ---
 

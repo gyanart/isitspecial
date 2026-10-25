@@ -15,6 +15,8 @@ lang: "hi"
 translationSlug: "aeropress-coffee-maker"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../../components/AudioVerdictPlayer.astro';
 
 दुनिया के किसी भी महंगे कैफे में कदम रखिए—वहां आपको ₹5 लाख से लेकर ₹15 लाख तक की चमचमाती इतालवी एस्प्रेसो मशीनें देखने को मिलेंगी। उनके साथ डिजिटल वजन तराजू, खास केतली और बड़े-बड़े ग्राइंडर लगे होते हैं।
 
@@ -23,6 +25,9 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 इसे 2005 में **एलन एडलर (Alan Adler)** ने डिजाइन किया था—जो स्टैनफोर्ड यूनिवर्सिटी के पूर्व इंजीनियरिंग लेक्चरर हैं। उन्होंने दुनिया में सबसे दूर उड़ने वाली 'एरोबी फ्लाइंग रिंग' का भी आविष्कार किया था।
 
 तो हमारा सीधा उपभोक्ता सवाल है: **क्या ₹3,500 का यह साधारण प्लास्टिक सिलेंडर सच में खास है? या यह केवल सोशल मीडिया का प्रचार है?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/aeropress-coffee-maker-verdict-hi.mp3" duration="0:45" lang="hi" />
 
 ---
 
@@ -62,6 +67,27 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 - **अटूट सामग्री:** यह फूड-ग्रेड, बीपीए-मुक्त पॉलीप्रोपाइलीन से बना है। आप इसे बैकपैक में रखकर हिमालय की ट्रैकिंग पर ले जाएं या रसोई के फर्श पर पटक दें, यह कभी नहीं टूटता।
 - **3-सेकंड में सफाई:** जब आप प्लंजर को पूरा नीचे दबाते हैं, तो रबर सील सिलेंडर की दीवारों को पूरी तरह पोंछ देती है। बची हुई कॉफी की सूखी टिकिया सीधे डस्टबिन में गिरती है और इसे केवल पानी से धोना होता है।
 - **शून्य बिजली, शून्य मेंटेनेंस:** इसमें कोई मोटर नहीं है जो खराब हो, कोई इलेक्ट्रॉनिक चिप नहीं है, और न ही सर्विसिंग का कोई खर्च।
+---
+
+## लागत-प्रति-उपयोग (CPU) का वास्तविक गणित
+
+क्या महंगे टिकाऊ उत्पाद सस्ते विकल्पों की तुलना में दीर्घकाल में किफायती साबित होते हैं? आइए गणितीय दृष्टि से इसका वास्तविक मूल्यांकन करें:
+
+<CostPerUseCalculator 
+  productName="AeroPress ओरिजिनल कॉफी मेकर"
+  productPrice={3800}
+  heirloomLifespanYears={15}
+  competitorName="पॉड मशीन / कैफे कॉफी"
+  competitorPrice={16000}
+  competitorLifespanYears={3}
+  unitLabel="कप"
+  unitLabelPlural="कप"
+  defaultFrequencyPerWeek={7}
+  defaultYears={5}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
 
 ---
 

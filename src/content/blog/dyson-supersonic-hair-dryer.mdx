@@ -12,12 +12,17 @@ readingTime: "6 min read"
 featured: true
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../components/AudioVerdictPlayer.astro';
 
 When James Dyson launched the Dyson Supersonic in 2016, it was heralded as a triumph of aerospace engineering applied to an everyday morning chore. With its hollow cylindrical barrel, donut-shaped head, and signature metallic accents, it looked less like an appliance and more like a prop from *Blade Runner*.
 
 Ten years later, the price tag has climbed past \$430. Celebrities endorse it, five-star hotel suites stock it as a status flex, and social media influencers swear it altered the trajectory of their hair health.
 
 Which brings us to our fundamental question: **Is the Dyson Supersonic actually special, or are you paying a 400% markup for industrial design and a badge of luxury?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/dyson-supersonic-hair-dryer-verdict-en.mp3" duration="0:45" lang="en" />
 
 ---
 
@@ -56,6 +61,27 @@ If you are buying the Supersonic strictly for its high-velocity brushless motor 
 
 - **The Smart Dupe — Laifen Swift (\$120–\$140):** Features a near-identical 110,000 RPM brushless motor, magnetic nozzles, and temperature sensor cycling at less than a third of Dyson's cost.
 - **The Professional Workhorse — Parlux Alyon (\$170):** The undisputed favorite of seasoned salon professionals. It doesn't have a hollow donut head, but it is built to survive being dropped on concrete 50 times and lasts for 10+ years.
+---
+
+## The True Cost-Per-Use (CPU) Equation
+
+Can an upfront purchase make rational economic sense over cheaper disposable alternatives? Here is the actual mathematical equation of long-term ownership:
+
+<CostPerUseCalculator 
+  productName="Dyson Supersonic Hair Dryer"
+  productPrice={430}
+  heirloomLifespanYears={7}
+  competitorName="Standard Salon AC Dryer"
+  competitorPrice={60}
+  competitorLifespanYears={4}
+  unitLabel="dry"
+  unitLabelPlural="dries"
+  defaultFrequencyPerWeek={4}
+  defaultYears={5}
+  currencySymbol="$"
+  lang="en"
+/>
+
 
 ---
 

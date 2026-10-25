@@ -14,12 +14,17 @@ lang: "hi"
 translationSlug: "dyson-supersonic-hair-dryer"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../../components/AudioVerdictPlayer.astro';
 
 जब जेम्स डायसन ने 2016 में Dyson Supersonic हेयर ड्रायर लॉन्च किया था, तो इसे रोज़मर्रा के बालों को सुखाने के काम में एयरोस्पेस इंजीनियरिंग की एक बड़ी क्रांति बताया गया था। अपने खोखले बेलनाकार डिज़ाइन, डोनट के आकार के सिर और आकर्षक मेटैलिक रंगों के साथ, यह किसी ब्यूटी टूल से कम और किसी साइंस-फिक्शन फिल्म का गैजेट ज़्यादा लग रहा था।
 
 आज इसकी कीमत ₹38,000 से भी ऊपर जा चुकी है। बड़े-बड़े सेलिब्रिटी इसका प्रचार करते हैं, फाइव-स्टार होटल अपने कमरों में इसे स्टेटस के तौर पर रखते हैं, और इंस्टाग्राम इन्फ्लुएंसर्स कसम खाते हैं कि इसने उनके बालों की कायापलट कर दी।
 
 जिससे हमारा बुनियादी सवाल खड़ा होता है: **क्या डायसन सुपरसोनिक सचमुच कोई अनोखी तकनीक है, या फिर आप सिर्फ एक प्रीमियम ब्रांड और शानदार डिज़ाइन के लिए 400% अतिरिक्त कीमत चुका रहे हैं?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/dyson-supersonic-hair-dryer-verdict-hi.mp3" duration="0:45" lang="hi" />
 
 ---
 
@@ -58,6 +63,27 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 
 - **Laifen Swift (लगभग ₹10,000–₹12,000):** डायसन जैसी ही 1,10,000 RPM मोटर, मैग्नेटिक नोज़ल्स और टेम्परेचर साइकलिंग प्रदान करता है—वह भी एक-तिहाई कीमत पर।
 - **Parlux Alyon (लगभग ₹15,000):** दुनिया भर के अनुभवी हेयरड्रेसर और सैलून प्रोफेशनल्स की पहली पसंद। यह ज़मीन पर 50 बार गिरने के बाद भी 10 साल तक बिना किसी शिकायत के काम करता है।
+---
+
+## लागत-प्रति-उपयोग (CPU) का वास्तविक गणित
+
+क्या महंगे टिकाऊ उत्पाद सस्ते विकल्पों की तुलना में दीर्घकाल में किफायती साबित होते हैं? आइए गणितीय दृष्टि से इसका वास्तविक मूल्यांकन करें:
+
+<CostPerUseCalculator 
+  productName="Dyson Supersonic हेयर ड्रायर"
+  productPrice={38000}
+  heirloomLifespanYears={7}
+  competitorName="मानक सैलून ड्रायर"
+  competitorPrice={4500}
+  competitorLifespanYears={4}
+  unitLabel="ब्लो ड्राई"
+  unitLabelPlural="ब्लो ड्राई"
+  defaultFrequencyPerWeek={4}
+  defaultYears={5}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
 
 ---
 

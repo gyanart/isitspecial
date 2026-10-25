@@ -14,6 +14,8 @@ lang: "hi"
 translationSlug: "casio-f91w-watch-masterpiece"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../../components/AudioVerdictPlayer.astro';
 
 औद्योगिक उत्पाद डिज़ाइन की दुनिया में एक आम धारणा है: जो चीज़ जितनी महंगी होगी, वह उतनी ही बेहतर होगी। ₹8 लाख की स्विस मैकेनिकल घड़ी की उसके नक्काशीदार पुर्जों के लिए तारीफ होती है, और ₹80,000 की टाइटेनियम स्मार्टवॉच आपको बताती है कि आप सोते समय कितनी सांसें ले रहे हैं।
 
@@ -22,6 +24,9 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 1989 में कैसीओ के जापानी इंजीनियर र्युसुके मोरिआई द्वारा डिज़ाइन की गई यह घड़ी महज़ रेज़िन (प्लास्टिक) और लिक्विड क्रिस्टल डिस्प्ले का एक छोटा सा टुकड़ा है। चार दशकों बाद भी, यह हर साल दुनिया भर में **30 लाख (3 मिलियन)** से ज़्यादा बिकती है।
 
 हमारा मुख्य सवाल यह है: **क्या 1989 की यह सस्ती प्लास्टिक घड़ी वाकई कोई असाधारण चीज़ है? या यह सिर्फ पुरानी यादों का सस्ता खेल है?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/casio-f91w-watch-masterpiece-verdict-hi.mp3" duration="0:45" lang="hi" />
 
 ---
 
@@ -63,6 +68,27 @@ Casio F-91W को सिलिकॉन वैली के अरबपति 
     Casio F-91W का आधिकारिक भारतीय <strong>MRP मात्र ₹1,295</strong> है (और डिस्काउंट में यह ₹950–₹1,100 में मिलती है)। यदि अमेज़न पर कोई थर्ड-पार्टी सेलर या यूएस इंपोर्टर इसे ₹10,000 से ₹14,000 में बेच रहा है, तो <strong>बिल्कुल ना खरीदें</strong>। यह केवल स्टॉक की कमी का फायदा उठाने वाले आयातकों का दाम है। हमेशा अधिकृत सेलर (जैसे VRP Telematics) या कैसीओ की आधिकारिक वेबसाइट से ही ₹1,200 के आसपास की असली कीमत पर खरीदें।
   </p>
 </div>
+---
+
+## लागत-प्रति-उपयोग (CPU) का वास्तविक गणित
+
+क्या महंगे टिकाऊ उत्पाद सस्ते विकल्पों की तुलना में दीर्घकाल में किफायती साबित होते हैं? आइए गणितीय दृष्टि से इसका वास्तविक मूल्यांकन करें:
+
+<CostPerUseCalculator 
+  productName="Casio F-91W डिजिटल घड़ी"
+  productPrice={1200}
+  heirloomLifespanYears={10}
+  competitorName="सस्ती स्मार्टवॉच"
+  competitorPrice={3500}
+  competitorLifespanYears={2}
+  unitLabel="दिन"
+  unitLabelPlural="दिन"
+  defaultFrequencyPerWeek={7}
+  defaultYears={7}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
 
 ---
 

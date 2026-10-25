@@ -12,6 +12,8 @@ readingTime: "7 min read"
 featured: false
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../components/AudioVerdictPlayer.astro';
 
 In the sprawling world of industrial product design, cost is almost universally conflated with excellence. A Swiss mechanical chronograph running \$10,000 is revered for its hand-beveled bridges, while an \$800 titanium smartwatch promises to monitor your blood oxygen while you sleep.
 
@@ -20,6 +22,9 @@ And yet, sitting quietly on hardware store shelves and convenience store racks f
 First released by Casio engineer Ryusuke Moriai in 1989, this small slab of molded resin and liquid-crystal display hasn't just survived for four decades—it sells three million units every single year.
 
 So we ask: **Is an \$18 plastic wristwatch from 1989 genuinely special? Or is it merely cheap nostalgia?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/casio-f91w-watch-masterpiece-verdict-en.mp3" duration="0:45" lang="en" />
 
 ---
 
@@ -63,6 +68,27 @@ To be intellectually honest, the F-91W has two undeniable weaknesses:
     The official retail price (MSRP) of the Casio F-91W is <strong>$18 to $22 (₹1,095–₹1,295 in India)</strong>. If you search online and see third-party importers or scalpers listing this for $80 to $150 (₹10,000–₹14,000), <strong>DO NOT BUY IT</strong>. Those are inflated import prices exploiting temporary regional stock shortages. Always purchase from authorized Casio dealers at the fair ~$20 / ₹1,200 retail price.
   </p>
 </div>
+---
+
+## The True Cost-Per-Use (CPU) Equation
+
+Can an upfront purchase make rational economic sense over cheaper disposable alternatives? Here is the actual mathematical equation of long-term ownership:
+
+<CostPerUseCalculator 
+  productName="Casio F-91W Digital Watch"
+  productPrice={19}
+  heirloomLifespanYears={10}
+  competitorName="Budget Smartwatch"
+  competitorPrice={60}
+  competitorLifespanYears={2}
+  unitLabel="day"
+  unitLabelPlural="days"
+  defaultFrequencyPerWeek={7}
+  defaultYears={7}
+  currencySymbol="$"
+  lang="en"
+/>
+
 
 ---
 

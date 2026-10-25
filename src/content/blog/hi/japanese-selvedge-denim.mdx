@@ -14,12 +14,17 @@ lang: "hi"
 translationSlug: "japanese-selvedge-denim"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../../components/AudioVerdictPlayer.astro';
 
 किसी भी मॉल के ब्रांडेड स्टोर में चले जाइए, वहाँ आपको ₹2,500 से ₹4,000 में स्ट्रेचेबल और पहले से धुली हुई (pre-washed) जींस मिल जाएगी। वे छूने में बेहद मुलायम होती हैं और उनमें 2% इलास्टेन मिला होता है ताकि आप घुटनों को बिना किसी रुकावट के मोड़ सकें।
 
 लेकिन दूसरी तरफ, दुनिया भर के डेनिम प्रेमी जापान के ओकायामा (Okayama) के कोजिमा जिले में विंटेज शटल लूम पर बुनी गई कड़क, गत्ते जैसी भारी जींस के लिए ₹20,000 से ₹35,000 तक खर्च करते हैं। वे छह महीने तक उसे धोते तक नहीं, नीचे से मोहरी (cuff) मोड़कर लाल-सफेद किनारी का गर्व से प्रदर्शन करते हैं और "स्लब", "चैटर" और "रोप-डाइंग" की बातें करते हैं।
 
 तो हमारा सवाल यह है: **क्या जापानी सेल्वेज डेनिम वाकई कोई कालजयी और विशेष कपड़ा है? या यह सिर्फ पुरानी यादों का महंगा फैशन पाखंड है?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/japanese-selvedge-denim-verdict-hi.mp3" duration="0:45" lang="hi" />
 
 ---
 
@@ -50,6 +55,27 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 - **शुरुआती हफ़्तों की तकलीफ़ (Break-In):** पहले 3 से 4 हफ़्तों तक 15oz भारी रॉ डेनिम पहनना किसी सैंडपेपर या टीन की चादर पहनने जैसा लगता है। घुटनों के पीछे रगड़ लगती है और उठना-बैठना कड़ा महसूस होता है।
 - **नीले रंग का छूटना (Indigo Crock):** शुरुआत के महीनों में इसका प्राकृतिक इंडिगो रंग सफेद स्नीकर्स, हल्के सोफे और कार की चमड़े की सीटों पर लग सकता है।
 - **भारी कीमत:** असली जापानी सेल्वेज जींस की कीमत ₹18,000 से शुरू होकर सामुराई या आयरन हार्ट जैसे ब्रांड्स में ₹35,000 के पार चली जाती है।
+---
+
+## लागत-प्रति-उपयोग (CPU) का वास्तविक गणित
+
+क्या महंगे टिकाऊ उत्पाद सस्ते विकल्पों की तुलना में दीर्घकाल में किफायती साबित होते हैं? आइए गणितीय दृष्टि से इसका वास्तविक मूल्यांकन करें:
+
+<CostPerUseCalculator 
+  productName="जापानी रॉ सेल्वेज डेनिम"
+  productPrice={20000}
+  heirloomLifespanYears={10}
+  competitorName="फास्ट फैशन स्ट्रेच जींस"
+  competitorPrice={2500}
+  competitorLifespanYears={1.5}
+  unitLabel="पहनना"
+  unitLabelPlural="पहनना"
+  defaultFrequencyPerWeek={3}
+  defaultYears={6}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
 
 ---
 

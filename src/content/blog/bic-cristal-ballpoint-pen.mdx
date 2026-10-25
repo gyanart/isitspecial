@@ -12,6 +12,8 @@ readingTime: "5 min read"
 featured: false
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
+import AudioVerdictPlayer from '../../components/AudioVerdictPlayer.astro';
 
 Walk into any luxury stationery boutique and you will find hand-turned Italian resin pens with 14-karat gold nibs priced upwards of \$600. They arrive in velvet-lined mahogany cases, demanding specialized bottled inks and careful maintenance.
 
@@ -20,6 +22,9 @@ And yet, sitting inside billions of bank counters, school classrooms, and govern
 Introduced by Marcel Bich in France in December 1950, the Bic Cristal has sold over **100 billion units**, making it the best-selling pen in human history. It is also one of the rare industrial objects housed in the permanent design collection of the Museum of Modern Art (MoMA) in New York.
 
 So we ask: **Is this ubiquitous 30-cent disposable pen genuinely special? Or just cheap plastic trash?**
+
+
+<AudioVerdictPlayer audioSrc="/audio/bic-cristal-ballpoint-pen-verdict-en.mp3" duration="0:45" lang="en" />
 
 ---
 
@@ -54,6 +59,27 @@ The pen is not without criticism:
     The Bic Cristal Medium (1.0mm) is best purchased in <strong>value packs of 10, 20, or 50</strong>. Look for authentic packs distributed by Bic to ensure genuine tungsten carbide spheres that write smoothly for up to 2 full kilometers without blotting or scratching.
   </p>
 </div>
+---
+
+## The True Cost-Per-Use (CPU) Equation
+
+Can an upfront purchase make rational economic sense over cheaper disposable alternatives? Here is the actual mathematical equation of long-term ownership:
+
+<CostPerUseCalculator 
+  productName="Bic Cristal Ballpoint Pen"
+  productPrice={0.3}
+  heirloomLifespanYears={2}
+  competitorName="Disposable Gel Pen"
+  competitorPrice={2.5}
+  competitorLifespanYears={0.5}
+  unitLabel="page"
+  unitLabelPlural="pages"
+  defaultFrequencyPerWeek={10}
+  defaultYears={2}
+  currencySymbol="$"
+  lang="en"
+/>
+
 
 ---
 
