@@ -306,9 +306,11 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {relatedPosts.map((related) => {
-                const relatedLink = related.data.lang === 'hi' 
-                  ? `/hi/blog/${related.id.replace(/^hi\//, '')}` 
-                  : `/blog/${related.id}`;
+                const isRelatedHi = related.data.lang === 'hi' || related.id.startsWith('hi/');
+                const relatedSlug = related.id.replace(/^hi\//, '');
+                const relatedLink = isRelatedHi 
+                  ? `/hi/blog/${relatedSlug}` 
+                  : `/blog/${relatedSlug}`;
                 return (
                   <a 
                     href={relatedLink} 
@@ -397,9 +399,11 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
 
             <ul class="space-y-3.5 divide-y divide-[#dce5dd]/50 text-xs">
               {recentPosts.map((recent, idx) => {
-                const recentLink = recent.data.lang === 'hi' 
-                  ? `/hi/blog/${recent.id.replace(/^hi\//, '')}` 
-                  : `/blog/${recent.id}`;
+                const isRecentHi = recent.data.lang === 'hi' || recent.id.startsWith('hi/');
+                const recentSlug = recent.id.replace(/^hi\//, '');
+                const recentLink = isRecentHi 
+                  ? `/hi/blog/${recentSlug}` 
+                  : `/blog/${recentSlug}`;
                 return (
                   <li class={idx > 0 ? 'pt-3' : ''}>
                     <a href={recentLink} class="group block space-y-1">
