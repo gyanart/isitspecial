@@ -2,7 +2,7 @@
 
 > **The Definitive Standard Operating Procedure for Article Production, Monthly Scheduling, Usability/UX, SEO, GEO, and Bilingual Publishing.**  
 > *Primary Language:* English (`/blog/[slug]`) | *Localized Edition:* Hindi (`/hi/blog/[slug]`)  
-> *Amazon Associate Tag:* `isitspecial-21` | *Default Image Aspect Ratio:* `16:9` (1920×1080 px)
+> *Amazon Associate Tag:* `isitspecial-21` | *Default Image Standard:* `16:9` WebP @ 70% quality (< 100 KB)
 
 ---
 
@@ -187,7 +187,7 @@ flowchart LR
 1. **Step 1: Visual Asset Generation (AI Studio Prompt / 16:9 Hero Render)**
    - Draft a photorealistic, commercial studio prompt matching the product's authentic materials.
    - Strictly `16:9` aspect ratio (minimum `1920 × 1080 px` or `1280 × 720 px`).
-   - Saved locally to `public/images/[slug].jpg`.
+   - Converted and saved locally to `public/images/[slug].webp` (WebP @ 70% quality, `< 100 KB`, yielding ~90% file size reduction with zero perceptible quality loss).
    - Prompt structure: `[Shot Type] + [Product Model, Color, Materials] + [Tactile Studio Surface] + [Natural Rim Lighting] + [16:9 banner aspect ratio]`.
 
 2. **Step 2: Studio Voice Verdict Generation (Edge-TTS)**
@@ -243,7 +243,7 @@ title: "Why the 30-Cent Bic Cristal Pen is an Unmatched Miracle of Engineering"
 description: "How a disposable French plastic tube from 1950 writes for 2 full miles..."
 pubDate: 2026-10-24
 category: "Everyday Curiosities"
-heroImage: "/images/bic-pen.jpg"
+heroImage: "/images/bic-pen.webp"
 author: "Is It Special Editorial Desk"
 authorRole: "Materials & Design Research"
 specialScore: 9.8
@@ -261,7 +261,7 @@ title: "मात्र ₹25 का Bic Cristal पेन असल में �
 description: "1950 का एक साधारण फ्रेंच प्लास्टिक पेन जो बिना रुके 3 किलोमीटर लिखता है..."
 pubDate: 2026-10-24
 category: "रोज़मर्रा के अजूबे"
-heroImage: "/images/bic-pen.jpg"
+heroImage: "/images/bic-pen.webp"
 author: "Is It Special संपादकीय डेस्क"
 authorRole: "सामग्री एवं डिज़ाइन अनुसंधान"
 specialScore: 9.8
@@ -279,13 +279,28 @@ translationSlug: "bic-cristal-ballpoint-pen"
 
 ## 5. Visual Asset Generation & Image Prompt Engineering
 
-All hero banners must be custom AI-generated studio product photographs adhering to strict commercial lighting rules.
+All hero banners must be custom AI-generated studio product photographs adhering to strict commercial lighting rules and encoded in modern WebP format.
 
 ### 📐 Image Specifications
 * **Aspect Ratio:** Strictly `16:9` widescreen banner.
 * **Resolution:** Minimum `1920 × 1080 px` (or `1280 × 720 px` high-DPI).
-* **Format:** Optimized Progressive JPEG or WebP (`< 450 KB`).
-* **Storage Location:** `public/images/[slug].jpg`.
+* **Format:** **WebP at 70% quality** (`.webp`).
+* **Target File Size:** `< 100 KB` (typically 25 KB – 45 KB, achieving 85–90% byte reduction vs. legacy JPEG without perceptible loss).
+* **Storage Location:** `public/images/[slug].webp`.
+* **Social Scraper Exception:** `public/og-image.jpg` is preserved exclusively in JPEG format for external social scrapers (WhatsApp, Facebook, iMessage) that lack full WebP preview support.
+
+### 🛠️ Mandatory Python WebP Compression Command
+When generating or acquiring high-resolution source product images (PNG/JPG), immediately convert to production `.webp` via Python Pillow:
+
+```python
+from PIL import Image
+
+# Open source image and ensure RGB mode
+img = Image.open("source-image.png").convert("RGB")
+
+# Save as WebP at 70% quality with maximum compression effort (method=6)
+img.save("public/images/[slug].webp", format="WEBP", quality=70, method=6)
+```
 
 ### 🎨 Master Prompt Anatomy for ChatGPT / Midjourney
 Always format prompts with these 5 core elements:
@@ -371,7 +386,7 @@ Our official Amazon affiliate card is built as a balanced 3-row stacked containe
   * `icon-192.png` & `icon-512.png`: For Android home screen and PWA splash screens.
   * `site.webmanifest`: PWA manifest with theme color `#15803d` and background `#f7faf7`.
 * **Social Preview Card (Open Graph & Twitter):**
-  * Primary fallback image: `public/og-image.jpg` (1200×630 px MozJPEG @ 92% quality) featuring the clean editorial desk preview.
+  * Primary fallback image: `public/og-image.jpg` (1200×630 px MozJPEG @ 92% quality, retained specifically for WhatsApp, iMessage, and Facebook scrapers alongside modern WebP assets).
 * **Footer Attribution:**
   * Must display: `Website Design by GyanArt` linking to `https://www.gyanart.com` (Hindi edition: `वेबसाइट डिज़ाइन: GyanArt`).
 
@@ -419,7 +434,7 @@ AI-driven search engines (ChatGPT Search, Perplexity, Google AI Overviews, Claud
 Before any batch is committed or pushed to production:
 
 - [ ] **Bilingual Parity:** Both `src/content/blog/[slug].mdx` and `src/content/blog/hi/[slug].mdx` exist and have synchronized `translationSlug`.
-- [ ] **Image Health:** Hero photo is placed at `public/images/[slug].jpg` in 16:9 ratio and renders cleanly.
+- [ ] **Image Health:** Hero photo is placed at `public/images/[slug].webp` in 16:9 ratio, encoded in WebP @ 70% quality (`< 100 KB`), and preloads smoothly without layout shift.
 - [ ] **🎙️ Audio Verdicts:** Both `public/audio/[slug]-verdict-en.mp3` (`en-US-AriaNeural`) and `public/audio/[slug]-verdict-hi.mp3` (`hi-IN-SwaraNeural`) are generated, tested, and referenced in `<AudioVerdictPlayer />`.
 - [ ] **🧮 CPU Calculator:** `<CostPerUseCalculator />` is embedded with tailored product economics, localized currencies (`$` for EN, `₹` for HI), and realistic lifespans.
 - [ ] **🛒 Amazon Box Tested:** Store button functions cleanly with geo-routing and the `isitspecial-21` tag; Copy Verdict button works.
