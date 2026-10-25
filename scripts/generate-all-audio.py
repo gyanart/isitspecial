@@ -1,8 +1,28 @@
 import asyncio
 import edge_tts
 import os
+import shutil
 
 SCRIPTS = {
+    "le-creuset-dutch-oven": {
+        "en": (
+            "Is a four hundred and twenty dollar Le Creuset Dutch oven actually special, or just culinary vanity? "
+            "Here is the verdict. Le Creuset is genuinely special. "
+            "Its sand cast iron and vitreous glass enamel fused at eight hundred degrees Celsius create near permanent thermal stability "
+            "and acid resistance that cheap supermarket alternatives cannot match. "
+            "Over twenty years of weekly cooking, it costs roughly forty cents per meal. "
+            "If you cook slow braises, stews, or crusty artisan bread, it is an heirloom purchase that will outlive you. "
+            "Final score: 9.3 out of 10. True Gem."
+        ),
+        "hi": (
+            "क्या पैंतीस हजार रुपये का ले क्रूसेट डच ओवन सचमुच खास है या सिर्फ दिखावा? "
+            "यहाँ है हमारा निष्पक्ष फैसला। ले क्रूसेट सचमुच एक खास बर्तन है। "
+            "आठ सौ डिग्री सेल्सियस पर पिघलाए गए कांच की विट्रियस इनेमल कोटिंग इसे सालों साल टूटने और चटकने से बचाती है। "
+            "बीस साल के उपयोग में इसका खर्च प्रति भोजन केवल चालीस पैसे आता है। "
+            "यदि आप धीमी आंच पर मटन, दम बिरयानी या क्रस्टी ब्रेड बनाते हैं तो यह पीढ़ियों तक चलने वाला नायाब निवेश है। "
+            "फाइनल स्कोर: दस में से 9.3। एक सच्चा नगीना।"
+        )
+    },
     "aeropress-coffee-maker": {
         "en": (
             "Is the forty dollar AeroPress coffee maker actually special, or just plastic hype? "
@@ -168,22 +188,30 @@ SCRIPTS = {
     }
 }
 
-async def generate_audio():
+FEMALE_VOICE_EN = "en-US-AriaNeural" # Expressive, natural, warm American female broadcaster
+FEMALE_VOICE_HI = "hi-IN-SwaraNeural" # Clear, articulate, natural conversational Hindi female broadcaster
+
+async def generate_all_female_audio():
     os.makedirs("public/audio", exist_ok=True)
     for slug, langs in SCRIPTS.items():
         # English
         en_file = f"public/audio/{slug}-verdict-en.mp3"
-        print(f"Generating EN audio for {slug}...")
-        comm_en = edge_tts.Communicate(langs["en"], "en-US-ChristopherNeural", rate="-2%")
+        print(f"Generating EN female voice for {slug} using {FEMALE_VOICE_EN}...")
+        comm_en = edge_tts.Communicate(langs["en"], FEMALE_VOICE_EN, rate="-2%")
         await comm_en.save(en_file)
         print(f"✓ Saved {en_file}")
 
         # Hindi
         hi_file = f"public/audio/{slug}-verdict-hi.mp3"
-        print(f"Generating HI audio for {slug}...")
-        comm_hi = edge_tts.Communicate(langs["hi"], "hi-IN-MadhurNeural")
+        print(f"Generating HI female voice for {slug} using {FEMALE_VOICE_HI}...")
+        comm_hi = edge_tts.Communicate(langs["hi"], FEMALE_VOICE_HI)
         await comm_hi.save(hi_file)
         print(f"✓ Saved {hi_file}")
 
+        # If slug is le-creuset-dutch-oven, also write to the legacy alias
+        if slug == "le-creuset-dutch-oven":
+            shutil.copyfile("public/audio/le-creuset-dutch-oven-verdict-en.mp3", "public/audio/le-creuset-verdict-en.mp3")
+            shutil.copyfile("public/audio/le-creuset-dutch-oven-verdict-hi.mp3", "public/audio/le-creuset-verdict-hi.mp3")
+
 if __name__ == "__main__":
-    asyncio.run(generate_audio())
+    asyncio.run(generate_all_female_audio())
