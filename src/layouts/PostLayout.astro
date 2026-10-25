@@ -99,6 +99,7 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
   image={heroImage}
   lang={lang}
   translationUrl={translationUrl}
+  preloadImage={heroImage}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -221,6 +222,10 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
           alt={heroImageAlt || title} 
           class="w-full h-[280px] sm:h-[440px] md:h-[500px] object-cover" 
           loading="eager"
+          decoding="sync"
+          fetchpriority="high"
+          width="1200"
+          height="675"
         />
       </div>
     )}

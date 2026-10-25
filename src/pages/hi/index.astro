@@ -12,7 +12,7 @@ const posts = (await getCollection('blog'))
   .filter(p => p.data.lang === 'hi' || p.id.startsWith('hi/'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const heroLcpImage = (posts[0]?.data.heroImage || '/images/casio-f91w.jpg').replace(/\.jpg$/, '.webp');
+const heroLcpImage = posts[0]?.data.heroImage || '/images/casio-f91w.webp';
 
 const categories = [
   {

@@ -13,7 +13,7 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const featuredPost = posts.find(p => p.data.featured) || posts[0];
-const heroLcpImage = (posts[0]?.data.heroImage || '/images/casio-f91w.jpg').replace(/\.jpg$/, '.webp');
+const heroLcpImage = posts[0]?.data.heroImage || '/images/casio-f91w.webp';
 
 // Category metadata with cover imagery for the 4-card catalog grid
 const categories = [
