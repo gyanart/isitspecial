@@ -55,45 +55,45 @@ const slides = posts.slice(0, 6).map(p => {
 });
 ---
 
-<div class="relative w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto hero-slider-root select-none">
+<div class="relative w-full max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-none mx-auto hero-slider-root select-none">
   
   <!-- Browser Window Mockup Frame Header (User Inspired) -->
-  <div class="flex items-center justify-between px-4 sm:px-5 py-3 bg-white border-t border-x border-[#dce5dd] rounded-t-3xl shadow-xs">
+  <div class="flex items-center justify-between px-4 sm:px-6 py-3.5 bg-white border-t border-x border-[#dce5dd] rounded-t-3xl shadow-xs">
     <!-- Left: 3 Mac-Style Window Dots -->
-    <div class="flex items-center space-x-1.5 shrink-0">
-      <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] border border-[#e0443e]/40 inline-block"></span>
-      <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] border border-[#dea123]/40 inline-block"></span>
-      <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] border border-[#1aab29]/40 inline-block"></span>
+    <div class="flex items-center space-x-2 shrink-0">
+      <span class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]/50 inline-block shadow-2xs"></span>
+      <span class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]/50 inline-block shadow-2xs"></span>
+      <span class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]/50 inline-block shadow-2xs"></span>
     </div>
 
     <!-- Center: Official Logo Emblem + Editor's Choice Title -->
-    <div class="flex items-center space-x-2 min-w-0 px-2">
+    <div class="flex items-center space-x-2.5 min-w-0 px-2">
       <img 
         src="/logo.webp" 
         alt="Is It Special Logo" 
-        class="w-5 h-5 rounded-full object-contain shadow-2xs shrink-0" 
-        width="20" 
-        height="20"
+        class="w-5 sm:w-6 h-5 sm:h-6 rounded-full object-contain shadow-2xs shrink-0" 
+        width="24" 
+        height="24"
         loading="eager"
       />
-      <span class="font-extrabold text-[11px] sm:text-xs uppercase tracking-wider text-[#14241c] truncate font-mono">
-        {isHi ? "संपादक की पसंद • ताज़ा समीक्षाएं" : "EDITOR'S CHOICE • LATEST 6"}
+      <span class="font-bold text-xs sm:text-sm uppercase tracking-wide text-[#14241c] truncate font-sans">
+        {isHi ? "संपादक की पसंद • ताज़ा 6 समीक्षाएं" : "EDITOR'S CHOICE • LATEST 6"}
       </span>
     </div>
 
     <!-- Right: Active Slide Counter Pill -->
     <div class="shrink-0">
-      <span class="slider-counter text-[10px] sm:text-[11px] font-mono font-extrabold text-[#15803d] bg-[#eaf5eb] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">
+      <span class="slider-counter text-[11px] sm:text-xs font-mono font-black text-[#15803d] bg-[#eaf5eb] px-3 py-1 rounded-full border border-[#bbf7d0] shadow-2xs">
         1 / {slides.length}
       </span>
     </div>
   </div>
 
   <!-- Browser Window Card Body -->
-  <div class="relative bg-white border border-[#dce5dd] rounded-b-3xl shadow-xl p-3 sm:p-4 overflow-visible">
+  <div class="relative bg-white border border-[#dce5dd] rounded-b-3xl shadow-xl p-3 sm:p-5 overflow-visible">
     
     <!-- Slides Track Deck -->
-    <div class="relative overflow-hidden aspect-[16/10] sm:aspect-[16/9.5] rounded-2xl bg-[#eaf5eb]">
+    <div class="relative overflow-hidden aspect-[16/10] sm:aspect-[16/10] lg:aspect-[16/11] rounded-2xl bg-[#eaf5eb]">
       {slides.map((slide, idx) => (
         <article 
           class={`hero-slide absolute inset-0 transition-all duration-500 ease-out flex flex-col justify-end ${
@@ -114,38 +114,38 @@ const slides = posts.slice(0, 6).map(p => {
             />
             
             <!-- High-Contrast Dark Editorial Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent"></div>
 
             <!-- Top Floating Badges -->
-            <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+            <div class="absolute top-3.5 left-3.5 right-3.5 sm:top-4 sm:left-4 sm:right-4 flex items-center justify-between pointer-events-none">
               <!-- Score Badge -->
-              <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#15803d] text-white shadow-md flex items-center space-x-1 border border-white/20 backdrop-blur-xs">
+              <span class="px-3.5 py-1.5 rounded-full text-xs sm:text-[13px] font-bold bg-[#15803d] text-white shadow-md flex items-center space-x-1.5 border border-white/20 backdrop-blur-xs">
                 <span>★</span>
                 <span>{slide.specialVerdict}</span>
                 <span class="opacity-90">({slide.specialScore.toFixed(1)}/10)</span>
               </span>
 
               <!-- Origin Country Pill -->
-              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-black/60 text-white backdrop-blur-md border border-white/20 shadow-xs">
+              <span class="px-3 py-1.5 rounded-full text-xs sm:text-[12px] font-semibold bg-black/65 text-white backdrop-blur-md border border-white/20 shadow-xs">
                 {slide.origin.flag} {isHi ? slide.origin.labelHi : slide.origin.labelEn}
               </span>
             </div>
 
             <!-- Bottom Content Overlaid on Card -->
-            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 space-y-1 sm:space-y-1.5 text-white pointer-events-none">
-              <div class="flex items-center space-x-2 text-[10px] sm:text-[11px] font-semibold">
+            <div class="absolute bottom-3.5 left-3.5 right-3.5 sm:bottom-5 sm:left-5 sm:right-5 space-y-1.5 sm:space-y-2 text-white pointer-events-none">
+              <div class="flex items-center space-x-2 text-[11px] sm:text-xs font-semibold">
                 <span class="uppercase tracking-widest text-[#86efac] font-mono">{slide.category}</span>
                 <span class="text-white/40">&bull;</span>
-                <span class="inline-flex items-center space-x-1 text-white/90 bg-white/15 px-2 py-0.5 rounded-full backdrop-blur-xs">
+                <span class="inline-flex items-center space-x-1 text-white/95 bg-white/20 px-2.5 py-0.5 rounded-full backdrop-blur-xs">
                   <span>🎧</span>
                   <span>{isHi ? "ऑडियो निष्कर्ष" : "Voice Verdict"}</span>
                 </span>
                 <span class="text-white/40 hidden sm:inline">&bull;</span>
-                <span class="text-white/70 hidden sm:inline">{slide.readingTime}</span>
+                <span class="text-white/80 hidden sm:inline">{slide.readingTime}</span>
               </div>
 
               <!-- Title -->
-              <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-white leading-snug line-clamp-2 group-hover/item:text-[#86efac] transition-colors">
+              <h3 class="font-serif font-bold text-base sm:text-lg lg:text-xl text-white leading-snug line-clamp-2 group-hover/item:text-[#86efac] transition-colors">
                 {slide.title}
               </h3>
             </div>
@@ -157,7 +157,7 @@ const slides = posts.slice(0, 6).map(p => {
     <!-- Side Navigation Chevrons (User Mockup Arrow Buttons) -->
     <button 
       type="button" 
-      class="hero-prev-btn absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-lg flex items-center justify-center text-[#14241c] hover:bg-[#15803d] hover:text-white transition-all cursor-pointer z-30 group active:scale-95" 
+      class="hero-prev-btn absolute -left-3.5 sm:-left-5 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-lg flex items-center justify-center text-[#14241c] hover:bg-[#15803d] hover:text-white transition-all cursor-pointer z-30 group active:scale-95" 
       aria-label={isHi ? "पिछली समीक्षा" : "Previous slide"}
       title={isHi ? "पिछली समीक्षा" : "Previous"}
     >
@@ -168,7 +168,7 @@ const slides = posts.slice(0, 6).map(p => {
 
     <button 
       type="button" 
-      class="hero-next-btn absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-lg flex items-center justify-center text-[#14241c] hover:bg-[#15803d] hover:text-white transition-all cursor-pointer z-30 group active:scale-95" 
+      class="hero-next-btn absolute -right-3.5 sm:-right-5 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-lg flex items-center justify-center text-[#14241c] hover:bg-[#15803d] hover:text-white transition-all cursor-pointer z-30 group active:scale-95" 
       aria-label={isHi ? "अगली समीक्षा" : "Next slide"}
       title={isHi ? "अगली समीक्षा" : "Next"}
     >
@@ -178,12 +178,12 @@ const slides = posts.slice(0, 6).map(p => {
     </button>
 
     <!-- Interactive Pagination Dots (User Mockup Dots) -->
-    <div class="flex items-center justify-center space-x-1.5 pt-3.5 pb-1">
+    <div class="flex items-center justify-center space-x-2 pt-4 pb-1">
       {slides.map((_, i) => (
         <button 
           type="button" 
-          class={`hero-dot h-2 rounded-full transition-all duration-300 cursor-pointer ${
-            i === 0 ? 'w-6 bg-[#15803d]' : 'w-2 bg-[#dce5dd] hover:bg-[#15803d]/50'
+          class={`hero-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+            i === 0 ? 'w-8 bg-[#15803d]' : 'w-2.5 bg-[#dce5dd] hover:bg-[#15803d]/50'
           }`}
           data-dot-index={i} 
           aria-label={isHi ? `समीक्षा ${i + 1} पर जाएं` : `Go to slide ${i + 1}`}
