@@ -161,57 +161,46 @@ const verdictTheme = isOverhyped
     </div>
   )}
 
-  <!-- Modern High-Contrast Affiliate Callout with Crisp Vector SVG Icons -->
+  <!-- Modern High-Contrast Affiliate Callout with Clean Structured Layout -->
   {effectiveAffiliateUrl && (
-    <div class="mt-7 pt-6 border-t border-zinc-200/90 flex flex-col sm:flex-row items-center justify-between gap-5 bg-zinc-950 text-white p-5 sm:p-6 rounded-2xl shadow-lg">
+    <div class="mt-8 pt-6 border-t border-zinc-200/90 bg-zinc-950 text-white p-6 sm:p-7 rounded-2xl shadow-xl not-prose space-y-4">
       
-      <!-- Left Info: Store Vector Logo + Title -->
-      <div class="text-xs space-y-1.5 text-center sm:text-left flex-1 min-w-0">
-        <div class="flex items-center justify-center sm:justify-start space-x-2.5">
-          {affiliateStore.toLowerCase() === 'amazon' ? (
-            <div class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 inline-flex items-center space-x-1.5 shadow-inner">
-              <svg class="h-4 w-4 shrink-0" viewBox="0 0 448 512" fill="none">
-                <path fill="#ffffff" d="M257.2 162.7c-48.7 1.8-169.5 15.5-169.5 117.5c0 109.5 138.3 114 183.5 43.2c6.5 10.2 35.4 37.5 45.3 46.8l56.8-56S341 288.9 341 261.4V114.3C341 89 316.5 32 228.7 32C140.7 32 94 87 94 136.3l73.5 6.8c16.3-49.5 54.2-49.5 54.2-49.5c40.7-.1 35.5 29.8 35.5 69.1m0 86.8c0 80-84.2 68-84.2 17.2c0-47.2 50.5-56.7 84.2-57.8z"/>
-                <path fill="#FF9900" d="M393.2 413c-7.7 10-70 67-174.5 67S34.2 408.5 9.7 379c-6.8-7.7 1-11.3 5.5-8.3C88.5 415.2 203 488.5 387.7 401c7.5-3.7 13.3 2 5.5 12z"/>
-                <path fill="#FF9900" d="M433 415.2c-6.5 15.8-16 26.8-21.2 31c-5.5 4.5-9.5 2.7-6.5-3.8s19.3-46.5 12.7-55c-6.5-8.3-37-4.3-48-3.2c-10.8 1-13 2-14-.3c-2.3-5.7 21.7-15.5 37.5-17.5c15.7-1.8 41-.8 46 5.7c3.7 5.1 0 27.1-6.5 43.1z"/>
-              </svg>
-              <span class="font-extrabold tracking-wide text-xs text-white">
-                amazon<span class="text-amber-400 font-bold" data-amazon-tld>{isHi ? '.in' : ''}</span>
-              </span>
-            </div>
-          ) : (
-            <div class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 inline-flex items-center space-x-1.5 shadow-inner">
-              <svg class="h-3.5 w-3.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-              </svg>
-              <span class="font-extrabold tracking-wide text-xs text-white">
-                {affiliateStore}
-              </span>
-            </div>
-          )}
+      <!-- Top Row: Amazon Logo Pill + Check Real-Time Pricing & Stock Headline -->
+      <div class="flex flex-wrap items-center gap-3">
+        {affiliateStore.toLowerCase() === 'amazon' ? (
+          <div class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 inline-flex items-center space-x-1.5 shadow-inner shrink-0">
+            <!-- Amazon Vector Smile Logo -->
+            <svg class="h-4 w-4 shrink-0" viewBox="0 0 448 512" fill="none">
+              <path fill="#ffffff" d="M257.2 162.7c-48.7 1.8-169.5 15.5-169.5 117.5c0 109.5 138.3 114 183.5 43.2c6.5 10.2 35.4 37.5 45.3 46.8l56.8-56S341 288.9 341 261.4V114.3C341 89 316.5 32 228.7 32C140.7 32 94 87 94 136.3l73.5 6.8c16.3-49.5 54.2-49.5 54.2-49.5c40.7-.1 35.5 29.8 35.5 69.1m0 86.8c0 80-84.2 68-84.2 17.2c0-47.2 50.5-56.7 84.2-57.8z"/>
+              <path fill="#FF9900" d="M393.2 413c-7.7 10-70 67-174.5 67S34.2 408.5 9.7 379c-6.8-7.7 1-11.3 5.5-8.3C88.5 415.2 203 488.5 387.7 401c7.5-3.7 13.3 2 5.5 12z"/>
+              <path fill="#FF9900" d="M433 415.2c-6.5 15.8-16 26.8-21.2 31c-5.5 4.5-9.5 2.7-6.5-3.8s19.3-46.5 12.7-55c-6.5-8.3-37-4.3-48-3.2c-10.8 1-13 2-14-.3c-2.3-5.7 21.7-15.5 37.5-17.5c15.7-1.8 41-.8 46 5.7c3.7 5.1 0 27.1-6.5 43.1z"/>
+            </svg>
+            <span class="font-extrabold tracking-wide text-xs text-white">
+              amazon
+            </span>
+          </div>
+        ) : (
+          <div class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 inline-flex items-center space-x-1.5 shadow-inner shrink-0">
+            <svg class="h-3.5 w-3.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+            <span class="font-extrabold tracking-wide text-xs text-white">
+              {affiliateStore}
+            </span>
+          </div>
+        )}
 
-          <span class="font-bold text-sm text-zinc-100">
-            {isHi ? 'मूल्य एवं उपलब्धता जांचें' : 'Check Real-Time Pricing & Stock'}
-          </span>
-        </div>
-
-        <p class="text-[11px] text-zinc-400 leading-relaxed max-w-md">
-          {isAffiliate 
-            ? (isHi 
-                ? '*पारदर्शिता: यदि आप हमारे लिंक से खरीदते हैं, तो हमें बिना किसी अतिरिक्त शुल्क के एक छोटा कमीशन मिल सकता है।' 
-                : '*Transparency: As an independent reviewer, we may earn a small referral commission at zero extra cost to you.')
-            : (isHi 
-                ? '*पारदर्शिता: यह गैर-संबद्ध सीधा लिंक है जो केवल पाठकों की सुविधा के लिए दिया गया है।' 
-                : '*Transparency: Direct non-affiliate retailer link provided purely for reader convenience.')
-          }
-        </p>
+        <h4 class="font-bold text-sm sm:text-base text-zinc-100">
+          {isHi ? 'मूल्य एवं उपलब्धता जांचें' : 'Check Real-Time Pricing & Stock'}
+        </h4>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center gap-2.5 w-full sm:w-auto">
+      <!-- Action Buttons Row: [ Copy Verdict ] [ Check Price on Amazon → ] -->
+      <div class="flex flex-col sm:flex-row items-center gap-3 pt-1">
         <!-- 1-Click Copy Quick Verdict Button for WhatsApp & Socials -->
         <button 
           type="button"
-          class="copy-quick-verdict-btn w-full sm:w-auto px-4 py-3.5 rounded-xl bg-white border border-[#dce5dd] hover:border-[#15803d] text-[#14241c] hover:text-[#15803d] text-xs font-bold transition-all shadow-2xs hover:shadow-xs flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
+          class="copy-quick-verdict-btn w-full sm:w-auto px-5 py-3 rounded-xl bg-white hover:bg-zinc-100 border border-[#dce5dd] text-zinc-950 font-bold text-xs transition-all shadow-xs hover:shadow-md flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
           data-score={score}
           data-verdict={verdict}
           data-product={productKeyword || "This Product"}
@@ -219,7 +208,7 @@ const verdictTheme = isOverhyped
           data-lang={lang}
           title={isHi ? 'व्हाट्सएप के लिए संक्षिप्त निष्कर्ष कॉपी करें' : 'Copy quick verdict summary for WhatsApp / Reddit'}
         >
-          <span class="copy-verdict-icon">📋</span>
+          <span class="copy-verdict-icon text-sm">📋</span>
           <span class="copy-verdict-text">{isHi ? 'निष्कर्ष कॉपी' : 'Copy Verdict'}</span>
         </button>
 
@@ -232,7 +221,7 @@ const verdictTheme = isOverhyped
           data-keyword={productKeyword}
           data-tag={defaultStoreTag}
           data-has-custom-label={affiliateLabel ? "true" : undefined}
-          class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-sm transition-all duration-200 shadow-md hover:shadow-xl flex items-center justify-center space-x-2.5 shrink-0 cursor-pointer no-underline group"
+          class="w-full sm:flex-1 sm:w-auto px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-sm transition-all duration-200 shadow-md hover:shadow-xl flex items-center justify-center space-x-2.5 shrink-0 cursor-pointer no-underline group"
           style="text-decoration: none !important; color: #09090b !important;"
         >
           <!-- Sharp Solid Black High-Visibility Shopping Cart Icon -->
@@ -243,10 +232,22 @@ const verdictTheme = isOverhyped
           </svg>
 
           <span data-affiliate-label class="tracking-tight font-black" style="color: #09090b !important;">
-            {affiliateLabel || (isHi ? `${affiliateStore} पर देखें →` : `Check Price on ${affiliateStore} →`)}
+            {affiliateLabel || (isHi ? `अमेज़न पर देखें →` : `Check Price on Amazon →`)}
           </span>
         </a>
       </div>
+
+      <!-- Bottom Disclaimer: Full Width, Non-Squished -->
+      <p class="text-[11px] text-zinc-400 leading-relaxed pt-2 border-t border-zinc-800/80">
+        {isAffiliate 
+          ? (isHi 
+              ? '*पारदर्शिता: यदि आप हमारे लिंक से खरीदते हैं, तो हमें बिना किसी अतिरिक्त शुल्क के एक छोटा कमीशन मिल सकता है।' 
+              : '*Transparency: As an independent reviewer, we may earn a small referral commission at zero extra cost to you.')
+          : (isHi 
+              ? '*पारदर्शिता: यह गैर-संबद्ध सीधा लिंक है जो केवल पाठकों की सुविधा के लिए दिया गया है।' 
+              : '*Transparency: Direct non-affiliate retailer link provided purely for reader convenience.')
+        }
+      </p>
 
     </div>
   )}
@@ -313,21 +314,15 @@ const verdictTheme = isOverhyped
           // Rewrite URL to reader's localized Amazon storefront
           btn.href = 'https://www.amazon.' + tld + '/s?k=' + encodeURIComponent(keyword) + '&tag=' + tag;
 
-          // Update visible Amazon storefront badge (e.g. amazon.in, amazon.co.uk)
-          var badge = card.querySelector('[data-amazon-tld]');
-          if (badge) {
-            badge.textContent = storeSuffix;
-          }
-
-          // Update button text if no custom hardcoded label was assigned
+          // Update button text if no custom hardcoded label was assigned (clean without .in suffix)
           var hasCustomLabel = btn.getAttribute('data-has-custom-label') === 'true';
           var btnText = card.querySelector('[data-affiliate-label]');
           var isHindi = card.getAttribute('data-lang') === 'hi';
 
           if (btnText && !hasCustomLabel) {
             btnText.textContent = isHindi 
-              ? 'अमेज़न (Amazon' + storeSuffix + ') पर देखें →' 
-              : 'Check Price on Amazon' + storeSuffix + ' →';
+              ? 'अमेज़न पर देखें →' 
+              : 'Check Price on Amazon →';
           }
         });
       }
