@@ -443,3 +443,63 @@ Before any batch is committed or pushed to production:
 - [ ] **Pipeline Updated:** Update [TASKS.md](file:///d:/_Anti-Gravity/_isitspecial/TASKS.md) status to 🟢 `LIVE`.
 - [ ] **AI Directory:** Append entry to [`public/llms.txt`](file:///d:/_Anti-Gravity/_isitspecial/public/llms.txt).
 - [ ] **Git Discipline:** Commit with clean milestone message.
+
+---
+
+## 11. Multi-Scene Video Production Engine (12-Scene Modular Video Standard)
+
+To power high-velocity visual discovery on YouTube Shorts, Instagram Reels, and long-form video platforms, every published article on `isitspecial.com` must be structured into an automated **12-scene modular video production package**.
+
+Each scene is designed as a standalone **10-second micro-story** (12 scenes = 120 seconds / 2 minutes total), which can be published as:
+1. **12 Individual Vertical Micro-Shorts (9:16)** for rapid audience discovery and high view counts.
+2. **A Unified 16:9 Widescreen Video Essay (2 Minutes)** with cinematic motion, on-screen text, voiceover, and SFX.
+
+### 📐 Visual Asset Standards for Video
+* **Aspect Ratio:** Strictly `16:9` widescreen banner (`1920 × 1080 px` or `3840 × 2160 px` 4K).
+* **Format:** **100% Maximum Quality JPEG** (`.jpg`) with `subsampling=0` (4:4:4 sampling, ~1 MB per image).
+  > **Note:** Modern `.webp @ 70%` is reserved exclusively for web browser delivery to achieve sub-second page loads. Video generation models (Google Omni Flash, Veo, Runway, Kling) require uncompressed 100% JPEG starting frames to prevent video compression artifacts.
+* **Storage Location:** `public/images/[slug]-scene-[01-12]-[name].jpg`.
+
+### 🎞️ The Standard 12-Scene Narrative Blueprint
+Every review must adhere to this exact 12-beat storytelling arc:
+
+| Scene # | Narrative Beat | Core Focus | Visual Style |
+| :---: | :--- | :--- | :--- |
+| **01** | **The Luxury Paradox** | $15,000+ luxury industry standard vs. affordable utilitarian underdog. | Split-composition commercial studio shot. |
+| **02** | **The Inventor & Origin** | Historical engineering origin (Stanford lab, aerospace, patent breakthrough). | Nostalgic workshop blueprints, calipers, prototype. |
+| **03** | **Global Verification** | World championship, international cult following, museum collection. | High-energy event stage or gallery spotlight. |
+| **04** | **The Physics Flaw of Status Quo** | Why traditional methods fail (channeling, thermal loss, bitter acids). | Microscopic flow visualization, high-speed physics. |
+| **05** | **Micro-Engineering Innovation** | Core structural breakthrough (total immersion, tolerances, airtight seal). | Clear chamber bloom, luminous macro fluid dynamics. |
+| **06** | **Thermodynamic Chemistry** | Exact temperature & extraction kinetics (e.g. 80°C sub-boiling chemistry). | Analog thermometer gauge, kettle pour, rising steam. |
+| **07** | **Pressure & Mechanical Dynamics** | Physics of the hand/lever force (e.g. 0.75 bar air pocket compression). | Slow-motion descending plunger, rich concentrate stream. |
+| **08** | **Filtration & Purity Membrane** | Separation of unwanted compounds (diterpenes, fines, zero sludge). | Side-by-side backlit liquid clarity comparison. |
+| **09** | **Materials Science & Durability** | Drop-resistance, food-grade polymer/metal, zero electronic parts. | Outdoor rugged backpack, granite summit, indestructible. |
+| **10** | **The 3-Second Maintenance Ritual**| Effortless cleanup, squeegee action, dry puck ejection. | High-speed slow-motion pop into compost bin. |
+| **11** | **Cost-Per-Use (CPU) Equation** | Mathematical economics vs. disposable pods/competitors over 15 years. | Clean marble desk, cost breakdown graphic, bean jar. |
+| **12** | **The Special Score & Verdict** | Final verdict, authoritative Special Score out of 10, heirloom status. | Golden-hour hero beauty shot, glowing score badge. |
+
+### 🎙️ Voiceover Script & Pacing Rules
+* **Exact Duration:** 10 seconds per scene.
+* **Word Budget:** **20 to 25 spoken words** (speaking cadence of ~130–140 words per minute).
+* **Audio Voiceover Pairing:** Generated via Edge-TTS (`en-US-AriaNeural` and `hi-IN-SwaraNeural`) or ElevenLabs.
+* **Metadata Requirements:** Every scene must include:
+  1. Spoken voiceover text (English & Hindi)
+  2. Video generation prompt (Omni Flash / Veo optimized)
+  3. Camera movement directive (dolly, probe push-in, orbital tilt)
+  4. On-screen graphic text (OST)
+  5. Sound effects (SFX) cues
+
+### 🤖 Automated Video Generation via Google Omni Flash API
+Once the 12 starting frame JPEGs and prompts are authored, automated batch rendering executes through `scripts/video/generate_video.py` or article-specific runners:
+```bash
+python scripts/video/generate_video.py "<PROMPT>" \
+  --first-frame "public/images/[slug]-scene-01.jpg" \
+  --aspect-ratio "16:9" \
+  --resolution "1080p" \
+  --duration 10 \
+  --output "public/videos/[slug]-scene-01.mp4"
+```
+Or in batch mode using `jobs.json` with concurrency:
+```bash
+python scripts/video/generate_video.py --batch jobs.json --concurrency 3
+```
