@@ -28,7 +28,7 @@ const currentYear = new Date().getFullYear();
     </a>
 
     <!-- Mission Tagline -->
-    <p class="max-w-md text-xs sm:text-sm text-[#14241c]/65 leading-relaxed font-normal">
+    <p class="max-w-md text-xs sm:text-sm text-[#14241c]/80 leading-relaxed font-normal">
       {lang === 'hi' 
         ? 'वायरल मार्केटिंग और सतही ट्रेंड्स के खिलाफ एक निष्पक्ष, स्वतंत्र समीक्षा कैटालॉग। सभी परीक्षण बिना किसी प्रायोजन के किए जाते हैं।'
         : 'An unfiltered consumer critique catalog with unvarnished verdicts and zero sponsor influence. Real objects tested with confidence.'
@@ -48,7 +48,7 @@ const currentYear = new Date().getFullYear();
           name="email" 
           required 
           placeholder={lang === 'hi' ? 'ईमेल द्वारा साप्ताहिक अपडेट्स पाएं...' : 'Get weekly teardowns in your inbox...'} 
-          class="w-full px-4 py-2.5 rounded-full border border-[#dce5dd] text-xs bg-white text-[#14241c] placeholder-[#14241c]/45 focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all shadow-2xs"
+          class="w-full px-4 py-2.5 rounded-full border border-[#dce5dd] text-xs bg-white text-[#14241c] placeholder-[#14241c]/65 focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all shadow-2xs"
         />
         <button 
           type="submit" 
@@ -60,7 +60,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Navigation & AdSense Mandatory Compliance Links (Pill Style) -->
-    <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2.5 text-xs font-medium text-[#14241c]/75">
+    <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2.5 text-xs font-medium text-[#14241c]/85">
       <a href={lang === 'hi' ? '/hi' : '/'} class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'होम' : 'Home'}</a>
       <a href={lang === 'hi' ? '/hi#categories' : '/#categories'} class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'कैटालॉग' : 'The Catalog'}</a>
       <a href="/about" class="hover:text-[#15803d] transition-colors">{lang === 'hi' ? 'परीक्षण मानक' : 'Our Criteria'}</a>
@@ -72,16 +72,16 @@ const currentYear = new Date().getFullYear();
     </nav>
 
     <!-- Bottom Copyright & Amazon Disclosure -->
-    <div class="pt-6 border-t border-[#dce5dd]/60 w-full flex flex-col items-center text-[11px] text-[#14241c]/50 gap-2">
-      <p class="text-[11.5px] text-[#14241c]/60 max-w-xl mx-auto">
+    <div class="pt-6 border-t border-[#dce5dd]/60 w-full flex flex-col items-center text-[11px] text-[#14241c]/75 gap-2">
+      <p class="text-[11.5px] text-[#14241c]/80 max-w-xl mx-auto">
         {lang === 'hi' 
           ? 'एक अमेज़न एसोसिएट के रूप में, isitspecial.com योग्य खरीदारियों से कमीशन अर्जित करता है।' 
           : 'As an Amazon Associate, isitspecial.com earns from qualifying purchases.'}
       </p>
-      <div class="w-full flex flex-col sm:flex-row justify-between items-center pt-2 text-[11px] text-[#14241c]/45 gap-2">
+      <div class="w-full flex flex-col sm:flex-row justify-between items-center pt-2 text-[11px] text-[#14241c]/75 gap-2">
         <p>&copy; {currentYear} isitspecial.com. All rights reserved.</p>
         <p>
-          {lang === 'hi' ? 'वेबसाइट डिज़ाइन:' : 'Website Design by'} <a href="https://www.gyanart.com" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#14241c]/70 hover:text-[#15803d] transition-colors underline decoration-[#dce5dd] underline-offset-2">GyanArt</a>
+          {lang === 'hi' ? 'वेबसाइट डिज़ाइन:' : 'Website Design by'} <a href="https://www.gyanart.com" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#14241c]/85 hover:text-[#15803d] transition-colors underline decoration-[#dce5dd] underline-offset-2">GyanArt</a>
         </p>
       </div>
     </div>

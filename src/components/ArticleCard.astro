@@ -60,12 +60,18 @@ const articleUrl = isHi ? `/hi/blog/${cleanSlug}` : `/blog/${cleanSlug}`;
   <!-- Top Thumbnail Container with Origin Badge & Favorite Heart -->
   <div class="relative m-3.5 mb-0 rounded-2xl overflow-hidden aspect-[16/10] bg-[#eaf5eb]">
     {heroImage ? (
-      <img 
-        src={heroImage} 
-        alt={title} 
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-        loading="lazy" 
-      />
+      <picture>
+        <source srcset={heroImage.replace(/\.jpg$/, '.webp')} type="image/webp" />
+        <img 
+          src={heroImage} 
+          alt={title} 
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+          loading="lazy" 
+          decoding="async"
+          width="400"
+          height="250"
+        />
+      </picture>
     ) : (
       <div class="w-full h-full flex items-center justify-center text-[#15803d] font-bold">
         Is It Special?
@@ -130,7 +136,7 @@ const articleUrl = isHi ? `/hi/blog/${cleanSlug}` : `/blog/${cleanSlug}`;
       <div class="flex items-center space-x-1 font-bold text-[#15803d] font-serif text-sm">
         <span class="text-amber-500 text-xs">★</span>
         <span>{specialScore.toFixed(1)}</span>
-        <span class="text-[10px] text-[#14241c]/50 font-sans font-normal">/10</span>
+        <span class="text-[10px] text-[#14241c]/75 font-sans font-normal">/10</span>
       </div>
     </div>
 

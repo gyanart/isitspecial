@@ -12,29 +12,31 @@ const posts = (await getCollection('blog'))
   .filter(p => p.data.lang === 'hi' || p.id.startsWith('hi/'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
+const heroLcpImage = (posts[0]?.data.heroImage || '/images/casio-f91w.jpg').replace(/\.jpg$/, '.webp');
+
 const categories = [
   {
     name: 'रोजमर्रा के अजूबे',
     count: '2 समीक्षाएं',
-    image: '/images/casio-f91w.jpg',
+    image: '/images/casio-f91w.webp',
     href: '/hi#articles',
   },
   {
     name: 'हाइप बनाम हकीकत',
     count: '1 समीक्षा',
-    image: '/images/stanley-tumbler.jpg',
+    image: '/images/stanley-tumbler.webp',
     href: '/hi#articles',
   },
   {
     name: 'शिल्प एवं विरासत',
     count: '1 समीक्षा',
-    image: '/images/lodge-cast-iron.jpg',
+    image: '/images/lodge-cast-iron.webp',
     href: '/hi#articles',
   },
   {
     name: 'औद्योगिक डिज़ाइन',
     count: '1 समीक्षा',
-    image: '/images/bic-pen.jpg',
+    image: '/images/bic-pen.webp',
     href: '/hi#articles',
   },
 ];
@@ -45,6 +47,7 @@ const categories = [
   description="वायरल उत्पादों, रोजमर्रा की तकनीक और शिल्प कौशल की निष्पक्ष, गहन समीक्षाएं। हम बताते हैं कि क्या कोई चीज़ वाकई आपके पैसे के लायक है।"
   lang="hi"
   translationUrl="/"
+  preloadImage={heroLcpImage}
 >
   
   <!-- Fixed Floating Share Dock (Right Side, Vertically Centered) -->
@@ -87,7 +90,7 @@ const categories = [
           <!-- Search Bar -->
           <div class="max-w-md">
             <form action="#articles" method="get" class="relative flex items-center bg-white rounded-full border border-[#dce5dd] shadow-sm p-1.5 focus-within:border-[#15803d] focus-within:ring-2 focus-within:ring-[#15803d]/20 transition-all">
-              <div class="pl-4 text-[#14241c]/40">
+              <div class="pl-4 text-[#14241c]/60">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <circle cx="11" cy="11" r="8"></circle>
                   <path d="m21 21-4.3-4.3"></path>
@@ -96,7 +99,7 @@ const categories = [
               <input 
                 type="text" 
                 placeholder="खोजें 'कैसिओ', 'स्टैनली', 'कास्ट आयरन'..." 
-                class="w-full bg-transparent px-3 py-2 text-sm text-[#14241c] placeholder-[#14241c]/40 focus:outline-none"
+                class="w-full bg-transparent px-3 py-2 text-sm text-[#14241c] placeholder-[#14241c]/60 focus:outline-none"
               />
               <button 
                 type="submit" 
@@ -107,8 +110,8 @@ const categories = [
             </form>
 
             <!-- Popular Quick Keywords -->
-            <div class="mt-3 flex items-center flex-wrap gap-2 text-xs text-[#14241c]/60">
-              <span class="font-extrabold uppercase tracking-wider text-[10px] text-[#14241c]/40 font-mono">लोकप्रिय:</span>
+            <div class="mt-3 flex items-center flex-wrap gap-2 text-xs text-[#14241c]/80">
+              <span class="font-extrabold uppercase tracking-wider text-[10px] text-[#14241c]/75 font-mono">लोकप्रिय:</span>
               <a href="/hi/blog/casio-f91w-watch-masterpiece" class="px-2.5 py-0.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] hover:text-[#15803d] transition-colors">कैसिओ</a>
               <a href="/hi/blog/stanley-tumbler-hype" class="px-2.5 py-0.5 rounded-full bg-white border border-[#dce5dd] hover:border-[#15803d] hover:text-[#15803d] transition-colors">स्टैनली</a>
             </div>
@@ -120,21 +123,21 @@ const categories = [
               <span class="text-base text-[#15803d]">⚡</span>
               <div>
                 <span class="block font-bold text-sm text-[#14241c] font-serif">9.8</span>
-                <span class="text-[#14241c]/60 text-[11px]">उच्चतम स्कोर</span>
+                <span class="text-[#14241c]/80 text-[11px] font-medium">उच्चतम स्कोर</span>
               </div>
             </div>
             <div class="flex items-center space-x-2">
               <span class="text-base text-[#15803d]">🔍</span>
               <div>
                 <span class="block font-bold text-sm text-[#14241c] font-serif">{posts.length}</span>
-                <span class="text-[#14241c]/60 text-[11px]">गहन समीक्षाएं</span>
+                <span class="text-[#14241c]/80 text-[11px] font-medium">गहन समीक्षाएं</span>
               </div>
             </div>
             <div class="flex items-center space-x-2">
               <span class="text-base text-[#15803d]">🛡️</span>
               <div>
                 <span class="block font-bold text-sm text-[#14241c] font-serif">100%</span>
-                <span class="text-[#14241c]/60 text-[11px]">गैर-प्रायोजित</span>
+                <span class="text-[#14241c]/80 text-[11px] font-medium">गैर-प्रायोजित</span>
               </div>
             </div>
           </div>

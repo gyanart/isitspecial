@@ -11,6 +11,7 @@ interface Props {
   type?: 'website' | 'article';
   lang?: 'en' | 'hi';
   translationUrl?: string;
+  preloadImage?: string;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   type = 'website',
   lang = 'en',
   translationUrl,
+  preloadImage,
 } = Astro.props;
 
 const siteName = lang === 'hi' ? 'इज इट स्पेशल? (Is It Special?)' : 'Is It Special?';
@@ -89,13 +91,31 @@ const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial
     <link rel="alternate" hreflang={lang} href={fullCanonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={lang === 'en' ? fullCanonicalUrl : (fullTranslationUrl || fullCanonicalUrl)} />
 
-    <!-- Google Fonts: Bitter (Display Serif) + Inter (Clean Sans) + Devanagari (Hindi) -->
+    <!-- LCP Hero Image Preload (Eliminates Resource Discovery Delay) -->
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} type={preloadImage.endsWith('.webp') ? 'image/webp' : undefined} fetchpriority="high" />
+    )}
+
+    <!-- Non-Blocking Optimized Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link 
+      rel="preload" 
+      as="style" 
       href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" 
-      rel="stylesheet" 
     />
+    <link 
+      rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" 
+      media="print" 
+      onload="this.media='all'" 
+    />
+    <noscript>
+      <link 
+        rel="stylesheet" 
+        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" 
+      />
+    </noscript>
 
     <!-- SEO Meta Tags -->
     <title>{title}</title>

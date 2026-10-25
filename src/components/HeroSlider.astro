@@ -104,14 +104,20 @@ const slides = posts.slice(0, 6).map(p => {
           data-slide-index={idx}
         >
           <a href={slide.url} class="block h-full w-full relative group/item">
-            <!-- Hero Photo -->
-            <img 
-              src={slide.heroImage} 
-              alt={slide.title} 
-              class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-700" 
-              loading={idx === 0 ? "eager" : "lazy"} 
-              decoding="async"
-            />
+            <!-- Hero Photo with High-Performance WebP & Eager LCP Loading -->
+            <picture>
+              <source srcset={slide.heroImage.replace(/\.jpg$/, '.webp')} type="image/webp" />
+              <img 
+                src={slide.heroImage} 
+                alt={slide.title} 
+                class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-700" 
+                loading={idx === 0 ? "eager" : "lazy"} 
+                fetchpriority={idx === 0 ? "high" : "auto"}
+                decoding={idx === 0 ? "sync" : "async"}
+                width="640"
+                height="440"
+              />
+            </picture>
             
             <!-- High-Contrast Dark Editorial Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent"></div>
