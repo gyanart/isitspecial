@@ -14,6 +14,7 @@ featured: false
 translationSlug: "bialetti-moka-express"
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
 
 Found on 90% of Italian kitchen stovetops and permanently displayed in London's Science Museum and New York's MoMA, the **Bialetti Moka Express** is one of the most recognizable consumer objects in modern industrial history.
 
@@ -76,7 +77,28 @@ The Moka Express demands user technique; it does not forgive lazy brewing:
 
 ---
 
-## 4. The Special Index Breakdown
+## 4. The True Cost-Per-Use (CPU) Equation
+
+How does a $35 manual stovetop pot compare to a $160 electronic capsule pod machine over a decade of daily coffee? Let us run the actual math:
+
+<CostPerUseCalculator 
+  productName="Bialetti Moka Express (6-Cup)"
+  productPrice={35}
+  heirloomLifespanYears={25}
+  competitorName="Electronic Capsule / Pod Machine"
+  competitorPrice={160}
+  competitorLifespanYears={4}
+  unitLabel="cup"
+  unitLabelPlural="cups"
+  defaultFrequencyPerWeek={7}
+  defaultYears={10}
+  currencySymbol="$"
+  lang="en"
+/>
+
+---
+
+## 5. The Special Index Breakdown
 
 <SpecialIndexCard 
   score={9.1}
@@ -102,7 +124,7 @@ The Moka Express demands user technique; it does not forgive lazy brewing:
 
 ---
 
-## 5. The Unvarnished Verdict
+## 6. The Unvarnished Verdict
 
 In an era where modern kitchen appliances are crammed with fragile digital touchscreens, microchips, and subscription-based coffee pods engineered to break after warranty expiration, the Bialetti Moka Express stands as a triumph of honest industrial physics.
 

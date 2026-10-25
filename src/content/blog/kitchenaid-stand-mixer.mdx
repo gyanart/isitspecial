@@ -14,6 +14,7 @@ featured: false
 translationSlug: "kitchenaid-stand-mixer"
 ---
 import SpecialIndexCard from '../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../components/CostPerUseCalculator.astro';
 
 On wedding registries and kitchen design mood boards across the globe, one appliance reigns supreme: the **KitchenAid Artisan 5-Quart Stand Mixer**. Finished in glossy Empire Red, Pistachio, or Matte Cast Iron, this **\$450 machine** is as much an interior design flex as it is a culinary tool.
 
@@ -74,7 +75,28 @@ Even an industrial icon has genuine limitations you must know before spending \$
 
 ---
 
-## 4. The Special Index Breakdown
+## 4. The True Cost-Per-Use (CPU) Equation
+
+Can a $450 heavy metal mixer make financial sense over a $60 plastic mixer? Let us calculate the true lifetime economics of home baking:
+
+<CostPerUseCalculator 
+  productName="KitchenAid Artisan 5-Qt Mixer"
+  productPrice={450}
+  heirloomLifespanYears={30}
+  competitorName="Budget $60 Plastic Mixer"
+  competitorPrice={60}
+  competitorLifespanYears={3}
+  unitLabel="bake"
+  unitLabelPlural="bakes"
+  defaultFrequencyPerWeek={2}
+  defaultYears={20}
+  currencySymbol="$"
+  lang="en"
+/>
+
+---
+
+## 5. The Special Index Breakdown
 
 <SpecialIndexCard 
   score={9.2}
@@ -99,7 +121,7 @@ Even an industrial icon has genuine limitations you must know before spending \$
 
 ---
 
-## 5. The Unvarnished Verdict
+## 6. The Unvarnished Verdict
 
 If you only bake cookies once a Christmas, buying a \$450 KitchenAid is purely an aesthetic statement.
 

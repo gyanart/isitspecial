@@ -14,6 +14,7 @@ featured: false
 translationSlug: "kitchenaid-stand-mixer"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
 
 शादियों के गिफ्ट्स, बेकिंग स्टूडियो और मॉड्यूलर किचन डिजाइन की तस्वीरों में एक उपकरण हमेशा केंद्र में रहता है: **KitchenAid Artisan 5-Quart Stand Mixer**। अपने क्लासिक एम्पायर रेड या पेस्टल रंगों में चमकने वाली यह **$450 (भारत में ₹40,000 से ₹48,000)** की मशीन केवल एक किचन गैजेट नहीं, बल्कि इंटीरियर डिजाइन का स्टेटस सिंबल मानी जाती है।
 
@@ -74,7 +75,28 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 
 ---
 
-## 4. द स्पेशल इंडेक्स स्कोर
+## 4. वास्तविक लागत-प्रति-उपयोग (CPU) की गणित
+
+क्या ₹45,000 की भारी मेटल मशीन ₹5,000 के प्लास्टिक मिक्सर से सस्ती पड़ सकती है? आइए दीर्घकालिक बेकिंग और आटा गूंथने का गणित देखते हैं:
+
+<CostPerUseCalculator 
+  productName="KitchenAid Artisan 5-Qt मिक्सर"
+  productPrice={45000}
+  heirloomLifespanYears={30}
+  competitorName="सस्ता ₹5,000 प्लास्टिक मिक्सर"
+  competitorPrice={5000}
+  competitorLifespanYears={3}
+  unitLabel="बेकिंग"
+  unitLabelPlural="बेकिंग"
+  defaultFrequencyPerWeek={2}
+  defaultYears={20}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
+---
+
+## 5. द स्पेशल इंडेक्स स्कोर
 
 <SpecialIndexCard 
   score={9.2}
@@ -99,7 +121,7 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 
 ---
 
-## 5. अंतिम निष्पक्ष निष्कर्ष
+## 6. अंतिम निष्पक्ष निष्कर्ष
 
 यदि आप साल में केवल एक बार कुकीज बनाते हैं, तो ₹45,000 का KitchenAid खरीदना केवल काउंटर की सजावट है।
 

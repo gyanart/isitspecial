@@ -14,6 +14,7 @@ featured: false
 translationSlug: "bialetti-moka-express"
 ---
 import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
+import CostPerUseCalculator from '../../../components/CostPerUseCalculator.astro';
 
 इटली के 90% घरों के किचन में मौजूद और न्यूयॉर्क के प्रसिद्ध MoMA म्यूजियम में स्थायी रूप से प्रदर्शित **Bialetti Moka Express** आधुनिक औद्योगिक डिजाइन की सबसे पहचानी जाने वाली वस्तुओं में से एक है।
 
@@ -76,7 +77,28 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 
 ---
 
-## 4. द स्पेशल इंडेक्स स्कोर
+## 4. वास्तविक लागत-प्रति-उपयोग (CPU) की गणित
+
+क्या ₹3,500 का साधारण स्टोवटॉप पॉट ₹25,000 की फैंसी कैप्सूल मशीनों से बेहतर और किफायती है? आइए दैनिक कॉफी की वास्तविक गणित देखते हैं:
+
+<CostPerUseCalculator 
+  productName="Bialetti Moka Express (6-कप)"
+  productPrice={3500}
+  heirloomLifespanYears={25}
+  competitorName="इलेक्ट्रॉनिक कैप्सूल / पॉड मशीन"
+  competitorPrice={22000}
+  competitorLifespanYears={4}
+  unitLabel="कप"
+  unitLabelPlural="कप"
+  defaultFrequencyPerWeek={7}
+  defaultYears={10}
+  currencySymbol="₹"
+  lang="hi"
+/>
+
+---
+
+## 5. द स्पेशल इंडेक्स स्कोर
 
 <SpecialIndexCard 
   score={9.1}
@@ -102,7 +124,7 @@ import SpecialIndexCard from '../../../components/SpecialIndexCard.astro';
 
 ---
 
-## 5. अंतिम निष्पक्ष निष्कर्ष
+## 6. अंतिम निष्पक्ष निष्कर्ष
 
 ऐसे समय में जब आधुनिक किचन उपकरण नाजुक टचस्क्रीन, माइक्रोचिप्स और प्लास्टिक पॉड्स से भरे पड़े हैं जो वारंटी खत्म होते ही कूड़ा बन जाते हैं, Bialetti Moka Express ईमानदार इंडस्ट्रियल फिजिक्स की एक बड़ी जीत है।
 
