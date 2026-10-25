@@ -5,6 +5,7 @@ import ArticleCard from '../../components/ArticleCard.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import WhatsAppChannelCard from '../../components/WhatsAppChannelCard.astro';
 import FloatingShareBar from '../../components/FloatingShareBar.astro';
+import HeroSlider from '../../components/HeroSlider.astro';
 
 // Fetch Hindi blog posts sorted by pubDate descending
 const posts = (await getCollection('blog'))
@@ -57,11 +58,17 @@ const categories = [
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
         <!-- Left Hero Content -->
-        <div class="lg:col-span-7 space-y-6 text-left">
+        <div class="lg:col-span-6 space-y-6 text-left">
           
-          <!-- Top Mint Pill Badge -->
-          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#15803d] bg-[#dcfce7]/70 border border-[#bbf7d0] shadow-2xs">
-            <span class="w-2 h-2 rounded-full bg-[#15803d] animate-pulse"></span>
+          <!-- Top Mint Pill Badge with Official Logo Emblem -->
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#15803d] bg-[#dcfce7]/80 border border-[#bbf7d0] shadow-2xs">
+            <img 
+              src="/logo.webp" 
+              alt="Is It Special Logo" 
+              class="w-4 h-4 rounded-full object-cover shrink-0" 
+              width="16" 
+              height="16" 
+            />
             <span>निष्पक्ष परीक्षण &middot; द स्पेशल इंडेक्स</span>
           </div>
 
@@ -134,54 +141,9 @@ const categories = [
 
         </div>
 
-        <!-- Right Hero Floating Cards Collage -->
-        <div class="lg:col-span-5 relative flex justify-center lg:justify-end">
-          <div class="relative w-full max-w-sm sm:max-w-md">
-            
-            <!-- Main Hero Card (Casio Watch in Hindi) -->
-            <div class="relative rounded-3xl overflow-hidden bg-white border border-[#dce5dd] shadow-xl p-3 group">
-              <div class="rounded-2xl overflow-hidden aspect-[16/11] bg-[#eaf5eb] relative">
-                <img 
-                  src="/images/casio-f91w.jpg" 
-                  alt="Casio F-91W समीक्षा" 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-[#15803d] text-white shadow-md">
-                  ★ प्रमुख समीक्षा
-                </span>
-                <span class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-black/60 text-white backdrop-blur-md">
-                  जापान 🇯🇵
-                </span>
-              </div>
-              <div class="p-3 pt-4 space-y-1">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#15803d]">आधुनिक मास्टरपीस</span>
-                <h3 class="font-serif font-bold text-lg text-[#14241c] leading-snug">
-                  <a href="/hi/blog/casio-f91w-watch-masterpiece" class="hover:text-[#15803d] transition-colors">
-                    Casio F-91W: मात्र ₹1,200 की घड़ी असल में एक अमर डिज़ाइन मास्टरपीस क्यों है?
-                  </a>
-                </h3>
-              </div>
-            </div>
-
-            <!-- Floating Card -->
-            <div class="hidden sm:block absolute -bottom-6 -left-8 w-60 rounded-2xl overflow-hidden bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-2xl p-2.5 transition-transform hover:scale-105">
-              <div class="flex items-center space-x-3">
-                <img 
-                  src="/images/stanley-tumbler.jpg" 
-                  alt="Stanley Tumbler" 
-                  class="w-14 h-14 rounded-xl object-cover shrink-0"
-                />
-                <div class="min-w-0 flex-1">
-                  <span class="text-[9px] font-extrabold uppercase tracking-wider text-rose-600">हाइप बनाम हकीकत</span>
-                  <h4 class="font-serif font-bold text-xs text-[#14241c] truncate">Stanley 40 oz Tumbler</h4>
-                  <span class="inline-block mt-0.5 px-2 py-0.2 rounded-full text-[9px] font-bold bg-[#eaf5eb] text-[#15803d]">
-                    ⏱️ 5 मिनट का पाठ
-                  </span>
-                </div>
-              </div>
-            </div>
-
-          </div>
+        <!-- Right Hero Interactive Browser Slider for Latest 6 Articles -->
+        <div class="lg:col-span-6 relative flex justify-center lg:justify-end">
+          <HeroSlider posts={posts} lang="hi" />
         </div>
 
       </div>

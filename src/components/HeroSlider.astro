@@ -1,0 +1,342 @@
+---
+interface Props {
+  posts: Array<{
+    id: string;
+    data: {
+      title: string;
+      description: string;
+      category: string;
+      heroImage?: string;
+      heroImageAlt?: string;
+      specialScore: number;
+      specialVerdict: string;
+      readingTime: string;
+      translationSlug?: string;
+    };
+  }>;
+  lang?: 'en' | 'hi';
+}
+
+const { posts, lang = 'en' } = Astro.props;
+const isHi = lang === 'hi';
+
+// Origin flags for products
+const origins: Record<string, { labelEn: string; labelHi: string; flag: string }> = {
+  'casio-f91w-watch-masterpiece': { labelEn: 'Japan', labelHi: 'जापान', flag: '🇯🇵' },
+  'le-creuset-dutch-oven': { labelEn: 'France', labelHi: 'फ्रांस', flag: '🇫🇷' },
+  'kitchenaid-stand-mixer': { labelEn: 'USA', labelHi: 'अमेरिका', flag: '🇺🇸' },
+  'bialetti-moka-express': { labelEn: 'Italy', labelHi: 'इटली', flag: '🇮🇹' },
+  'aeropress-coffee-maker': { labelEn: 'USA', labelHi: 'अमेरिका', flag: '🇺🇸' },
+  'moccamaster-coffee-maker': { labelEn: 'Netherlands', labelHi: 'नीदरलैंड्स', flag: '🇳🇱' },
+  'bic-cristal-ballpoint-pen': { labelEn: 'France', labelHi: 'फ्रांस', flag: '🇫🇷' },
+  'japanese-selvedge-denim': { labelEn: 'Japan', labelHi: 'जापान', flag: '🇯🇵' },
+  'lodge-cast-iron-skillet': { labelEn: 'USA', labelHi: 'अमेरिका', flag: '🇺🇸' },
+  'dyson-supersonic-hair-dryer': { labelEn: 'United Kingdom', labelHi: 'यूके', flag: '🇬🇧' },
+  'stanley-tumbler-hype': { labelEn: 'USA', labelHi: 'अमेरिका', flag: '🇺🇸' },
+};
+
+// Pick top 6 latest articles
+const slides = posts.slice(0, 6).map(p => {
+  const cleanSlug = p.id.replace(/^hi\//, '');
+  const origin = origins[cleanSlug] || { labelEn: 'Global', labelHi: 'वैश्विक', flag: '🌐' };
+  const url = isHi ? `/hi/blog/${cleanSlug}` : `/blog/${cleanSlug}`;
+  return {
+    slug: cleanSlug,
+    title: p.data.title,
+    description: p.data.description,
+    category: p.data.category,
+    heroImage: p.data.heroImage || '/og-image.jpg',
+    specialScore: p.data.specialScore,
+    specialVerdict: p.data.specialVerdict,
+    readingTime: p.data.readingTime,
+    origin,
+    url
+  };
+});
+---
+
+<div class="relative w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto hero-slider-root select-none">
+  
+  <!-- Browser Window Mockup Frame Header (User Inspired) -->
+  <div class="flex items-center justify-between px-4 sm:px-5 py-3 bg-white border-t border-x border-[#dce5dd] rounded-t-3xl shadow-xs">
+    <!-- Left: 3 Mac-Style Window Dots -->
+    <div class="flex items-center space-x-1.5 shrink-0">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] border border-[#e0443e]/40 inline-block"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] border border-[#dea123]/40 inline-block"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] border border-[#1aab29]/40 inline-block"></span>
+    </div>
+
+    <!-- Center: Official Logo Emblem + Editor's Choice Title -->
+    <div class="flex items-center space-x-2 min-w-0 px-2">
+      <img 
+        src="/logo.webp" 
+        alt="Is It Special Logo" 
+        class="w-5 h-5 rounded-full object-contain shadow-2xs shrink-0" 
+        width="20" 
+        height="20"
+        loading="eager"
+      />
+      <span class="font-extrabold text-[11px] sm:text-xs uppercase tracking-wider text-[#14241c] truncate font-mono">
+        {isHi ? "संपादक की पसंद • ताज़ा समीक्षाएं" : "EDITOR'S CHOICE • LATEST 6"}
+      </span>
+    </div>
+
+    <!-- Right: Active Slide Counter Pill -->
+    <div class="shrink-0">
+      <span class="slider-counter text-[10px] sm:text-[11px] font-mono font-extrabold text-[#15803d] bg-[#eaf5eb] px-2.5 py-0.5 rounded-full border border-[#bbf7d0]">
+        1 / {slides.length}
+      </span>
+    </div>
+  </div>
+
+  <!-- Browser Window Card Body -->
+  <div class="relative bg-white border border-[#dce5dd] rounded-b-3xl shadow-xl p-3 sm:p-4 overflow-visible">
+    
+    <!-- Slides Track Deck -->
+    <div class="relative overflow-hidden aspect-[16/10] sm:aspect-[16/9.5] rounded-2xl bg-[#eaf5eb]">
+      {slides.map((slide, idx) => (
+        <article 
+          class={`hero-slide absolute inset-0 transition-all duration-500 ease-out flex flex-col justify-end ${
+            idx === 0 
+              ? 'opacity-100 scale-100 z-10 pointer-events-auto' 
+              : 'opacity-0 scale-95 z-0 pointer-events-none'
+          }`}
+          data-slide-index={idx}
+        >
+          <a href={slide.url} class="block h-full w-full relative group/item">
+            <!-- Hero Photo -->
+            <img 
+              src={slide.heroImage} 
+              alt={slide.title} 
+              class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-700" 
+              loading={idx === 0 ? "eager" : "lazy"} 
+              decoding="async"
+            />
+            
+            <!-- High-Contrast Dark Editorial Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
+
+            <!-- Top Floating Badges -->
+            <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+              <!-- Score Badge -->
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#15803d] text-white shadow-md flex items-center space-x-1 border border-white/20 backdrop-blur-xs">
+                <span>★</span>
+                <span>{slide.specialVerdict}</span>
+                <span class="opacity-90">({slide.specialScore.toFixed(1)}/10)</span>
+              </span>
+
+              <!-- Origin Country Pill -->
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-black/60 text-white backdrop-blur-md border border-white/20 shadow-xs">
+                {slide.origin.flag} {isHi ? slide.origin.labelHi : slide.origin.labelEn}
+              </span>
+            </div>
+
+            <!-- Bottom Content Overlaid on Card -->
+            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 space-y-1 sm:space-y-1.5 text-white pointer-events-none">
+              <div class="flex items-center space-x-2 text-[10px] sm:text-[11px] font-semibold">
+                <span class="uppercase tracking-widest text-[#86efac] font-mono">{slide.category}</span>
+                <span class="text-white/40">&bull;</span>
+                <span class="inline-flex items-center space-x-1 text-white/90 bg-white/15 px-2 py-0.5 rounded-full backdrop-blur-xs">
+                  <span>🎧</span>
+                  <span>{isHi ? "ऑडियो निष्कर्ष" : "Voice Verdict"}</span>
+                </span>
+                <span class="text-white/40 hidden sm:inline">&bull;</span>
+                <span class="text-white/70 hidden sm:inline">{slide.readingTime}</span>
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-white leading-snug line-clamp-2 group-hover/item:text-[#86efac] transition-colors">
+                {slide.title}
+              </h3>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <!-- Side Navigation Chevrons (User Mockup Arrow Buttons) -->
+    <button 
+      type="button" 
+      class="hero-prev-btn absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-lg flex items-center justify-center text-[#14241c] hover:bg-[#15803d] hover:text-white transition-all cursor-pointer z-30 group active:scale-95" 
+      aria-label={isHi ? "पिछली समीक्षा" : "Previous slide"}
+      title={isHi ? "पिछली समीक्षा" : "Previous"}
+    >
+      <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-none stroke-current stroke-2.5 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+
+    <button 
+      type="button" 
+      class="hero-next-btn absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/95 backdrop-blur-md border border-[#dce5dd] shadow-lg flex items-center justify-center text-[#14241c] hover:bg-[#15803d] hover:text-white transition-all cursor-pointer z-30 group active:scale-95" 
+      aria-label={isHi ? "अगली समीक्षा" : "Next slide"}
+      title={isHi ? "अगली समीक्षा" : "Next"}
+    >
+      <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-none stroke-current stroke-2.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+
+    <!-- Interactive Pagination Dots (User Mockup Dots) -->
+    <div class="flex items-center justify-center space-x-1.5 pt-3.5 pb-1">
+      {slides.map((_, i) => (
+        <button 
+          type="button" 
+          class={`hero-dot h-2 rounded-full transition-all duration-300 cursor-pointer ${
+            i === 0 ? 'w-6 bg-[#15803d]' : 'w-2 bg-[#dce5dd] hover:bg-[#15803d]/50'
+          }`}
+          data-dot-index={i} 
+          aria-label={isHi ? `समीक्षा ${i + 1} पर जाएं` : `Go to slide ${i + 1}`}
+        />
+      ))}
+    </div>
+
+  </div>
+
+</div>
+
+<script is:inline>
+  (function initHeroSlider() {
+    var container = document.querySelector('.hero-slider-root');
+    if (!container) return;
+
+    var slides = container.querySelectorAll('.hero-slide');
+    var dots = container.querySelectorAll('.hero-dot');
+    var counter = container.querySelector('.slider-counter');
+    var prevBtn = container.querySelector('.hero-prev-btn');
+    var nextBtn = container.querySelector('.hero-next-btn');
+
+    if (!slides.length) return;
+
+    var currentIndex = 0;
+    var total = slides.length;
+    var autoPlayTimer = null;
+    var intervalDuration = 5000; // 5 seconds per slide
+
+    function updateSlider(newIndex) {
+      if (newIndex < 0) newIndex = total - 1;
+      if (newIndex >= total) newIndex = 0;
+      currentIndex = newIndex;
+
+      // Update slides
+      slides.forEach(function(slide, idx) {
+        if (idx === currentIndex) {
+          slide.classList.remove('opacity-0', 'scale-95', 'z-0', 'pointer-events-none');
+          slide.classList.add('opacity-100', 'scale-100', 'z-10', 'pointer-events-auto');
+        } else {
+          slide.classList.remove('opacity-100', 'scale-100', 'z-10', 'pointer-events-auto');
+          slide.classList.add('opacity-0', 'scale-95', 'z-0', 'pointer-events-none');
+        }
+      });
+
+      // Update dots
+      dots.forEach(function(dot, idx) {
+        if (idx === currentIndex) {
+          dot.classList.remove('w-2', 'bg-[#dce5dd]');
+          dot.classList.add('w-6', 'bg-[#15803d]');
+        } else {
+          dot.classList.remove('w-6', 'bg-[#15803d]');
+          dot.classList.add('w-2', 'bg-[#dce5dd]');
+        }
+      });
+
+      // Update counter
+      if (counter) {
+        counter.textContent = (currentIndex + 1) + ' / ' + total;
+      }
+    }
+
+    function nextSlide() {
+      updateSlider(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      updateSlider(currentIndex - 1);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(nextSlide, intervalDuration);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    // Button event listeners
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        nextSlide();
+        startAutoPlay();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        prevSlide();
+        startAutoPlay();
+      });
+    }
+
+    // Dot event listeners
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function(e) {
+        e.preventDefault();
+        var targetIndex = parseInt(dot.getAttribute('data-dot-index'), 10);
+        if (!isNaN(targetIndex)) {
+          updateSlider(targetIndex);
+          startAutoPlay();
+        }
+      });
+    });
+
+    // Pause on hover
+    container.addEventListener('mouseenter', stopAutoPlay);
+    container.addEventListener('mouseleave', startAutoPlay);
+
+    // Touch Swipe Navigation for Mobile Devices
+    var touchStartX = 0;
+    var touchEndX = 0;
+    container.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoPlay();
+    }, { passive: true });
+
+    container.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          nextSlide(); // Swiped left -> show next
+        } else {
+          prevSlide(); // Swiped right -> show prev
+        }
+      }
+      startAutoPlay();
+    }, { passive: true });
+
+    // Keyboard Arrow Navigation
+    document.addEventListener('keydown', function(e) {
+      // Only when container is in viewport
+      var rect = container.getBoundingClientRect();
+      var inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+        startAutoPlay();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+        startAutoPlay();
+      }
+    });
+
+    // Start auto advance
+    startAutoPlay();
+  })();
+</script>
