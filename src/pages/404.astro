@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="404 - Page Not Found | Is It Special?"
+  description="The page you are looking for does not exist or may have moved. Explore our catalog of unvarnished product reviews."
+  lang="en"
+>
+  <main class="min-h-[70vh] flex items-center justify-center py-16 px-4 sm:px-6">
+    <div class="max-w-xl w-full text-center space-y-6">
+      
+      <!-- Pill Badge -->
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#15803d] bg-[#dcfce7]/80 border border-[#bbf7d0] shadow-2xs">
+        <img 
+          src="/logo.webp" 
+          alt="Is It Special Logo" 
+          class="w-4 h-4 rounded-full object-cover shrink-0" 
+          width="16" 
+          height="16" 
+        />
+        <span>Error 404 &middot; Page Not Found</span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="font-serif text-4xl sm:text-5xl font-extrabold text-[#14241c] tracking-tight">
+        Nothing special here.
+      </h1>
+
+      <p class="text-sm sm:text-base text-[#14241c]/75 leading-relaxed max-w-md mx-auto">
+        The link you followed may be mistyped, broken, or moved. Let's get you back to our unfiltered teardowns and verdicts.
+      </p>
+
+      <!-- Bilingual note -->
+      <div class="p-3 bg-[#eaf5eb] border border-[#dce5dd] rounded-2xl text-xs text-[#14241c]/80 text-center max-w-md mx-auto">
+        <span>Looking for Hindi articles? Check out <a href="/hi/" class="text-[#15803d] font-bold underline decoration-[#86efac]">Hindi Catalog (/hi/)</a></span>
+      </div>
+
+      <!-- Primary Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <a 
+          href="/" 
+          class="px-6 py-3 rounded-full bg-[#15803d] hover:bg-[#166534] text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all hover:shadow-md active:scale-95"
+        >
+          &larr; Back to Home
+        </a>
+        <a 
+          href="/hi/" 
+          class="px-6 py-3 rounded-full bg-white hover:bg-zinc-50 border border-[#dce5dd] text-[#14241c] text-xs font-bold uppercase tracking-wider shadow-2xs transition-all hover:border-[#15803d]"
+        >
+          मुख्य पृष्ठ (हिन्दी)
+        </a>
+      </div>
+
+      <!-- Quick Helpful Links -->
+      <div class="pt-8 border-t border-[#dce5dd]/60">
+        <span class="block text-[11px] font-mono uppercase tracking-widest text-[#14241c]/50 mb-3">Popular Teardowns</span>
+        <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
+          <a href="/blog/bialetti-moka-express" class="px-3 py-1 rounded-full bg-white border border-[#dce5dd] text-[#14241c]/80 hover:text-[#15803d] hover:border-[#15803d] transition-colors">Bialetti Moka Express</a>
+          <a href="/hi/blog/bialetti-moka-express" class="px-3 py-1 rounded-full bg-[#dcfce7]/60 border border-[#bbf7d0] text-[#15803d] font-semibold transition-colors">Bialetti (हिन्दी)</a>
+          <a href="/blog/casio-f91w-watch-masterpiece" class="px-3 py-1 rounded-full bg-white border border-[#dce5dd] text-[#14241c]/80 hover:text-[#15803d] hover:border-[#15803d] transition-colors">Casio F-91W</a>
+          <a href="/blog/stanley-tumbler-hype" class="px-3 py-1 rounded-full bg-white border border-[#dce5dd] text-[#14241c]/80 hover:text-[#15803d] hover:border-[#15803d] transition-colors">Stanley Tumbler</a>
+          <a href="/blog/le-creuset-dutch-oven" class="px-3 py-1 rounded-full bg-white border border-[#dce5dd] text-[#14241c]/80 hover:text-[#15803d] hover:border-[#15803d] transition-colors">Le Creuset</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>

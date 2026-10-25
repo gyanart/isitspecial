@@ -23,9 +23,19 @@
   RewriteCond %{HTTP_HOST} ^isitspecial\.com$ [NC]
   RewriteRule ^(.*)$ https://www.isitspecial.com/$1 [L,R=301]
 
-  # 3. Clean routing for static directory indexes
+  # 3. TYPO FIXES & REDIRECTS:
+  # Redirect mistyped /blog/hi/:slug -> /hi/blog/:slug
+  RewriteRule ^blog/hi/(.+)$ https://%{HTTP_HOST}/hi/blog/$1 [R=301,L]
+  RewriteRule ^blog/hi/?$ https://%{HTTP_HOST}/hi/ [R=301,L]
+
+  # 4. Clean routing for static directory indexes
   DirectoryIndex index.html
 </IfModule>
+
+# Custom Clean Error Pages (Overrides cPanel/Apache default error handlers)
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 500 /404.html
 
 # Security Headers
 <IfModule mod_headers.c>
