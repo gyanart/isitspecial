@@ -40,6 +40,12 @@
   AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript application/json image/svg+xml
 </IfModule>
 
+# MIME Types for Web Manifest & Icons
+<IfModule mod_mime.c>
+  AddType application/manifest+json webmanifest
+  AddType image/x-icon ico
+</IfModule>
+
 # Browser Caching for Performance & LCP Optimization
 <IfModule mod_expires.c>
   ExpiresActive On

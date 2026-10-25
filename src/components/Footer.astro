@@ -12,11 +12,16 @@ const currentYear = new Date().getFullYear();
     
     <!-- Grasshopper Brand Logo Centerpiece -->
     <a href={lang === 'hi' ? '/hi' : '/'} class="inline-flex items-center space-x-2.5 text-[#14241c] group">
-      <span class="w-8 h-8 rounded-full bg-[#15803d] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
-        <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-        </svg>
-      </span>
+      <!-- Circular Brand Logo Emblem -->
+      <img 
+        src="/logo.webp" 
+        alt="Is It Special Logo" 
+        class="w-8 h-8 rounded-full object-contain shadow-xs group-hover:scale-105 transition-transform" 
+        width="32" 
+        height="32" 
+        loading="lazy"
+        decoding="async"
+      />
       <span class="font-serif text-2xl font-black italic tracking-tight text-[#14241c]">
         Is It Special<span class="text-[#15803d]">?</span>
       </span>
