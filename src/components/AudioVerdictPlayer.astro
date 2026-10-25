@@ -1,0 +1,157 @@
+---
+interface Props {
+  audioSrc: string;
+  duration?: string;
+  lang?: 'en' | 'hi';
+}
+
+const {
+  audioSrc = '/audio/le-creuset-verdict-en.mp3',
+  duration = '0:45',
+  lang = 'en'
+} = Astro.props;
+
+const isHi = lang === 'hi';
+---
+
+<div class="my-8 p-4 sm:p-5 rounded-2xl bg-white border border-[#dce5dd] shadow-xs not-prose audio-verdict-box transition-all hover:shadow-sm">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    
+    <!-- Left Info: Voice Badge & Title -->
+    <div class="flex items-center space-x-3.5">
+      <!-- Play/Pause Button -->
+      <button 
+        type="button"
+        class="audio-play-btn w-12 h-12 rounded-full bg-[#15803d] hover:bg-[#166534] text-white flex items-center justify-center shrink-0 shadow-sm transition-all duration-200 active:scale-95 cursor-pointer group"
+        aria-label={isHi ? 'ऑडियो निष्कर्ष सुनें' : 'Play Audio Verdict'}
+      >
+        <!-- Play Icon -->
+        <svg class="play-icon w-5 h-5 fill-current ml-0.5 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <!-- Pause Icon (hidden by default) -->
+        <svg class="pause-icon w-5 h-5 fill-current hidden" viewBox="0 0 24 24">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+      </button>
+
+      <div class="space-y-0.5 min-w-0">
+        <div class="flex items-center space-x-2">
+          <span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-[#15803d] bg-[#eaf5eb] border border-[#bbf7d0]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#15803d] animate-pulse"></span>
+            <span>{isHi ? 'ऑडियो निष्कर्ष' : 'Voice Briefing'}</span>
+          </span>
+          <span class="text-[11px] font-mono text-[#14241c]/50 font-bold">{duration}</span>
+        </div>
+        <h4 class="font-bold text-sm sm:text-base text-[#14241c] truncate">
+          {isHi ? '45 सेकंड में निष्पक्ष फैसला सुनें' : 'Listen to the 45-Second Verdict'}
+        </h4>
+        <p class="text-[11px] text-[#14241c]/60">
+          {isHi ? 'स्पष्ट स्टूडियो वॉइस • शून्य विज्ञापन' : 'Studio voice briefing • No fluff • Zero ads'}
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Controls: Progress Track & Speed Selector -->
+    <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-end">
+      <!-- Mini Progress Bar -->
+      <div class="flex-1 sm:w-32 bg-[#dce5dd]/60 h-2 rounded-full overflow-hidden relative cursor-pointer audio-progress-track">
+        <div class="audio-progress-bar bg-[#15803d] h-full w-0 transition-all duration-100"></div>
+      </div>
+
+      <!-- Time Display -->
+      <span class="audio-time font-mono text-xs font-bold text-[#14241c]/70 shrink-0">
+        0:00
+      </span>
+
+      <!-- Speed Toggle Pill (1x / 1.25x / 1.5x) -->
+      <button 
+        type="button" 
+        class="audio-speed-btn px-2.5 py-1 rounded-lg bg-[#f7faf7] border border-[#dce5dd] hover:border-[#15803d] text-[11px] font-mono font-bold text-[#14241c] cursor-pointer transition-colors shrink-0"
+        title="Playback Speed"
+      >
+        1.0x
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Hidden Native Audio Element -->
+  <audio class="native-audio" src={audioSrc} preload="none"></audio>
+</div>
+
+<script is:inline>
+  (function initAudioPlayers() {
+    document.querySelectorAll('.audio-verdict-box').forEach(function(box) {
+      var audio = box.querySelector('.native-audio');
+      var playBtn = box.querySelector('.audio-play-btn');
+      var playIcon = box.querySelector('.play-icon');
+      var pauseIcon = box.querySelector('.pause-icon');
+      var progressBar = box.querySelector('.audio-progress-bar');
+      var progressTrack = box.querySelector('.audio-progress-track');
+      var timeDisplay = box.querySelector('.audio-time');
+      var speedBtn = box.querySelector('.audio-speed-btn');
+
+      if (!audio || !playBtn) return;
+
+      var speeds = [1.0, 1.25, 1.5];
+      var speedIndex = 0;
+
+      function formatTime(seconds) {
+        var mins = Math.floor(seconds / 60);
+        var secs = Math.floor(seconds % 60);
+        return mins + ':' + (secs < 10 ? '0' : '') + secs;
+      }
+
+      playBtn.addEventListener('click', function() {
+        if (audio.paused) {
+          // Pause any other playing audio on the page
+          document.querySelectorAll('.native-audio').forEach(function(other) {
+            if (other !== audio && !other.paused) other.pause();
+          });
+          audio.play();
+          playIcon.classList.add('hidden');
+          pauseIcon.classList.remove('hidden');
+        } else {
+          audio.pause();
+          playIcon.classList.remove('hidden');
+          pauseIcon.classList.add('hidden');
+        }
+      });
+
+      audio.addEventListener('timeupdate', function() {
+        if (audio.duration) {
+          var pct = (audio.currentTime / audio.duration) * 100;
+          if (progressBar) progressBar.style.width = pct + '%';
+          if (timeDisplay) timeDisplay.textContent = formatTime(audio.currentTime);
+        }
+      });
+
+      audio.addEventListener('ended', function() {
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        if (progressBar) progressBar.style.width = '0%';
+        if (timeDisplay) timeDisplay.textContent = '0:00';
+      });
+
+      if (progressTrack) {
+        progressTrack.addEventListener('click', function(e) {
+          var rect = progressTrack.getBoundingClientRect();
+          var clickPos = (e.clientX - rect.left) / rect.width;
+          if (audio.duration) {
+            audio.currentTime = clickPos * audio.duration;
+          }
+        });
+      }
+
+      if (speedBtn) {
+        speedBtn.addEventListener('click', function() {
+          speedIndex = (speedIndex + 1) % speeds.length;
+          var newSpeed = speeds[speedIndex];
+          audio.playbackRate = newSpeed;
+          speedBtn.textContent = newSpeed.toFixed(1) + 'x';
+        });
+      }
+    });
+  })();
+</script>
