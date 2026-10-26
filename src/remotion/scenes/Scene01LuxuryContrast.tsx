@@ -13,6 +13,7 @@ import { HeaderBadge } from "../components/HeaderBadge";
 import { ProgressBar } from "../components/ProgressBar";
 import { AnimatedCard } from "../components/AnimatedCard";
 import { CaptionBar, CaptionSegment } from "../components/CaptionBar";
+import { SceneBackground } from "../components/SceneBackground";
 
 const CAPTIONS: CaptionSegment[] = [
   {
@@ -44,54 +45,15 @@ export const Scene01LuxuryContrast: React.FC = () => {
   // Vertical breathing camera crane
   const panY = Math.sin((frame / durationInFrames) * Math.PI) * 15;
 
-  // Smooth image crossfade: fade in at start, fade out at end
-  const fadeIn = interpolate(frame, [0, 20], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-  });
-  const fadeOut = interpolate(
-    frame,
-    [durationInFrames - 15, durationInFrames],
-    [1, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-    }
-  );
-  const imageOpacity = fadeIn * fadeOut;
-
   return (
     <AbsoluteFill style={{ backgroundColor: "#020617", overflow: "hidden", fontFamily: "Segoe UI, Inter, sans-serif" }}>
       {/* Voiceover Audio Track */}
       <Audio src={staticFile("audio/aeropress/aeropress_scene01_en.mp3")} />
 
-      {/* Background Photography with Camera Motion & Smooth Fade-In */}
-      <AbsoluteFill
-        style={{
-          transform: `translate(${panX}px, ${panY}px) scale(${zoom})`,
-          transformOrigin: "center center",
-          opacity: imageOpacity,
-        }}
-      >
-        <Img
-          src={staticFile("images/aeropress-scene-01-chrome-vs-syringe.jpg")}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </AbsoluteFill>
-
-      {/* Cinematic Vignette Shadow */}
-      <AbsoluteFill
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(2,6,23,0.7) 0%, rgba(2,6,23,0) 25%, rgba(2,6,23,0) 65%, rgba(2,6,23,0.85) 100%)",
-          pointerEvents: "none",
-        }}
+      {/* Cinematic Seamless Crossfade Background */}
+      <SceneBackground
+        currentImage="images/aeropress-scene-01-chrome-vs-syringe.jpg"
+        transform={`translate(${panX}px, ${panY}px) scale(${zoom})`}
       />
 
       {/* Clean Brand Badge */}

@@ -616,7 +616,7 @@ For every article published on `isitspecial.com`, execute this standardized rele
 * **Visual Presentation Rules (Strict Cleanliness Standards):**
   * **❌ No Progress Lines:** Do NOT display bottom horizontal timeline bars or moving progress lines across the screen (`ProgressBar` must return `null`).
   * **❌ No Scene Counters or Timers:** Never show `"Scene 1/12"` or on-screen elapsed seconds timers.
-  * **✅ Smooth Image Dissolves:** Every image must have a 20-frame fade-in (`fadeIn * fadeOut`).
+  * **✅ Seamless Optical Cross-Dissolve (Zero Black Screen Dips):** New images must fade in transparently directly on top of the preceding image (`SceneBackground` component holding `prevImage` underneath during `frame <= 25`). Never fade down to black between scenes; only the final scene of the entire video essay may fade to black.
   * **✅ Synchronized Closed Captions (CC):** Captions (`<CaptionBar />`) must match the voiceover text verbatim, positioned neatly below info cards with high-contrast semi-transparent backdrops (`rgba(2, 6, 23, 0.92)`).
   * **✅ Smooth Card Animation:** Info cards (`<AnimatedCard />`) must spring smoothly into view and glide out before the next scene transition.
 

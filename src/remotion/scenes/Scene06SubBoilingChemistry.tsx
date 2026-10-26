@@ -14,6 +14,7 @@ import { HeaderBadge } from "../components/HeaderBadge";
 import { ProgressBar } from "../components/ProgressBar";
 import { AnimatedCard } from "../components/AnimatedCard";
 import { CaptionBar, CaptionSegment } from "../components/CaptionBar";
+import { SceneBackground } from "../components/SceneBackground";
 
 const CAPTIONS: CaptionSegment[] = [
   {
@@ -42,80 +43,15 @@ export const Scene06SubBoilingChemistry: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
-  // Smooth image crossfade: fade in at start, fade out at end
-  const fadeIn = interpolate(frame, [0, 20], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-  });
-  const fadeOut = interpolate(
-    frame,
-    [durationInFrames - 15, durationInFrames],
-    [1, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-    }
-  );
-  const imageOpacity = fadeIn * fadeOut;
-
-  // Animated temperature readout climbing from 72°C to 80°C
-  const currentTemp = interpolate(frame, [0, 90], [72.0, 80.0], {
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.quad),
-  });
-
-  const tempSpring = spring({
-    frame: Math.max(0, frame - 20),
-    fps,
-    config: {
-      damping: 12,
-      mass: 0.5,
-      stiffness: 100,
-    },
-  });
-
-  const exitProgress = interpolate(
-    frame,
-    [durationInFrames - 20, durationInFrames - 3],
-    [1, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.bezier(0.3, 0.0, 0.2, 1),
-    }
-  );
-
   return (
     <AbsoluteFill style={{ backgroundColor: "#020617", overflow: "hidden", fontFamily: "Segoe UI, Inter, sans-serif" }}>
       <Audio src={staticFile("audio/aeropress/aeropress_scene06_en.mp3")} />
 
-      {/* Cinematic Background Image with Fade-In */}
-      <AbsoluteFill
-        style={{
-          transform: `translateY(${panY}px) scale(${zoom})`,
-          transformOrigin: "center center",
-          opacity: imageOpacity,
-        }}
-      >
-        <Img
-          src={staticFile("images/aeropress-scene-06-sub-boiling.jpg")}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </AbsoluteFill>
-
-      {/* Cinematic Vignette */}
-      <AbsoluteFill
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(2,6,23,0.7) 0%, rgba(2,6,23,0) 25%, rgba(2,6,23,0) 65%, rgba(2,6,23,0.85) 100%)",
-          pointerEvents: "none",
-        }}
+      {/* Cinematic Seamless Crossfade Background */}
+      <SceneBackground
+        currentImage="images/aeropress-scene-06-sub-boiling.jpg"
+        prevImage="images/aeropress-scene-05-total-immersion.jpg"
+        transform={`translateY(${panY}px) scale(${zoom})`}
       />
 
       <HeaderBadge />

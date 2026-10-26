@@ -14,6 +14,7 @@ import { ProgressBar } from "../components/ProgressBar";
 import { AnimatedCard } from "../components/AnimatedCard";
 import { AnimatedStatBadge } from "../components/AnimatedStatBadge";
 import { CaptionBar, CaptionSegment } from "../components/CaptionBar";
+import { SceneBackground } from "../components/SceneBackground";
 
 const CAPTIONS: CaptionSegment[] = [
   {
@@ -42,53 +43,15 @@ export const Scene08MicroPaperMembrane: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
-  // Smooth image crossfade: fade in at start, fade out at end
-  const fadeIn = interpolate(frame, [0, 20], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-  });
-  const fadeOut = interpolate(
-    frame,
-    [durationInFrames - 15, durationInFrames],
-    [1, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-    }
-  );
-  const imageOpacity = fadeIn * fadeOut;
-
   return (
     <AbsoluteFill style={{ backgroundColor: "#020617", overflow: "hidden", fontFamily: "Segoe UI, Inter, sans-serif" }}>
       <Audio src={staticFile("audio/aeropress/aeropress_scene08_en.mp3")} />
 
-      {/* Background Image with Fade-In */}
-      <AbsoluteFill
-        style={{
-          transform: `translateX(${panX}px) scale(${zoom})`,
-          transformOrigin: "center center",
-          opacity: imageOpacity,
-        }}
-      >
-        <Img
-          src={staticFile("images/aeropress-scene-08-paper-membrane.jpg")}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </AbsoluteFill>
-
-      {/* Cinematic Vignette */}
-      <AbsoluteFill
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(2,6,23,0.7) 0%, rgba(2,6,23,0) 25%, rgba(2,6,23,0) 65%, rgba(2,6,23,0.85) 100%)",
-          pointerEvents: "none",
-        }}
+      {/* Cinematic Seamless Crossfade Background */}
+      <SceneBackground
+        currentImage="images/aeropress-scene-08-paper-membrane.jpg"
+        prevImage="images/aeropress-scene-07-pneumatic-pressure.jpg"
+        transform={`translateX(${panX}px) scale(${zoom})`}
       />
 
       <HeaderBadge />
