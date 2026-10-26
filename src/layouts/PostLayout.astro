@@ -38,6 +38,7 @@ interface Props {
   currentSlug?: string;
   lang?: 'en' | 'hi';
   translationUrl?: string;
+  youtubeId?: string;
   relatedPosts?: PostItem[];
   recentPosts?: PostItem[];
   allPosts?: PostItem[];
@@ -58,6 +59,7 @@ const {
   currentSlug = '',
   lang = 'en',
   translationUrl,
+  youtubeId,
   relatedPosts = [],
   recentPosts = [],
   allPosts = [],
@@ -131,6 +133,20 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
         "worstRating": "1"
       }
     })} />
+    {youtubeId && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": title,
+        "description": description,
+        "thumbnailUrl": [
+          heroImage ? (heroImage.startsWith('http') ? heroImage : `https://www.isitspecial.com${heroImage}`) : `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
+        ],
+        "uploadDate": pubDate.toISOString(),
+        "contentUrl": `https://www.youtube.com/watch?v=${youtubeId}`,
+        "embedUrl": `https://www.youtube-nocookie.com/embed/${youtubeId}`
+      })} />
+    )}
   </Fragment>
 
   <!-- Reading Progress Bar -->

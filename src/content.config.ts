@@ -19,6 +19,7 @@ const blog = defineCollection({
     featured: z.boolean().default(false),
     lang: z.enum(['en', 'hi']).default('en'),
     translationSlug: z.string().optional(),
+    youtubeId: z.string().optional(),
   }),
 });
 

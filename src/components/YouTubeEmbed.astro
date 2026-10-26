@@ -1,0 +1,61 @@
+---
+interface Props {
+  id: string;
+  title?: string;
+  caption?: string;
+}
+
+const {
+  id,
+  title = "Is It Special? • The Video Essay",
+  caption = "Watch the 2-minute cinematic breakdown above, or continue reading the complete written analysis below.",
+} = Astro.props;
+
+// Extract clean 11-char YouTube ID even if full URL is passed
+function extractYouTubeId(input: string): string {
+  if (!input) return "";
+  const match = input.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/
+  );
+  return match ? match[1] : input.trim();
+}
+
+const cleanId = extractYouTubeId(id);
+const embedUrl = `https://www.youtube-nocookie.com/embed/${cleanId}?rel=0&modestbranding=1&color=white`;
+---
+
+{cleanId && (
+  <div class="my-8 not-prose">
+    <div class="bg-slate-900 border border-emerald-500/30 rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-950/20 backdrop-blur-md transition-all duration-300 hover:border-emerald-500/50">
+      <!-- Header Bar -->
+      <div class="flex items-center justify-between pb-3 px-1 text-xs sm:text-sm font-semibold tracking-wider uppercase text-emerald-400">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]"></span>
+          <span>The Video Essay</span>
+        </div>
+        <span class="text-slate-400 text-xs normal-case tracking-normal font-medium hidden sm:inline-block">
+          1080p • 2-Min Breakdown
+        </span>
+      </div>
+
+      <!-- 16:9 Responsive Embed (Zero CLS) -->
+      <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-950 shadow-inner">
+        <iframe
+          src={embedUrl}
+          title={title}
+          class="absolute top-0 left-0 w-full h-full border-0"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <!-- Optional Sub-Caption -->
+      {caption && (
+        <p class="mt-2.5 text-center text-xs text-slate-400 font-sans tracking-wide">
+          {caption}
+        </p>
+      )}
+    </div>
+  </div>
+)}

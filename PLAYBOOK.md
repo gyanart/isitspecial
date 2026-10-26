@@ -19,6 +19,12 @@
 8. [Technical SEO & Structured Data Requirements](#8-technical-seo--structured-data-requirements)
 9. [GEO (Generative Engine Optimization) & AI Citability](#9-geo-generative-engine-optimization--ai-citability)
 10. [Pre-Flight Build & Verification Checklist](#10-pre-flight-build--verification-checklist)
+11. [Multi-Scene Video Production Engine (12-Scene Modular Video Standard)](#11-multi-scene-video-production-engine-12-scene-modular-video-standard)
+12. [YouTube Channel Setup & Video Publishing Engine](#12-youtube-channel-setup--video-publishing-engine)
+    - [12.1 One-Time Channel Setup (Targeting Traffic to isitspecial.com)](#121-one-time-channel-setup-targeting-traffic-to-isitspecialcom)
+    - [12.2 Repeat Video Publishing Protocol (Per Video Release)](#122-repeat-video-publishing-protocol-per-video-release)
+    - [12.3 Post-Publish On-Site Video Embedding & VideoObject SEO Schema](#123-post-publish-on-site-video-embedding--videoobject-seo-schema)
+    - [12.4 Additional Growth & Traffic Multipliers](#124-additional-growth--traffic-multipliers)
 
 ---
 
@@ -502,4 +508,197 @@ python scripts/video/generate_video.py "<PROMPT>" \
 Or in batch mode using `jobs.json` with concurrency:
 ```bash
 python scripts/video/generate_video.py --batch jobs.json --concurrency 3
+```
+
+---
+
+## 12. YouTube Channel Setup & Video Publishing Engine
+
+To transform video views into sustained, high-intent traffic for `isitspecial.com`, every video release follows an engineered YouTube distribution protocol. This bridges programmatic video production (Remotion) with YouTube algorithmic discovery and on-site SEO.
+
+---
+
+### 12.1 One-Time Channel Setup (Targeting Traffic to isitspecial.com)
+
+Configure these permanent settings in **YouTube Studio** (`studio.youtube.com`) to establish authority and maximize click-through traffic to the website.
+
+#### 1. Channel Identity & Custom Handle
+* **Channel Name:** `Is It Special?`
+* **Custom Handle:** `@isitspecial` (or `@isitspecial_official`)
+* **Channel Tagline:** *Deconstructing everyday icons to answer one consumer question: Is It Special?*
+
+#### 2. Channel Visual Branding
+* **Profile Picture / Avatar (800 × 800 px):** Clean, high-contrast emerald green icon with the brand lettermark or pulsing emerald dot on a deep slate black background (`#020617`).
+* **Channel Banner (2560 × 1440 px):**
+  * Safe Text Area: Centered `1232 × 338 px` readable across mobile and desktop.
+  * Visual: Side-by-side silhouette collage of iconic products (AeroPress, Bic Cristal, Casio F-91W, Le Creuset).
+  * Copy on Banner: *"We test the engineering, fluid dynamics, and true cost-per-use of iconic products."*
+  * Call-to-Action: A subtle visual cue on the bottom right pointing to the banner links: *"Read in-depth reviews at isitspecial.com ➔"*
+* **Video Watermark (150 × 150 px):** Transparent PNG subscribe mark set to display for the **Entire Video**.
+
+#### 3. Channel "About" Bio (SEO & Authority Copy)
+Copy and paste this into **YouTube Studio > Customization > Basic Info**:
+```text
+We deconstruct everyday icons to answer one consumer question: Is It Special?
+
+Most products are disposable marketing fluff. A rare few are authentic feats of industrial design, fluid dynamics, and anti-fragile engineering that last for decades. 
+
+Through rigorous physics breakdowns, material science analysis, and long-term Cost-Per-Use (CPU) mathematics, we evaluate iconic gear to determine whether it earns a spot in your life—or belongs in a landfill.
+
+🌐 In-depth written articles & interactive calculators: https://www.isitspecial.com
+💬 Join our WhatsApp Channel for curated verdicts: https://whatsapp.com/channel/0029Vb4wWbK6LwHiGZ4z1Q0S
+📫 Editorial & Inquiries: editorial@isitspecial.com
+```
+
+#### 4. Channel Header Links (Conversion Funnel)
+Add these links in **YouTube Studio > Customization > Basic Info > Links**. YouTube displays up to 5 clickable links directly in the channel header banner:
+1. **Link 1 (Primary):** `Website | isitspecial.com` ➔ `https://www.isitspecial.com/?utm_source=youtube&utm_medium=channel_header`
+2. **Link 2:** `WhatsApp Channel` ➔ `https://whatsapp.com/channel/0029Vb4wWbK6LwHiGZ4z1Q0S`
+3. **Link 3:** `The Special Index™ Rankings` ➔ `https://www.isitspecial.com/about?utm_source=youtube&utm_medium=channel_header`
+
+#### 5. Feature Eligibility & Phone Verification
+Go to **YouTube Studio > Settings > Channel > Feature Eligibility**:
+* **Standard Features:** Enabled by default.
+* **Intermediate Features (MANDATORY):** Verify with a phone number (SMS). This immediately unlocks:
+  * **Custom thumbnails** (vital for 80%+ of video click-through rate).
+  * Video uploads longer than 15 minutes.
+* **Advanced Features:** Complete video verification or channel history. This unlocks **clickable external links in video descriptions**, which is essential for driving traffic to `isitspecial.com`.
+
+#### 6. Default Upload Settings (Automation)
+Go to **YouTube Studio > Settings > Upload Defaults** to automate metadata for all uploads:
+* **Category:** `Science & Technology` (or `Howto & Style`).
+* **Default Language:** English (`en-US`).
+* **Caption Certification:** None.
+* **Default Description Footer:**
+```text
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 ABOUT IS IT SPECIAL?
+We rigorously evaluate the design, materials science, and long-term cost-per-use of iconic products. 
+Read our full reviews, explore interactive calculators, and see our complete Special Index™ scorecards at:
+👉 https://www.isitspecial.com
+
+💬 JOIN THE WHATSAPP COMMUNITY:
+Get our latest product verdicts and design breakdowns directly on WhatsApp:
+👉 https://whatsapp.com/channel/0029Vb4wWbK6LwHiGZ4z1Q0S
+
+⚖️ EDITORIAL INDEPENDENCE & AFFILIATE DISCLOSURE:
+Is It Special? is reader-supported. We purchase our own test gear or borrow it without editorial influence. Some links in our descriptions and articles are affiliate links where we may earn a modest commission at zero additional cost to you.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+#### 7. Playlist Architecture
+Create 5 core playlists to keep viewers engaged in bingeable content loops:
+1. ☕ **The Fluid Dynamics of Coffee** (AeroPress, Bialetti, Moccamaster)
+2. 🖊️ **Everyday Carry & Micro-Design Icons** (Bic Cristal, Kaweco, Field Notes)
+3. 🍳 **Culinary Heirlooms & Kitchenware** (Le Creuset, KitchenAid, Lodge)
+4. ⏱️ **Horology & Precision Engineering** (Casio F-91W, Timex)
+5. 👖 **Heritage Textiles & Raw Materials** (Japanese Selvedge Denim)
+
+---
+
+### 12.2 Repeat Video Publishing Protocol (Per Video Release)
+
+For every article published on `isitspecial.com`, execute this standardized release checklist:
+
+#### Step 1: Render the Remotion Video
+Ensure the latest video is rendered at 1080p Full HD:
+```bash
+npm run video:render AeroPressMaster public/videos/[slug]_master_video_1080p.mp4
+```
+
+#### Step 2: Generate High-CTR Thumbnail (16:9)
+* **Dimensions:** `1280 × 720 px` or `1920 × 1080 px` (`.jpg` or `.png`, < 2 MB).
+* **Composition Standard:**
+  * High contrast split: Expensive/complex status quo on the left vs. glowing simple icon on the right.
+  * Maximum 3–4 words of bold text in high-contrast sans-serif (e.g. `"$40 VS $15,000"` or `"GENIUS OR GIMMICK?"`).
+  * Warm, vibrant saturation to pop against YouTube's dark/light modes.
+* **Storage Location:** `public/images/[slug]-youtube-thumbnail.jpg`.
+
+#### Step 3: Title Formula (CTR & Search Hook)
+Choose one of these 3 proven high-retention formulas:
+* **Formula A (Curiosity & Price Contrast):** `$40 Plastic vs. $15,000 Espresso: The [Product] Paradox`
+* **Formula B (The Engineering Feat):** `Why This $40 [Product] is an Unmatched Feat of Engineering`
+* **Formula C (The Definitive Test):** `Is the [Product] ACTUALLY Special? | The Special Index™`
+
+#### Step 4: Description Structure (Traffic Optimized)
+Always format video descriptions with this exact hierarchy:
+1. **Lines 1–2 (Above the "Show More" fold):** Punchy 2-sentence hook explaining the paradox.
+2. **Line 3 (Primary Call to Action):** Direct link to the complete website article with UTM parameters.
+3. **Line 4:** WhatsApp Channel invite link.
+4. **Lines 5–18:** Timestamped Chapters matching all 12 scenes (YouTube automatically creates clickable scrubbable chapters!).
+5. **Lines 19–24:** The Special Score breakdown.
+6. **Footer:** Default upload footer with website bio, social links, and affiliate disclosure.
+
+#### Step 5: Tags (15–20 Search Terms)
+Include a mix of:
+* **Brand/Product:** `[product name]`, `[product name] review`, `is it special`, `the special index`
+* **Engineering/Comparison:** `[product] vs [expensive competitor]`, `how [product] works`, `industrial design`
+* **Category:** `coffee brewing`, `everyday carry`, `buy it for life`, `product engineering`
+
+#### Step 6: Strategic Pinned Comment
+Immediately after uploading, post a pinned comment:
+* Include the direct tracking link to the website article.
+* Ask an open discussion question to spark YouTube algorithm comments (e.g. *"What's your go-to recipe? Does a $40 device beat a commercial espresso machine in your kitchen? Let us know below!"*).
+* Pin the comment to the top of the video comment section.
+
+---
+
+### 12.3 Post-Publish On-Site Video Embedding & VideoObject SEO Schema
+
+Once the video is uploaded to YouTube, integrate it into `isitspecial.com` to capture Google Search rich video snippets and provide visitors with a multi-sensory reading experience.
+
+#### Step 1: Add YouTube ID to Article Frontmatter
+In `src/content/blog/[slug].mdx`, add the 11-character YouTube video ID:
+```yaml
+---
+title: "Why the $40 AeroPress is an Unmatched Feat of Fluid Dynamics"
+pubDate: 2026-10-24
+youtubeId: "dQw4w9WgXcQ"  # Replace with your actual YouTube Video ID
+---
+```
+
+#### Step 2: Automatic Google VideoObject Schema JSON-LD
+When `youtubeId` is present in the frontmatter, `src/layouts/PostLayout.astro` automatically generates and injects Google-compliant `VideoObject` Schema in the `<head>`:
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Why the $40 AeroPress is an Unmatched Feat of Fluid Dynamics",
+  "description": "How a retired Stanford aerodynamics professor invented an unpretentious plastic syringe...",
+  "thumbnailUrl": ["https://www.isitspecial.com/images/aeropress.webp"],
+  "uploadDate": "2026-10-24T00:00:00.000Z",
+  "contentUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "embedUrl": "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+}
+```
+> **SEO Benefit:** This enables Google Search to display the **Video Rich Snippet** badge, Google Video carousel listing, and key moments directly in Google Search results and Google AI Overviews.
+
+#### Step 3: Embed Directly in the MDX Article
+Import and position `<YouTubeEmbed />` inside the article body (typically right below the Audio Verdict player or at the start of Section 1):
+```mdx
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+
+<YouTubeEmbed 
+  id="dQw4w9WgXcQ" 
+  title="Why the $40 AeroPress is an Unmatched Feat of Fluid Dynamics" 
+/>
+```
+* **Features:**
+  * Uses `youtube-nocookie.com` for strict GDPR/privacy compliance.
+  * Zero Cumulative Layout Shift (CLS = 0) with responsive `16:9` aspect ratio.
+  * Native lazy loading (`loading="lazy"`) to preserve sub-second site load speeds.
+
+---
+
+### 12.4 Additional Growth & Traffic Multipliers
+
+1. **Repurpose as 12 YouTube Shorts:**
+   * Every scene in `src/remotion/Root.tsx` is an isolated composition (`Scene01` through `Scene12`).
+   * Render individual scenes as 10-second vertical micro-shorts to capture top-of-funnel viral mobile traffic, directing viewers to the full 16:9 video and website.
+2. **Community Tab Teasers:**
+   * 24 hours after publishing, post a photo poll or behind-the-scenes engineering still from the article to YouTube Community, linking back to the website review.
+3. **UTM Parameter Tracking:**
+   * Always tag URLs in YouTube descriptions with:
+     `?utm_source=youtube&utm_medium=video&utm_campaign=[slug]`
+   * This enables clear tracking in Google Analytics of how many visitors, subscribers, and affiliate clicks originate from each YouTube video.
 ```
