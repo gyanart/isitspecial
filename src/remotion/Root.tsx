@@ -13,6 +13,7 @@ import { Scene09PolypropyleneDurability } from "./scenes/Scene09PolypropyleneDur
 import { Scene10SqueegeePuckEjection } from "./scenes/Scene10SqueegeePuckEjection";
 import { Scene11CostPerUse } from "./scenes/Scene11CostPerUse";
 import { Scene12SpecialScoreVerdict } from "./scenes/Scene12SpecialScoreVerdict";
+import { Thumbnail } from "./Thumbnail";
 
 export const Root: React.FC = () => {
   return (
@@ -120,6 +121,32 @@ export const Root: React.FC = () => {
         id="Scene12"
         component={Scene12SpecialScoreVerdict}
         durationInFrames={330}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 3. YouTube Thumbnail Compositions (1920x1080 Full HD with Viral Hook Stickers) */}
+      <Composition
+        id="ThumbnailWin"
+        component={() => <Thumbnail variant="how-did-it-win" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="ThumbnailBeat"
+        component={() => <Thumbnail variant="it-beat-this" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="ThumbnailBetter"
+        component={() => <Thumbnail variant="better-coffee" />}
+        durationInFrames={1}
         fps={30}
         width={1920}
         height={1080}
