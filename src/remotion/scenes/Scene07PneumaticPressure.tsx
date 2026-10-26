@@ -43,6 +43,33 @@ export const Scene07PneumaticPressure: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
+  // Animated pressure bar from 0.0 to 0.75 bar
+  const pressureValue = interpolate(frame, [0, 80], [0.0, 0.75], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  const gaugeSpring = spring({
+    frame: Math.max(0, frame - 20),
+    fps,
+    config: {
+      damping: 12,
+      mass: 0.5,
+      stiffness: 100,
+    },
+  });
+
+  const exitProgress = interpolate(
+    frame,
+    [durationInFrames - 20, durationInFrames - 3],
+    [1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.3, 0.0, 0.2, 1),
+    }
+  );
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#020617", overflow: "hidden", fontFamily: "Segoe UI, Inter, sans-serif" }}>
       <Audio src={staticFile("audio/aeropress/aeropress_scene07_en.mp3")} />

@@ -42,6 +42,33 @@ export const Scene11CostPerUse: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
+  // Animated cost counting down from $0.95 to $0.03
+  const cpuValue = interpolate(frame, [0, 80], [0.95, 0.03], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  const savingsSpring = spring({
+    frame: Math.max(0, frame - 20),
+    fps,
+    config: {
+      damping: 12,
+      mass: 0.5,
+      stiffness: 100,
+    },
+  });
+
+  const exitProgress = interpolate(
+    frame,
+    [durationInFrames - 20, durationInFrames - 3],
+    [1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.3, 0.0, 0.2, 1),
+    }
+  );
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#020617", overflow: "hidden", fontFamily: "Segoe UI, Inter, sans-serif" }}>
       <Audio src={staticFile("audio/aeropress/aeropress_scene11_en.mp3")} />

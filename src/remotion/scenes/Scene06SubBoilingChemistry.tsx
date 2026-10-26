@@ -43,6 +43,33 @@ export const Scene06SubBoilingChemistry: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
+  // Animated temperature readout climbing from 72°C to 80°C
+  const currentTemp = interpolate(frame, [0, 90], [72.0, 80.0], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.quad),
+  });
+
+  const tempSpring = spring({
+    frame: Math.max(0, frame - 20),
+    fps,
+    config: {
+      damping: 12,
+      mass: 0.5,
+      stiffness: 100,
+    },
+  });
+
+  const exitProgress = interpolate(
+    frame,
+    [durationInFrames - 20, durationInFrames - 3],
+    [1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.3, 0.0, 0.2, 1),
+    }
+  );
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#020617", overflow: "hidden", fontFamily: "Segoe UI, Inter, sans-serif" }}>
       <Audio src={staticFile("audio/aeropress/aeropress_scene06_en.mp3")} />

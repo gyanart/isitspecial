@@ -43,6 +43,33 @@ export const Scene12SpecialScoreVerdict: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
+  // Animated score counter climbing from 0.0 to 9.7
+  const scoreValue = interpolate(frame, [15, 80], [0.0, 9.7], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  const scorecardSpring = spring({
+    frame: Math.max(0, frame - 20),
+    fps,
+    config: {
+      damping: 12,
+      mass: 0.5,
+      stiffness: 100,
+    },
+  });
+
+  const exitProgress = interpolate(
+    frame,
+    [durationInFrames - 20, durationInFrames - 3],
+    [1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.3, 0.0, 0.2, 1),
+    }
+  );
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#020617", overflow: "hidden", fontFamily: "Segoe UI, Inter, sans-serif" }}>
       <Audio src={staticFile("audio/aeropress/aeropress_scene12_en.mp3")} />
