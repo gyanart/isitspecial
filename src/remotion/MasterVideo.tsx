@@ -13,7 +13,7 @@ import { Scene10SqueegeePuckEjection } from "./scenes/Scene10SqueegeePuckEjectio
 import { Scene11CostPerUse } from "./scenes/Scene11CostPerUse";
 import { Scene12SpecialScoreVerdict } from "./scenes/Scene12SpecialScoreVerdict";
 
-export const MASTER_VIDEO_DURATION_FRAMES = 3940; // ~131.3s (2m 11s) @ 30fps
+export const MASTER_VIDEO_DURATION_FRAMES = 3995; // ~133.2s (2m 13s) @ 30fps
 
 export const MasterVideo: React.FC = () => {
   return (
@@ -23,8 +23,8 @@ export const MasterVideo: React.FC = () => {
         <Scene01LuxuryContrast />
       </Series.Sequence>
 
-      {/* Scene 02: The Stanford Aerodynamics Origin (11.83s) */}
-      <Series.Sequence durationInFrames={355}>
+      {/* Scene 02: The Stanford Aerodynamics Origin (12.33s) */}
+      <Series.Sequence durationInFrames={370}>
         <Scene02Origin />
       </Series.Sequence>
 
@@ -38,13 +38,13 @@ export const MasterVideo: React.FC = () => {
         <Scene04ChannelingDefect />
       </Series.Sequence>
 
-      {/* Scene 05: Total Immersion Uniformity (11.33s) */}
-      <Series.Sequence durationInFrames={340}>
+      {/* Scene 05: Total Immersion Uniformity (11.67s) */}
+      <Series.Sequence durationInFrames={350}>
         <Scene05TotalImmersion />
       </Series.Sequence>
 
-      {/* Scene 06: Sub-Boiling Extraction Chemistry (11.67s) */}
-      <Series.Sequence durationInFrames={350}>
+      {/* Scene 06: Sub-Boiling Extraction Chemistry (12.33s) */}
+      <Series.Sequence durationInFrames={370}>
         <Scene06SubBoilingChemistry />
       </Series.Sequence>
 
@@ -53,8 +53,8 @@ export const MasterVideo: React.FC = () => {
         <Scene07PneumaticPressure />
       </Series.Sequence>
 
-      {/* Scene 08: The Micro-Paper Membrane (10.17s) */}
-      <Series.Sequence durationInFrames={305}>
+      {/* Scene 08: The Micro-Paper Membrane (10.33s) */}
+      <Series.Sequence durationInFrames={310}>
         <Scene08MicroPaperMembrane />
       </Series.Sequence>
 
@@ -68,8 +68,8 @@ export const MasterVideo: React.FC = () => {
         <Scene10SqueegeePuckEjection />
       </Series.Sequence>
 
-      {/* Scene 11: True Cost-Per-Use Equation (10.00s) */}
-      <Series.Sequence durationInFrames={300}>
+      {/* Scene 11: True Cost-Per-Use Equation (10.17s) */}
+      <Series.Sequence durationInFrames={305}>
         <Scene11CostPerUse />
       </Series.Sequence>
 

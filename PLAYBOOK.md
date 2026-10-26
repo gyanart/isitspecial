@@ -600,13 +600,27 @@ Create 5 core playlists to keep viewers engaged in bingeable content loops:
 
 For every article published on `isitspecial.com`, execute this standardized release checklist:
 
-#### Step 1: Render the Remotion Video
-Ensure the latest video is rendered at 1080p Full HD:
-```bash
-npm run video:render AeroPressMaster public/videos/[slug]_master_video_1080p.mp4
-```
+#### Step 1: Voiceover & Audio Engine Standard
+* **Official Voice standard:** **Indian English Female Voiceover (`en-IN-NeerjaExpressiveNeural`)** via Edge-TTS / Microsoft Azure Neural.
+* **Pacing / Rate:** Set rate to `+4%` (`rate="+4%"`) for articulate, engaging video essay delivery.
+* **Audio Script Generator:** Run `scripts/generate_[slug]_audio.py` to synthesize the 12 scene voiceovers into `public/audio/[slug]/`.
 
-#### Step 2: Generate High-CTR Thumbnail (16:9)
+#### Step 2: Remotion Video Rendering & Visual Standards
+* **Render Command:**
+  ```bash
+  # Pre-bundle to avoid browser launch timeouts:
+  .\node_modules\.bin\remotion.cmd bundle src/remotion/index.ts --bundle-cache
+  # Render full 1080p Master Video:
+  .\node_modules\.bin\remotion.cmd render build MasterVideo public/videos/[slug]_master_video_1080p.mp4
+  ```
+* **Visual Presentation Rules (Strict Cleanliness Standards):**
+  * **❌ No Progress Lines:** Do NOT display bottom horizontal timeline bars or moving progress lines across the screen (`ProgressBar` must return `null`).
+  * **❌ No Scene Counters or Timers:** Never show `"Scene 1/12"` or on-screen elapsed seconds timers.
+  * **✅ Smooth Image Dissolves:** Every image must have a 20-frame fade-in (`fadeIn * fadeOut`).
+  * **✅ Synchronized Closed Captions (CC):** Captions (`<CaptionBar />`) must match the voiceover text verbatim, positioned neatly below info cards with high-contrast semi-transparent backdrops (`rgba(2, 6, 23, 0.92)`).
+  * **✅ Smooth Card Animation:** Info cards (`<AnimatedCard />`) must spring smoothly into view and glide out before the next scene transition.
+
+#### Step 3: Generate High-CTR Thumbnail (16:9)
 * **Dimensions:** `1280 × 720 px` or `1920 × 1080 px` (`.jpg` or `.png`, < 2 MB).
 * **Composition Standard:**
   * High contrast split: Expensive/complex status quo on the left vs. glowing simple icon on the right.
