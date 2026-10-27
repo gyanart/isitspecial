@@ -14,6 +14,8 @@ import { Scene10SqueegeePuckEjection } from "./scenes/Scene10SqueegeePuckEjectio
 import { Scene11CostPerUse } from "./scenes/Scene11CostPerUse";
 import { Scene12SpecialScoreVerdict } from "./scenes/Scene12SpecialScoreVerdict";
 import { Thumbnail } from "./Thumbnail";
+import { BicMasterVideo, BIC_MASTER_VIDEO_DURATION_FRAMES } from "./BicMasterVideo";
+import { BicThumbnail } from "./BicThumbnail";
 
 export const Root: React.FC = () => {
   return (
@@ -23,6 +25,16 @@ export const Root: React.FC = () => {
         id="AeroPressMaster"
         component={MasterVideo}
         durationInFrames={MASTER_VIDEO_DURATION_FRAMES}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 2. Video 2: Bic Cristal Master Video Essay (~2m 34s) */}
+      <Composition
+        id="BicCristalMaster"
+        component={BicMasterVideo}
+        durationInFrames={BIC_MASTER_VIDEO_DURATION_FRAMES}
         fps={30}
         width={1920}
         height={1080}
@@ -146,6 +158,32 @@ export const Root: React.FC = () => {
       <Composition
         id="ThumbnailBetter"
         component={() => <Thumbnail variant="better-coffee" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 4. Bic Cristal YouTube Thumbnail Compositions */}
+      <Composition
+        id="BicThumbnailBeat"
+        component={() => <BicThumbnail variant="it-beat-600" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="BicThumbnailLegal"
+        component={() => <BicThumbnail variant="how-is-this-legal" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="BicThumbnailMoMA"
+        component={() => <BicThumbnail variant="moma-bought-this" />}
         durationInFrames={1}
         fps={30}
         width={1920}
