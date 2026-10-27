@@ -16,6 +16,8 @@ import { Scene12SpecialScoreVerdict } from "./scenes/Scene12SpecialScoreVerdict"
 import { Thumbnail } from "./Thumbnail";
 import { BicMasterVideo, BIC_MASTER_VIDEO_DURATION_FRAMES } from "./BicMasterVideo";
 import { BicThumbnail } from "./BicThumbnail";
+import { CasioMasterVideo } from "./CasioMasterVideo";
+import { CasioThumbnail } from "./CasioThumbnail";
 
 export const Root: React.FC = () => {
   return (
@@ -35,6 +37,16 @@ export const Root: React.FC = () => {
         id="BicCristalMaster"
         component={BicMasterVideo}
         durationInFrames={BIC_MASTER_VIDEO_DURATION_FRAMES}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 3. Video 3: Casio F-91W 4-Minute Master Video Essay (7,200 frames @ 30fps) */}
+      <Composition
+        id="CasioMaster"
+        component={CasioMasterVideo}
+        durationInFrames={7200}
         fps={30}
         width={1920}
         height={1080}
@@ -184,6 +196,32 @@ export const Root: React.FC = () => {
       <Composition
         id="BicThumbnailMoMA"
         component={() => <BicThumbnail variant="moma-bought-this" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 5. Casio F-91W YouTube Thumbnail Compositions */}
+      <Composition
+        id="CasioThumbnailBeat"
+        component={() => <CasioThumbnail variant="it-beat-10000" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="CasioThumbnailWhy"
+        component={() => <CasioThumbnail variant="why-is-this-15" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="CasioThumbnailRolex"
+        component={() => <CasioThumbnail variant="rolex-killer" />}
         durationInFrames={1}
         fps={30}
         width={1920}
