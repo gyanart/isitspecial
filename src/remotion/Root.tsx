@@ -21,6 +21,10 @@ import { CasioThumbnail } from "./CasioThumbnail";
 import { MokaMasterVideo, MOKA_MASTER_VIDEO_DURATION_FRAMES } from "./MokaMasterVideo";
 import { MokaThumbnail } from "./MokaThumbnail";
 import { MokaShortVideo, MOKA_SHORT_DURATION_FRAMES } from "./MokaShortVideo";
+import { LodgeMasterVideo, LODGE_MASTER_VIDEO_DURATION_FRAMES } from "./LodgeMasterVideo";
+import { LodgeShortVideo, LODGE_SHORT_DURATION_FRAMES } from "./LodgeShortVideo";
+import { LodgeThumbnail } from "./LodgeThumbnail";
+
 
 
 export const Root: React.FC = () => {
@@ -276,6 +280,52 @@ export const Root: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+      />
+
+      {/* 8. Lodge Cast Iron Skillet Master Video Essay (~4m 05s / 7,346 frames) */}
+      <Composition
+        id="LodgeMaster"
+        component={LodgeMasterVideo}
+        durationInFrames={LODGE_MASTER_VIDEO_DURATION_FRAMES}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 9. Lodge Cast Iron Skillet YouTube Short / Reel (9:16 Vertical, 57s) */}
+      <Composition
+        id="LodgeShort"
+        component={LodgeShortVideo}
+        durationInFrames={LODGE_SHORT_DURATION_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 10. Lodge Cast Iron Skillet YouTube Thumbnail Compositions */}
+      <Composition
+        id="LodgeThumbnailBeat"
+        component={() => <LodgeThumbnail variant="it-beat-300" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="LodgeThumbnailWhy"
+        component={() => <LodgeThumbnail variant="why-is-this-25" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="LodgeThumbnailKiller"
+        component={() => <LodgeThumbnail variant="teflon-killer" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
       />
     </>
   );

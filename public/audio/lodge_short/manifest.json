@@ -1,0 +1,72 @@
+{
+  "total_duration": 57.14000000000001,
+  "total_frames": 1715,
+  "segments": [
+    {
+      "segment": 1,
+      "id": "seg01_hook",
+      "title": "THE $300 TEFLON PARADOX",
+      "tag": "IRON VS TEFLON",
+      "filename": "seg01_hook.mp3",
+      "metric_label": "PRICE GAP",
+      "metric_val": "$25 vs $300",
+      "duration": 7.25,
+      "frames": 218
+    },
+    {
+      "segment": 2,
+      "id": "seg02_foundry",
+      "title": "1896 FOUNDRY ORIGIN",
+      "tag": "SAND-CASTING",
+      "filename": "seg02_foundry.mp3",
+      "metric_label": "FOUNDRY TEMP",
+      "metric_val": "2,800\u00b0F Molten Iron",
+      "duration": 13.25,
+      "frames": 398
+    },
+    {
+      "segment": 3,
+      "id": "seg03_physics",
+      "title": "THERMAL INERTIA",
+      "tag": "MAILLARD REACTION",
+      "filename": "seg03_physics.mp3",
+      "metric_label": "HEAT CAPACITY",
+      "metric_val": "3.7 MJ/m\u00b3\u00b7K",
+      "duration": 11.57,
+      "frames": 347
+    },
+    {
+      "segment": 4,
+      "id": "seg04_chemistry",
+      "title": "POLYMERIZATION PATINA",
+      "tag": "ORGANIC CHEMISTRY",
+      "filename": "seg04_chemistry.mp3",
+      "metric_label": "SURFACE COATING",
+      "metric_val": "Cross-Linked Carbon",
+      "duration": 8.38,
+      "frames": 251
+    },
+    {
+      "segment": 5,
+      "id": "seg05_cpu",
+      "title": "100-YEAR LIFESPAN",
+      "tag": "COST-PER-USE",
+      "filename": "seg05_cpu.mp3",
+      "metric_label": "HARDWARE COST",
+      "metric_val": "$0.002 / Meal",
+      "duration": 10.06,
+      "frames": 302
+    },
+    {
+      "segment": 6,
+      "id": "seg06_verdict",
+      "title": "THE SPECIAL VERDICT",
+      "tag": "THE SPECIAL INDEX\u2122",
+      "filename": "seg06_verdict.mp3",
+      "metric_label": "SPECIAL SCORE",
+      "metric_val": "9.2 / 10 \u2022 True Gem",
+      "duration": 6.63,
+      "frames": 199
+    }
+  ]
+}

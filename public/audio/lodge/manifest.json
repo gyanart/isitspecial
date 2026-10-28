@@ -1,0 +1,102 @@
+{
+  "total_duration": 244.91000000000003,
+  "total_frames": 7346,
+  "scenes": [
+    {
+      "scene": 1,
+      "id": "lodge_scene01_in",
+      "title": "The $300 Teflon Paradox",
+      "filename": "lodge_scene01_in.mp3",
+      "duration": 22.19,
+      "frames": 666
+    },
+    {
+      "scene": 2,
+      "id": "lodge_scene02_in",
+      "title": "1896 South Pittsburg, Tennessee",
+      "filename": "lodge_scene02_in.mp3",
+      "duration": 20.6,
+      "frames": 618
+    },
+    {
+      "scene": 3,
+      "id": "lodge_scene03_in",
+      "title": "The 2,800\u00b0F Sand-Casting Foundry",
+      "filename": "lodge_scene03_in.mp3",
+      "duration": 20.15,
+      "frames": 604
+    },
+    {
+      "scene": 4,
+      "id": "lodge_scene04_in",
+      "title": "The Thermodynamic Flaw of Teflon",
+      "filename": "lodge_scene04_in.mp3",
+      "duration": 20.1,
+      "frames": 603
+    },
+    {
+      "scene": 5,
+      "id": "lodge_scene05_in",
+      "title": "5.4 Pounds of Thermal Inertia",
+      "filename": "lodge_scene05_in.mp3",
+      "duration": 18.99,
+      "frames": 570
+    },
+    {
+      "scene": 6,
+      "id": "lodge_scene06_in",
+      "title": "The Maillard Caramelization Reaction",
+      "filename": "lodge_scene06_in.mp3",
+      "duration": 17.75,
+      "frames": 532
+    },
+    {
+      "scene": 7,
+      "id": "lodge_scene07_in",
+      "title": "The Polymerization Chemistry Patina",
+      "filename": "lodge_scene07_in.mp3",
+      "duration": 21.66,
+      "frames": 650
+    },
+    {
+      "scene": 8,
+      "id": "lodge_scene08_in",
+      "title": "The Anti-Fragile Restoration Miracle",
+      "filename": "lodge_scene08_in.mp3",
+      "duration": 20.27,
+      "frames": 608
+    },
+    {
+      "scene": 9,
+      "id": "lodge_scene09_in",
+      "title": "The Honest Friction: Heft & Heat",
+      "filename": "lodge_scene09_in.mp3",
+      "duration": 20.58,
+      "frames": 617
+    },
+    {
+      "scene": 10,
+      "id": "lodge_scene10_in",
+      "title": "The Two-Minute Maintenance Ritual",
+      "filename": "lodge_scene10_in.mp3",
+      "duration": 19.93,
+      "frames": 598
+    },
+    {
+      "scene": 11,
+      "id": "lodge_scene11_in",
+      "title": "The True Cost-Per-Use Equation",
+      "filename": "lodge_scene11_in.mp3",
+      "duration": 19.98,
+      "frames": 599
+    },
+    {
+      "scene": 12,
+      "id": "lodge_scene12_in",
+      "title": "The Special Index Score & Verdict",
+      "filename": "lodge_scene12_in.mp3",
+      "duration": 22.71,
+      "frames": 681
+    }
+  ]
+}
