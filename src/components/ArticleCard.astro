@@ -85,11 +85,12 @@ const articleUrl = isHi ? `/hi/blog/${cleanSlug}` : `/blog/${cleanSlug}`;
 
     <!-- Bookmark / Favorite Icon (Top-Right) -->
     <button 
-      type="button"
-      data-article-url={articleUrl}
-      data-article-title={title}
-      class="card-bookmark-btn z-20 absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#14241c]/60 shadow-2xs hover:text-rose-500 hover:scale-110 transition-all cursor-pointer"
-      title="Save to Reading List"
+      type="button" 
+      data-article-url={articleUrl} 
+      data-article-title={title} 
+      class="card-bookmark-btn z-20 absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#14241c]/60 shadow-2xs hover:text-rose-500 hover:scale-110 transition-all cursor-pointer" 
+      title={isHi ? 'रीडिंग लिस्ट में सेव करें' : 'Save to Reading List'}
+      aria-label={isHi ? 'रीडिंग लिस्ट में सेव करें' : 'Save to Reading List'}
     >
       <svg class="w-4 h-4 fill-none stroke-current transition-colors" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>

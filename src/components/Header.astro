@@ -97,7 +97,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#15803d] font-mono">
               {isHi ? 'शेयर विकल्प' : 'SHARE THIS PAGE'}
             </span>
-            <button id="close-share-dropdown-btn" class="w-5 h-5 rounded-full hover:bg-zinc-100 flex items-center justify-center text-xs text-[#14241c]/50 hover:text-[#14241c] cursor-pointer">
+            <button id="close-share-dropdown-btn" class="w-5 h-5 rounded-full hover:bg-zinc-100 flex items-center justify-center text-xs text-[#14241c]/50 hover:text-[#14241c] cursor-pointer" aria-label="Close share menu">
               ✕
             </button>
           </div>
@@ -200,7 +200,8 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
       <button 
         id="open-saved-btn" 
         class="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#dce5dd] hover:border-[#15803d] text-[#14241c] transition-colors shadow-2xs cursor-pointer"
-        title="View Saved Articles"
+        title={isHi ? 'सेव की गई समीक्षाएं देखें' : 'View Saved Articles'}
+        aria-label={isHi ? 'सेव की गई समीक्षाएं देखें' : 'View Saved Articles'}
       >
         <span>🔖</span>
         <span class="hidden lg:inline">{isHi ? 'सेव्ड' : 'Saved'}</span>

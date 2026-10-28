@@ -47,6 +47,7 @@ const currentYear = new Date().getFullYear();
           type="email" 
           name="email" 
           required 
+          aria-label={lang === 'hi' ? 'न्यूज़लेटर ईमेल पता' : 'Newsletter email address'}
           placeholder={lang === 'hi' ? 'ईमेल द्वारा साप्ताहिक अपडेट्स पाएं...' : 'Get weekly teardowns in your inbox...'} 
           class="w-full px-4 py-2.5 rounded-full border border-[#dce5dd] text-xs bg-white text-[#14241c] placeholder-[#14241c]/65 focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all shadow-2xs"
         />

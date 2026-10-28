@@ -75,14 +75,25 @@ const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial
       <meta name="google-site-verification" content={gscVerification} />
     )}
 
-    <!-- Google Analytics 4 (GA4) -->
+    <!-- Google Analytics 4 (GA4) - Non-Blocking Idle Execution -->
     {gaMeasurementId && (
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
       <script is:inline define:vars={{ gaMeasurementId }}>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', gaMeasurementId);
+
+        function initGA() {
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaMeasurementId;
+          s.async = true;
+          document.head.appendChild(s);
+        }
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(initGA, { timeout: 3500 });
+        } else {
+          window.addEventListener('load', initGA);
+        }
       </script>
     )}
 
@@ -98,26 +109,44 @@ const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial
       <link rel="preload" as="image" href={preloadImage} type={preloadImage.endsWith('.webp') ? 'image/webp' : undefined} fetchpriority="high" />
     )}
 
-    <!-- Non-Blocking Optimized Google Fonts -->
+    <!-- Non-Blocking Optimized Google Fonts (Language-Specific Lean Subsets) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link 
-      rel="preload" 
-      as="style" 
-      href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" 
-    />
-    <link 
-      rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" 
-      media="print" 
-      onload="this.media='all'" 
-    />
-    <noscript>
-      <link 
-        rel="stylesheet" 
-        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" 
-      />
-    </noscript>
+    {lang === 'hi' ? (
+      <>
+        <link 
+          rel="preload" 
+          as="style" 
+          href="https://fonts.googleapis.com/css2?family=Bitter:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@600;700;800&display=swap" 
+        />
+        <link 
+          rel="stylesheet" 
+          href="https://fonts.googleapis.com/css2?family=Bitter:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@600;700;800&display=swap" 
+          media="print" 
+          onload="this.media='all'" 
+        />
+        <noscript>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@600;700;800&display=swap" />
+        </noscript>
+      </>
+    ) : (
+      <>
+        <link 
+          rel="preload" 
+          as="style" 
+          href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" 
+        />
+        <link 
+          rel="stylesheet" 
+          href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" 
+          media="print" 
+          onload="this.media='all'" 
+        />
+        <noscript>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" />
+        </noscript>
+      </>
+    )}
 
     <!-- SEO Meta Tags -->
     <title>{title}</title>

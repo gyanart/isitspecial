@@ -20,6 +20,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
     data-float-share="whatsapp" 
     class="float-share-btn w-9 h-9 rounded-full bg-[#f7faf7] hover:bg-[#25D366]/15 text-[#14241c] hover:text-[#25D366] flex items-center justify-center transition-all cursor-pointer relative group"
     title={isHi ? 'व्हाट्सएप पर शेयर करें' : 'Share on WhatsApp'}
+    aria-label={isHi ? 'व्हाट्सएप पर शेयर करें' : 'Share on WhatsApp'}
   >
     <svg class="w-4 h-4 fill-current text-[#25D366]" viewBox="0 0 24 24">
       <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.835.811 2.791.811 3.18 0 5.766-2.587 5.767-5.766.001-3.181-2.585-5.767-5.767-5.797zm0 10.366c-.859 0-1.637-.238-2.316-.677l-.166-.108-1.574.412.42-1.535-.114-.183c-.47-.749-.718-1.583-.717-2.511.001-2.52 2.052-4.57 4.572-4.57 2.518 0 4.568 2.051 4.568 4.571-.001 2.521-2.051 4.571-4.573 4.571zM12 .001C5.372.001 0 5.373 0 12c0 2.115.548 4.103 1.509 5.836L0 24l6.336-1.464C8.016 23.473 9.96 24 12 24c6.628 0 12-5.373 12-12S18.628.001 12 .001z"/>
@@ -34,6 +35,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
     data-float-share="x" 
     class="float-share-btn w-9 h-9 rounded-full bg-[#f7faf7] hover:bg-black/10 text-[#14241c] hover:text-black flex items-center justify-center transition-all cursor-pointer relative group"
     title={isHi ? 'एक्स पर पोस्ट करें' : 'Post on X'}
+    aria-label={isHi ? 'एक्स पर पोस्ट करें' : 'Post on X'}
   >
     <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -48,6 +50,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
     data-float-share="facebook" 
     class="float-share-btn w-9 h-9 rounded-full bg-[#f7faf7] hover:bg-[#1877F2]/15 text-[#14241c] hover:text-[#1877F2] flex items-center justify-center transition-all cursor-pointer relative group"
     title={isHi ? 'फेसबुक पर शेयर करें' : 'Share on Facebook'}
+    aria-label={isHi ? 'फेसबुक पर शेयर करें' : 'Share on Facebook'}
   >
     <svg class="w-4 h-4 fill-current text-[#1877F2]" viewBox="0 0 24 24">
       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -62,6 +65,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
     data-float-share="linkedin" 
     class="float-share-btn w-9 h-9 rounded-full bg-[#f7faf7] hover:bg-[#0A66C2]/15 text-[#14241c] hover:text-[#0A66C2] flex items-center justify-center transition-all cursor-pointer relative group"
     title={isHi ? 'लिंक्डइन पर शेयर करें' : 'Share on LinkedIn'}
+    aria-label={isHi ? 'लिंक्डइन पर शेयर करें' : 'Share on LinkedIn'}
   >
     <svg class="w-3.5 h-3.5 fill-current text-[#0A66C2]" viewBox="0 0 24 24">
       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
@@ -78,6 +82,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
     id="float-copy-link-btn" 
     class="w-9 h-9 rounded-full bg-[#f7faf7] hover:bg-[#eaf5eb] text-[#14241c] hover:text-[#15803d] flex items-center justify-center transition-all cursor-pointer relative group"
     title={isHi ? 'लिंक कॉपी करें' : 'Copy Page Link'}
+    aria-label={isHi ? 'लिंक कॉपी करें' : 'Copy Page Link'}
   >
     <svg id="float-copy-icon" class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
       <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
@@ -93,6 +98,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
     id="float-bookmark-btn" 
     class="w-9 h-9 rounded-full bg-[#f7faf7] hover:bg-rose-50 text-[#14241c] hover:text-rose-500 flex items-center justify-center transition-all cursor-pointer relative group"
     title={isHi ? 'सेव करें' : 'Save Article'}
+    aria-label={isHi ? 'सेव करें' : 'Save Article'}
   >
     <svg id="float-heart-icon" class="w-4 h-4 fill-none stroke-current text-[#14241c]/70 transition-colors" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
@@ -109,6 +115,7 @@ const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q0
     rel="noopener noreferrer" 
     class="w-9 h-9 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-md transition-all cursor-pointer relative group hover:scale-105"
     title="Join WhatsApp Channel"
+    aria-label="Join WhatsApp Channel"
   >
     <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-300 border-2 border-white animate-pulse"></span>
     <svg class="w-4.5 h-4.5 fill-current text-white" viewBox="0 0 24 24">
