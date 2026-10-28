@@ -20,6 +20,8 @@ import { CasioMasterVideo } from "./CasioMasterVideo";
 import { CasioThumbnail } from "./CasioThumbnail";
 import { MokaMasterVideo, MOKA_MASTER_VIDEO_DURATION_FRAMES } from "./MokaMasterVideo";
 import { MokaThumbnail } from "./MokaThumbnail";
+import { MokaShortVideo, MOKA_SHORT_DURATION_FRAMES } from "./MokaShortVideo";
+
 
 export const Root: React.FC = () => {
   return (
@@ -264,6 +266,16 @@ export const Root: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
+      />
+
+      {/* 7. Bialetti Moka Express YouTube Short / Reel (9:16 Vertical, 58s) */}
+      <Composition
+        id="MokaShort"
+        component={MokaShortVideo}
+        durationInFrames={MOKA_SHORT_DURATION_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );
