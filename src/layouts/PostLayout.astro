@@ -106,29 +106,38 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Review",
-      "headline": title,
+      "@type": "Product",
+      "name": title,
       "description": description,
-      "inLanguage": isHi ? "hi" : "en",
       "image": heroImage ? (heroImage.startsWith('http') ? heroImage : `https://www.isitspecial.com${heroImage}`) : undefined,
-      "datePublished": pubDate.toISOString(),
-      "author": {
-        "@type": "Organization",
-        "name": author,
-        "url": "https://www.isitspecial.com/about"
+      "review": {
+        "@type": "Review",
+        "headline": title,
+        "description": description,
+        "inLanguage": isHi ? "hi" : "en",
+        "image": heroImage ? (heroImage.startsWith('http') ? heroImage : `https://www.isitspecial.com${heroImage}`) : undefined,
+        "datePublished": pubDate.toISOString(),
+        "author": {
+          "@type": "Organization",
+          "name": author,
+          "url": "https://www.isitspecial.com/about/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": isHi ? "इज इट स्पेशल?" : "Is It Special?",
+          "url": "https://www.isitspecial.com/"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": specialScore,
+          "bestRating": "10",
+          "worstRating": "1"
+        }
       },
-      "publisher": {
-        "@type": "Organization",
-        "name": isHi ? "इज इट स्पेशल?" : "Is It Special?",
-        "url": "https://www.isitspecial.com"
-      },
-      "itemReviewed": {
-        "@type": "Product",
-        "name": title
-      },
-      "reviewRating": {
-        "@type": "Rating",
+      "aggregateRating": {
+        "@type": "AggregateRating",
         "ratingValue": specialScore,
+        "reviewCount": 1,
         "bestRating": "10",
         "worstRating": "1"
       }
