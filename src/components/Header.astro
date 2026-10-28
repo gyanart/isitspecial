@@ -12,22 +12,22 @@ const isHi = lang === 'hi';
 const enNavLinks = [
   { href: '/', label: 'Home' },
   { href: '/#categories', label: 'The Index' },
-  { href: '/about', label: 'Manifesto' },
-  { href: '/contact', label: 'Submit Item' },
+  { href: '/about/', label: 'Manifesto' },
+  { href: '/contact/', label: 'Submit Item' },
 ];
 
 const hiNavLinks = [
-  { href: '/hi', label: 'होम' },
-  { href: '/hi#categories', label: 'श्रेणियां' },
-  { href: '/about', label: 'हमारा मिशन' },
-  { href: '/contact', label: 'सुझाव भेजें' },
+  { href: '/hi/', label: 'होम' },
+  { href: '/hi/#categories', label: 'श्रेणियां' },
+  { href: '/about/', label: 'हमारा मिशन' },
+  { href: '/contact/', label: 'सुझाव भेजें' },
 ];
 
 const currentLinks = isHi ? hiNavLinks : enNavLinks;
 
 // Target URL when switching language
 const targetEnUrl = isHi ? (translationUrl || '/') : '#';
-const targetHiUrl = !isHi ? (translationUrl || '/hi') : '#';
+const targetHiUrl = !isHi ? (translationUrl || '/hi/') : '#';
 const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbE0Bs69Gv7SoqV89q04';
 ---
 

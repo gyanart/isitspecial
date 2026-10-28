@@ -17,7 +17,7 @@ export async function getStaticPaths() {
     const hasEnTranslation = allPosts.some(
       (p) => p.id === cleanSlug || p.data.translationSlug === cleanSlug
     );
-    const translationUrl = hasEnTranslation ? `/blog/${cleanSlug}` : undefined;
+    const translationUrl = hasEnTranslation ? `/blog/${cleanSlug}/` : undefined;
 
     const relatedPosts = hiPosts
       .filter((p) => p.id !== post.id && p.data.category === post.data.category)

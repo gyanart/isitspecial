@@ -12,6 +12,7 @@ interface Props {
   lang?: 'en' | 'hi';
   translationUrl?: string;
   preloadImage?: string;
+  robots?: string;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   lang = 'en',
   translationUrl,
   preloadImage,
+  robots = 'index, follow',
 } = Astro.props;
 
 const siteName = lang === 'hi' ? 'इज इट स्पेशल? (Is It Special?)' : 'Is It Special?';
@@ -121,7 +123,7 @@ const fullImageUrl = image.startsWith('http') ? image : `https://www.isitspecial
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />

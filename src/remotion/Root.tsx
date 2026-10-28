@@ -18,6 +18,8 @@ import { BicMasterVideo, BIC_MASTER_VIDEO_DURATION_FRAMES } from "./BicMasterVid
 import { BicThumbnail } from "./BicThumbnail";
 import { CasioMasterVideo } from "./CasioMasterVideo";
 import { CasioThumbnail } from "./CasioThumbnail";
+import { MokaMasterVideo, MOKA_MASTER_VIDEO_DURATION_FRAMES } from "./MokaMasterVideo";
+import { MokaThumbnail } from "./MokaThumbnail";
 
 export const Root: React.FC = () => {
   return (
@@ -47,6 +49,16 @@ export const Root: React.FC = () => {
         id="CasioMaster"
         component={CasioMasterVideo}
         durationInFrames={7200}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 4. Video 4: Bialetti Moka Express Master Video Essay (~3m 34s) */}
+      <Composition
+        id="MokaMaster"
+        component={MokaMasterVideo}
+        durationInFrames={MOKA_MASTER_VIDEO_DURATION_FRAMES}
         fps={30}
         width={1920}
         height={1080}
@@ -222,6 +234,32 @@ export const Root: React.FC = () => {
       <Composition
         id="CasioThumbnailRolex"
         component={() => <CasioThumbnail variant="rolex-killer" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 6. Bialetti Moka Express YouTube Thumbnail Compositions */}
+      <Composition
+        id="MokaThumbnailBeat"
+        component={() => <MokaThumbnail variant="it-beat-3000" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="MokaThumbnailWhy"
+        component={() => <MokaThumbnail variant="why-is-this-35" />}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="MokaThumbnailItalian"
+        component={() => <MokaThumbnail variant="italian-secret" />}
         durationInFrames={1}
         fps={30}
         width={1920}
