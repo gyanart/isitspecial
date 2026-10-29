@@ -1,0 +1,72 @@
+{
+  "total_duration": 57.35,
+  "total_frames": 1722,
+  "segments": [
+    {
+      "segment": 1,
+      "id": "seg01_hook",
+      "title": "THE $10,000 SWISS PARADOX",
+      "tag": "CASIO VS ROLEX",
+      "filename": "seg01_hook.mp3",
+      "metric_label": "PRICE CONTRAST",
+      "metric_val": "$15 vs $10,000",
+      "duration": 7.69,
+      "frames": 231
+    },
+    {
+      "segment": 2,
+      "id": "seg02_origin",
+      "title": "1989 TOKYO DESIGN",
+      "tag": "RYUSUKE MORIAI",
+      "filename": "seg02_origin.mp3",
+      "metric_label": "ANNUAL SALES",
+      "metric_val": "3,000,000+ Units/Yr",
+      "duration": 9.99,
+      "frames": 300
+    },
+    {
+      "segment": 3,
+      "id": "seg03_quartz",
+      "title": "32,768 HZ QUARTZ",
+      "tag": "HOROLOGY SCIENCE",
+      "filename": "seg03_quartz.mp3",
+      "metric_label": "OSCILLATION",
+      "metric_val": "32,768 Hz \u00b11s/Day",
+      "duration": 11.29,
+      "frames": 339
+    },
+    {
+      "segment": 4,
+      "id": "seg04_durability",
+      "title": "ACCIDENTAL INDESTRUCTIBILITY",
+      "tag": "TORTURE TESTS",
+      "filename": "seg04_durability.mp3",
+      "metric_label": "BATTERY LIFE",
+      "metric_val": "7 - 10 Years",
+      "duration": 10.73,
+      "frames": 322
+    },
+    {
+      "segment": 5,
+      "id": "seg05_easteregg",
+      "title": "SECRET HARDWARE EASTER EGG",
+      "tag": "SECURITY CHIP",
+      "filename": "seg05_easteregg.mp3",
+      "metric_label": "AUTHENTICITY",
+      "metric_val": "CASIO Display",
+      "duration": 8.33,
+      "frames": 250
+    },
+    {
+      "segment": 6,
+      "id": "seg06_verdict",
+      "title": "THE SPECIAL VERDICT",
+      "tag": "THE SPECIAL INDEX\u2122",
+      "filename": "seg06_verdict.mp3",
+      "metric_label": "SPECIAL SCORE",
+      "metric_val": "9.6 / 10 Masterpiece",
+      "duration": 9.32,
+      "frames": 280
+    }
+  ]
+}

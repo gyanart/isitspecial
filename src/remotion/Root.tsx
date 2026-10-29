@@ -18,6 +18,8 @@ import { BicMasterVideo, BIC_MASTER_VIDEO_DURATION_FRAMES } from "./BicMasterVid
 import { BicThumbnail } from "./BicThumbnail";
 import { CasioMasterVideo } from "./CasioMasterVideo";
 import { CasioThumbnail } from "./CasioThumbnail";
+import { CasioShortVideo, CASIO_SHORT_DURATION_FRAMES } from "./CasioShortVideo";
+
 import { MokaMasterVideo, MOKA_MASTER_VIDEO_DURATION_FRAMES } from "./MokaMasterVideo";
 import { MokaThumbnail } from "./MokaThumbnail";
 import { MokaShortVideo, MOKA_SHORT_DURATION_FRAMES } from "./MokaShortVideo";
@@ -244,6 +246,17 @@ export const Root: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
+      />
+
+      
+      {/* 5b. Casio F-91W YouTube Short / Reel (9:16 Vertical, 57s) */}
+      <Composition
+        id="CasioShort"
+        component={CasioShortVideo}
+        durationInFrames={CASIO_SHORT_DURATION_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
       />
 
       {/* 6. Bialetti Moka Express YouTube Thumbnail Compositions */}
