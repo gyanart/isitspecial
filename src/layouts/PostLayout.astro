@@ -129,7 +129,7 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://www.isitspecial.com${isHi ? '/hi' : ''}/blog/${currentSlug}/`
+        "@id": Astro.url.href
       }
     })} />
     {youtubeId && (
