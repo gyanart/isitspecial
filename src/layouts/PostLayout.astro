@@ -106,16 +106,13 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Review",
+      "@type": "Article",
       "headline": title,
-      "reviewBody": description,
-      "inLanguage": isHi ? "hi" : "en",
+      "description": description,
+      "image": heroImage ? (heroImage.startsWith('http') ? heroImage : `https://www.isitspecial.com${heroImage}`) : undefined,
       "datePublished": pubDate.toISOString(),
-      "itemReviewed": {
-        "@type": "Product",
-        "name": title,
-        "image": heroImage ? (heroImage.startsWith('http') ? heroImage : `https://www.isitspecial.com${heroImage}`) : undefined
-      },
+      "dateModified": (Astro.props.updatedDate || pubDate).toISOString(),
+      "inLanguage": isHi ? "hi-IN" : "en-US",
       "author": {
         "@type": "Organization",
         "name": author,
@@ -124,13 +121,15 @@ const categoriesWithCount = Array.from(new Set(currentLangPosts.map(p => p.data.
       "publisher": {
         "@type": "Organization",
         "name": isHi ? "इज इट स्पेशल?" : "Is It Special?",
-        "url": "https://www.isitspecial.com/"
+        "url": "https://www.isitspecial.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.isitspecial.com/logo.png"
+        }
       },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": specialScore,
-        "bestRating": 10,
-        "worstRating": 1
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://www.isitspecial.com${isHi ? '/hi' : ''}/blog/${currentSlug}/`
       }
     })} />
     {youtubeId && (
