@@ -23,12 +23,16 @@
   RewriteCond %{HTTP_HOST} ^isitspecial\.com$ [NC]
   RewriteRule ^(.*)$ https://www.isitspecial.com/$1 [L,R=301]
 
-  # 3. TYPO FIXES & REDIRECTS:
+  # 3. LEGACY URL REDIRECTS
+  # Redirect the old WordPress /home/ page to the current homepage
+  RewriteRule ^home/?$ https://www.isitspecial.com/ [R=301,L]
+
+  # 4. TYPO FIXES & REDIRECTS:
   # Redirect mistyped /blog/hi/:slug -> /hi/blog/:slug
   RewriteRule ^blog/hi/(.+)$ https://%{HTTP_HOST}/hi/blog/$1 [R=301,L]
   RewriteRule ^blog/hi/?$ https://%{HTTP_HOST}/hi/ [R=301,L]
 
-  # 4. Clean routing for static directory indexes
+  # 5. Clean routing for static directory indexes
   DirectoryIndex index.html
 </IfModule>
 
